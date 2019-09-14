@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Tasks from './sample/tasks';
 import Tareas from './Components/Tasks.js';
+import Botones from './Components/Buttons.js';
 /*
 import Menu from './Components/Menu';
 
@@ -67,11 +68,14 @@ class App extends React.Component{
     return(
       <div>
         {
-          <Tareas tasks={this.state.Tasks}/>
+          //<Tareas tasks={this.state.Tasks}/>
+          <Botones/>
         }
       </div>
       
+      
     )
+    
   }
 }
 
