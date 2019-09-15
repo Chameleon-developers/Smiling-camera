@@ -7,7 +7,7 @@ import { Icon } from 'reactbulma'
 import { Title } from 'reactbulma'
 import { SubTitle } from 'reactbulma'
 import { Tabs } from 'reactbulma'
-
+import Showecommerceheader from './EcommerceHeader.js'
 /*
     Notas, el color azul de fondo hay que reemplazarlo con la imagen llamada tecnicamara.jpg
     en la carpeta Images, lo mejor sera usando css para importar y agregar la imagen
@@ -15,9 +15,12 @@ import { Tabs } from 'reactbulma'
 class Portada extends React.Component {
     render(){
         return <div>
+            <Showecommerceheader></Showecommerceheader>
+                    
             <Hero info large>
                 <Hero.Head>
                     <Nav>
+                   
                     <Container>
                         <Nav.Left>
                         <Nav.Item>
