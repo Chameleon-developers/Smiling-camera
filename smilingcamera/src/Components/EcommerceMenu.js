@@ -57,7 +57,7 @@ class EcommerceMenu extends React.Component {
                     </div>
                     
                     <a className="navbar-item">
-                        Carrito
+                     Otros
                     </a>
                     </div>
 

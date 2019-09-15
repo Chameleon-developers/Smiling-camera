@@ -9,6 +9,7 @@ import { SubTitle } from 'reactbulma'
 import { Tabs } from 'reactbulma'
 import Showecommerceheader from './EcommerceHeader.js'
 import Showecommercemenu from './EcommerceMenu.js'
+import Showecommercefooter from './EcommerceFooter.js'
 /*
     Notas, el color azul de fondo hay que reemplazarlo con la imagen llamada tecnicamara.jpg
     en la carpeta Images, lo mejor sera usando css para importar y agregar la imagen
@@ -43,8 +44,6 @@ class Portada extends React.Component {
                         El mejor sitio para personalizar tus regalos
                     </SubTitle>
                     </Container>
-                </Hero.Body>
-                <Hero.Foot>
                     <Tabs boxed fullwidth>
                     <Container>
                         <ul>
@@ -56,9 +55,12 @@ class Portada extends React.Component {
                         </ul>
                     </Container>
                     </Tabs>
+                </Hero.Body>
+                <Hero.Foot>
+                    
                 </Hero.Foot>
             </Hero>
-            
+            <Showecommercefooter></Showecommercefooter>
         </div>
         
     }
