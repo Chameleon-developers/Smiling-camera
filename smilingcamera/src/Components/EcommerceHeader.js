@@ -42,12 +42,7 @@ class ShowEcommerceHeader extends React.Component {
                         
                                 </div>
                             </div>
-
-                       
                         </div>
-                        
-                        
-                        
                 </div>
             </Nav>
         </div>
