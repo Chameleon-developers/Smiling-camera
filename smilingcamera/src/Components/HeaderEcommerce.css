@@ -1,0 +1,18 @@
+#ShowEcommerceHeader{
+    background-color: white;
+    padding: 0.51% 0%;
+}
+
+#LinkUserAccount, #LinkShoppingCar{
+    color: #F74784;
+    scroll-padding-bottom: 10%;
+}
+
+#showLogoHeader {
+    width: 20%;
+}
+
+#searchButtonHeader {
+    background-color: #F74784;
+    color:white;
+}

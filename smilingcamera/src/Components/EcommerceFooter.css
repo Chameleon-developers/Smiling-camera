@@ -1,0 +1,18 @@
+
+
+ #ShowEcommerceRights{
+    background-color: #9696D4;
+    color: white;
+    height: 50px;
+    display: flex;
+   justify-content: center;
+   align-items: center;
+    font-family: 'Pontano Sans', sans-serif;
+    font-size: 80%;
+}
+
+#ShowEcommerceContactInfo {
+    font-family: 'PT Sans', sans-serif;
+    font-family: 'Barlow', sans-serif;
+    font-family: 'Pontano Sans', sans-serif;
+}
