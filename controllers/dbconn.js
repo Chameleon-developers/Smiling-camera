@@ -4,7 +4,7 @@ module.exports = function () {
         host : 'localhost',
         user : 'root',
         password : '',
-        database : ''
+        database : 'youprint_shop'
     }); 
 
     con.on('error',function (err) {  

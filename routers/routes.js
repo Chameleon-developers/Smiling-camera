@@ -1,21 +1,26 @@
-var prueba=require('../controllers/prueba');
+//var prueba=require('../controllers/prueba');
+var users=require('../controllers/users');
 
 module.exports = function (app,secureApp) {
 
-  app.get('/prueba',prueba.prueba);
+    /* Obtener Los tipos de usuario existentes */
+    app.get('/getTypeUsers',users.getTypeUsers);
 
-  /* NOTE Ejemplos */
-  /* app.get('/prueba' , (req,res)=>{
-      res.status(200).json({
-          status : 'ok',
-          msg : 'prueba Routes Con GET'
-      })
-  })
+    /* Registrar un nuevo usuario */
+    app.post('/insertUser',users.insertUser);
 
-  app.post('/prueba' , (req,res)=>{
-      res.status(200).json({
-          status : 'ok',
-          msg : 'prueba Routes Con POST'
-      })
-  }) */
+    /* NOTE Ejemplos */
+    /* app.get('/prueba' , (req,res)=>{
+        res.status(200).json({
+            status : 'ok',
+            msg : 'prueba Routes Con GET'
+        })
+    })
+
+    app.post('/prueba' , (req,res)=>{
+        res.status(200).json({
+            status : 'ok',
+            msg : 'prueba Routes Con POST'
+        })
+    }) */
 }

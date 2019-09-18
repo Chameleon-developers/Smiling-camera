@@ -218,6 +218,7 @@ CREATE TABLE typeusers(
     supplies tinyint(1) NOT NULL DEFAULT 0,
     products tinyint(1) NOT NULL DEFAULT 0,
     configurations tinyint(1) NOT NULL DEFAULT 0,
+    ecommerceYouPrint tinyint(1) NOT NULL DEFAULT 0,
     PRIMARY KEY (idTypeUser)
 ) DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 -- Tabla usuarios pagina adminitrativa 
@@ -229,6 +230,7 @@ CREATE TABLE managerusers(
     passwordUser varchar(45) NOT NULL, -- longitud?
     idTypeUser INT NOT NULL,
     statusUser tinyint(1) not null DEFAULT 1,
+    ecommerceYouPrint tinyint(1) NOT NULL DEFAULT 0,
     PRIMARY KEY (idManagerUser),
     FOREIGN KEY (idTypeUser) REFERENCES typeusers (idTypeUser) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
