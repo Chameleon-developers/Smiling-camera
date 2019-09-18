@@ -4,6 +4,7 @@ import Tasks from './sample/tasks';
 import Tareas from './Components/Tasks.js';
 import Botones from './Components/Buttons.js';
 import Portada from './Components/Hero';
+import Admin from './Components/DashboardAdmin/AdminDashboard.js';
 /*
 import Menu from './Components/Menu';
 
@@ -69,13 +70,11 @@ class App extends React.Component{
     return(
       <div>
         {
-          //<Tareas tasks={this.state.Tasks}/>
-          
           <Portada/>
+         // <Admin></Admin>
+
         }
       </div>
-      
-      
     )
     
   }
