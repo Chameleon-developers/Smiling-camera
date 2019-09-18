@@ -3,3 +3,21 @@
     width: 450px;
     display: inline-block;
 }
+/*
+aside{
+    width: 250px;
+}*/
+.dashboard-panel{
+    top: 0px;
+    display: inline-block;
+    width: 15rem;
+    position: relative;
+    vertical-align: top;
+    background-color:#d4d6d5;
+}
+.dashboard-main{
+  
+    position: relative;
+    display: inline-block;
+    width: 75%;
+}
