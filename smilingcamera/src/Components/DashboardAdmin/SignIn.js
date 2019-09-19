@@ -18,6 +18,12 @@ import cyan from '@material-ui/core/colors/cyan'; //azul
 import grey from '@material-ui/core/colors/grey'; //azul
 import yellow from '@material-ui/core/colors/yellow'; //yellow
 import { createMuiTheme, withStyles} from '@material-ui/core/styles';
+import Logo from "../../Images/logo.jpg";
+import myTheme from '../../Components/theme.json';
+
+<MuiThemeProvider muiTheme={myTheme}>
+  <MyMaterialComponents />
+</MuiThemeProvider>
 
 //const primary = teal['A400']; // #F44336
 //const accent = pink[400]; // #E040FB
@@ -44,8 +50,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="#">
+        You Print
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -89,11 +95,16 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+        <Grid container>
+          <Grid item xs>
+            <img src={Logo} alt="You Print"/>
+          </Grid>
+        </Grid>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Iniciar Sesión
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -102,7 +113,7 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Correo"
             name="email"
             autoComplete="email"
             autoFocus
@@ -113,32 +124,27 @@ export default function SignIn() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
+          {/*<FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
+            label="Recuérdame"
+          />*/}
 
-          <ColorButton type="submit"
-                fullWidth variant="contained" color="primary" className={classes.submit}>
-            Iniciar Sesi
+          <ColorButton type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+            Iniciar Sesión
           </ColorButton>
 
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Forgot password?
+              ¿Olvidaste tu contraseña?
               </Link>
             </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
+            
           </Grid>
         </form>
       </div>
