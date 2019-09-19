@@ -9,11 +9,10 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-//import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-//import $ from 'jquery';
 
 function Copyright() {
   return (
@@ -46,7 +45,6 @@ class SignIn extends React.Component {
         <Avatar className={classes.avatar}>
         className={classes.form}
         className={classes.submit}
-        <LockOutlinedIcon />
 */
 
   render() {
@@ -57,7 +55,7 @@ class SignIn extends React.Component {
       <CssBaseline />
       <div>
         <Avatar >
-          
+          <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
@@ -152,27 +150,27 @@ class SignIn extends React.Component {
       passwordUser: this.state.passwordUser
     }
     console.log(this.state.passwordUser);
-    
     fetch("http://" + document.domain+":3500/logIn",{
       method: 'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
       body: JSON.stringify({ mainEmail: this.state.userName, passwordUser: this.state.passwordUser })
     }).then(res => res.json());
 
-     /* $.ajax({
+     /* 
+     fetch(`http://` + document.domain+`:3500/logIn/${this.state.userName},${this.state.userPass}`)
+      .then(res => res.json())
+      .then(userInfo => this.setState({ userInfo }));
+     $.ajax({
         type: "POST",
         url: "http://" + document.domain+":3500/logIn",
         dataType: 'json',
         data: {
-          "mainEmail": this.state.userName,
-          "passwordUser": this.state.passwordUser
+          "mainEmail": ${this.state.userName},
+          "passwordUser": ${this.state.userPass}
         },
         success: function(data){
           console.log(data);
         }
-      }); */
+      });*/
   };
 }
 export default SignIn;

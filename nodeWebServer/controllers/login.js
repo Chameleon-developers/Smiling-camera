@@ -4,8 +4,7 @@ module.exports.logIn = function (req, res) {
     var con = require('../controllers/dbconn')();
 
     /* Obtener los datos del Body */
-    var data  = req.data;
-    //var data = req.body;
+    var data = req.body;
     console.log(data);
     
 
