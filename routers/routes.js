@@ -15,6 +15,12 @@ module.exports = function (app,secureApp) {
     
     /* Modificar datos de un usuario existente */
     app.post('/updateUser',users.updateUser);
+    
+    /* Obtener datos de los usuarios registrados */
+    app.get('/getUsers' ,users.getUsers);
+
+    /* Eliminar usuario registrado */
+    app.post('/deleteUser' ,users.deleteUser);
 
     /* NOTE Ejemplos */
     /* app.get('/prueba' , (req,res)=>{
