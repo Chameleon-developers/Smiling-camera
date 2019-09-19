@@ -50,17 +50,55 @@ module.exports.insertUser = function (req, res) {
             // Internal error message send
             res.status(500).json({
                 Status: 'internal error',
-                message: 'Internal error'
+                message: err
             });
             con.end();
             return;
         } else {
             if (result.affectedRows == 1) {
-                console.log(result);
-                
                 res.status(200).json({
                     Status: 'Success',
                     message: 'Se registró correctamente el usuario'
+                })
+            }
+        }
+    })
+}
+
+/* Registrar un nuevo usuario */
+module.exports.updateUser = function (req, res) {
+    /* Obtener variable para la conexión a la BD */
+    const con = require('../controllers/dbconn')();
+
+    /* Obtener los datos del Body */
+    let data = req.body;
+
+     /* Establecer query para la modificación */
+     let qry = ""
+     if (data.passwordUser){
+        qry="UPDATE managerusers SET mainEmail = ?, resetEmail = ?, nameUser = ?, passwordUser = ?, idTypeUser = ? WHERE idManagerUser = ? "
+        values=[data.mainEmail,data.resetEmail,data.nameUser,data.passwordUser,data.idTypeUser,data.idManagerUser];
+     } else{
+        qry="UPDATE managerusers SET mainEmail = ?, resetEmail = ?, nameUser = ?, idTypeUser = ? WHERE idManagerUser = ? "
+        values=[data.mainEmail,data.resetEmail,data.nameUser,data.idTypeUser,data.idManagerUser];
+     }
+
+     /* Ejecutar la consulta para la obtención de tipos de usuario */
+    con.query(qry,values,function (err, result, fields) {
+        if (err) {
+            // Internal error message send
+            res.status(500).json({
+                Status: 'internal error',
+                message: err
+                //message: 'Internal error'
+            });
+            con.end();
+            return;
+        } else {
+            if (result.affectedRows == 1) {
+                res.status(200).json({
+                    Status: 'Success',
+                    message: 'Se modificó correctamente el usuario'
                 })
             }
         }

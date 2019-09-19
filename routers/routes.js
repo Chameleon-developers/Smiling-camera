@@ -1,13 +1,20 @@
 //var prueba=require('../controllers/prueba');
 var users=require('../controllers/users');
+var login=require('../controllers/login');
 
 module.exports = function (app,secureApp) {
+
+    /* Validar logIn */
+    app.post('/logIn',login.logIn);
 
     /* Obtener Los tipos de usuario existentes */
     app.get('/getTypeUsers',users.getTypeUsers);
 
     /* Registrar un nuevo usuario */
     app.post('/insertUser',users.insertUser);
+    
+    /* Modificar datos de un usuario existente */
+    app.post('/updateUser',users.updateUser);
 
     /* NOTE Ejemplos */
     /* app.get('/prueba' , (req,res)=>{
