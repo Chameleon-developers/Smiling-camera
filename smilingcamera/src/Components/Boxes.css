@@ -3,6 +3,12 @@
     width: 450px;
     display: inline-block;
 }
+
+#BigBox{
+    margin: 15px;
+    width: 750;
+    display: block;
+}
 /*
 aside{
     width: 250px;
@@ -13,11 +19,22 @@ aside{
     width: 15rem;
     position: relative;
     vertical-align: top;
-    background-color:#d4d6d5;
+    background-color:#DBDBDB;
+    height: 700px;
 }
 .dashboard-main{
   
     position: relative;
     display: inline-block;
     width: 75%;
+    top:15px;
+}
+
+.menu-list a:hover{
+    background-color: #4af1ce;
+    color: white;
+}
+.menu{
+    margin-left: 10px;
+    margin-right: 10px;
 }

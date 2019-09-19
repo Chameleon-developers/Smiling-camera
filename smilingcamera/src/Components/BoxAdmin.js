@@ -3,7 +3,7 @@ import {Card} from 'reactbulma';
 import {Content} from 'reactbulma';
 import './Boxes.css';
 import tasks from'../Prueba.json';
-console.log(tasks);
+
 class BoxAdmin extends React.Component {
     state = {
         tasks: tasks

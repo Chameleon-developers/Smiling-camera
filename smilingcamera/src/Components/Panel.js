@@ -1,6 +1,6 @@
 import React from 'react';
-import Box from './BoxAdmin';
 import './Boxes.css';
+import BigBox from './BigBox';
 
 class Panel extends React.Component {
     render(){
@@ -16,37 +16,15 @@ class Panel extends React.Component {
 
                     <aside class="menu has-text-white">
                     <p class="menu-label">
-                        General
+                        Administracion
                     </p>
                     <ul class="menu-list">
-                        <li><a>Dashboard</a></li>
-                        <li><a>Customers</a></li>
+                        <li><a>Productos</a></li>
+                        <li><a>Usuarios</a></li>
+                        <li><a>Estadísticas</a></li>
+                        <li><a>Kioscos</a></li>
                     </ul>
-                    <p class="menu-label">
-                        Administration
-                    </p>
-                    <ul class="menu-list">
-                        <li><a>Team Settings</a></li>
-                        <li>
-                        <a class="is-active">Manage Your Team</a>
-                        <ul>
-                            <li><a>Members</a></li>
-                            <li><a>Plugins</a></li>
-                            <li><a>Add a member</a></li>
-                        </ul>
-                        </li>
-                        <li><a>Invitations</a></li>
-                        <li><a>Cloud Storage Environment Settings</a></li>
-                        <li><a>Authentication</a></li>
-                    </ul>
-                    <p class="menu-label">
-                        Transactions
-                    </p>
-                    <ul class="menu-list">
-                        <li><a>Payments</a></li>
-                        <li><a>Transfers</a></li>
-                        <li><a>Balance</a></li>
-                    </ul>
+                    
                     </aside>
                 </div>
                              
@@ -55,25 +33,23 @@ class Panel extends React.Component {
                     <div class="navbar-menu">
                         <div class="navbar-end">
                         <span class="navbar-item">
-                            Fixed-top navbar
+                            Opciones
                         </span>
                         </div>
                     </div>
                     </nav>
                 
                     <section class="section">
-                    <p class="title is-size-2 is-spaced">
-                        The Bulma Dashboard
-                    </p>
+                    
 
                     <p class="subtitle is-size-3">
-                        A Bulma extension for full-page dashboard-style layouts
+                        Gestión de usuarios
                     </p>
 
                     <hr />
 
                     <section class="content is-medium">
-                    <Box/>
+                    <BigBox/>
 
                        
                     </section>
@@ -87,5 +63,8 @@ class Panel extends React.Component {
         </div>
     }
 }
+/*<p class="title is-size-2 is-spaced">
+                        Usuarios
+                    </p>*/ 
 
 export default Panel;
