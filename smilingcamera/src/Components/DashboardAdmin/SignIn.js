@@ -145,14 +145,18 @@ class SignIn extends React.Component {
       mainEmail: this.state.userName,
       passwordUser: this.state.passwordUser
     }
-    console.log(this.state.passwordUser);
-    fetch("http://" + document.domain+":3500/logIn/",{
-      method: 'post',
+    fetch("http://" + document.domain+":3500/logIn",{
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ mainEmail: this.state.userName, passwordUser: this.state.passwordUser })
-    }).then(res => res.json());
+    }).then(function (response) {
+        return response.json(); // call the json method on the response to get JSON
+    })
+    .then(function (json) {
+        console.log(json)
+    })
 
      /* 
      fetch(`http://` + document.domain+`:3500/logIn/${this.state.userName},${this.state.userPass}`)

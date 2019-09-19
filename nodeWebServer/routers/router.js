@@ -1,6 +1,5 @@
-module.exports = function (app,secureApp) {  
+module.exports = function (app,secureApp) {
     var routes = require('./routes')
-
 
     app.use(function (req,res,next) {
         res.header("Access-Control-Allow-Origin", "*")
@@ -8,7 +7,7 @@ module.exports = function (app,secureApp) {
         next()
     })
 
-    app.use('/logged',secureApp)
+    //app.use('/logged',secureApp)
 
     secureApp.use(function (req,res,next) {
         res.header("Access-Control-Allow-Origin", "*")

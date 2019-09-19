@@ -3,19 +3,6 @@ module.exports.logIn = function (req, res) {
      /* Obtener variable para la conexión a la BD */
     var con = require('../controllers/dbconn')();
 
-    /* Obtener los datos del Body */
-    var app = express();
-    app.use(express.urlencoded());
-
-    // Parse JSON bodies (as sent by API clients)
-    app.use(express.json());
-
-    // Access the parse results as request.body
-    app.post('/', function(request, response){
-        console.log(request.body.user.name);
-        console.log(request.body.user.email);
-    });
-
     var data = req.body;
     
     console.log(data);
