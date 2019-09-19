@@ -1,9 +1,9 @@
 -- Eliminar base de datos si ya existe
-DROP DATABASE IF EXISTS youprint_shop2;
+DROP DATABASE IF EXISTS youprint_shop;
 -- Crear base de datos
-CREATE DATABASE youprint_shop2/*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
+CREATE DATABASE youprint_shop/*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
 -- Usar base de datos
-USE youprint_shop2;
+USE youprint_shop;
 -- Activar planificador de eventos 
 SET GLOBAL event_scheduler = ON;
 -- Tablas
