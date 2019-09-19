@@ -5,6 +5,7 @@ module.exports.logIn = function (req, res) {
 
     /* Obtener los datos del Body */
     var data = req.body;
+    
     console.log(data);
     
 

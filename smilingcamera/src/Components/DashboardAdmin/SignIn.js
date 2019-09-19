@@ -27,10 +27,6 @@ function Copyright() {
   );
 }
 
-
-
-
-
 class SignIn extends React.Component {
   
   
@@ -150,8 +146,8 @@ class SignIn extends React.Component {
       passwordUser: this.state.passwordUser
     }
     console.log(this.state.passwordUser);
-    fetch("http://" + document.domain+":3500/logIn",{
-      method: 'POST',
+    fetch("http://" + document.domain+":3500/logIn/",{
+      method: 'post',
       body: JSON.stringify({ mainEmail: this.state.userName, passwordUser: this.state.passwordUser })
     }).then(res => res.json());
 
