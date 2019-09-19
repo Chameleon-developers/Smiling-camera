@@ -1,33 +1,62 @@
 import TablePagination from '@material-ui/core/TablePagination';
 import React from 'react';
 import MaterialTable from 'material-table';
+import usrs from '../../sample/usrs2.json';
+import { Container } from 'reactbulma'
+import { fontFamily } from '@material-ui/system';
 
 export default function MaterialTableDemo() {
   const [state, setState] = React.useState({
     columns: [
-      { title: 'Name', field: 'name' },
-      { title: 'Surname', field: 'surname' },
-      { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
+      { title: 'Username', field: 'username',/*
+        cellStyle: {
+          backgroundColor: '#039be5',
+          color: '#FFF'
+        },*/
+        headerStyle: {
+          backgroundColor: '#4AE0B8',
+          color: '#FFF',
+          fontFamily:'Barlow'
+        }
+      },
+      { title: 'email', field: 'email' , headerStyle: {
+        backgroundColor: '#4AE0B8',
+        color: '#FFF',
+        fontFamily:'Barlow'
+      }},
+      //{ title: 'Birth Year', field: 'birthYear', type: 'numeric' },
       {
-        title: 'Birth Place',
-        field: 'birthCity',
-        lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
+        title: 'Tipo de usuario',
+        field: 'type',
+        lookup: { 1: 'Administrador', 2: 'Normal' },headerStyle: {
+          backgroundColor: '#4AE0B8',
+          color: '#FFF',
+          fontFamily:'Barlow'
+        }
+      },
+      {
+        title: 'Status',
+        field: 'status',
+        lookup: { true: 'Activo', false: 'Inactivo' },headerStyle: {
+          backgroundColor: '#4AE0B8',
+          color: '#FFF',
+          fontFamily:'Barlow'
+        }
       },
     ],
-    data: [
-      { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-      {
-        name: 'Zerya Betül',
-        surname: 'Baran',
-        birthYear: 2017,
-        birthCity: 34,
-      },
-    ],
+    data: usrs,
+    options: {
+      headerStyle: {
+        backgroundColor: '#01579b',
+        color: '#FFF'
+      }
+    }
   });
 
   return (
+    <Container>
     <MaterialTable
-      title="Editable Example"
+      title="Tabla de Usuarios"
       columns={state.columns}
       data={state.data}
       editable={{
@@ -60,5 +89,6 @@ export default function MaterialTableDemo() {
           }),
       }}
     />
+    </Container>
   );
 }
