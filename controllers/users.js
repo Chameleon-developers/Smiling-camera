@@ -104,3 +104,76 @@ module.exports.updateUser = function (req, res) {
         }
     })
 }
+
+/* Obtener usuarios registrados */
+module.exports.getUsers = function (req, res) {
+    /* Obtener variable para la conexión a la BD */
+    const con = require('../controllers/dbconn')();
+
+    /* Establecer query para la obtencion de usuarios */
+    let qry = "SELECT idManagerUser, mainEmail, resetEmail, nameUser, passwordUser, idTypeUser FROM managerusers WHERE statusUser=1 AND ecommerceYouPrint=1";
+
+    /* Ejecutar la consulta para la obtención de tipos de usuario */
+    con.query(qry, function (err, result, fields) {
+        if (err) {
+            // Internal error message send
+            res.status(500).json({
+                Status: 'Internal Error',
+                message: 'Internal Error'
+            });
+            con.end();
+            return;
+        } else {
+            if (result.length > 0) {
+                // Setup and send of response
+                res.status(200).json({
+                    Status: 'Success',
+                    users: result,
+                    message: 'Datos de los usuarios'
+                })
+            } else {
+                res.status(400).json({
+                    Status: 'Failure',
+                    message: 'No existen usuarios para e-commerce YouPrint'
+                })
+                con.end();
+            }
+        }
+    });
+}
+
+/* Eliminar usuarios registrados */
+module.exports.deleteUser = function(req, res) {
+    /* Obtener variable para la conexión a la BD */
+    const con = require('../controllers/dbconn')();
+
+    /* Obtener los datos del Body */
+    let data = req.body;
+
+    /* Establecer query para la insersión */
+    let qry = "UPDATE managerusers SET statusUser=0 WHERE idManagerUser=?";
+
+    /* Obtiene los valores para la consulta */
+    let values[data.idManagerUser];
+
+    /* Ejecutar la consulta para la eliminacion de usuario */
+    con.query(qry,values,function (err, result, fields) {
+        if (err) {
+            // Internal error message send
+            res.status(500).json({
+                Status: 'internal error',
+                message: err
+                //message: 'Internal error'
+            });
+            con.end();
+            return;
+        } else {
+            if (result.affectedRows == 1) {
+                res.status(200).json({
+                    Status: 'Success',
+                    message: 'Se elimino correctamente el usuario'
+                })
+            }
+        }
+    });
+}
