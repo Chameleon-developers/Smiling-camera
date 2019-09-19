@@ -148,6 +148,9 @@ class SignIn extends React.Component {
     console.log(this.state.passwordUser);
     fetch("http://" + document.domain+":3500/logIn/",{
       method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ mainEmail: this.state.userName, passwordUser: this.state.passwordUser })
     }).then(res => res.json());
 
