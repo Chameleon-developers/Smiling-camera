@@ -19,11 +19,6 @@ import grey from '@material-ui/core/colors/grey'; //azul
 import yellow from '@material-ui/core/colors/yellow'; //yellow
 import { createMuiTheme, withStyles} from '@material-ui/core/styles';
 import Logo from "../../Images/logo.jpg";
-import myTheme from '../../Components/theme.json';
-
-<MuiThemeProvider muiTheme={myTheme}>
-  <MyMaterialComponents />
-</MuiThemeProvider>
 
 //const primary = teal['A400']; // #F44336
 //const accent = pink[400]; // #E040FB
