@@ -1,0 +1,26 @@
+{
+  "name": "Smiling-camera",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chameleon-developers/Smiling-camera.git"
+  },
+  "keywords": [],
+  "author": "Chameleon Developers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chameleon-developers/Smiling-camera/issues"
+  },
+  "homepage": "https://github.com/Chameleon-developers/Smiling-camera#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.17.1"
+  }
+}
