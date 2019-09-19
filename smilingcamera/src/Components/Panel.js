@@ -1,6 +1,7 @@
 import React from 'react';
 import './Boxes.css';
 import BigBox from './BigBox';
+import Pagintab from './DashboardAdmin/Pagintableusers'
 
 class Panel extends React.Component {
     render(){
@@ -49,7 +50,7 @@ class Panel extends React.Component {
                     <hr />
 
                     <section class="content is-medium">
-                    <BigBox/>
+                        <Pagintab></Pagintab>
 
                        
                     </section>

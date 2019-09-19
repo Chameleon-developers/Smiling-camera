@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card} from 'reactbulma';
 import {Content} from 'reactbulma';
+import Pagintab from './DashboardAdmin/Pagintableusers'
 
 class BigBox extends React.Component {
     render(){
