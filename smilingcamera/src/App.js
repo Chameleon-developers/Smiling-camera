@@ -11,11 +11,11 @@ class App extends React.Component{
   render(){
     return(
         //<Portada/>
-        // <Admin></Admin>
-        <Panel></Panel>
+        //<Admin></Admin>
+        //<Panel></Panel>
         
         //<Pagintab></Pagintab>
-        //<Loginadmin></Loginadmin>
+        <Loginadmin></Loginadmin>
 
     )
     

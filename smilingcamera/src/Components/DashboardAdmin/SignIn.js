@@ -1,4 +1,5 @@
 import React from 'react';
+import { render } from "react-dom";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -26,45 +27,40 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
-  '@global': {
-    body: {
-      backgroundColor: theme.palette.common.white,
-    },
-  },
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
-export default function SignIn() {
-  const classes = useStyles();
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
+
+
+class SignIn extends React.Component {
+  
+  
+  constructor() {
+    super();
+    this.state = {};
+    
+  }
+//const classes = useStyles();+
+/*
+<div className={classes.paper}>
         <Avatar className={classes.avatar}>
+        className={classes.form}
+        className={classes.submit}
+*/
+
+  render() {
+    
+    return (
+      
+      <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div>
+        <Avatar >
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={this.onSubmit} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -72,9 +68,10 @@ export default function SignIn() {
             fullWidth
             id="email"
             label="Email Address"
-            name="email"
+            name="userName"
             autoComplete="email"
             autoFocus
+            onChange={this.onUserNameChange}
           />
           <TextField
             variant="outlined"
@@ -96,7 +93,7 @@ export default function SignIn() {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            
           >
             Sign In
           </Button>
@@ -113,10 +110,70 @@ export default function SignIn() {
             </Grid>
           </Grid>
         </form>
+        {this.renderUsuario()}
       </div>
       <Box mt={8}>
         <Copyright />
       </Box>
     </Container>
-  );
+    );
+  }
+
+  renderUsuario() {
+    if (this.state.userInfo == null) {
+      return;
+    }
+
+    const { name, avatar_url, public_repos } = this.state.userInfo;
+
+    return (
+      <div>
+        <h3>{name}</h3>
+        <img src={`${avatar_url}`} />
+        <p>Número de repos: {public_repos}</p>
+      </div>
+    );
+  }
+
+  onUserNameChange = e => {
+    this.setState({ userName: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    fetch(`https://api.github.com/users/${this.state.userName}`)
+      .then(res => res.json())
+      .then(userInfo => this.setState({ userInfo }));
+  };
 }
+export default SignIn;
+/*import React from "react";
+import { render } from "react-dom";
+const useStyles = makeStyles(theme => ({
+      '@global': {
+        body: {
+          backgroundColor: theme.palette.common.white,
+        },
+      },
+      paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      },
+      avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+      },
+      form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+      },
+      submit: {
+        margin: theme.spacing(3, 0, 2),
+      },
+    }));
+    const classes = useStyles();
+const classes = useStyles();
+
+ */
