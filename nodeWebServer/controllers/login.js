@@ -4,7 +4,22 @@ module.exports.logIn = function (req, res) {
     var con = require('../controllers/dbconn')();
 
     /* Obtener los datos del Body */
+    var app = express();
+    app.use(express.urlencoded());
+
+    // Parse JSON bodies (as sent by API clients)
+    app.use(express.json());
+
+    // Access the parse results as request.body
+    app.post('/', function(request, response){
+        console.log(request.body.user.name);
+        console.log(request.body.user.email);
+    });
+
     var data = req.body;
+    
+    console.log(data);
+    
 
     /* Establecer query para la consulta de logIn y saber si los datos son correctos */
     let qry = "SELECT MU.idManagerUser,MU.nameUser, T.idTypeUser, T.typeUser FROM managerusers AS MU INNER JOIN typeusers AS T ON MU.idTypeUser = T.idTypeUser WHERE MU.mainEmail = ? AND MU.passwordUser = ? AND MU.statusUser = 1 AND MU.ecommerceYouPrint = 1"
