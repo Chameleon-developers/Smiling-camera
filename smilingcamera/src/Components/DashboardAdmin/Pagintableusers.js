@@ -8,49 +8,26 @@ import { fontFamily } from '@material-ui/system';
 export default function MaterialTableDemo() {
   const [state, setState] = React.useState({
     columns: [
-      { title: 'Username', field: 'username',/*
+      { title: 'Username', field: 'username'/*
         cellStyle: {
           backgroundColor: '#039be5',
           color: '#FFF'
         },*/
-        headerStyle: {
-          backgroundColor: '#4AE0B8',
-          color: '#FFF',
-          fontFamily:'Barlow'
-        }
       },
-      { title: 'email', field: 'email' , headerStyle: {
-        backgroundColor: '#4AE0B8',
-        color: '#FFF',
-        fontFamily:'Barlow'
-      }},
+      { title: 'email', field: 'email'},
       //{ title: 'Birth Year', field: 'birthYear', type: 'numeric' },
       {
         title: 'Tipo de usuario',
         field: 'type',
-        lookup: { 1: 'Administrador', 2: 'Normal' },headerStyle: {
-          backgroundColor: '#4AE0B8',
-          color: '#FFF',
-          fontFamily:'Barlow'
-        }
+        lookup: { 1: 'Administrador', 2: 'Normal' }
       },
       {
         title: 'Status',
         field: 'status',
-        lookup: { true: 'Activo', false: 'Inactivo' },headerStyle: {
-          backgroundColor: '#4AE0B8',
-          color: '#FFF',
-          fontFamily:'Barlow'
-        }
+        lookup: { true: 'Activo', false: 'Inactivo' }
       },
     ],
-    data: usrs,
-    options: {
-      headerStyle: {
-        backgroundColor: '#01579b',
-        color: '#FFF'
-      }
-    }
+    data: usrs
   });
 
   return (
@@ -65,7 +42,10 @@ export default function MaterialTableDemo() {
             setTimeout(() => {
               resolve();
               const data = [...state.data];
-              data.push(newData);
+              if (data.email == "baran@hotmail.com") {
+                data.push(newData);
+              }
+              
               setState({ ...state, data });
             }, 600);
           }),
@@ -87,6 +67,13 @@ export default function MaterialTableDemo() {
               setState({ ...state, data });
             }, 600);
           }),
+      }}
+      options={{
+        headerStyle: {
+          backgroundColor: '#4AE0B8',
+          color: '#FFF',
+          fontFamily:'Barlow'
+        }
       }}
     />
     </Container>
