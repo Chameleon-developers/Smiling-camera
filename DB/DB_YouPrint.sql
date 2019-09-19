@@ -1,9 +1,9 @@
 -- Eliminar base de datos si ya existe
-DROP DATABASE IF EXISTS youprint_shop;
+DROP DATABASE IF EXISTS youprint_shop2;
 -- Crear base de datos
-CREATE DATABASE youprint_shop/*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
+CREATE DATABASE youprint_shop2/*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci */;
 -- Usar base de datos
-USE youprint_shop;
+USE youprint_shop2;
 -- Activar planificador de eventos 
 SET GLOBAL event_scheduler = ON;
 -- Tablas
@@ -232,6 +232,7 @@ CREATE TABLE managerusers(
     statusUser tinyint(1) not null DEFAULT 1,
     ecommerceYouPrint tinyint(1) NOT NULL DEFAULT 0,
     PRIMARY KEY (idManagerUser),
+    UNIQUE KEY mainEmail (mainEmail),
     FOREIGN KEY (idTypeUser) REFERENCES typeusers (idTypeUser) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 -- Tabla notificaciones

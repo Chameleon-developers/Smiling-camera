@@ -111,7 +111,7 @@ module.exports.getUsers = function (req, res) {
     const con = require('../controllers/dbconn')();
 
     /* Establecer query para la obtencion de usuarios */
-    let qry = "SELECT idManagerUser, mainEmail, resetEmail, nameUser, passwordUser, idTypeUser FROM managerusers WHERE statusUser=1 AND ecommerceYouPrint=1";
+    let qry = "SELECT idManagerUser, mainEmail, resetEmail, nameUser, idTypeUser FROM managerusers WHERE statusUser=1 AND ecommerceYouPrint=1";
 
     /* Ejecutar la consulta para la obtención de tipos de usuario */
     con.query(qry, function (err, result, fields) {
@@ -154,9 +154,9 @@ module.exports.deleteUser = function(req, res) {
     let qry = "UPDATE managerusers SET statusUser=0 WHERE idManagerUser=?";
 
     /* Obtiene los valores para la consulta */
-    let values[data.idManagerUser];
+    let values = [data.idManagerUser];
 
-    /* Ejecutar la consulta para la eliminacion de usuario */
+    /* Ejecutar la consulta para la eliminación de usuario */
     con.query(qry,values,function (err, result, fields) {
         if (err) {
             // Internal error message send
