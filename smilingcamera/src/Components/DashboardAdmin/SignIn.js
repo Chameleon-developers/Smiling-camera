@@ -78,11 +78,12 @@ class SignIn extends React.Component {
             margin="normal"
             required
             fullWidth
-            name="password"
+            name="passwordUser"
             label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={this.onUserPassChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -138,12 +139,38 @@ class SignIn extends React.Component {
   onUserNameChange = e => {
     this.setState({ userName: e.target.value });
   };
+  onUserPassChange = e => {
+    this.setState({ passwordUser: e.target.value });
+  };
 
   onSubmit = e => {
     e.preventDefault();
-    fetch(`https://api.github.com/users/${this.state.userName}`)
+    let data = {
+      mainEmail: this.state.userName,
+      passwordUser: this.state.passwordUser
+    }
+    console.log(this.state.passwordUser);
+    fetch("http://" + document.domain+":3500/logIn",{
+      method: 'POST',
+      body: JSON.stringify({ mainEmail: this.state.userName, passwordUser: this.state.passwordUser })
+    }).then(res => res.json());
+
+     /* 
+     fetch(`http://` + document.domain+`:3500/logIn/${this.state.userName},${this.state.userPass}`)
       .then(res => res.json())
       .then(userInfo => this.setState({ userInfo }));
+     $.ajax({
+        type: "POST",
+        url: "http://" + document.domain+":3500/logIn",
+        dataType: 'json',
+        data: {
+          "mainEmail": ${this.state.userName},
+          "passwordUser": ${this.state.userPass}
+        },
+        success: function(data){
+          console.log(data);
+        }
+      });*/
   };
 }
 export default SignIn;
