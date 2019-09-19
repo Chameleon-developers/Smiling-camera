@@ -4,6 +4,7 @@ import Portada from './Components/Hero';
 import Admin from './Components/DashboardAdmin/AdminDashboard.js';
 import Showuserstable from './Components/Showtableusers.js'
 import Pagintab from './Components/DashboardAdmin/Pagintableusers'
+import Loginadmin from './Components/DashboardAdmin/SignIn.js'
 class App extends React.Component{
   render(){
     return(
@@ -11,7 +12,8 @@ class App extends React.Component{
         // <Admin></Admin>
       
         //<Showuserstable/>
-        <Pagintab></Pagintab>
+        //<Pagintab></Pagintab>
+        <Loginadmin></Loginadmin>
 
     )
     
