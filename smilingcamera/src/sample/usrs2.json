@@ -1,16 +1,18 @@
 [
-    { "id": 20,"username": "Mehmet", "email": "baran@hotmail.com", "type": 1, "status": true },
+    { "id": 20,"username": "Mehmet", "email": "baran@hotmail.com","aemail": "baran2@hotmail.com", "type": 1, "status": true },
     {
         "id": 0,
         "username": "task one",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 1,
-        "status": true
+        "status": false
     },
     {
         "id": 1,
         "username": "task 2",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 2,
         "status": true
     },
@@ -18,6 +20,7 @@
         "id": 2,
         "username": "task one",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 2,
         "status": true
     },
@@ -25,6 +28,7 @@
         "id": 3,
         "username": "task one",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 2,
         "status": true
     },
@@ -32,6 +36,7 @@
         "id": 4,
         "username": "task 2",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 1,
         "status": true
     },
@@ -39,6 +44,7 @@
         "id": 5,
         "username": "task one",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 2,
         "status": true
     },
@@ -46,6 +52,7 @@
         "id": 6,
         "username": "task one",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 2,
         "status": true
     },
@@ -53,6 +60,7 @@
         "id": 7,
         "username": "task 2",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 2,
         "status": true
     },
@@ -60,6 +68,7 @@
         "id": 8,
         "username": "task one",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 2,
         "status": true
     },
@@ -67,6 +76,7 @@
         "id": 9,
         "username": "task one",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 2,
         "status": true
     },
@@ -74,6 +84,7 @@
         "id": 10,
         "username": "task 2",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 2,
         "status": true
     },
@@ -81,6 +92,7 @@
         "id": 11,
         "username": "task one",
         "email": "loren ipsum",
+        "aemail": "loren ipsum",
         "type": 2,
         "status": true
     }

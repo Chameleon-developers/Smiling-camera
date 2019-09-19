@@ -12,6 +12,33 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import teal from '@material-ui/core/colors/teal'; //verde
+import pink from '@material-ui/core/colors/pink'; //rosa
+import cyan from '@material-ui/core/colors/cyan'; //azul
+import grey from '@material-ui/core/colors/grey'; //azul
+import yellow from '@material-ui/core/colors/yellow'; //yellow
+import { createMuiTheme, withStyles} from '@material-ui/core/styles';
+
+//const primary = teal['A400']; // #F44336
+//const accent = pink[400]; // #E040FB
+
+const ColorButton = withStyles(theme => ({
+  root: {
+    color: theme.palette.getContrastText('#4AE0B8'),
+    backgroundColor: '#4AE0B8',
+    color: "white",
+    borderLeftColor: teal['A400'],
+    borderColor: teal['A400'],
+    width: "400px",
+    minWidth: '64px',
+    boxSizing: "border-box",
+    '&:hover': {
+      backgroundColor: '#45c4a2',
+    },
+  },
+}))(Button);
+
+
 
 function Copyright() {
   return (
@@ -26,10 +53,14 @@ function Copyright() {
   );
 }
 
+ 
+
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
       backgroundColor: theme.palette.common.white,
+      primary: teal['A400'], // #F44336
+      accent:pink[400] // #E040FB
     },
   },
   paper: {
@@ -91,15 +122,12 @@ export default function SignIn() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
+
+          <ColorButton type="submit"
+                fullWidth variant="contained" color="primary" className={classes.submit}>
+            Iniciar Sesi
+          </ColorButton>
+
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

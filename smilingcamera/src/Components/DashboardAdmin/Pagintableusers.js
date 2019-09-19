@@ -8,23 +8,20 @@ import { fontFamily } from '@material-ui/system';
 export default function MaterialTableDemo() {
   const [state, setState] = React.useState({
     columns: [
+      { title: 'e-mail', field: 'email'},
+      { title: 'e-mail Alterno', field: 'aemail'},
       { title: 'Username', field: 'username'/*
         cellStyle: {
           backgroundColor: '#039be5',
           color: '#FFF'
         },*/
       },
-      { title: 'email', field: 'email'},
+      
       //{ title: 'Birth Year', field: 'birthYear', type: 'numeric' },
       {
         title: 'Tipo de usuario',
         field: 'type',
-        lookup: { 1: 'Administrador', 2: 'Normal' }
-      },
-      {
-        title: 'Status',
-        field: 'status',
-        lookup: { true: 'Activo', false: 'Inactivo' }
+        lookup: { 1: 'Administrador', 2: 'Operador' }
       },
     ],
     data: usrs
