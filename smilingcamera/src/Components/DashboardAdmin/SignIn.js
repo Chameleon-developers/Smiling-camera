@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from "react-dom";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,13 +12,41 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import teal from '@material-ui/core/colors/teal'; //verde
+import pink from '@material-ui/core/colors/pink'; //rosa
+import cyan from '@material-ui/core/colors/cyan'; //azul
+import grey from '@material-ui/core/colors/grey'; //azul
+import yellow from '@material-ui/core/colors/yellow'; //yellow
+import { createMuiTheme, withStyles} from '@material-ui/core/styles';
+import Logo from "../../Images/logo.png";
+
+//const primary = teal['A400']; // #F44336
+//const accent = pink[400]; // #E040FB
+
+const ColorButton = withStyles(theme => ({
+  root: {
+    color: theme.palette.getContrastText('#4AE0B8'),
+    backgroundColor: '#4AE0B8',
+    color: "white",
+    borderLeftColor: teal['A400'],
+    borderColor: teal['A400'],
+    width: "400px",
+    minWidth: '64px',
+    boxSizing: "border-box",
+    '&:hover': {
+      backgroundColor: '#45c4a2',
+    },
+  },
+}))(Button);
+
+
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="#">
+        You Print
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -27,44 +54,112 @@ function Copyright() {
   );
 }
 
-class SignIn extends React.Component {
-  
-  
-  constructor() {
-    super();
-    this.state = {};
-    
-  }
-//const classes = useStyles();+
-/*
-<div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-        className={classes.form}
-        className={classes.submit}
-*/
+ 
 
-  render() {
-    
-    return (
+const useStyles = makeStyles(theme => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.common.white,
+      primary: teal['A400'], // #F44336
+      accent:pink[400] // #E040FB
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+onUserNameChange = e => {
+  this.setState({ userName: e.target.value });
+};
+onUserPassChange = e => {
+  this.setState({ passwordUser: e.target.value });
+};
+onSubmit = e => {
+  e.preventDefault();
+  let data = {
+    mainEmail: this.state.userName,
+    passwordUser: this.state.passwordUser
+  }
+  fetch("http://" + document.domain+":3500/logIn",{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ mainEmail: this.state.userName, passwordUser: this.state.passwordUser })
+  }).then(function (response) {
+      return response.json(); // call the json method on the response to get JSON
+  })
+  .then(function (json) {
       
-      <Container component="main" maxWidth="xs">
+      console.log(json.Status);
+  })
+};
+function onUserNameChange(e){
+  this.setState({ userName: e.target.value });
+}
+function onUserPassChange(e){
+  this.setState({ passwordUser: e.target.value });
+}
+function onSubmit(e){
+  e.preventDefault();
+  let data = {
+    mainEmail: this.state.userName,
+    passwordUser: this.state.passwordUser
+  }
+  fetch("http://" + document.domain+":3500/logIn",{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ mainEmail: this.state.userName, passwordUser: this.state.passwordUser })
+  }).then(function (response) {
+      return response.json(); // call the json method on the response to get JSON
+  })
+  .then(function (json) {
+      
+      console.log(json.Status);
+  })
+}
+export default function SignIn() {
+  const classes = useStyles();
+  return (
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div>
-        <Avatar >
+      <div className={classes.paper}>
+        <Grid container>
+          <Grid item xs>
+            <img src={Logo} alt="You Print"/>
+          </Grid>
+        </Grid>
+        <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Iniciar Sesión
         </Typography>
-        <form onSubmit={this.onSubmit} noValidate>
+        <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             id="email"
-            label="Email Address"
-            name="userName"
+            label="Correo"
+            name="email"
             autoComplete="email"
             autoFocus
             onChange={this.onUserNameChange}
@@ -75,39 +170,30 @@ class SignIn extends React.Component {
             required
             fullWidth
             name="passwordUser"
-            label="Password"
+            label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
             onChange={this.onUserPassChange}
           />
-          <FormControlLabel
+          {/*<FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            
-          >
-            Sign In
-          </Button>
+            label="Recuérdame"
+          />*/}
+
+          <ColorButton type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+            Iniciar Sesión
+          </ColorButton>
+
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Forgot password?
+              ¿Olvidaste tu contraseña?
               </Link>
             </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
+            
           </Grid>
         </form>
-        {this.renderUsuario()}
       </div>
       <Box mt={8}>
         <Copyright />
@@ -116,53 +202,13 @@ class SignIn extends React.Component {
     );
   }
 
-  renderUsuario() {
-    if (this.state.userInfo == null) {
-      return;
-    }
+  
+  
+  
 
-    const { name, avatar_url, public_repos } = this.state.userInfo;
+  /*
 
-    return (
-      <div>
-        <h3>{name}</h3>
-        <img src={`${avatar_url}`} />
-        <p>Número de repos: {public_repos}</p>
-      </div>
-    );
-  }
-
-  onUserNameChange = e => {
-    this.setState({ userName: e.target.value });
-  };
-  onUserPassChange = e => {
-    this.setState({ passwordUser: e.target.value });
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-    let data = {
-      mainEmail: this.state.userName,
-      passwordUser: this.state.passwordUser
-    }
-    fetch("http://" + document.domain+":3500/logIn",{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ mainEmail: this.state.userName, passwordUser: this.state.passwordUser })
-    }).then(function (response) {
-        return response.json(); // call the json method on the response to get JSON
-    })
-    .then(function (json) {
-        
-        console.log(json.Status);
-    })
-
-     
-  };
-}
-export default SignIn;
+//export default SignIn;
 /*import React from "react";
 import { render } from "react-dom";
 const useStyles = makeStyles(theme => ({
