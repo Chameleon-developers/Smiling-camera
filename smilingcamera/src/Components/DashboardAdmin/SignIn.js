@@ -121,7 +121,7 @@ class SignIn extends React.Component {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={this.onUserNameChange}
+              onChange={this.onUserPassChange}
             />
             {<FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
