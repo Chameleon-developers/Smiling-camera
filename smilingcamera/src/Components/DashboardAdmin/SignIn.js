@@ -20,7 +20,7 @@ import grey from '@material-ui/core/colors/grey'; //azul
 import yellow from '@material-ui/core/colors/yellow'; //yellow
 import { createMuiTheme, withStyles} from '@material-ui/core/styles';
 import Logo from "../../Images/logo.png";
-
+import Panel from '../Panel'
 
 function Copyright() {
   return (
@@ -174,9 +174,14 @@ class SignIn extends React.Component {
         return response.json(); // call the json method on the response to get JSON
     })
     .then(function (json) {
-        if(json.Status =="S")
-        console.log(json.Status);
+        if(json.Status =="Success"){
+          
+          console.log(json.Status);
+        }
+        
     })
   };
 }
+
 export default SignIn;
+
