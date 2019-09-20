@@ -155,25 +155,11 @@ class SignIn extends React.Component {
         return response.json(); // call the json method on the response to get JSON
     })
     .then(function (json) {
-        console.log(json)
+        
+        console.log(json.Status);
     })
 
-     /* 
-     fetch(`http://` + document.domain+`:3500/logIn/${this.state.userName},${this.state.userPass}`)
-      .then(res => res.json())
-      .then(userInfo => this.setState({ userInfo }));
-     $.ajax({
-        type: "POST",
-        url: "http://" + document.domain+":3500/logIn",
-        dataType: 'json',
-        data: {
-          "mainEmail": ${this.state.userName},
-          "passwordUser": ${this.state.userPass}
-        },
-        success: function(data){
-          console.log(data);
-        }
-      });*/
+     
   };
 }
 export default SignIn;
