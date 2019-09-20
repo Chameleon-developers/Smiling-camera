@@ -19,30 +19,31 @@ function getData(){
             
   });
 }
-
-export default function MaterialTableDemo() {
-  
-  const [state, setState] = React.useState({
-    columns: [
-      { title: 'Nombre de Usuario', field: 'nameUser'/*
-        cellStyle: {
-          backgroundColor: '#039be5',
-          color: '#FFF'
-        },*/
-      },
-      { title: 'email', field: 'mainEmail'},
-      //{ title: 'Birth Year', field: 'birthYear', type: 'numeric' },
-      {
-        title: 'Tipo de usuario',
-        field: 'idTypeUser',
-        lookup: { 1: 'Administrador', 2: 'Normal' }
-      },
-      {
+/*{
         title: 'Status',
         field: 'status',
         lookup: { true: 'Activo', false: 'Inactivo' }
       },
-    ],
+*/ 
+export default function MaterialTableDemo() {
+  
+  const [state, setState] = React.useState({
+    
+
+    columns: [{ title: 'Nombre de Usuario', field: 'nameUser'
+    
+    
+    },
+    { title: 'email', field: 'mainEmail'},
+    //{ title: 'Birth Year', field: 'birthYear', type: 'numeric' },
+    {
+      title: 'Tipo de usuario',
+      field: 'idTypeUser',
+      lookup: { 1: 'Administrador', 2: 'Normal' }
+    }],
+      
+
+    
     //data: usrs
     data: getData()
   });
