@@ -4,6 +4,29 @@ import BigBox from './BigBox';
 import Pagintab from './DashboardAdmin/Pagintableusers'
 
 class Panel extends React.Component {
+    constructor(props){
+        
+        super(props);
+        
+        /*e.preventDefault();*/
+        
+        fetch("http://" + document.domain+":3500/getUsers",{
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(function (response) {
+            return response.json(); // call the json method on the response to get JSON
+        })
+        .then(function (json) {
+            console.log(json);
+            
+        });
+      
+    }
+    handleEvent(){
+        console.log(this.props);
+    }
     render(){
         return <div>
             <div class="dashboard">
@@ -63,9 +86,7 @@ class Panel extends React.Component {
             </div>
         </div>
     }
+    
 }
-/*<p class="title is-size-2 is-spaced">
-                        Usuarios
-                    </p>*/ 
 
 export default Panel;
