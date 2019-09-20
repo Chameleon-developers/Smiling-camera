@@ -1,4 +1,4 @@
-/*import React from 'react';
+import React from 'react';
 import { render } from "react-dom";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -26,6 +27,7 @@ function Copyright() {
     </Typography>
   );
 }
+/*
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
@@ -49,25 +51,48 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}));
+}));*/
 
-
+const useStyles =theme => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.palette.common.white,
+    },
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+});
 class SignIn extends React.Component {
   
   
   constructor() {
     super();
-    this.state = {};
+
     
   }
 
   render() {
-    
+    const { classes } = this.props;
     return (
       
       <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div>
+      <div className={classes.paper}>
         <Avatar >
           <LockOutlinedIcon />
         </Avatar>
@@ -162,7 +187,13 @@ class SignIn extends React.Component {
     })
   };
 }
-export default SignIn;*/
+SignIn.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default makeStyles(styles)(SignIn);
+
+/*
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -248,10 +279,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+onUserNameChange = e => {
+  this.setState({ userName: e.target.value });
+}
+onUserPassChange = e => {
+  this.setState({ passwordUser: e.target.value });
+}
+
 export default function SignIn() {
+
   const classes = useStyles();
 
   return (
+    
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -277,24 +317,39 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={(e) => this.setState({ userName: e.target.value })}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="password"
+            name="passwordUser"
             label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(e) => this.setState({ passwordUser: e.target.value })}
           />
           {/*<FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Recuérdame"
-          />*/}
+          />}
 
-          <ColorButton type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+          <ColorButton type="submit" onSubmit={ (e)=>fetch("http://" + document.domain+":3500/logIn",{
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mainEmail: this.state.userName, passwordUser: this.state.passwordUser })
+                }).then(function (response) {
+                    return response.json(); // call the json method on the response to get JSON
+                })
+                .then(function (json) {
+                    if(json.Status =="S")
+                    console.log(json.Status);
+                })
+  } fullWidth variant="contained" color="primary" className={classes.submit}>
             Iniciar Sesión
           </ColorButton>
 
@@ -313,4 +368,4 @@ export default function SignIn() {
       </Box>
     </Container>
   );
-}
+}*/
