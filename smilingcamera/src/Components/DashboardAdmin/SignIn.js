@@ -174,7 +174,7 @@ class SignIn extends React.Component {
         return response.json(); // call the json method on the response to get JSON
     })
     .then(function (json) {
-        if(json.Status =="S")
+        
         console.log(json.Status);
     })
   };
