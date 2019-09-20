@@ -20,7 +20,8 @@ import grey from '@material-ui/core/colors/grey'; //azul
 import yellow from '@material-ui/core/colors/yellow'; //yellow
 import { createMuiTheme, withStyles} from '@material-ui/core/styles';
 import Logo from "../../Images/logo.png";
-
+import {Route, Router} from 'react-router';
+//<LockOutlinedIcon />
 
 function Copyright() {
   return (
@@ -95,7 +96,7 @@ class SignIn extends React.Component {
             </Grid>
           </Grid>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+          <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Iniciar Sesión
