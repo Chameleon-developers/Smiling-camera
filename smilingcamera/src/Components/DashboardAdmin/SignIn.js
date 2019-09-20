@@ -98,7 +98,7 @@ class SignIn extends React.Component {
           <Typography component="h1" variant="h5">
             Iniciar Sesión
           </Typography>
-          <form className={classes.form} noValidate>
+          <form onSubmit={this.onSubmit} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
@@ -109,6 +109,7 @@ class SignIn extends React.Component {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={this.onUserNameChange}
             />
             <TextField
               variant="outlined"
@@ -120,6 +121,7 @@ class SignIn extends React.Component {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={this.onUserNameChange}
             />
             {<FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
