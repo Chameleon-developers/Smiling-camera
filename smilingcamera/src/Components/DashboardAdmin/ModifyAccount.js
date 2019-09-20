@@ -3,9 +3,13 @@ import { Container } from 'reactbulma'
 import './Admin.css'
 
 class Showmodifieraccount extends React.Component{
-    constructor() {
-        super()
-        this.MarkUser = React.createRef()
+    constructor(props) {
+        super(props);
+        this.MarkUser = React.createRef();
+        this.markMail = React.createRef();
+        this.markAmail = React.createRef();
+        this.validaCorreo = this.validaCorreo.bind(this);
+        this.validarCampos = this.validarCampos.bind(this);
     }
     validaCorreo(mail){
         var reg=new RegExp("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
@@ -14,10 +18,13 @@ class Showmodifieraccount extends React.Component{
         return res;
     }
 
-    validarCampos(usr, mail, amail){
-        
+    validarCampos(){
+        var mail= this.markMail.current;
+        var usr= this.MarkUser.current.value;
+        var amil= this.markAmail.current;
+
         alert(usr);
-        var messageUser = document.getElementById("ValidationUsername");
+        /*var messageUser = document.getElementById("ValidationUsername");
         var messageMail = document.getElementById("ValidationMail");
         var messageAmail = document.getElementById("validationAlternmail");
     
@@ -38,7 +45,7 @@ class Showmodifieraccount extends React.Component{
         }
         else {
             messageAmail.hide();
-        }
+        }*/
     }
 
     render(){
@@ -55,7 +62,7 @@ class Showmodifieraccount extends React.Component{
             <div className="field">
                 <label className="label">e-mail</label>
                 <div className="control">
-                    <input id="markMail" className="input is-primary" type="email"/>
+                    <input ref = { this.markMail } id="markMail" className="input is-primary" type="email"/>
                 </div>
                 <p className="help is-danger" id="ValidationMail">Correo incorrecto</p>
             </div>
@@ -63,7 +70,7 @@ class Showmodifieraccount extends React.Component{
             <div className="field">
                 <label className="label">e-mail alterno</label>
                 <div className="control has-icons-left has-icons-right">
-                    <input id="markAmail" className="input is-primary" type="email"/>
+                    <input ref = { this.markAmail } id="markAmail" className="input is-primary" type="email"/>
                 </div>
                 <p className="help is-danger" id="validationAlternmail">Correo incorrecto</p>
                 
@@ -73,7 +80,7 @@ class Showmodifieraccount extends React.Component{
                 <label className="label">Tipo de usuario</label>
                 <div className="control">
                     <div className="select is-primary">
-                    <select>
+                    <select value={this.state.value} onChange={this.handleChange.bind(this)}>
                         <option>Aministrador</option>
                         <option>Operador</option>
                     </select>
@@ -83,7 +90,7 @@ class Showmodifieraccount extends React.Component{
 
             <div className="field is-grouped" id="Actionbtnform">
                 <div className="control">
-                    <button className="button is-primary"  >{/*{this.validarCampos(document.getElementById("markUser").value,document.getElementById("markMail").value,document.getElementById("markAmail").value)}*/}Guardar</button>
+                    <button className="button is-primary"  onClick={this.validarCampos}>{/*{this.validarCampos(document.getElementById("markUser").value,document.getElementById("markMail").value,document.getElementById("markAmail").value)}*/}Guardar</button>
                 </div>
                 <div className="control">
                     <button className="button">Cancelar</button>

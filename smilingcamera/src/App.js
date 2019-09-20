@@ -21,5 +21,5 @@ class App extends React.Component{
     
   }
 }
-
+//ReactDOM.render(<App />, document.getElementById('container'));
 export default App;
