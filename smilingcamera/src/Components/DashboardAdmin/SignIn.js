@@ -1,4 +1,4 @@
-/*import React from 'react';
+import React from 'react';
 import { render } from "react-dom";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,6 +13,13 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import teal from '@material-ui/core/colors/teal'; //verde
+import pink from '@material-ui/core/colors/pink'; //rosa
+import cyan from '@material-ui/core/colors/cyan'; //azul
+import grey from '@material-ui/core/colors/grey'; //azul
+import yellow from '@material-ui/core/colors/yellow'; //yellow
+import { createMuiTheme, withStyles} from '@material-ui/core/styles';
+import Logo from "../../Images/logo.png";
 
 function Copyright() {
   return (
@@ -26,10 +33,29 @@ function Copyright() {
     </Typography>
   );
 }
+
+const ColorButton = withStyles(theme => ({
+  root: {
+    color: theme.palette.getContrastText('#4AE0B8'),
+    backgroundColor: '#4AE0B8',
+    color: "white",
+    borderLeftColor: teal['A400'],
+    borderColor: teal['A400'],
+    width: "400px",
+    minWidth: '64px',
+    boxSizing: "border-box",
+    '&:hover': {
+      backgroundColor: '#45c4a2',
+    },
+  },
+}))(Button);
+
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
       backgroundColor: theme.palette.common.white,
+      primary: teal['A400'], // #F44336
+      accent:pink[400] // #E040FB
     },
   },
   paper: {
@@ -53,84 +79,71 @@ const useStyles = makeStyles(theme => ({
 
 
 class SignIn extends React.Component {
-  
-  
-  constructor() {
-    super();
-    this.state = {};
-    
-  }
+
 
   render() {
-    
+    const classes  = useStyles;
     return (
-      
       <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div>
-        <Avatar >
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form onSubmit={this.onSubmit} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="userName"
-            autoComplete="email"
-            autoFocus
-            onChange={this.onUserNameChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="passwordUser"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={this.onUserPassChange}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            
-          >
-            Sign In
-          </Button>
+        <CssBaseline />
+        <div className={classes.paper}>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <img src={Logo} alt="You Print"/>
             </Grid>
           </Grid>
-        </form>
-
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Iniciar Sesión
+          </Typography>
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Correo"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Contraseña"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            {<FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Recuérdame"
+            />}
+  
+            <ColorButton type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+              Iniciar Sesión
+            </ColorButton>
+  
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                ¿Olvidaste tu contraseña?
+                </Link>
+              </Grid>
+              
+            </Grid>
+          </form>
+        </div>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
+      </Container>
     );
   }
 
@@ -162,8 +175,8 @@ class SignIn extends React.Component {
     })
   };
 }
-export default SignIn;*/
-import React from 'react';
+export default SignIn;
+/* import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -289,10 +302,10 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
-          {/*<FormControlLabel
+          {<FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Recuérdame"
-          />*/}
+          />}
 
           <ColorButton type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             Iniciar Sesión
@@ -313,4 +326,4 @@ export default function SignIn() {
       </Box>
     </Container>
   );
-}
+} */
