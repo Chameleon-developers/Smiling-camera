@@ -20,13 +20,14 @@ import grey from '@material-ui/core/colors/grey'; //azul
 import yellow from '@material-ui/core/colors/yellow'; //yellow
 import { createMuiTheme, withStyles} from '@material-ui/core/styles';
 import Logo from "../../Images/logo.png";
-import Panel from '../Panel'
+import Panel from '../Panel';
+import ReactDOM from 'react-dom';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="#">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -42,7 +43,7 @@ const ColorButton = withStyles(theme => ({
     color: "white",
     borderLeftColor: teal['A400'],
     borderColor: teal['A400'],
-    width: "400px",
+    width: "380px",
     minWidth: '64px',
     boxSizing: "border-box",
     '&:hover': {
@@ -125,23 +126,23 @@ class SignIn extends React.Component {
               autoComplete="current-password"
               onChange={this.onUserPassChange}
             />
-            {<FormControlLabel
+            {/*<FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Recuérdame"
-            />}
+            />*/}
   
             <ColorButton type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
               Iniciar Sesión
             </ColorButton>
-  
+            {/*
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                 ¿Olvidaste tu contraseña?
                 </Link>
               </Grid>
-              
             </Grid>
+            */}
           </form>
         </div>
         <Box mt={8}>
@@ -159,6 +160,7 @@ class SignIn extends React.Component {
   };
 
   onSubmit = e => {
+    ReactDOM.render(<Panel />, document.getElementById('root'));
     e.preventDefault();
     let data = {
       mainEmail: this.state.userName,
@@ -175,10 +177,9 @@ class SignIn extends React.Component {
     })
     .then(function (json) {
         if(json.Status =="Success"){
-          
+          ReactDOM.render(<Panel />, document.getElementById('root'));
           console.log(json.Status);
         }
-        
     })
   };
 }

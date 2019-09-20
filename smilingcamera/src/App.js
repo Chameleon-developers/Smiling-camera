@@ -12,10 +12,10 @@ class App extends React.Component{
     return(
         //<Portada/>
         //<Admin></Admin>
-        <Panel></Panel>
+        //<Panel></Panel>
         
         //<Pagintab></Pagintab>
-        //<Loginadmin></Loginadmin>
+        <Loginadmin></Loginadmin>
 
     )
     
