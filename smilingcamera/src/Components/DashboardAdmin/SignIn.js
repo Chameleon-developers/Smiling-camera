@@ -30,7 +30,7 @@ const ColorButton = withStyles(theme => ({
     color: "white",
     borderLeftColor: teal['A400'],
     borderColor: teal['A400'],
-    width: "400px",
+    width: "380px",
     minWidth: '64px',
     boxSizing: "border-box",
     '&:hover': {
@@ -132,15 +132,15 @@ export default function SignIn() {
           <ColorButton type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             Iniciar Sesión
           </ColorButton>
-
+          {/*
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
               ¿Olvidaste tu contraseña?
               </Link>
             </Grid>
-            
           </Grid>
+          */}
         </form>
       </div>
       <Box mt={8}>
