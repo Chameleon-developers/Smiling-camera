@@ -6,7 +6,6 @@ import Showuserstable from './Components/Showtableusers.js'
 import Pagintab from './Components/DashboardAdmin/Pagintableusers'
 import Loginadmin from './Components/DashboardAdmin/SignIn.js'
 import Panel from './Components/Panel'
-import {Link, Route,Router} from 'react-router';
 
 class App extends React.Component{
   render(){
