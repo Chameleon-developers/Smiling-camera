@@ -10,12 +10,12 @@ import Panel from './Components/Panel'
 class App extends React.Component{
   render(){
     return(
-        //<Portada/>
+        <Portada/>
         //<Admin></Admin>
         //<Panel></Panel>
         
         //<Pagintab></Pagintab>
-        <Loginadmin></Loginadmin>
+       // <Loginadmin></Loginadmin>
 
     )
     

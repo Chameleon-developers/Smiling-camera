@@ -8,7 +8,7 @@ class Panel extends React.Component {
         
         super(props);
         
-        /*e.preventDefault();*/
+        /*e.preventDefault();
         
         fetch("http://" + document.domain+":3500/getUsers",{
           method: 'GET',
@@ -21,7 +21,7 @@ class Panel extends React.Component {
         .then(function (json) {
             console.log(json);
             
-        });
+        });*/
       
     }
     handleEvent(){

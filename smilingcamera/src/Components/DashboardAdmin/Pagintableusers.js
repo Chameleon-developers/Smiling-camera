@@ -5,47 +5,43 @@ import usrs from '../../sample/usrs2.json';
 import { Container } from 'reactbulma'
 import { fontFamily } from '@material-ui/system';
 
-function getData(){
+export default function MaterialTableDemo() {
+  
   fetch("http://" + document.domain+":3500/getUsers",{
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           }
         }).then(function (response) {
-            return response.json(); // call the json method on the response to get JSON
+            return response.json().values; // call the json method on the response to get JSON
         })
         .then(function (json) {
+          return json;
             console.log(json);
-            
-  });
-}
-/*{
+        });
+
+  const [state, setState] = React.useState({
+    columns: [
+      { title: 'Username', field: 'username'/*
+        cellStyle: {
+          backgroundColor: '#039be5',
+          color: '#FFF'
+        },*/
+      },
+      { title: 'email', field: 'email'},
+      //{ title: 'Birth Year', field: 'birthYear', type: 'numeric' },
+      {
+        title: 'Tipo de usuario',
+        field: 'type',
+        lookup: { 1: 'Administrador', 2: 'Normal' }
+      },
+      {
         title: 'Status',
         field: 'status',
         lookup: { true: 'Activo', false: 'Inactivo' }
       },
-*/ 
-export default function MaterialTableDemo() {
-  
-  const [state, setState] = React.useState({
-    
-
-    columns: [{ title: 'Nombre de Usuario', field: 'nameUser'
-    
-    
-    },
-    { title: 'email', field: 'mainEmail'},
-    //{ title: 'Birth Year', field: 'birthYear', type: 'numeric' },
-    {
-      title: 'Tipo de usuario',
-      field: 'idTypeUser',
-      lookup: { 1: 'Administrador', 2: 'Normal' }
-    }],
-      
-
-    
-    //data: usrs
-    data: getData()
+    ],
+    data: usrs
   });
 
   return (

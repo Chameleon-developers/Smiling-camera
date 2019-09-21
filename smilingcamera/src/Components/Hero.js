@@ -26,7 +26,7 @@ class Portada extends React.Component {
                     <Container>
                         <Nav.Left>
                         <Nav.Item>
-                            <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo"/>
+                            
                         </Nav.Item>
                         </Nav.Left>
                         <Nav.Toggle/>
@@ -46,13 +46,7 @@ class Portada extends React.Component {
                     </Container>
                     <Tabs boxed fullwidth>
                     <Container>
-                        <ul>
-                        <li className="active"><a>Servicios</a></li>
-                        <li><a>Productos</a></li>
-                        <li><a>Personalizador</a></li>
-                        <li><a>Mi cuenta</a></li>
-                        <li><a>Carrito</a></li>
-                        </ul>
+                        
                     </Container>
                     </Tabs>
                 </Hero.Body>
