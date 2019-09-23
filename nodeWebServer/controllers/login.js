@@ -4,7 +4,6 @@ module.exports.logIn = function (req, res) {
     var con = require('../controllers/dbconn')();
 
     var data = req.body;
-    console.log(data);
     
     /* Establecer query para la consulta de logIn y saber si los datos son correctos */
     let qry = "SELECT MU.idManagerUser,MU.nameUser, T.idTypeUser, T.typeUser FROM managerusers AS MU INNER JOIN typeusers AS T ON MU.idTypeUser = T.idTypeUser WHERE MU.mainEmail = ? AND MU.passwordUser = ? AND MU.statusUser = 1 AND MU.ecommerceYouPrint = 1"

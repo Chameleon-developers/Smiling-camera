@@ -10,7 +10,7 @@ function init() {
     });
 
     $('#login').click(function () {
-        toast('gsggag','is-info')
+        login()
     })
 
 }
@@ -40,26 +40,33 @@ function login(){
     email = $('#email').val();
     password = $('#password').val();
     if(email == '' || password == '') {
-        M.toast({html : 'Complete los campos'})
+        toast('Complete los campos','is-warning')
     } else {
         $.ajax({
             type: "POST",
-            url: "access/index.php",
+            url: "http://" + document.domain +":3500/logIn",
             data:{
-                'usr' : user,
-                'pwd' : pwd
+                'mainEmail' : email,
+                'passwordUser' : password
             },
             dataType: "json",
             success: function (response) {
-                if (response.status == 200) {
-                    window.open('main.html','_self');
-                } else {
-                    M.toast({html : 'Error de Usuario o Contraseña'})
+                if (response.Status == 'Success') {
+                    window.open('panel.html','_self');
                 }
             },
             error: function (error) {
-                console.log(error);
-                M.toast({html : 'Error Interno del Servidor'})
+                console.log(error.status);
+                if(error.status == '401'){
+                    toast('Error de Usuario o Contraseña','is-danger')
+                }
+                else if(error.status == '406'){
+                    toast('La contraseña ingresada es incorrecta','is-danger')
+                }
+                else if (error == 'Internal Server Error') {
+                    toast('Error Interno del Servidor','is-danger')
+                }
+                
             }
         })
     }
