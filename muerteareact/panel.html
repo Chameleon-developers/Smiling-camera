@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+      Bulma Dashboard example
+    </title>
+    <link rel="stylesheet" href="css/bulma.min.css">
+    <link rel="stylesheet" href="css/dataTables.bulma.min.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="css/bulma-dashboard.min.css">
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bulma.min.js"></script>
+  </head>
+  <body>
+    <div class="dashboard">
+      <!-- left panel -->
+      <div class="dashboard-panel is-medium has-thick-padding has-background-grey-lighter is-hidden-mobile">
+        <div class="has-text-centered">
+          <img src="logo/logo.png" width="50%">
+        </div>
+
+        <br /><br />
+
+        <aside class="menu has-text-white">
+          <p class="menu-label">
+            Administración
+          </p>
+          <ul class="menu-list">
+            <li><a>Usuarios</a></li>
+            <li><a>Productos</a></li>
+            <li><a>Estadísticas</a></li>
+            <li><a>Kioscos</a></li>
+          </ul>
+         
+         
+        </aside>
+      </div>
+    
+      <!-- main section -->
+      <div class="dashboard-main is-scrollable">
+        <nav class="navbar is-fixed-top is-dark">
+          <div class="navbar-menu">
+            <div class="navbar-end">
+              <span class="navbar-item">
+                  
+                  <a class="button is-primary is-outlined">Salir</a>
+              </span>
+              
+            </div>
+          </div>
+        </nav>
+    
+        <section class="section">
+          <!--<p class="title is-size-2 is-spaced">
+            The Bulma Dashboard
+          </p>-->
+
+          <p class="subtitle is-size-3">
+            Usuarios
+          </p>
+
+          <hr />
+
+          <section class="content is-medium">
+            <table id="table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Correo</th>
+                  <th>Tipo de usuario</th>
+                  <th>Opciones</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Correo</th>
+                  <th>Tipo de usuario</th>
+                  <th>Opciones</th>
+                </tr>
+              </tfoot>
+              <tbody id="users">
+              </tbody>
+            </table>
+          </section>
+        </section>
+    
+        <!-- the footer will take up all unused space at the bottom 
+        <footer class="footer has-background-black has-text-white">
+          <p class="is-size-2">
+            Footer
+          </p>
+
+          <p>
+            You print
+          </p>
+        </footer>-->
+        
+      </div>
+    
+      
+    </div>
+  </body>
+  
+  <script>
+    $(document).ready(function() {
+      $.ajax({
+        url: "http://localhost:3500/getUsers", 
+        type: "GET",
+        dataType: "json",
+        success: function(response)
+        {
+          var dataSet = response.users;
+          
+          var i =0;
+          $.each(dataSet,function(key,value ) {
+            console.log(dataSet[0].nameUser);
+            var tipo;
+            if(dataSet[i].idTypeUser==1){
+              tipo = "Administrador";
+            }else{
+              tipo = "Operador";
+            }
+            $("#users").append("<tr><th>"+dataSet[i].nameUser+"</th>"+
+                    "<td>"+dataSet[i].mainEmail+"</td>"+
+                    "<td>"+tipo+"</td></tr>")
+            i++;
+          });
+          $("#table").DataTable();
+        }
+      });
+    });
+
+  </script>
+</html>

@@ -5,17 +5,17 @@ import Admin from './Components/DashboardAdmin/AdminDashboard.js';
 import Showuserstable from './Components/Showtableusers.js'
 import Pagintab from './Components/DashboardAdmin/Pagintableusers'
 import Loginadmin from './Components/DashboardAdmin/SignIn.js'
-import Modifyaccountpanel from './Components/DashboardAdmin/ModifyAccount'
+import Panel from './Components/Panel'
+
 class App extends React.Component{
   render(){
     return(
-        //<Portada/>
-        // <Admin></Admin>
-      
-        //<Showuserstable/>
+        <Portada/>
+        //<Admin></Admin>
+        //<Panel></Panel>
+        
         //<Pagintab></Pagintab>
-        //<Loginadmin></Loginadmin>
-        <Modifyaccountpanel/>
+       // <Loginadmin></Loginadmin>
 
     )
     

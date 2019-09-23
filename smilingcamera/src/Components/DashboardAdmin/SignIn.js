@@ -1,4 +1,5 @@
 import React from 'react';
+import { render } from "react-dom";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,10 +19,22 @@ import cyan from '@material-ui/core/colors/cyan'; //azul
 import grey from '@material-ui/core/colors/grey'; //azul
 import yellow from '@material-ui/core/colors/yellow'; //yellow
 import { createMuiTheme, withStyles} from '@material-ui/core/styles';
-import Logo from "../../Images/logo.jpg";
+import Logo from "../../Images/logo.png";
+import Panel from '../Panel';
+import ReactDOM from 'react-dom';
 
-//const primary = teal['A400']; // #F44336
-//const accent = pink[400]; // #E040FB
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="#">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
 const ColorButton = withStyles(theme => ({
   root: {
@@ -38,23 +51,6 @@ const ColorButton = withStyles(theme => ({
     },
   },
 }))(Button);
-
-
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="#">
-        You Print
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
- 
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -83,69 +79,110 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn() {
-  const classes = useStyles();
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Grid container>
-          <Grid item xs>
-            <img src={Logo} alt="You Print"/>
-          </Grid>
-        </Grid>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Iniciar Sesión
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Correo"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Contraseña"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          {/*<FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Recuérdame"
-          />*/}
 
-          <ColorButton type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-            Iniciar Sesión
-          </ColorButton>
-          {/*
+class SignIn extends React.Component {
+
+
+  render() {
+    const classes  = useStyles;
+    return (
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-              ¿Olvidaste tu contraseña?
-              </Link>
+              <img src={Logo} alt="You Print"/>
             </Grid>
           </Grid>
-          */}
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
-  );
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Iniciar Sesión
+          </Typography>
+          <form onSubmit={this.onSubmit} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Correo"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              onChange={this.onUserNameChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="passwordUser"
+              label="Contraseña"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={this.onUserPassChange}
+            />
+            {/*<FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Recuérdame"
+            />*/}
+  
+            <ColorButton type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+              Iniciar Sesión
+            </ColorButton>
+            {/*
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                ¿Olvidaste tu contraseña?
+                </Link>
+              </Grid>
+            </Grid>
+            */}
+          </form>
+        </div>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
+      </Container>
+    );
+  }
+
+  onUserNameChange = e => {
+    this.setState({ userName: e.target.value });
+  };
+  onUserPassChange = e => {
+    this.setState({ passwordUser: e.target.value });
+  };
+
+  onSubmit = e => {
+    ReactDOM.render(<Panel />, document.getElementById('root'));
+    e.preventDefault();
+    let data = {
+      mainEmail: this.state.userName,
+      passwordUser: this.state.passwordUser
+    }
+    fetch("http://" + document.domain+":3500/logIn",{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ mainEmail: this.state.userName, passwordUser: this.state.passwordUser })
+    }).then(function (response) {
+        return response.json(); // call the json method on the response to get JSON
+    })
+    .then(function (json) {
+        if(json.Status =="Success"){
+          ReactDOM.render(<Panel />, document.getElementById('root'));
+          console.log(json.Status);
+        }
+    })
+  };
 }
+
+export default SignIn;
+
