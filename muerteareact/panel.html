@@ -25,15 +25,23 @@
 
         <br /><br />
 
-        <aside class="menu has-text-white">
+        <aside class="menu has-text-white has-background-grey-lighter">
           <p class="menu-label">
             Administración
           </p>
           <ul class="menu-list">
-            <li><a>Usuarios</a></li>
-            <li><a>Productos</a></li>
-            <li><a>Estadísticas</a></li>
-            <li><a>Kioscos</a></li>
+            <li><a><span class="icon">
+                <i class="fas fa-users"></i>
+            </span> Usuarios</a></li>
+            <li><a><span class="icon">
+                <i class="fas fa-clipboard-list"></i>
+            </span> Productos</a></li>
+            <li><a><span class="icon">
+                <i class="fas fa-chart-bar"></i>
+            </span> Estadísticas</a></li>
+            <li><a><span class="icon">
+                <i class="fas fa-bezier-curve"></i>
+            </span> Kioscos</a></li>
           </ul>
          
          
@@ -80,7 +88,14 @@
                   <th>Nombre</th>
                   <th>Correo</th>
                   <th>Tipo de usuario</th>
-                  <th>Opciones</th>
+                  <th>
+                    <span class="icon" style="padding: 0% 10%">
+                      <i class="fas fa-trash"></i>
+                     </span>
+                    <span class="icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </span>
+                  </th>
                 </tr>
               </tfoot>
               <tbody id="users">
