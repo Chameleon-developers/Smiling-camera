@@ -15,7 +15,7 @@ class App extends React.Component{
         //<Panel></Panel>
         
         //<Pagintab></Pagintab>
-        <Loginadmin></Loginadmin>
+       <Loginadmin></Loginadmin>
 
     )
     

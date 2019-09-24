@@ -6,6 +6,20 @@ import { Container } from 'reactbulma'
 import { fontFamily } from '@material-ui/system';
 
 export default function MaterialTableDemo() {
+  
+  fetch("http://" + document.domain+":3500/getUsers",{
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(function (response) {
+            return response.json().values; // call the json method on the response to get JSON
+        })
+        .then(function (json) {
+          return json;
+            console.log(json);
+        });
+
   const [state, setState] = React.useState({
     columns: [
       { title: 'Username', field: 'username'/*

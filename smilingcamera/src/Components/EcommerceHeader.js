@@ -1,6 +1,7 @@
 import React from 'react';
 import { Nav } from 'reactbulma'
 import './HeaderEcommerce.css';
+import Logo from "../Images/logo.png";
 
 class ShowEcommerceHeader extends React.Component {
     render(){
@@ -8,8 +9,9 @@ class ShowEcommerceHeader extends React.Component {
             <Nav>
                 <div className="container">
                         <div className="navbar-brand">
-                            <span className="navbar-item">
-                                <img id="showLogoHeader" src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo"/>
+                        <img src={Logo} alt="Bulma logo" style={{height: 90 + 'px'}}/>
+                            <span className="navbar-item" style={{paddingBottom: 0 + 'em'}}>
+                                
                             </span>
 
                                 <div className="navbar-menu">
