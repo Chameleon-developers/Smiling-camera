@@ -1,5 +1,9 @@
 /* Verificar datos de logIn */
 module.exports.logIn = function (req, res) {
+    /* Obtener variable para encriptar el JWT */
+    var crypto = require('crypto')
+    /* Obtener variable para generar un token */
+    var jwt = require('jsonwebtoken');
      /* Obtener variable para la conexión a la BD */
     var con = require('../controllers/dbconn')();
 
@@ -20,10 +24,24 @@ module.exports.logIn = function (req, res) {
             return;
         } else {
             if (result.length == 1) {
+
+                // Token generation for a successful auth
+                const token = jwt.sign({
+                    mainEmail: data.mainEmail,
+                    idUser: result[0].idManagerUser,
+                    type: result[0].typeUser
+                }, process.env.SEC_KEY, {
+                        expiresIn: '24h',
+                });
+                var cipher = crypto.createCipher('aes128',process.env.SEC_AES_KEY)
+                let encrypted = cipher.update( token , 'utf8' , 'hex')
+                encrypted += cipher.final('hex')
+
                 // Setup and send of response
                 res.status(200).json({
                     Status: 'Success',
                     user: result,
+                    token: encrypted
                 })
             } else {
                 // In failed auth, error search
