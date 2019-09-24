@@ -52,7 +52,7 @@ function login(){
             dataType: "json",
             success: function (response) {
                 if (response.Status == 'Success') {
-                    //sessionStorage.token = response.token
+                    sessionStorage.token = response.token
                     window.open('panel.html','_self');
                 }
             },
