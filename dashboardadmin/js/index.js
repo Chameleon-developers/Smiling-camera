@@ -57,7 +57,7 @@ function login(){
                 }
             },
             error: function (error) {
-                console.log(error.status);
+                console.log(error.status); //Deberia de jalar XD
                 if(error.status == '401'){
                     toast('Error de Usuario o Contraseña','is-danger')
                 }
