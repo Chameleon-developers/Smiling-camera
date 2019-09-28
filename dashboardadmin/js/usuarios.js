@@ -1,25 +1,14 @@
 const ip_server = 'http://' + document.domain + ':3500'
 
+//Importación de módulos
+import { toast, modal } from "./plugins.js"
+
 //Exportación de módulos
 export { init }
 
-//Importación de módulos
-import { toast} from "./panel.js"
-
 function init() {
+    modal()
     getUsers()
-
-    document.querySelectorAll('.modal-button').forEach(function(el) {
-        el.addEventListener('click', function() {
-            var target = document.querySelector(el.getAttribute('data-target'));
-            
-            target.classList.add('is-active');
-
-            target.querySelector('.delete').addEventListener('click',   function() {
-                target.classList.remove('is-active');
-            });
-        });
-    });
 }
 
 function getUsers(){

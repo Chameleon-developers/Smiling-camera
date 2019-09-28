@@ -293,3 +293,11 @@ img.logo {
     opacity: 0;
     visibility: hidden;
 }
+
+/* .g-recaptcha {
+    display: inline-block;
+} */
+
+.g-recaptcha {
+    display: inline-block;
+}
