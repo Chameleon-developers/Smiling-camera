@@ -35,7 +35,7 @@ function getUsers(){
                 "<td>" + dataSet[i].mainEmail + "</td>" +
                 "<td>" + tipo + "</td>" +
 
-                "<td>" + "<a style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a style='padding-left: 35px;color: #F74784'><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>" + "</td>" +
+                "<td>" + "<a style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a href='#' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>" + "</td>" +
                 "</tr>")
                 i++;
             });
@@ -59,6 +59,25 @@ function getUsers(){
                         '</select></div>'
                 }
             });
+        }
+    });
+}
+/*Funcion para eliminar un registro*/
+
+function deleteUser(idManagerUser){
+
+    $.ajax({
+        url: ip_server +
+        "/logged/deleteUser",
+        type: "POST",
+        data:{
+            'bearer' : sessionStorage.token,
+            'idManagerUser' : idManagerUser
+        },
+        dataType: "json",
+        success: function (response) {
+            var dataSet = response.users;
+            console.log(dataSet);
         }
     });
 }
