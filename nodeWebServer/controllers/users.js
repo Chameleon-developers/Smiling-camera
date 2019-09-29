@@ -119,7 +119,7 @@ module.exports.getUsers = function (req, res) {
             // Internal error message send
             res.status(500).json({
                 Status: 'Internal Error',
-                message: err
+                message: 'Internal Error'
             });
             con.end();
             return;

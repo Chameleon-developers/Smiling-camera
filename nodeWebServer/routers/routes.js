@@ -1,4 +1,3 @@
-//var prueba=require('../controllers/prueba');
 var users=require('../controllers/users');
 var login=require('../controllers/login');
 
@@ -8,19 +7,19 @@ module.exports = function (app,secureApp) {
     app.post('/logIn',login.logIn);
 
     /* Obtener Los tipos de usuario existentes */
-    app.get('/getTypeUsers',users.getTypeUsers);
+    secureApp.get('/getTypeUsers',users.getTypeUsers);
 
     /* Registrar un nuevo usuario */
-    app.post('/insertUser',users.insertUser);
+    secureApp.post('/insertUser',users.insertUser);
     
     /* Modificar datos de un usuario existente */
-    app.post('/updateUser',users.updateUser);
+    secureApp.post('/updateUser',users.updateUser);
     
     /* Obtener datos de los usuarios registrados */
-    app.get('/getUsers' ,users.getUsers);
+    secureApp.post('/getUsers' ,users.getUsers);
 
     /* Eliminar usuario registrado */
-    app.post('/deleteUser' ,users.deleteUser);
+    secureApp.post('/deleteUser' ,users.deleteUser);
 
     /* NOTE Ejemplos */
     /* app.get('/prueba' , (req,res)=>{
