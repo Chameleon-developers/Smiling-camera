@@ -41,28 +41,68 @@ module.exports.insertUser = function (req, res) {
     /* Obtener los datos del Body */
     let data = req.body;
 
-    /* Establecer query para la insersión */
-    let qry="INSERT INTO managerusers (idManagerUser, mainEmail, resetEmail, nameUser, passwordUser, idTypeUser, statusUser, ecommerceYouPrint) VALUES (NULL, ?, ?, ?, ?, ?, '1', '1')"
+    /* Validar datos */
+    let check = validationsAddUser(data.mainEmail,data.resetEmail,data.nameUser,data.passwordUser,data.idTypeUser);
+    
+    if (check) {
+        let typeUser = parseInt(data.idTypeUser)
+        
+        /* Establecer query para la insersión */
+        let qry="INSERT INTO managerusers (idManagerUser, mainEmail, resetEmail, nameUser, passwordUser, idTypeUser, statusUser, ecommerceYouPrint) VALUES (NULL, ?, ?, ?, ?, ?, '1', '1')"
 
-    /* Ejecutar la consulta para la obtención de tipos de usuario */
-    con.query(qry,[data.mainEmail,data.resetEmail,data.nameUser,data.passwordUser,data.idTypeUser],function (err, result, fields) {
-        if (err) {
-            // Internal error message send
-            res.status(500).json({
-                Status: 'internal error',
-                message: err
-            });
-            con.end();
-            return;
-        } else {
-            if (result.affectedRows == 1) {
-                res.status(200).json({
-                    Status: 'Success',
-                    message: 'Se registró correctamente el usuario'
-                })
+        /* Ejecutar la consulta para la obtención de tipos de usuario */
+        con.query(qry,[data.mainEmail,data.resetEmail,data.nameUser,data.passwordUser,typeUser],function (err, result, fields) {
+            if (err) {
+                // Internal error message send
+                res.status(500).json({
+                    Status: 'internal error',
+                    message: err
+                });
+                con.end();
+                return;
+            } else {
+                if (result.affectedRows == 1) {
+                    res.status(200).json({
+                        Status: 'Success',
+                        message: 'Se registró correctamente el usuario'
+                    })
+                }
             }
-        }
-    })
+        })
+    } else {
+        res.status(406).json({
+            Status: 'internal error',
+            message: err
+        });
+    }
+
+    
+}
+
+function validationsAddUser(mainEmail, resetEmail, nameUser, passwordUser, typeUser) {
+    if (mainEmail == '' || resetEmail == '' || nameUser == '' || passwordUser == '') {
+        return false
+    }
+    if (parseInt(typeUser) == 0) {
+        return false
+    }
+    
+    var pattMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (!pattMail.test(mainEmail) && mainEmail.lenght < 50) {
+        return false
+    }
+    if (!pattMail.test(resetEmail) && resetEmail.lenght < 50) {
+        return false
+    }
+    if (mainEmail == resetEmail) {
+        return false
+    }
+
+    var pattPassword = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
+    if (!pattPassword.test(passwordUser)) {
+        return false
+    }
+    return true
 }
 
 /* Registrar un nuevo usuario */

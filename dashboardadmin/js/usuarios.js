@@ -1,27 +1,55 @@
-const ip_server = 'http://' + document.domain + ':3500'
+//Importación de módulos
+import { toast, modal, ip_server, setTable } from "./plugins.js"
+/* toast options: is-info, is-success, is-warning, is-danger */
 
 //Exportación de módulos
 export { init }
 
-//Importación de módulos
-import { toast} from "./panel.js"
-
+/* Función para establecer eventos y datos iniciales */
 function init() {
+    modal()
+    setTable('table')
+    getTypeUsers()
     getUsers()
 
-    document.querySelectorAll('.modal-button').forEach(function(el) {
-        el.addEventListener('click', function() {
-            var target = document.querySelector(el.getAttribute('data-target'));
-            
-            target.classList.add('is-active');
+    /* Set Clics */
+    $('#addUser').click(addUser);
+}
 
-            target.querySelector('.delete').addEventListener('click',   function() {
-                target.classList.remove('is-active');
-            });
-        });
+/* Función para consultar los tipos de usuarios que existen */
+function getTypeUsers() {
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/logged/getTypeUsers",
+        data: {
+            'bearer' : sessionStorage.token,
+        },
+        dataType: "json",
+        success: function (response) {
+
+            setSelectTypeUsers(response.typeUsers)
+
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                sessionStorage.removeItem('token')
+                window.open("index.html",'_self');
+            }
+        }
     });
 }
 
+/* Función para agregar los tipos de usuarios a los selects  */
+function setSelectTypeUsers(typeUsers) {
+    $.each(typeUsers, function (key, value) {
+        let option = document.createElement('option')
+        option.textContent = value.typeUser.split(' ')[0]
+        option.value = value.idTypeUser
+        $('#addTypeUsers').append(option)
+    })
+}
+
+/* Función para obtener los usuarios ya registrados */
 function getUsers(){
     $.ajax({
         url: ip_server +
@@ -32,49 +60,131 @@ function getUsers(){
         },
         dataType: "json",
         success: function (response) {
+            const table=$("#table").DataTable()
             var dataSet = response.users;
+            var tipo = ""
+            
+            //Limpiar tabla
+            table.clear()
 
-            var i = 0;
-            $.each(dataSet, function (key, value) {
-                var tipo;
-                if (dataSet[i].idTypeUser == 1) {
-                tipo = "Administrador";
+            //insertar datos
+            for (const usr of dataSet) {
+                var iconContainer = "<a style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a href='#' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
+                
+                if (usr.idTypeUser == 1) {
+                    tipo = "Administrador";
                 } else {
-                tipo = "Operador";
+                    tipo = "Operador";
                 }
-                $("#users").append("<tr><th>" + dataSet[i].nameUser + "</th>" +
-                "<td>" + dataSet[i].mainEmail + "</td>" +
-                "<td>" + tipo + "</td>" +
 
-                "<td>" + "<a style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a href='#' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>" + "</td>" +
-                "</tr>")
-                i++;
-            });
-            $("#table").DataTable({
-                "oLanguage": {
-                    "sEmptyTable": "No existe información para mostrar",
-                    "sSearch": "",
-                    "oPaginate": {
-                        "sNext":       "Siguiente",
-                        "sPrevious":   "Anterior"
-                    },
-                    "sInfoEmpty":      "0 de 0",
-                    "sSearchPlaceholder": "BUSCAR",
-                    "sInfo": "Mostrando _START_-_END_ de _TOTAL_",
-                    "sLengthMenu": '<span>Filas mostradas: </span><select class="browser-default">' +
-                        '<option value="10">5</option>' +
-                        '<option value="20">10</option>' +
-                        '<option value="30">15</option>' +
-                        '<option value="30">20</option>' +
-                        '<option value="30">25</option>' +
-                        '</select></div>'
-                }
-            });
+                table.row.add([
+                    usr.nameUser,
+                    usr.mainEmail,
+                    tipo,
+                    iconContainer
+                ])
+            }
+            table.draw();
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                sessionStorage.removeItem('token')
+                window.open("index.html",'_self');
+            }
         }
     });
 }
-/*Funcion para eliminar un registro*/
 
+/* Función para agregar un nuevo usuario */
+function addUser() {
+    var mainEmail = $('#mainEmail').val()
+    var resetEmail = $('#resetEmail').val()
+    var nameUser = $('#nameUser').val()
+    var typeUser = $( "#addTypeUsers option:selected" ).val()
+    var passwordUser = $('#passwordUser').val()
+    var cPasswordUser = $('#cPasswordUser').val()
+
+    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser)
+    if (check) {
+        var modal = $(this).parent().parent().parent()
+        $.ajax({
+            type: "POST",
+            url: ip_server + "/logged/insertUser",
+            data: {
+                'bearer' : sessionStorage.token,
+                'mainEmail' : mainEmail,
+                'resetEmail' : resetEmail,
+                'nameUser' : nameUser,
+                'idTypeUser' : typeUser,
+                'passwordUser' : passwordUser,
+            },
+            dataType: "json",
+            success: function (response) {
+                toast('Se ha registrado correctamente', 'is-info')
+                /* Vaciar inputs y cerrar modal */
+                modal.removeClass('is-active')
+                var inputsAddModal = modal.find(".input")
+                $.each(inputsAddModal, function(idx, el) {
+                    el.value = ""
+                });
+                getUsers()
+            },
+            error: function (error) {
+                if(error.status == '401'){
+                    sessionStorage.removeItem('token')
+                    window.open("index.html",'_self');
+                }
+                if(error.status == '406'){
+                    toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
+                    window.open("index.html",'_self');
+                }
+                if(error.status == '406'){
+                    toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
+                    window.open("index.html",'_self');
+                }
+            }
+        });
+    }
+}
+
+/* Función para validar que los datos ingresados están correctos */
+function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser) {
+    if (mainEmail == '' || resetEmail == '' || nameUser == '' || passwordUser == '' || cPasswordUser == '') {
+        toast('Completa los campos', 'is-warning')
+        return false
+    }
+    if (typeUser == 0) {
+        toast('Selecciona un tipo de usuario', 'is-warning')
+        return false
+    }
+    
+    var pattMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (!pattMail.test(mainEmail) && mainEmail.lenght < 50) {
+        toast('El correo ingresado en "Correo (Usuario)" no es válido', 'is-warning')
+        return false
+    }
+    if (!pattMail.test(resetEmail) && resetEmail.lenght < 50) {
+        toast('El correo ingresado en "Correo para restablecer Contraseña" no es válido', 'is-warning')
+        return false
+    }
+    if (mainEmail == resetEmail) {
+        toast('Los correos ingresados deben ser diferentes', 'is-warning')
+        return false
+    }
+    var pattPassword = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
+    if (!pattPassword.test(passwordUser)) {
+        toast('La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter no alfanumérico.', 'is-warning')
+        return false
+    }
+    if (passwordUser != cPasswordUser) {
+        toast('Las contraseñas ingresadas deben coincidir', 'is-warning')
+        return false
+    }
+    return true
+}
+
+
+/*Funcion para eliminar un registro*/
 function deleteUser(idManagerUser){
 
     $.ajax({
