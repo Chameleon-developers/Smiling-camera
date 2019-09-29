@@ -1,5 +1,12 @@
 //Exportación de módulos
-export { toast, modal }
+export { 
+    toast, 
+    modal, 
+    ip_server, 
+    setTable 
+}
+
+const ip_server = 'http://' + document.domain + ':3500'
 
 /* Función para ejecutar un toast-notification */
 function toast(msg, type) {
@@ -25,12 +32,59 @@ function modal() {
     document.querySelectorAll('.modal-button').forEach(function(e) {
         e.addEventListener('click', function() {
             var target = document.querySelector(e.getAttribute('data-target'));
-            
+            modal = target
+
             target.classList.add('is-active');
 
             target.querySelector('.delete').addEventListener('click',   function() {
                 target.classList.remove('is-active');
+                target.querySelectorAll(".input").forEach(
+                    elemento => elemento.value = ""
+                );
+            });
+
+            target.querySelector('.deleteBtn').addEventListener('click',   function() {
+                target.classList.remove('is-active');
+                target.querySelectorAll(".input").forEach(
+                    elemento => elemento.value = ""
+                );
+            });
+
+            target.querySelector('.modal-background').addEventListener('click',   function() {
+                target.classList.remove('is-active');
+                target.querySelectorAll(".input").forEach(
+                    elemento => elemento.value = ""
+                );
             });
         });
+    });
+}
+
+/* Establecer estructura y texts de la tabla */
+function setTable(nameTable) {
+    $.fn.dataTableExt.sErrMode = 'throw'
+    $("#" + nameTable).DataTable({
+        "oLanguage": {
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "No existe información para mostrar",
+            "sSearch": "",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "sInfoEmpty":      "0 de 0",
+            "sSearch": "Buscar en tabla:",
+            "sSearchPlaceholder": "BUSCAR",
+            "sInfo": "Mostrando _START_-_END_ de _TOTAL_",
+            "sLengthMenu": '<span>Filas mostradas: </span><select class="browser-default">' +
+                '<option value="10">5</option>' +
+                '<option value="20">10</option>' +
+                '<option value="30">15</option>' +
+                '<option value="30">20</option>' +
+                '<option value="30">25</option>' +
+                '</select></div>'
+        }
     });
 }

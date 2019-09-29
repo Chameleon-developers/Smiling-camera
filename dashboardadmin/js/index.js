@@ -1,6 +1,6 @@
 //Importación de módulos
-import { toast } from "./plugins.js"
-
+import { toast, ip_server } from "./plugins.js"
+/* toast options: is-info, is-success, is-warning, is-danger */
 /* Ejecución del Js */
 $(function() {
     init()
@@ -23,12 +23,12 @@ function login(){
     email = $('#email').val();
     password = $('#password').val();
     if(email == '' || password == '') {
-        toast('Complete los campos','is-warning')
+        toast('Complete los campos','is-info')
     } else {
         const captcha = document.querySelector('#g-recaptcha-response').value;
         $.ajax({
             type: "POST",
-            url: "http://" + document.domain +":3500/logIn",
+            url: ip_server + "/logIn",
             data:{
                 'mainEmail' : email,
                 'passwordUser' : password,
@@ -38,7 +38,7 @@ function login(){
             success: function (response) {
                 if (response.Status == 'Success') {
                     sessionStorage.token = response.token
-                    window.open(response.route,'_self');
+                    window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/" + response.route);
                 }
             },
             error: function (error) {
