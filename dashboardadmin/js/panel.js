@@ -1,8 +1,5 @@
 import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
 
-//Exportación de módulos
-export { toast }
-
 /* Función para declarar eventos eventos */
 $(function() {
 
@@ -43,24 +40,4 @@ function loadFiles(htmlFile, jsFile) {
         });
 
     });
-}
-
-/* Función para ejecutar un toast-notification */
-function toast(msg, type) {
-    let notifDiv = document.createElement('div')
-    notifDiv.setAttribute('class', 'notification ' + type)
-    notifDiv.appendChild(document.createTextNode(msg))
-    let btn = document.createElement('button')
-    btn.setAttribute('class', 'delete')
-    notifDiv.appendChild(btn)
-    $('.toast-container').append(notifDiv)
-    $(btn).click(function(e) {
-        notifDiv.classList.add('hidden')
-        setTimeout(() => {
-            notifDiv.remove()
-        }, 300);
-    })
-    setTimeout(() => {
-        $(notifDiv).addClass('hidden');
-    }, 4000);
 }
