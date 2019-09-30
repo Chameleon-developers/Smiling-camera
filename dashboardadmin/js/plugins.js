@@ -3,8 +3,11 @@ export {
     toast, 
     modal, 
     ip_server, 
-    setTable 
+    setTable,
+    loadFiles
 }
+
+import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
 
 const ip_server = 'http://' + document.domain + ':3500'
 
@@ -86,5 +89,17 @@ function setTable(nameTable) {
                 '<option value="30">25</option>' +
                 '</select></div>'
         }
+    });
+}
+
+/* Función para cargar los archivos html y js */
+function loadFiles(htmlFile, jsFile) {
+
+    $('#Content').load(htmlFile, function () {
+
+        importModule(jsFile).then((module) => {
+            module.init();
+        });
+
     });
 }
