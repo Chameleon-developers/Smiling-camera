@@ -20,8 +20,8 @@ function init() {
 
 /* Obtener datos ingresados, validarlos y mandarlos por ajax para ser validados en la BD */
 function login(){
-    email = $('#email').val();
-    password = $('#password').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
     if(email == '' || password == '') {
         toast('Complete los campos','is-info')
     } else {

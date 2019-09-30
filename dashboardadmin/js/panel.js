@@ -10,12 +10,18 @@ $(function() {
         menu("usuarios")
     });
 
+    $("#Productos").click(function (e){
+        isActiveMenu(this)
+        menu("productos")
+    })
+
+
 })
 
 /* Función para agregar la clase is-active a una opción del menú */
 function isActiveMenu(element) {
 
-    $(".active").removeClass("active")
+    $(".is-active").removeClass("is-active")
     $(element).addClass("is-active");
     
 }
@@ -27,8 +33,11 @@ function menu(page) {
       case "usuarios":
         loadFiles("usuarios.html", "js/usuarios.js");
         break;
+     case "productos":
+        loadFiles("productos.html", "js/productos.js");
+        break;
     }
-}
+} 
 
 /* Función para cargar los archivos html y js */
 function loadFiles(htmlFile, jsFile) {
