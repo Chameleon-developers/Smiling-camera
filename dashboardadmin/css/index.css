@@ -352,3 +352,14 @@ img.logo {
     background-color:#f74784;
     color:#fff
 }
+
+.modal.modal-active {
+    visibility: visible;
+}
+.modal.modal-active {
+    display: flex;
+}
+
+.modal.modal-active .modal-background {
+    opacity: 1;
+}

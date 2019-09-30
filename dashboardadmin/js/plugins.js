@@ -35,26 +35,25 @@ function modal() {
     document.querySelectorAll('.modal-button').forEach(function(e) {
         e.addEventListener('click', function() {
             var target = document.querySelector(e.getAttribute('data-target'));
-            modal = target
 
-            target.classList.add('is-active');
+            target.classList.add('modal-active');
 
             target.querySelector('.delete').addEventListener('click',   function() {
-                target.classList.remove('is-active');
+                target.classList.remove('modal-active');
                 target.querySelectorAll(".input").forEach(
                     elemento => elemento.value = ""
                 );
             });
 
             target.querySelector('.deleteBtn').addEventListener('click',   function() {
-                target.classList.remove('is-active');
+                target.classList.remove('modal-active');
                 target.querySelectorAll(".input").forEach(
                     elemento => elemento.value = ""
                 );
             });
 
             target.querySelector('.modal-background').addEventListener('click',   function() {
-                target.classList.remove('is-active');
+                target.classList.remove('modal-active');
                 target.querySelectorAll(".input").forEach(
                     elemento => elemento.value = ""
                 );
