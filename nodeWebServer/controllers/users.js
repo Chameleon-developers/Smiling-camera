@@ -98,7 +98,7 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, passwordUser, typeU
         return false
     }
 
-    var pattPassword = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
+    var pattPassword = /^(?=.*\d)(?=.*[!@#$&-.+,])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
     if (!pattPassword.test(passwordUser)) {
         return false
     }

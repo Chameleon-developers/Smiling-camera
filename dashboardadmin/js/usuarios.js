@@ -139,7 +139,7 @@ function addUser() {
             success: function (response) {
                 toast('Se ha registrado correctamente', 'is-info')
                 /* Vaciar inputs y cerrar modal */
-                modal.removeClass('is-active')
+                modal.removeClass('modal-active')
                 var inputsAddModal = modal.find(".input")
                 $.each(inputsAddModal, function(idx, el) {
                     el.value = ""
@@ -153,11 +153,9 @@ function addUser() {
                 }
                 if(error.status == '406'){
                     toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
-                    window.open("index.html",'_self');
                 }
                 if(error.status == '406'){
                     toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
-                    window.open("index.html",'_self');
                 }
             }
         });
@@ -188,9 +186,9 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
         toast('Los correos ingresados deben ser diferentes', 'is-warning')
         return false
     }
-    var pattPassword = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
+    var pattPassword = /^(?=.*\d)(?=.*[!@#$&-.+,])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
     if (!pattPassword.test(passwordUser)) {
-        toast('La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter no alfanumérico.', 'is-warning')
+        toast('La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter no alfanumérico ! @ # $ & - . + ,', 'is-warning')
         return false
     }
     if (passwordUser != cPasswordUser) {
