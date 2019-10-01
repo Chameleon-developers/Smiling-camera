@@ -124,7 +124,7 @@ function addUser() {
             success: function (response) {
                 toast('Se ha registrado correctamente', 'is-info')
                 /* Vaciar inputs y cerrar modal */
-                modal.removeClass('is-active')
+                modal.removeClass('modal-active')
                 var inputsAddModal = modal.find(".input")
                 $.each(inputsAddModal, function(idx, el) {
                     el.value = ""
