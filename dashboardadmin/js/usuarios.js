@@ -14,6 +14,7 @@ function init() {
 
     /* Set Clics */
     $('#addUser').click(addUser);
+    $("#delUser").click(deleteUser);
 
 }
 
@@ -92,16 +93,12 @@ function getUsers(){
             }
             table.draw();
             modal()
-            /*var botones = document.getElementsByClassName("deleteUsr");
-            console.log(botones.length);
-            for(var i=0;i<botones.length;i++){
-                botones[i].addEventListener("click",function(){
-                    
-                });
-            }*/
+
             $(".deleteUsr").click(function(e){
                 $("#delUser").attr('data-u', $(this).attr('data-u'));
+                
             });
+            
         },
         error: function (error) {
             if(error.status == '401'){
@@ -199,8 +196,8 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
 }
 
 /*Funcion para eliminar un registro*/
-function deleteUser(idManagerUser){
-
+function deleteUser(){
+    var idManagerUser = $("#delUser").attr('data-u');
     $.ajax({
         url: ip_server +
         "/logged/deleteUser",
@@ -213,7 +210,6 @@ function deleteUser(idManagerUser){
         success: function (response) {
             toast('Se ha eliminado el usuario correctamente', 'is-info')
             modal.removeClass('is-active')
-            
             getUsers()
         }
     });
