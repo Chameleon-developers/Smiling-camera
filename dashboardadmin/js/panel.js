@@ -1,4 +1,5 @@
-import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
+//Importación de módulos
+import { loadFiles } from "./plugins.js"
 
 /* Función para declarar eventos eventos */
 $(function() {
@@ -6,8 +7,8 @@ $(function() {
     menu("usuarios")
 
     $("#Usuarios").click(function (e) {
-        isActiveMenu(this)
-        menu("usuarios")
+            isActiveMenu(this)
+            menu("usuarios")
     });
 
     $("#Productos").click(function (e){
@@ -23,7 +24,7 @@ function isActiveMenu(element) {
 
     $(".is-active").removeClass("is-active")
     $(element).addClass("is-active");
-    
+
 }
 
 /* Función para saber que html y js cargar */
