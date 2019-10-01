@@ -14,6 +14,7 @@ function init() {
 
     /* Set Clics */
     $('#addUser').click(addUser);
+
 }
 
 /* Función para consultar los tipos de usuarios que existen */
@@ -70,7 +71,10 @@ function getUsers(){
             //insertar datos
             for (const usr of dataSet) {
                 //<a class="button modal-button colorBlue" data-target="#modalAddUser">
-                var iconContainer = "<a class='modal-button' data-target='#modalEditUser' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a href='#' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
+                var iconContainer = "<a class='modal-button' data-target='#modalEditUser' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a class='modal-button deleteUsr' data-u='"+usr.idManagerUser+"' data-target='#modalDelUser' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
+                //boton eliminar
+                //$('#delUser').click(deleteUser(usr.idManagerUser));
+                //$(document).on('click','.deleteUsr',deleteUser(usr.idManagerUser));
                 
                 if (usr.idTypeUser == 1) {
                     tipo = "Administrador";
@@ -84,9 +88,20 @@ function getUsers(){
                     tipo,
                     iconContainer
                 ])
+                
             }
             table.draw();
             modal()
+            /*var botones = document.getElementsByClassName("deleteUsr");
+            console.log(botones.length);
+            for(var i=0;i<botones.length;i++){
+                botones[i].addEventListener("click",function(){
+                    
+                });
+            }*/
+            $(".deleteUsr").click(function(e){
+                $("#delUser").attr('data-u', $(this).attr('data-u'));
+            });
         },
         error: function (error) {
             if(error.status == '401'){
@@ -185,7 +200,6 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
     return true
 }
 
-
 /*Funcion para eliminar un registro*/
 function deleteUser(idManagerUser){
 
@@ -199,7 +213,10 @@ function deleteUser(idManagerUser){
         },
         dataType: "json",
         success: function (response) {
+            toast('Se ha eliminado el usuario correctamente', 'is-info')
+            modal.removeClass('is-active')
             
+            getUsers()
         }
     });
   }
