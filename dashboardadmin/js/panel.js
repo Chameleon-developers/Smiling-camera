@@ -40,14 +40,3 @@ function menu(page) {
     }
 } 
 
-/* Función para cargar los archivos html y js */
-function loadFiles(htmlFile, jsFile) {
-
-    $('#Content').load(htmlFile, function () {
-
-        importModule(jsFile).then((module) => {
-            module.init();
-        });
-
-    });
-}
