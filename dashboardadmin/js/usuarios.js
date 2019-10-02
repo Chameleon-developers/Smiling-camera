@@ -15,6 +15,7 @@ function init() {
     /* Set Clics */
     $('#addUser').click(addUser);
     $("#delUser").click(deleteUser);
+    $('#updateUser').click(updateUser);
 
 }
 
@@ -111,6 +112,7 @@ function getUsers(){
 
             $(".updateUser").click(function(e){
                 getUser($(this).attr('data-u'));
+                $('#updateUser').attr('data-u', $(this).attr('data-u'));
             });
             
         },
@@ -205,6 +207,58 @@ function addUser() {
             dataType: "json",
             success: function (response) {
                 toast('Se ha registrado correctamente', 'is-info')
+                /* Vaciar inputs y cerrar modal */
+                modal.removeClass('modal-active')
+                var inputsAddModal = modal.find(".input")
+                $.each(inputsAddModal, function(idx, el) {
+                    el.value = ""
+                });
+                getUsers()
+            },
+            error: function (error) {
+                if(error.status == '401'){
+                    sessionStorage.removeItem('token')
+                    window.open("index.html",'_self');
+                }
+                if(error.status == '406'){
+                    toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
+                }
+                if(error.status == '406'){
+                    toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
+                }
+            }
+        });
+    }
+}
+
+/* Función para agregar un nuevo usuario */
+function updateUser() {
+    var idManagerUser = $("#updateUser").attr('data-u');
+    var mainEmail = $('#mainEmailUpdate').val()
+    var resetEmail = $('#resetEmailUpdate').val()
+    var nameUser = $('#nameUserUpdate').val()
+    var typeUser = $( "#addTypeUsersUpdate option:selected" ).val()
+    var passwordUser = $('#passwordUserUpdate').val()
+    var cPasswordUser = $('#cPasswordUserUpdate').val()
+
+    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser)
+    if (check) {
+        var modal = $(this).parent().parent().parent()
+        $.ajax({
+            type: "POST",
+            url: ip_server + "/logged/updateUser",
+            data: {
+                'bearer' : sessionStorage.token,
+                'idManagerUser' : idManagerUser,
+                'mainEmail' : mainEmail,
+                'resetEmail' : resetEmail,
+                'nameUser' : nameUser,
+                'idTypeUser' : typeUser,
+                'passwordUser' : passwordUser,
+            },
+            dataType: "json",
+            success: function (response) {
+                toast('Se modificó correctamente el usuario', 'is-info')
                 /* Vaciar inputs y cerrar modal */
                 modal.removeClass('modal-active')
                 var inputsAddModal = modal.find(".input")
