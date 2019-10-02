@@ -18,6 +18,9 @@ module.exports = function (app,secureApp) {
     /* Obtener datos de los usuarios registrados */
     secureApp.post('/getUsers' ,users.getUsers);
 
+    /* Obtener datos de un usuario especifico */
+    secureApp.post('/getUser' ,users.getUser);
+
     /* Eliminar usuario registrado */
     secureApp.post('/deleteUser' ,users.deleteUser);
 

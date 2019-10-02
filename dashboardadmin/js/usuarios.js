@@ -30,6 +30,7 @@ function getTypeUsers() {
         success: function (response) {
 
             setSelectTypeUsers(response.typeUsers)
+            setSelectTypeUsersUpdate(response.typeUsers)
 
         },
         error: function (error) {
@@ -48,6 +49,16 @@ function setSelectTypeUsers(typeUsers) {
         option.textContent = value.typeUser.split(' ')[0]
         option.value = value.idTypeUser
         $('#addTypeUsers').append(option)
+    })
+}
+
+/* Función para agregar los tipos de usuarios a los selects  */
+function setSelectTypeUsersUpdate(typeUsers) {
+    $.each(typeUsers, function (key, value) {
+        let option = document.createElement('option')
+        option.textContent = value.typeUser.split(' ')[0]
+        option.value = value.idTypeUser
+        $('#addTypeUsersUpdate').append(option)
     })
 }
 
@@ -72,7 +83,7 @@ function getUsers(){
             //insertar datos
             for (const usr of dataSet) {
                 //<a class="button modal-button colorBlue" data-target="#modalAddUser">
-                var iconContainer = "<a class='modal-button' data-target='#modalEditUser' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a class='modal-button deleteUsr' data-u='"+usr.idManagerUser+"' data-target='#modalDelUser' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
+                var iconContainer = "<a class='modal-button updateUser' data-u='"+usr.idManagerUser+"' data-target='#modalEditUser' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a class='modal-button deleteUsr' data-u='"+usr.idManagerUser+"' data-target='#modalDelUser' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
                 //boton eliminar
                 //$('#delUser').click(deleteUser(usr.idManagerUser));
                 //$(document).on('click','.deleteUsr',deleteUser(usr.idManagerUser));
@@ -96,9 +107,68 @@ function getUsers(){
 
             $(".deleteUsr").click(function(e){
                 $("#delUser").attr('data-u', $(this).attr('data-u'));
-                
+            });
+
+            $(".updateUser").click(function(e){
+                getUser($(this).attr('data-u'));
             });
             
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                sessionStorage.removeItem('token')
+                window.open("index.html",'_self');
+            }
+        }
+    });
+}
+
+/* Funcion para obtener datos de un usuario especifico */
+function getUser(id) {
+    $.ajax({
+        url: ip_server +
+        "/logged/getUser",
+        type: "POST",
+        data:{
+            'bearer' : sessionStorage.token,
+            'idManagerUser' : id,
+        },
+        dataType: "json",
+        success: function (response) {
+            var dataSet = response.users;
+
+            for (const usr of dataSet) {
+                $('#mainEmailUpdate').val(usr.mainEmail);
+                $('#resetEmailUpdate').val(usr.resetEmail);
+                $('#nameUserUpdate').val(usr.nameUser);
+                $('#addTypeUsersUpdate option[value="'+usr.idTypeUser+'"]').attr("selected", true);
+                $('#passwordUserUpdate').val(usr.passwordUser);
+                $('#cPasswordUserUpdate').val(usr.passwordUser);
+            }
+            
+
+            //insertar datos
+           /* for (const usr of dataSet) {
+                //<a class="button modal-button colorBlue" data-target="#modalAddUser">
+                var iconContainer = "<a class='modal-button updateUser' data-u='"+usr.idManagerUser+"' data-target='#modalEditUser' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a class='modal-button deleteUsr' data-u='"+usr.idManagerUser+"' data-target='#modalDelUser' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
+                //boton eliminar
+                //$('#delUser').click(deleteUser(usr.idManagerUser));
+                //$(document).on('click','.deleteUsr',deleteUser(usr.idManagerUser));
+                
+                if (usr.idTypeUser == 1) {
+                    tipo = "Administrador";
+                } else {
+                    tipo = "Operador";
+                }
+
+                table.row.add([
+                    usr.nameUser,
+                    usr.mainEmail,
+                    tipo,
+                    iconContainer
+                ])
+                
+            }*/
         },
         error: function (error) {
             if(error.status == '401'){
