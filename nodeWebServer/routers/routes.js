@@ -24,4 +24,8 @@ module.exports = function (app,secureApp) {
     /* Eliminar usuario registrado */
     secureApp.post('/deleteUser' ,users.deleteUser);
 
+    /* Obtener Las categorias de productos existentes */
+    
+
 }
+ 

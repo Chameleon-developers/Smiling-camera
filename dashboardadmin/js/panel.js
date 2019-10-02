@@ -11,6 +11,12 @@ $(function() {
             menu("usuarios")
     });
 
+    $("#Productos").click(function (e){
+        isActiveMenu(this)
+        menu("productos")
+    })
+
+
 })
 
 /* Función para agregar la clase is-active a una opción del menú */
@@ -28,5 +34,9 @@ function menu(page) {
       case "usuarios":
         loadFiles("usuarios.html", "js/usuarios.js");
         break;
+     case "productos":
+        loadFiles("productos.html", "js/productos.js");
+        break;
     }
-}
+} 
+
