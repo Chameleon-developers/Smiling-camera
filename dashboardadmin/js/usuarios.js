@@ -144,33 +144,7 @@ function getUser(id) {
                 $('#resetEmailUpdate').val(usr.resetEmail);
                 $('#nameUserUpdate').val(usr.nameUser);
                 $('#addTypeUsersUpdate option[value="'+usr.idTypeUser+'"]').attr("selected", true);
-                $('#passwordUserUpdate').val(usr.passwordUser);
-                $('#cPasswordUserUpdate').val(usr.passwordUser);
             }
-            
-
-            //insertar datos
-           /* for (const usr of dataSet) {
-                //<a class="button modal-button colorBlue" data-target="#modalAddUser">
-                var iconContainer = "<a class='modal-button updateUser' data-u='"+usr.idManagerUser+"' data-target='#modalEditUser' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a class='modal-button deleteUsr' data-u='"+usr.idManagerUser+"' data-target='#modalDelUser' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
-                //boton eliminar
-                //$('#delUser').click(deleteUser(usr.idManagerUser));
-                //$(document).on('click','.deleteUsr',deleteUser(usr.idManagerUser));
-                
-                if (usr.idTypeUser == 1) {
-                    tipo = "Administrador";
-                } else {
-                    tipo = "Operador";
-                }
-
-                table.row.add([
-                    usr.nameUser,
-                    usr.mainEmail,
-                    tipo,
-                    iconContainer
-                ])
-                
-            }*/
         },
         error: function (error) {
             if(error.status == '401'){
@@ -190,7 +164,7 @@ function addUser() {
     var passwordUser = $('#passwordUser').val()
     var cPasswordUser = $('#cPasswordUser').val()
 
-    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser)
+    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser, 1)
     if (check) {
         var modal = $(this).parent().parent().parent()
         $.ajax({
@@ -241,21 +215,37 @@ function updateUser() {
     var passwordUser = $('#passwordUserUpdate').val()
     var cPasswordUser = $('#cPasswordUserUpdate').val()
 
-    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser)
+    var update=0;
+    if(passwordUser.length > 0) {
+        update=1;
+        var dataTemp = {
+            'bearer' : sessionStorage.token,
+            'idManagerUser' : idManagerUser,
+            'mainEmail' : mainEmail,
+            'resetEmail' : resetEmail,
+            'nameUser' : nameUser,
+            'idTypeUser' : typeUser,
+            'passwordUser' : passwordUser,
+        }
+    }
+    else {
+        var dataTemp = {
+            'bearer' : sessionStorage.token,
+            'idManagerUser' : idManagerUser,
+            'mainEmail' : mainEmail,
+            'resetEmail' : resetEmail,
+            'nameUser' : nameUser,
+            'idTypeUser' : typeUser,
+        }
+    }
+
+    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser, update);
     if (check) {
         var modal = $(this).parent().parent().parent()
         $.ajax({
             type: "POST",
             url: ip_server + "/logged/updateUser",
-            data: {
-                'bearer' : sessionStorage.token,
-                'idManagerUser' : idManagerUser,
-                'mainEmail' : mainEmail,
-                'resetEmail' : resetEmail,
-                'nameUser' : nameUser,
-                'idTypeUser' : typeUser,
-                'passwordUser' : passwordUser,
-            },
+            data: dataTemp,
             dataType: "json",
             success: function (response) {
                 toast('Se modificó correctamente el usuario', 'is-info')
@@ -284,10 +274,17 @@ function updateUser() {
 }
 
 /* Función para validar que los datos ingresados están correctos */
-function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser) {
-    if (mainEmail == '' || resetEmail == '' || nameUser == '' || passwordUser == '' || cPasswordUser == '') {
-        toast('Completa los campos', 'is-warning')
-        return false
+function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser, update) {
+    if (update) {
+        if (mainEmail == '' || resetEmail == '' || nameUser == '' || passwordUser == '' || cPasswordUser == '') {
+            toast('Completa los campos', 'is-warning')
+            return false
+        }
+    } else {
+        if (mainEmail == '' || resetEmail == '' || nameUser == '') {
+            toast('Completa los campos', 'is-warning')
+            return false
+        }
     }
     if (typeUser == 0) {
         toast('Selecciona un tipo de usuario', 'is-warning')
@@ -307,14 +304,17 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
         toast('Los correos ingresados deben ser diferentes', 'is-warning')
         return false
     }
-    var pattPassword = /^(?=.*\d)(?=.*[!@#$&-.+,])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
-    if (!pattPassword.test(passwordUser)) {
-        toast('La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter no alfanumérico ! @ # $ & - . + ,', 'is-warning')
-        return false
-    }
-    if (passwordUser != cPasswordUser) {
-        toast('Las contraseñas ingresadas deben coincidir', 'is-warning')
-        return false
+
+    if(update) {
+        var pattPassword = /^(?=.*\d)(?=.*[!@#$&-.+,])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
+        if (!pattPassword.test(passwordUser)) {
+            toast('La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter no alfanumérico ! @ # $ & - . + ,', 'is-warning')
+            return false
+        }
+        if (passwordUser != cPasswordUser) {
+            toast('Las contraseñas ingresadas deben coincidir', 'is-warning')
+            return false
+        }
     }
     return true
 }
