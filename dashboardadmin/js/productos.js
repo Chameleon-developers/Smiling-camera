@@ -8,8 +8,21 @@ export { init }
 
 /* Función para establecer eventos y datos iniciales */
 function init() {
-  //  modal()
-    //cargar()
+  
+    getCategories()
+    $('#searchCategory').onChange(function (e){
+        getSubCategories($('#searchCategory').value);
+        
+        //BUSQUEDA POR CATEGORIA()
+
+    });
+    $('#searchSubCategory').onChange(function (e){
+        getSubCategories($('#searchSubCategory').value);
+        
+        //BUSQUEDA POR SUB-CATEGORIA()
+
+    });
+    //cargar() 
     getTypeUsers()
     getUsers()
 
@@ -31,18 +44,18 @@ function loadFiles(htmlFile, jsFile) {
 }
 
 
-/* Función para consultar los tipos de usuarios que existen */
-function getTypeUsers() {
+/* Función para consultar las categorias de productos que existen */
+function getCategories() {
     $.ajax({
         type: "POST",
-        url: ip_server + "/logged/getTypeUsers",
+        url: ip_server + "/logged/getCategories",
         data: {
             'bearer' : sessionStorage.token,
         },
         dataType: "json",
         success: function (response) {
 
-            setSelectTypeUsers(response.typeUsers)
+            setSelectProductCategories(response.categories, "searchCategory")
 
         },
         error: function (error) {
@@ -54,15 +67,51 @@ function getTypeUsers() {
     });
 }
 
-/* Función para agregar los tipos de usuarios a los selects  */
-function setSelectTypeUsers(typeUsers) {
-    $.each(typeUsers, function (key, value) {
+/* Función para agregar las categorias de productos al select*/  
+function setSelectProductCategories(productCategories,searchCategory) {
+    $.each(productCategories, function (key, value) {
         let option = document.createElement('option')
-        option.textContent = value.typeUser.split(' ')[0]
-        option.value = value.idTypeUser
-        $('#addTypeUsers').append(option)
+        option.textContent = value.nameCategory.split(' ')[0]
+        option.value = value.idCategory
+        $('#'+searchCategory).append(option)
     })
 }
+/*--------------------------------------------------------------------------------------------------- 
+/* Función para consultar las subcategorias de productos que existen */
+function getSubCategories(idCategory) {
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/logged/getSubcategories",
+        data: {
+            'bearer' : sessionStorage.token,
+            'idCategory': idCategory,
+        },
+        dataType: "json",
+        success: function (response) {
+
+            setSelectProductSubCategories(response.subcategories, "searchSubCategory")
+
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                sessionStorage.removeItem('token')
+                window.open("index.html",'_self');
+            }
+        }
+    });
+}
+
+/* Función para agregar las subcategorias de productos al select  */
+function setSelectProductSubCategories(productCategories,searchSubCategory) {
+    $.each(productCategories, function (key, value) {
+        let option = document.createElement('option')
+        option.textContent = value.nameSubcategory.split(' ')[0]
+        option.value = value.idSubcategory
+        $('#'+searchSubCategory).append(option)
+    })
+}
+
+
 
 /* Función para obtener los usuarios ya registrados */
 function getUsers(){
@@ -200,7 +249,7 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
 }
 
 
-/*Funcion para paginar----------------------------------------------------------------------------*/
+/*Funcion para paginar--------------------------------cargar()--------------------------------------------*/
 $(function () {
 	var totalRecords = 0,
 	records = [],
