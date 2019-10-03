@@ -12,6 +12,7 @@ function init() {
     $('#returnProduct').click(function (e){
         loadFiles("producto.html","producto.js")
     });
+    
 }
 
 /* Función para regresar a la seccion inicial de productos */
@@ -124,4 +125,8 @@ function setSelectProductDimensions(productDimensions) {
         option.value = value.idDimension
         $('#addProductDimensions').append(option)
     })
+}
+
+function validateStepOneFields(){
+    
 }

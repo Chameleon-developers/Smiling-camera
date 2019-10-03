@@ -42,14 +42,18 @@
             <div class="steps-content">
                 <div class="step-content has-text-centered is-active">
                     <label for="productCategory" class="label">Categoría</label>
+
                     <div class="field">
-                        <div class="control select ">
-                            <!--select  multiple size="8"-->
-                              <select id="addProductCategories">
-                                <option value="-1">Selecciona una Opción</option>
-                            </select>
-                          </div>
+                        <div class="control select">
+                          <!--select  multiple size="8"-->
+                            <select data-validate="require" id="addProductCategories">
+                              <option value="-1">Selecciona una Opción</option>
+                              <option value="0">Datos de prueba</option>
+                          </select>
+                        </div>
                     </div>
+
+                   
                 </div>
   
   
@@ -159,10 +163,24 @@
                 <a href="#" data-nav="previous" class="button is-light">Anterior</a>
               </div>
               <div class="steps-action">
-                <a href="#" data-nav="next" class="button is-light">Siguiente</a>
+                <a href="#" data-nav="next" id="nextStep" class="button is-light">Siguiente</a>
               </div>
             </div>
           </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/js/bulma-steps.js"></script>
         <script>bulmaSteps.attach();</script>
+        <script>
+            var stepsWizard =new bulmaSteps(document.getElementById("stepsDemo"),{
+              'beforeNext':function(step_id){
+                switch (step_id) {
+                  case 1:
+                      
+                    break;
+                
+                  default:
+                    break;
+                }
+              }
+            });
+          </script>
