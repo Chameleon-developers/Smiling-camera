@@ -23,10 +23,10 @@ function init() {
                 searchCat(cat)
             }
         }
-        searchProducts($('#searchCategory').value,$('#searchSubCategory').value)
     });
     
     getCategories()
+
     $('#searchCategory').change(function (e){
         var category = $('#searchCategory').value;
         if(category != -1) 
