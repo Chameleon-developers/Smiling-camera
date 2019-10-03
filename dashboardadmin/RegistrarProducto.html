@@ -6,7 +6,7 @@
     </div>
     <div class="column is-2">
         <a id="returnProduct" class="button colorBlue">
-            Regresar
+            Regresar a Productos
         </a>
     </div>
   </section>
@@ -14,8 +14,8 @@
   <br>
        
        <div class="content is-medium">
-          <div class="steps" id="stepsDemo">
-            <div class="step-item is-active is-success">
+          <div class="steps" id="stepsAddProduct">
+            <div class="step-item is-success is-active">
               <div class="step-marker">1</div>
               <div class="step-details">
                 <p class="step-title">Categoría</p>
@@ -40,26 +40,28 @@
               </div>
             </div>
             <div class="steps-content">
-                <div class="step-content has-text-centered is-active">
-                    <label for="productCategory" class="label">Categoría</label>
+                <div class="step-content has-text-centered">
+                    <label for="productCategory" class="label" required>Categoría</label>
                     <div class="field">
                         <div class="control select ">
                             <!--select  multiple size="8"-->
                               <select id="addProductCategories">
                                 <option value="-1">Selecciona una Opción</option>
+                                <option value="ej">ej</option>
                             </select>
                           </div>
                     </div>
                 </div>
   
   
-                <div class="step-content has-text-centered">
+                <div class="step-content has-text-centered" beforeNext="{{console.log('siiiii')}}">
                     <label for="productSubCategory" class="label">Subcategoría</label>
                     <div class="field">
                         <div class="control select ">
                             <!--select  multiple size="8"-->
                               <select id="addproductSubCategories">
                                 <option value="-1">Selecciona una Opción</option>
+                                <option value="ej">ej</option>
                             </select>
                         </div>
                     </div>
@@ -80,59 +82,68 @@
   
                 
                 <div class="step-content has-text-centered">
-                    
-                    <div class="field">
-                        <label for="productname" class="label">Nombre</label>
-                        <p class="control has-icons-left">
-                            <input class="input " name="productname" id="productname" type="text" placeholder="Nombre del producto" autofocus data-validate="require">
+                   <div class="columns">
+                      <div class="column">
+                        <div class="field">
+                          <label for="productname" class="label">Nombre</label>
+                          <p class="control has-icons-left">
+                              <input class="input " name="productname" id="productname" type="text" placeholder="Nombre del producto" autofocus data-validate="require">
+                              <span class="icon is-small is-left">
+                                  <i class="fa fa-signature"></i>
+                              </span>
+                          </p>
+                        </div>
+                        <div class="field">
+                          <label class="label" for="productdimens">Dimensiones</label>
+                          <div class="control select  is-fullwidth">
+                              <!--select  multiple size="8"-->
+                                <select id="addProductDimensions">
+                                  <option value="-1">Selecciona una Opción (ancho x alto)</option>
+                                  <option value="ej">ej</option>
+                              </select>
+                            </div>
+                         </div>
+                        
+                      </div>
+                      <div class="column">
+                        <div class="field">
+                          <label for="productcost" class="label">Costo</label>
+                          <p class="control has-icons-left">
+                              <input class="input " name="productcost" id="productcost" type="text" placeholder="Costo del producto" autofocus data-validate="require">
                             <span class="icon is-small is-left">
-                                <i class="fa fa-signature"></i>
-                            </span>
-                        </p>
-                    </div>
+                                  <i class="fa fa-dollar-sign"></i>
+                              </span>
+                          </p>
+                        </div>
+                              
+      
+                        <div class="field">
+                            <label for="productpic" class="label">Foto</label>
+                            <p class="control has-icons-left">
+                                <input class="input " name="productpic" id="productpic" type="file" autofocus data-validate="require">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-image"></i>
+                                </span>
+                            </p>
+                        </div>
 
-                  
-                    <div class="field">
-                        <label for="productcaract" class="label">Características</label>
-                        <p class="control has-icons-left">
-                            <input class="input " name="productcaract" id="productcaract" type="text" placeholder="Características del producto" autofocus data-validate="require">
-                            <span class="icon is-small is-left">
-                                <i class="fa fa-signature"></i>
-                            </span>
-                        </p>
-                    </div>
+                        
 
-                    <div class="field">
-                        <label for="productcost" class="label">Costo</label>
-                        <p class="control has-icons-left">
-                            <input class="input " name="productcost" id="productcost" type="text" placeholder="Costo del producto" autofocus data-validate="require">
+
+
+                      </div>
+                   </div> 
+                   
+                   <div class="field">
+                      <label for="productcaract" class="label">Características</label>
+                      <p class="control has-icons-left">
+                          <input class="input " name="productcaract" id="productcaract" type="text" placeholder="Características del producto" autofocus data-validate="require">
                           <span class="icon is-small is-left">
-                                <i class="fa fa-dollar-sign"></i>
-                            </span>
-                        </p>
+                              <i class="fa fa-signature"></i>
+                          </span>
+                      </p>
                     </div>
-                          
-  
-                    <div class="field">
-                        <label for="productpic" class="label">Foto</label>
-                        <p class="control has-icons-left">
-                            <input class="input " name="productpic" id="productpic" type="file" autofocus data-validate="require">
-                            <span class="icon is-small is-left">
-                                <i class="fa fa-image"></i>
-                            </span>
-                        </p>
-                    </div>
-
-
-                    <div class="field">
-                        <label class="label" for="productdimens">Dimensiones</label>
-                        <div class="control select  is-fullwidth">
-                            <!--select  multiple size="8"-->
-                              <select id="addProductDimensions">
-                                <option value="-1">Selecciona una Opción (ancho x alto)</option>
-                            </select>
-                          </div>
-                    </div>
+                      
   
                             
                             <div class="field">
@@ -153,13 +164,13 @@
             </div>
             <div class="step-content has-text-centered">
                 <h1 class="title is-4">¡Producto registrado!</h1>
-              </div>
+            </div>
             <div class="steps-actions">
               <div class="steps-action">
-                <a href="#" data-nav="previous" class="button is-light">Anterior</a>
+                <a href="#" data-nav="previous" class="button is-light" >Anterior</a>
               </div>
               <div class="steps-action">
-                <a href="#" data-nav="next" class="button is-light">Siguiente</a>
+                <a id="nextStep" href="#" data-nav="next" class="button is-light">Siguiente</a>
               </div>
             </div>
           </div>

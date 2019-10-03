@@ -1,32 +1,70 @@
 //Importación de módulos
-import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
-
+import {loadFiles, toast, modal, ip_server } from "./plugins.js"
 //Exportación de módulos
 export { init }
 
 /* Función para establecer eventos y datos iniciales */
 function init() {
-    getCategories() 
-    getSubCategories() 
-    detDimensiones()
+    /*getCategories() 
+    getDimensiones()
     $('#returnProduct').click(function (e){
-        loadFiles("producto.html","producto.js")
+       /* $('#addProductCategories')[0].reset();
+        $('#addproductSubCategories')[0].reset();
+        $('#productname')[0].reset();
+        $('#addProductDimensions')[0].reset();
+        $('#productcost')[0].reset();
+        $('#productpic')[0].reset();
+        $('#productcaract')[0].reset();
+        loadFiles("productos.html","js/productos.js")
+    });
+    $('#addProductCategories').onChange(function (e){
+        getSubCategories($('#addProductCategories').value);
+    });
+
+  //  console.log($('#stepsAddProduct').is-completed;
+}
+/*$('#stepsAddProduct').options.beforeNext(function(step_id){
+        switch( step_id ) {
+            case 1:
+              // DO YOUR VALIDATION FOR FIRST STEP (steps_id start at 0)
+            if($('#addProductCategories').value == -1)
+                $('#nextStep').disabled;
+            else
+                $('#nextStep').enabled;
+              break;
+            case 2:
+              // DO YOUR VALIDATION FOR 2nd step
+              break;
+            case 2:
+              // DO YOUR VALIDATION FOR 3rd STEP 
+              break;
+        }    
     });
 }
 
-/* Función para regresar a la seccion inicial de productos */
-function loadFiles(htmlFile, jsFile) {
+/*
+var stepsWizard = new StepsWizard(document.getElementById("stepsDemo"), {
+    'beforeNext': function( step_id ) {
+      switch( step_id ) {
+        case 0:
+          // DO YOUR VALIDATION FOR FIRST STEP (steps_id start at 0)
+          break;
+        case 1:
+          // DO YOUR VALIDATION FOR 2nd step
+          break;
+        case 2:
+          // DO YOUR VALIDATION FOR 3rd STEP 
+          break;
+          
+          
+        }
+    }
+  } );*/
 
-    $('#Content').load(htmlFile, function () {
 
-        importModule(jsFile).then((module) => {
-            module.init();
-        });
 
-    });
-}
 
-/* Función para consultar las categorias de productos que existen */
+/* Función para consultar las categorias de productos que existen 
 function getCategories() {
     $.ajax({
         type: "POST",
@@ -49,7 +87,7 @@ function getCategories() {
     });
 }
 
-/* Función para agregar las categorias de productos al select  */
+/* Función para agregar las categorias de productos al select  
 function setSelectProductCategories(productCategories) {
     $.each(productCategories, function (key, value) {
         let option = document.createElement('option')
@@ -58,14 +96,15 @@ function setSelectProductCategories(productCategories) {
         $('#addProductCategories').append(option)
     })
 }
-/*---------------------------------------------------------------------------------------------------*/ 
-/* Función para consultar las subcategorias de productos que existen */
-function getSubCategories() {
+/*--------------------------------------------------------------------------------------------------- 
+/* Función para consultar las subcategorias de productos que existen 
+function getSubCategories(idCategory) {
     $.ajax({
         type: "POST",
         url: ip_server + "/logged/getSubcategories",
         data: {
             'bearer' : sessionStorage.token,
+            'idCategory': idCategory,
         },
         dataType: "json",
         success: function (response) {
@@ -82,7 +121,7 @@ function getSubCategories() {
     });
 }
 
-/* Función para agregar las subcategorias de productos al select  */
+/* Función para agregar las subcategorias de productos al select  
 function setSelectProductSubCategories(productCategories) {
     $.each(productCategories, function (key, value) {
         let option = document.createElement('option')
@@ -92,8 +131,8 @@ function setSelectProductSubCategories(productCategories) {
     })
 }
 
-/*---------------------------------------------------------------------------------------------------*/ 
-/* Función para consultar las dimensiones de productos que existen */
+/*--------------------------------------------------------------------------------------------------- 
+/* Función para consultar las dimensiones de productos que existen 
 function getDimensiones() {
     $.ajax({
         type: "POST",
@@ -116,12 +155,13 @@ function getDimensiones() {
     });
 }
 
-/* Función para agregar las categorias de productos al select  */
+/* Función para agregar las categorias de productos al select  
 function setSelectProductDimensions(productDimensions) {
     $.each(productDimensions, function (key, value) {
         let option = document.createElement('option')
-        option.textContent = value.widthDimension.split(' ')[0] +" X " + value.heightDimension.split(' ')[0] /*ESTO SE PUEDE???? */
+        option.textContent = value.widthDimension.split(' ')[0] +" X " + value.heightDimension.split(' ')[0] /*ESTO SE PUEDE???? 
         option.value = value.idDimension
         $('#addProductDimensions').append(option)
     })
 }
+*/

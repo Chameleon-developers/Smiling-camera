@@ -200,21 +200,140 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
 }
 
 
-/*Funcion para eliminar un registro*/
-function deleteUser(idManagerUser){
+/*Funcion para paginar----------------------------------------------------------------------------*/
+$(function () {
+	var totalRecords = 0,
+	records = [],
+	displayRecords = [],
+	recPerPage = 8,
+	page = 1,
+	totalPages = 0;
+	$.ajax({
+			type: "POST", 
+	      	url: url,
+	      	data: {
+                url: ip_server + "/logged/getProducts",
+                'bearer' : sessionStorage.token,
+            },
+	      	dataType: 'json',
+	      	success: function (data) {
+	                records = data;
+	                totalRecords = records.length;
+	                if (totalRecords>0) {
+	                	totalPages = Math.ceil(totalRecords / recPerPage);
+	                	apply_pagination();
+	                }else{
+	                	$('#content').append('<center>No se encontró ningun Producto</center>');
+	                }
+	                
+	      }
+	});
 
-    $.ajax({
-        url: ip_server +
-        "/logged/deleteUser",
-        type: "POST",
-        data:{
-            'bearer' : sessionStorage.token,
-            'idManagerUser' : idManagerUser
-        },
-        dataType: "json",
-        success: function (response) {
-            var dataSet = response.users;
-            console.log(dataSet);
-        }
-    });
-}
+	function apply_pagination() {
+	      $('.pagination').twbsPagination({
+	            totalPages: totalPages,
+	            visiblePages: 5,
+	            onPageClick: function (event, page) {
+	                  displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
+	                  endRec = (displayRecordsIndex) + recPerPage;
+	                 
+	                  displayRecords = records.slice(displayRecordsIndex, endRec);
+	                  generate_rows();
+	            }
+	      });
+	}
+
+
+	function generate_rows() {
+	      var div;
+	      $('#contentProducts').html('');
+	      for (var i = 0; i < displayRecords.length; i++) {
+
+
+	            div = $('<div class="col-md-3 col-sm-6">');
+	            div.append('<div class="single-shop-product">');
+	            
+	            div.append('<div class="product-upper" style="margin: 0 auto">');
+	            div.append('<a id="img' + displayRecords[i].idProducto + '"  class="sendProducto" style="width: 193px;height: 243px" itemprop="' + displayRecords[i].idProducto + '" href="#"><img src="imagenes/' + displayRecords[i].imagen + '" alt=""></a>');
+	            div.append('</div>');
+
+	            div.append('<h2><a id="text' + displayRecords[i].idProducto + '" class="sendProducto" itemprop="' + displayRecords[i].idProducto + '" href="#">' + displayRecords[i].nombre + '</a></h2>');
+
+	            div.append('<div class="product-carousel-price">');
+	            div.append('<ins style="text-decoration: none;margin-right: 5px;">$' + displayRecords[i].precio + '</ins>');
+	            div.append('</div>');
+
+	            div.append('</div>');
+	            div.append('</div>');
+ 
+            div.append('<div class="column ">'+
+                '<div class="image-flip" ontouchstart="this.classList.toggle("hover");">'+
+                    '<div classcolumns="mainflip">'+
+                        '<div class="frontside">'+
+                            '<div class="card">'+
+                              
+                                '<header class="card-header">'+
+                                    '<p class="card-header-title">'+displayRecords[i].nameProduct+' </p>'+
+                                '</header>'+
+                                '<div class="card-image">'+
+                                   ' <figure class="image is-4by3">'+
+                                      '<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">'+
+                                    '</figure>'+
+                                  '</div>'+
+                                '<div class="card-content">'+
+                                    '<div class="content">'+
+        
+                                        '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripcion:</strong>'+displayRecords[i].featuresProduct + '</div>'+
+                                      
+                                      '<a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>');
+                                    div.append('</div>');
+                                div.append('</div>');
+                            div.append('</div>');
+                        div.append('</div>');
+                        div.append('<div class="backside">'+
+                            '<div class="card">'+
+                                '<header class="card-header">'+
+                                    '<p class="card-header-title">'+displayRecords[i].nameProduct +'</p>'+
+                                '</header>'+
+                                '<div class="card-content text-center">'+
+                                    '<div class="content">'+
+                                        
+                                       
+                                            '<div class="card-text"><strong>Dimensiones:</strong>Dimensiones del P</div>'+
+                                            '<div class="card-text"><strong>Categoria:</strong>Termos</div>'+
+                                      '<div class="card-text">'+
+                                        '<strong>Acciones:</strong> '+
+                                        '<div class="has-addons">'+
+                                            '<a class=" button is-primary is-inverted" ><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>'+
+                                        
+                                            '<a href="#" class=" button is-danger is-inverted" style="padding-left: 10px;"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>');
+                                        div.append('</div>');
+                                                
+                                      div.append('</div>');
+                                  div.append('</div>');
+                                div.append('</div>');
+                            div.append('</div>');
+                        div.append('</div>');
+                    div.append('</div>');
+                div.append('</div>');
+            div.append('</div>');
+           
+
+
+
+
+	            $('#content').append(div);
+	            
+	      }
+	      controlarClick();
+	}
+
+	function controlarClick() {
+	    $('.sendProducto').unbind();
+	    $('.sendProducto').on('click', function(){
+	        var send = document.getElementById(this.id).getAttribute('itemprop');
+	        sessionStorage.setItem('idProd', send);
+        	window.open('single-product.html','_self');
+	    });
+	}
+});
