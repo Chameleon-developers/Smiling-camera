@@ -3,7 +3,7 @@ const fs = require('fs');
 /* Obtener Los tipos de usuario existentes */
 module.exports.getAllProducts = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn')();
+    const con = require('./dbconn')();
 
     /* Obtener los datos del Body */
     let data = req.body;

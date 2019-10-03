@@ -1,6 +1,6 @@
 var users=require('../controllers/users');
 var login=require('../controllers/login');
-var products=require('../controllers/productos');
+var products=require('../controllers/products');
 var multer = require("multer");
 
 module.exports = function (app,secureApp) {
