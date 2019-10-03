@@ -1,5 +1,5 @@
 //Importación de módulos
-import { toast, modal, ip_server, setTable } from "./plugins.js"
+import { toast, modal, ip_server, setTable, loadFiles } from "./plugins.js"
 /* toast options: is-info, is-success, is-warning, is-danger */
 import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
 
@@ -17,16 +17,6 @@ function init() {
     //$('#addProduct').click(addProduct);
     $('#addProduct').click(function (e){
         loadFiles("RegistrarProducto.html","js/RegistrarProducto.js")
-    });
-}
-function loadFiles(htmlFile, jsFile) {
-
-    $('#Content').load(htmlFile, function () {
-
-        importModule(jsFile).then((module) => {
-            module.init();
-        });
-
     });
 }
 

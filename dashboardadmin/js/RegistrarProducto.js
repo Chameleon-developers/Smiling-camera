@@ -1,5 +1,5 @@
 //Importación de módulos
-import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
+import { toast, modal, ip_server, setTable, loadFiles } from "./plugins.js"
 
 //Exportación de módulos
 export { init }
@@ -8,21 +8,9 @@ export { init }
 function init() {
     getCategories() 
     getSubCategories() 
-    detDimensiones()
+    getDimensiones()
     $('#returnProduct').click(function (e){
-        loadFiles("producto.html","producto.js")
-    });
-}
-
-/* Función para regresar a la seccion inicial de productos */
-function loadFiles(htmlFile, jsFile) {
-
-    $('#Content').load(htmlFile, function () {
-
-        importModule(jsFile).then((module) => {
-            module.init();
-        });
-
+        loadFiles("productos.html", "js/productos.js");
     });
 }
 

@@ -375,3 +375,7 @@ a .pagination-link.is-current {
     text-transform: uppercase;
     font-weight: bold;
 }
+
+ul.pagination-list li {
+    list-style: none;
+}
