@@ -8,30 +8,37 @@ export { init }
 
 /* Función para establecer eventos y datos iniciales */
 function init() {
-  
-    getCategories()
-    $('#searchCategory').change(function (e){
-        getSubCategories($('#searchCategory').value);
-        
-        //BUSQUEDA POR CATEGORIA()
-        
-    });
-    $('#searchSubCategory').change(function (e){
-        getSubCategories($('#searchSubCategory').value);
-        
-        //BUSQUEDA POR SUB-CATEGORIA()
-
-    });
-    //cargar() 
-    getTypeUsers()
-    getUsers()
-
-    /* Set Clics */
-    //$('#addProduct').click(addProduct);
     $('#addProduct').click(function (e){
         loadFiles("RegistrarProducto.html","js/RegistrarProducto.js")
     });
+
+    $('#searchProduct').click(function (e){
+        var cat= $('#searchCategory').value
+        var subcat = $('#searchSubCategory').value
+        if(cat != -1){
+            if(subcat !=-1){
+                searchCatSubcat(cat,subcat)
+            }
+            else {
+                searchCat(cat)
+            }
+        }
+        searchProducts($('#searchCategory').value,$('#searchSubCategory').value)
+    });
+    
+    getCategories()
+    $('#searchCategory').change(function (e){
+        var category = $('#searchCategory').value;
+        if(category != -1) 
+            getSubCategories($('#searchCategory').value);
+        else{
+            $('#searchCategory').empty()
+        }
+    });
+
 }
+
+/*This function will load the content of the dashboard */
 function loadFiles(htmlFile, jsFile) {
 
     $('#Content').load(htmlFile, function () {
@@ -42,7 +49,15 @@ function loadFiles(htmlFile, jsFile) {
 
     });
 }
+/*This function will load and search the products that belongs those categories or subcategories */
+function searchCatSubcat(idCategory, idSubcategory) {
+    
+}
 
+/*This function will load and search the products that belongs that category */
+function searchCat(idCategory) {
+    
+}
 
 /* Función para consultar las categorias de productos que existen */
 function getCategories() {
@@ -159,58 +174,7 @@ function getUsers(){
     });
 }
 
-/* Función para agregar un nuevo usuario */
-function addProduct() {
-    bulmaSteps.attach();
-    var mainEmail = $('#mainEmail').val()
-    var resetEmail = $('#resetEmail').val()
-    var nameUser = $('#nameUser').val()
-    var typeUser = $( "#addTypeUsers option:selected" ).val()
-    var passwordUser = $('#passwordUser').val()
-    var cPasswordUser = $('#cPasswordUser').val()
 
-    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser)
-    if (check) {
-        var modal = $(this).parent().parent().parent()
-        $.ajax({
-            type: "POST",
-            url: ip_server + "/logged/insertUser",
-            data: {
-                'bearer' : sessionStorage.token,
-                'mainEmail' : mainEmail,
-                'resetEmail' : resetEmail,
-                'nameUser' : nameUser,
-                'idTypeUser' : typeUser,
-                'passwordUser' : passwordUser,
-            },
-            dataType: "json",
-            success: function (response) {
-                toast('Se ha registrado correctamente', 'is-info')
-                /* Vaciar inputs y cerrar modal */
-                modal.removeClass('is-active')
-                var inputsAddModal = modal.find(".input")
-                $.each(inputsAddModal, function(idx, el) {
-                    el.value = ""
-                });
-                getUsers() 
-            },
-            error: function (error) {
-                if(error.status == '401'){
-                    sessionStorage.removeItem('token')
-                    window.open("index.html",'_self');
-                }
-                if(error.status == '406'){
-                    toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
-                    window.open("index.html",'_self');
-                }
-                if(error.status == '406'){
-                    toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
-                    window.open("index.html",'_self');
-                }
-            }
-        });
-    }
-}
 
 /* Función para validar que los datos ingresados están correctos */
 function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser) {
