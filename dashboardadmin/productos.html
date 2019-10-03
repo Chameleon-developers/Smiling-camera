@@ -1,15 +1,45 @@
 <section class="columns">
-  <div class="column is-9 is-offset-1">
+    <div class="column is-8 is-offset-1">
+        <span class="subtitle is-size-3">
+            Productos
+        </span>
+    </div>
+    <div class="column is-1">
+        <a id="addProduct" class="button modal-button colorBlue" data-target="#ModalAddProduct">
+            Agregar Nuevo
+            <section id="contModalAddProduct" class="section"></section>
+        </a>
+    </div>
+</section>
+<section class="columns">
+  <div class="column is-5 is-offset-1">
       <span class="subtitle is-size-3">
-          Productos
+        
       </span>
   </div>
   <div class="column is-2">
-      <a id="addProduct" class="button modal-button colorBlue" data-target="#ModalAddProduct">
-          Agregar Nuevo
-          <section id="contModalAddProduct" class="section"></section>
-      </a>
-  </div>
+    <label class="label" for="searchCategory">Categoría: </label>
+    <div class="control select  is-info">
+        <!--select  multiple size="8"-->
+          <select id="searchCategory" name="searchCategory">
+            <option value="-1">Selecciona una Opción</option>
+            <option value="ej">ej</option>
+            <option value="ej">ej</option>
+            <option value="ej">ej</option>
+        </select>
+      </div>
+   </div>
+   <div class="column is-2">
+    <label class="label" for="searchSubCategory">Subategoría: </label>
+    <div class="control select  is-info">
+        <!--select  multiple size="8"-->
+          <select id="searchSubCategory" class="searchSubCategory">
+            <option value="-1">Selecciona una Opción</option>
+            <option value="ej">ej</option>
+        </select>
+      </div>
+   </div>
+  
 </section>
 <br>
 <br>
@@ -23,7 +53,7 @@
             <!-- Team member -->
             <div class="column ">
                 <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div classcolumns="mainflip">
+                    <div class="mainflip">
                         <div class="frontside">
                             <div class="card">
                               
@@ -39,8 +69,8 @@
                                   </div>
                                 <div class="card-content">
                                     <div class="content">
-        
-                                        <div class="card-text" *ngIf="user.Rol==1"><strong>Descripcion:</strong>Datos de todo el producto </div>
+                                      
+                                        <div class="card-text" *ngIf="user.Rol==1"><strong>Descripcion:</strong>Datos de todo el producto</div>
                                       
                                       <a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>
                                     </div>

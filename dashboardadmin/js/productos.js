@@ -9,7 +9,7 @@ export { init }
 /* Función para establecer eventos y datos iniciales */
 function init() {
   //  modal()
-    
+    //cargar()
     getTypeUsers()
     getUsers()
 
@@ -210,7 +210,6 @@ $(function () {
 	totalPages = 0;
 	$.ajax({
 			type: "POST", 
-	      	url: url,
 	      	data: {
                 url: ip_server + "/logged/getProducts",
                 'bearer' : sessionStorage.token,
@@ -282,8 +281,8 @@ $(function () {
                                   '</div>'+
                                 '<div class="card-content">'+
                                     '<div class="content">'+
-        
-                                        '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripcion:</strong>'+displayRecords[i].featuresProduct + '</div>'+
+                                        '<div class="card-text"><strong>Categoría:</strong>'+displayRecords[i].nameCategory  +'</div>'+
+                                        '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripción:</strong>'+displayRecords[i].featuresProduct + '</div>'+
                                       
                                       '<a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>');
                                     div.append('</div>');
@@ -297,10 +296,11 @@ $(function () {
                                 '</header>'+
                                 '<div class="card-content text-center">'+
                                     '<div class="content">'+
-                                        
-                                       
-                                            '<div class="card-text"><strong>Dimensiones:</strong>Dimensiones del P</div>'+
-                                            '<div class="card-text"><strong>Categoria:</strong>Termos</div>'+
+                                            '<div class="card-text"><strong>Categoría:</strong>'+displayRecords[i].nameCategory  +'</div>'+
+                                            '<div class="card-text"><strong>Subcategoría:</strong>'+displayRecords[i].nameSubcategory  +'</div>'+
+                                            '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripción:</strong>'+displayRecords[i].featuresProduct + '</div>'+
+                                            '<div class="card-text"><strong>Dimensiones:</strong>'+displayRecords[i].widthDimension +' x '+displayRecords[i].heightDimension  +'</div>'+
+                                            '<div class="card-text"><strong>Costo:</strong>'+displayRecords[i].publicPrice +'</div>'+
                                       '<div class="card-text">'+
                                         '<strong>Acciones:</strong> '+
                                         '<div class="has-addons">'+

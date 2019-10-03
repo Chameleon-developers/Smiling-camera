@@ -5,7 +5,7 @@ export { init }
 
 /* Función para establecer eventos y datos iniciales */
 function init() {
-    /*getCategories() 
+    getCategories() 
     getDimensiones()
     $('#returnProduct').click(function (e){
        /* $('#addProductCategories')[0].reset();
@@ -14,13 +14,13 @@ function init() {
         $('#addProductDimensions')[0].reset();
         $('#productcost')[0].reset();
         $('#productpic')[0].reset();
-        $('#productcaract')[0].reset();
+        $('#productcaract')[0].reset();*/
         loadFiles("productos.html","js/productos.js")
-    });
+    });/*
     $('#addProductCategories').onChange(function (e){
         getSubCategories($('#addProductCategories').value);
     });
-
+*/
   //  console.log($('#stepsAddProduct').is-completed;
 }
 /*$('#stepsAddProduct').options.beforeNext(function(step_id){
