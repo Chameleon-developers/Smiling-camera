@@ -1,6 +1,7 @@
 var users=require('../controllers/users');
 var login=require('../controllers/login');
 var products=require('../controllers/products');
+var categories=require('../controllers/categories');
 var multer = require("multer");
 
 module.exports = function (app,secureApp) {
@@ -27,6 +28,14 @@ module.exports = function (app,secureApp) {
 
     /* Eliminar usuario registrado */
     secureApp.post('/deleteUser' ,users.deleteUser);
+
+    /* CATEGORIAS Y SUBCATEGORIAS */
+
+    /* Obtener categorias existentes */
+    secureApp.post('/getCategories' ,categories.getCategories);
+
+    /* Obtener subcatehgorias existentes */
+    secureApp.post('getSubcategories' ,categories.getSubcategories);
 
     /* PRODUCTOS */
 
