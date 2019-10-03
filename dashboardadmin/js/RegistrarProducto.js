@@ -17,7 +17,7 @@ function init() {
         $('#productcaract')[0].reset();*/
         loadFiles("productos.html","js/productos.js")
     });/*
-    $('#addProductCategories').onChange(function (e){
+    $('#addProductCategories').change(function (e){
         getSubCategories($('#addProductCategories').value);
     });
 */

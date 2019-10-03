@@ -10,13 +10,13 @@ export { init }
 function init() {
   
     getCategories()
-    $('#searchCategory').onChange(function (e){
+    $('#searchCategory').change(function (e){
         getSubCategories($('#searchCategory').value);
         
         //BUSQUEDA POR CATEGORIA()
-
+        
     });
-    $('#searchSubCategory').onChange(function (e){
+    $('#searchSubCategory').change(function (e){
         getSubCategories($('#searchSubCategory').value);
         
         //BUSQUEDA POR SUB-CATEGORIA()
