@@ -5,8 +5,8 @@ export { init }
 
 /* Función para establecer eventos y datos iniciales */
 function init() {
-    //getCategories() 
-    //getDimensiones()
+    getCategories() 
+    getDimensions()
     $('#returnProduct').click(function (e){
        /* $('#addProductCategories')[0].reset();
         $('#addproductSubCategories')[0].reset();
@@ -16,12 +16,15 @@ function init() {
         $('#productpic')[0].reset();
         $('#productcaract')[0].reset();*/
         loadFiles("productos.html","js/productos.js")
-    });/*
-    $('#addProductCategories').change(function (e){
-        if(category != -1) 
-            getSubCategories($('#addProductCategories').value);
     });
-*/
+
+    $('#addProductCategories').change(function (e){
+        const category = $('#addProductCategories option:selected').val()
+        if(category != -1) {
+            getSubCategories(category);
+        }
+    });
+
   //  console.log($('#stepsAddProduct').is-completed;
 }
 /*$('#stepsAddProduct').options.beforeNext(function(step_id){
@@ -65,7 +68,7 @@ var stepsWizard = new StepsWizard(document.getElementById("stepsDemo"), {
 
 
 
-/* Función para consultar las categorias de productos que existen 
+/* Función para consultar las categorias de productos que existen */
 function getCategories() {
     $.ajax({
         type: "POST",
@@ -82,13 +85,12 @@ function getCategories() {
         error: function (error) {
             if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html",'_self');
             }
         }
     });
 }
 
-/* Función para agregar las categorias de productos al select  
+/* Función para agregar las categorias de productos al select */
 function setSelectProductCategories(productCategories) {
     $.each(productCategories, function (key, value) {
         let option = document.createElement('option')
@@ -98,7 +100,7 @@ function setSelectProductCategories(productCategories) {
     })
 }
 /*--------------------------------------------------------------------------------------------------- 
-/* Función para consultar las subcategorias de productos que existen 
+/* Función para consultar las subcategorias de productos que existen */
 function getSubCategories(idCategory) {
     $.ajax({
         type: "POST",
@@ -116,15 +118,14 @@ function getSubCategories(idCategory) {
         error: function (error) {
             if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html",'_self');
             }
         }
     });
 }
 
-/* Función para agregar las subcategorias de productos al select  
-function setSelectProductSubCategories(productCategories) {
-    $.each(productCategories, function (key, value) {
+/* Función para agregar las subcategorias de productos al select */
+function setSelectProductSubCategories(productSubcategories) {
+    $.each(productSubcategories, function (key, value) {
         let option = document.createElement('option')
         option.textContent = value.nameSubcategory.split(' ')[0]
         option.value = value.idSubcategory
@@ -133,8 +134,8 @@ function setSelectProductSubCategories(productCategories) {
 }
 
 /*--------------------------------------------------------------------------------------------------- 
-/* Función para consultar las dimensiones de productos que existen 
-function getDimensiones() {
+/* Función para consultar las dimensiones de productos que existen */
+function getDimensions() {
     $.ajax({
         type: "POST",
         url: ip_server + "/logged/getDimensions",
@@ -156,11 +157,11 @@ function getDimensiones() {
     });
 }
 
-/* Función para agregar las categorias de productos al select  
+/* Función para agregar las categorias de productos al select */
 function setSelectProductDimensions(productDimensions) {
     $.each(productDimensions, function (key, value) {
         let option = document.createElement('option')
-        option.textContent = value.widthDimension.split(' ')[0] +" X " + value.heightDimension.split(' ')[0] /*ESTO SE PUEDE???? 
+        option.textContent = value.dimension.split(' ')[0]
         option.value = value.idDimension
         $('#addProductDimensions').append(option)
     })
