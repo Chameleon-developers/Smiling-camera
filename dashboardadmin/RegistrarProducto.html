@@ -1,5 +1,5 @@
 <section class="columns">
-    <div class="column is-9 is-offset-1">
+    <div class="column is-8 is-offset-1">
         <span class="subtitle is-size-3">
             Registrar producto
         </span>
@@ -7,15 +7,170 @@
     <div class="column is-2">
         <a id="returnProduct" class="button colorBlue">
             Regresar a Productos
+            <span class='icon' style="padding-left: 20px; padding-right: 10px"><i class='fas fa-lg fa-reply'></i></span>
         </a>
     </div>
   </section>
   <br>
   <br>
+
+
+  <form id="example-advanced-form" action="#">
+      <h3>Account</h3>
+      <fieldset style="width: 100%">
+          <legend><p class="step-title">Categoría</p></legend>
+          <div class="step-content has-text-centered">
+            <label for="productCategory" class="label" required>Categoría</label>
+            <div class="field">
+                <div class="control select ">
+                    <!--select  multiple size="8"-->
+                      <select id="addProductCategories">
+                        <option value="-1">Selecciona una Opción</option>
+                        <option value="ej">ej</option>
+                    </select>
+                  </div>
+            </div>
+        </div>
+
+
+
+
+
+
+          <label for="userName-2">User name *</label>
+          <input id="userName-2" name="userName" type="text" class="required is-primary">
+          <label for="password-2">Password *</label>
+          <input id="password-2" name="password" type="text" class="required">
+          <label for="confirm-2">Confirm Password *</label>
+          <input id="confirm-2" name="confirm" type="text" class="required is-primary">
+          <p>(*) Mandatory</p>
+      </fieldset>
+   
+      <h3>Profile</h3>
+      <fieldset>
+          <legend><p class="step-title">Subcategoría</p></legend>
+          <label for="productSubCategory" class="label">Subcategoría</label>
+          <div class="step-content has-text-centered" beforeNext="{{console.log('siiiii')}}">
+            <label for="productSubCategory" class="label">Subcategoría</label>
+            <div class="field">
+                <div class="control select ">
+                    <!--select  multiple size="8"-->
+                      <select id="addproductSubCategories">
+                        <option value="-1">Selecciona una Opción</option>
+                        <option value="ej">ej</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+          <label for="name-2">First name *</label>
+          <input id="name-2" name="name" type="text" class="required">
+          <label for="surname-2">Last name *</label>
+          <input id="surname-2" name="surname" type="text" class="required">
+          <label for="email-2">Email *</label>
+          <input id="email-2" name="email" type="text" class="required email">
+          <label for="address-2">Address</label>
+          <input id="address-2" name="address" type="text">
+          <label for="age-2">Age (The warning step will show up if age is less than 18) *</label>
+          <input id="age-2" name="age" type="text" class="required number">
+          <p>(*) Mandatory</p>
+      </fieldset>
+   
+      <h3>Warning</h3>
+      <fieldset>
+          <legend><p class="step-title">Info del producto</p></legend>
+          <div class="step-content has-text-centered">
+            <div class="columns">
+               <div class="column">
+                 <div class="field">
+                   <label for="productname" class="label">Nombre</label>
+                   <p class="control has-icons-left">
+                       <input class="input " name="productname" id="productname" type="text" placeholder="Nombre del producto" autofocus data-validate="require">
+                       <span class="icon is-small is-left">
+                           <i class="fa fa-signature"></i>
+                       </span>
+                   </p>
+                 </div>
+                 <div class="field">
+                   <label class="label" for="addProductDimensions">Dimensiones</label>
+                   <div class="control select  is-fullwidth">
+                       <!--select  multiple size="8"-->
+                         <select name="addProductDimensions" id="addProductDimensions">
+                           <option value="-1">Selecciona una Opción (ancho x alto)</option>
+                           <option value="ej">ej</option>
+                       </select>
+                     </div>
+                  </div>
+                 
+               </div>
+               <div class="column">
+                 <div class="field">
+                   <label for="productcost" class="label">Costo</label>
+                   <p class="control has-icons-left">
+                       <input class="input " name="productcost" id="productcost" type="text" placeholder="Costo del producto" autofocus data-validate="require">
+                     <span class="icon is-small is-left">
+                           <i class="fa fa-dollar-sign"></i>
+                       </span>
+                   </p>
+                 </div>
+                       
+
+                 <div class="field">
+                     <label for="productpic" class="label">Foto</label>
+                     <p class="control has-icons-left">
+                         <input class="input " name="productpic" id="productpic" type="file" autofocus data-validate="require">
+                         <span class="icon is-small is-left">
+                             <i class="fa fa-image"></i>
+                         </span>
+                     </p>
+                 </div>
+
+                 
+
+
+
+               </div>
+            </div> 
+            
+            <div class="field">
+               <label for="productcaract" class="label">Características</label>
+               <p class="control has-icons-left">
+                   <textarea class="textarea " name="productcaract" id="productcaract" type="text" placeholder="Características del producto" autofocus data-validate="require"></textarea>
+                   <span class="icon is-small is-left">
+                       <i class="fa fa-signature"></i>
+                   </span>
+               </p>
+             </div>
+               
+
+                     
+                     <div class="field">
+                       <div class="control">
+                         <label class="checkbox">
+                             <input type="checkbox" name="producthabil" id="producthabil">
+                             Habilitado para e-commerce
+                         </label>
+                       </div>
+       </div>
+      </div>
+          <p>Please go away ;-)</p>
+      </fieldset>
+   
+      <h3>Finish</h3>
+      <fieldset>
+          <legend>Terms and Conditions</legend>
+   
+          <input id="acceptTerms-2" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
+      </fieldset>
+  </form>
+
+
+
        
        <div class="content is-medium">
-          <div class="steps" id="stepsAddProduct">
-            <div class="step-item is-success is-active">
+         <form id="formSteps"></form>
+          <div class="steps is-primary" id="stepsAddProduct">
+            <div class="step-item is-success is-primary is-active">
               <div class="step-marker">1</div>
               <div class="step-details">
                 <p class="step-title">Categoría</p>
@@ -137,7 +292,7 @@
                    <div class="field">
                       <label for="productcaract" class="label">Características</label>
                       <p class="control has-icons-left">
-                          <input class="input " name="productcaract" id="productcaract" type="text" placeholder="Características del producto" autofocus data-validate="require">
+                          <textarea class="textarea " name="productcaract" id="productcaract" type="text" placeholder="Características del producto" autofocus data-validate="require"></textarea>
                           <span class="icon is-small is-left">
                               <i class="fa fa-signature"></i>
                           </span>

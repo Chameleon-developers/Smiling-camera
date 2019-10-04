@@ -5,8 +5,8 @@ export { init }
 
 /* Función para establecer eventos y datos iniciales */
 function init() {
-    getCategories() 
-    getDimensiones()
+    //getCategories() 
+    //getDimensiones()
     $('#returnProduct').click(function (e){
        /* $('#addProductCategories')[0].reset();
         $('#addproductSubCategories')[0].reset();
@@ -16,7 +16,74 @@ function init() {
         $('#productpic')[0].reset();
         $('#productcaract')[0].reset();*/
         loadFiles("productos.html","js/productos.js")
-    });/*
+    });
+
+    
+
+
+    var form = $("#example-advanced-form").show();
+ 
+    form.steps({
+        headerTag: "h3",
+        bodyTag: "fieldset",
+        transitionEffect: "slideLeft",
+        onStepChanging: function (event, currentIndex, newIndex)
+        {
+            // Allways allow previous action even if the current form is not valid!
+            if (currentIndex > newIndex)
+            {
+                return true;
+            }
+            // Forbid next action on "Warning" step if the user is to young
+            if (newIndex === 3 && Number($("#age-2").val()) < 18)
+            {
+                return false;
+            }
+            // Needed in some cases if the user went back (clean up)
+            if (currentIndex < newIndex)
+            {
+                // To remove error styles
+                form.find(".body:eq(" + newIndex + ") label.error").remove();
+                form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
+            }
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+        },
+        onStepChanged: function (event, currentIndex, priorIndex)
+        {
+            // Used to skip the "Warning" step if the user is old enough.
+            if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
+            {
+                form.steps("next");
+            }
+            // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
+            if (currentIndex === 2 && priorIndex === 3)
+            {
+                form.steps("previous");
+            }
+        },
+        onFinishing: function (event, currentIndex)
+        {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+        },
+        onFinished: function (event, currentIndex)
+        {
+            alert("Submitted!");
+        }
+    }).validate({
+        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+        rules: {
+            confirm: {
+                equalTo: "#password-2"
+            }
+        }
+    });
+
+
+    
+    
+    /*
     $('#addProductCategories').change(function (e){
         if(category != -1) 
             getSubCategories($('#addProductCategories').value);
@@ -24,24 +91,7 @@ function init() {
 */
   //  console.log($('#stepsAddProduct').is-completed;
 }
-/*$('#stepsAddProduct').options.beforeNext(function(step_id){
-        switch( step_id ) {
-            case 1:
-              // DO YOUR VALIDATION FOR FIRST STEP (steps_id start at 0)
-            if($('#addProductCategories').value == -1)
-                $('#nextStep').disabled;
-            else
-                $('#nextStep').enabled;
-              break;
-            case 2:
-              // DO YOUR VALIDATION FOR 2nd step
-              break;
-            case 2:
-              // DO YOUR VALIDATION FOR 3rd STEP 
-              break;
-        }    
-    });
-}
+
 
 /*
 var stepsWizard = new StepsWizard(document.getElementById("stepsDemo"), {
