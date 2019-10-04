@@ -8,36 +8,35 @@ export { init }
 
 /* Función para establecer eventos y datos iniciales */
 function init() {
-    console.log('entra');
     
     $('#addProduct').click(function (e) {
         loadFiles("RegistrarProducto.html", "js/RegistrarProducto.js")
     });
+
+    getCategories()
     getProducts()
+
     $("#delProd").click(deleteProduct);
     $('#updateProd').click(updateProduct);
 
     $('#searchProduct').click(function (e) {
-        var cat = $('#searchCategory').value
-        var subcat = $('#searchSubCategory').value
+        var cat = $('#searchCategory').val()
+        var subcat = $('#searchSubCategory').val()
+        
         if (cat != -1) {
             if (subcat != -1) {
-                searchCatSubcat(cat, subcat)
+                getProducts(cat, subcat)
             }
             else {
-                searchCat(cat)
+                getProducts(cat)
             }
         }
     });
 
-    //getCategories()
-
-    $('#searchCategory').change(function (e) {
-        var category = $('#searchCategory').value;
-        if (category != -1)
-            getSubCategories($('#searchCategory').value);
-        else {
-            $('#searchCategory').empty()
+    $('#searchCategory').change(function (e){
+        const category = $('#searchCategory option:selected').val()
+        if(category != -1) {
+            getSubCategories(category);
         }
     });
 
@@ -60,32 +59,32 @@ function getCategories() {
         type: "POST",
         url: ip_server + "/logged/getCategories",
         data: {
-            'bearer': sessionStorage.token,
+            'bearer' : sessionStorage.token,
         },
         dataType: "json",
         success: function (response) {
 
-            setSelectProductCategories(response.categories, "searchCategory")
+            setSelectProductCategories(response.categories)
 
         },
         error: function (error) {
-            if (error.status == '401') {
+            if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html", '_self');
             }
         }
     });
 }
 
-/* Función para agregar las categorias de productos al select*/
-function setSelectProductCategories(productCategories, searchCategory) {
+/* Función para agregar las categorias de productos al select */
+function setSelectProductCategories(productCategories) {
     $.each(productCategories, function (key, value) {
         let option = document.createElement('option')
         option.textContent = value.nameCategory.split(' ')[0]
         option.value = value.idCategory
-        $('#' + searchCategory).append(option)
+        $('#searchCategory').append(option)
     })
 }
+
 /*--------------------------------------------------------------------------------------------------- 
 /* Función para consultar las subcategorias de productos que existen */
 function getSubCategories(idCategory) {
@@ -93,19 +92,18 @@ function getSubCategories(idCategory) {
         type: "POST",
         url: ip_server + "/logged/getSubcategories",
         data: {
-            'bearer': sessionStorage.token,
+            'bearer' : sessionStorage.token,
             'idCategory': idCategory,
         },
         dataType: "json",
         success: function (response) {
 
-            setSelectProductSubCategories(response.subcategories, "searchSubCategory")
+            setSelectProductSubCategories(response.subcategories)
 
         },
         error: function (error) {
-            if (error.status == '401') {
+            if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html", '_self');
             }
         }
     });
@@ -117,32 +115,47 @@ function setSelectProductSubCategories(productCategories, searchSubCategory) {
         let option = document.createElement('option')
         option.textContent = value.nameSubcategory.split(' ')[0]
         option.value = value.idSubcategory
-        $('#' + searchSubCategory).append(option)
+        $('#searchSubCategory').append(option)
     })
 }
 
 
 
 
-function getProducts() {
+function getProducts(idCategory, idSubcategory) {
+    var values = {
+        'bearer': sessionStorage.token
+    }
+    if (idCategory && !idSubcategory) {
+        values = {
+            'bearer': sessionStorage.token,
+            'idCategory': idCategory
+        }
+    } else if (idSubcategory){
+        values = {
+            'bearer': sessionStorage.token,
+            'idSubcategory': idSubcategory
+        }
+    }
+    
     var totalRecords = 0,
     records = [],
     displayRecords = [],
     recPerPage = 8,
     page = 1,
     totalPages = 0;
-    console.log('entra al getProducts')
     $.ajax({
         type: "POST",
         url: ip_server + "/logged/getAllProducts",
-        data: {
-            'bearer': sessionStorage.token,
-        },
+        data: values,
         dataType: 'json',
         success: function (data) {
+            $('#searchSubCategory').val(-1)
             
+            var selectList = $("#searchSubCategory")
+            selectList.find("option:gt(0)").remove()
+
             records = data.products;
-            console.log(records);
             totalRecords = records.length;
             if (totalRecords > 0) {
                 totalPages = Math.ceil(totalRecords / recPerPage);
@@ -154,6 +167,7 @@ function getProducts() {
         }
     });
 }
+
 function deleteProduct(){
     var idManagerUser = $("#delProd").attr('data-p');
     $.ajax({
@@ -177,6 +191,7 @@ function updateProduct(){
 }
 
 function apply_pagination(totalPages, recPerPage, records,displayRecords) {
+    $('.pagination').twbsPagination('destroy');
     $('.pagination').twbsPagination({
         totalPages: totalPages,
         visiblePages: 5,
@@ -187,6 +202,7 @@ function apply_pagination(totalPages, recPerPage, records,displayRecords) {
         onPageClick: function (event, page) {
             var displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
             var endRec = (displayRecordsIndex) + recPerPage;
+            console.log('endRec',endRec);
 
             displayRecords = records.slice(displayRecordsIndex, endRec);
             generate_rows(displayRecords);
@@ -196,6 +212,7 @@ function apply_pagination(totalPages, recPerPage, records,displayRecords) {
 
 
 function generate_rows(displayRecords) {
+    
     var div = $('<div class="column">');
     var column1 = $('<div class="columns">');
     var column2 = $('<div class="columns">');

@@ -45,8 +45,6 @@ module.exports = function (app,secureApp) {
 
     /* PRODUCTOS */
 
-    /* Obtener Las categorias de productos existentes */
-
 
     /* Obtener datos de productos registrados */
     secureApp.post('/getAllProducts' ,products.getAllProducts);

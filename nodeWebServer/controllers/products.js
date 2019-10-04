@@ -12,20 +12,21 @@ module.exports.getAllProducts = function (req, res) {
     let qry = "SELECT PRO.idProduct, PRO.nameProduct, PRO.imageProduct, PRO.enableProduct, PRO.featuresProduct, PRO.idCategory, C.nameCategory, PRO.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE statusProduct = 1"
 
     if(data.idSubcategory && data.idCategory) {
-        qry+=" AND idCategory = ? AND idSubcategory=?"
+        qry+=" AND PRO.idCategory = ? AND PRO.idSubcategory=?"
         values=[data.idSubcategory, data.idCategory];
     }
     else if(!data.idSubcategory && data.idCategory) {
-        qry+=" AND idCategory = ?"
+        qry+=" AND PRO.idCategory = ?"
         values=[data.idCategory];
     }
     else if(data.idSubcategory && !data.idCategory) {
-        qry+=" AND idSubcategory = ?"
+        qry+=" AND PRO.idSubcategory = ?"
         values=[data.idSubcategory];
     }
     else {
         values=[]; 
     }
+    console.log(qry, values)
     
     /* Ejecutar la consulta para la obtención de tipos de productos */
     con.query(qry,values, function (err, result, fields) {
