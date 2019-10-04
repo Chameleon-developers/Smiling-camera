@@ -17,6 +17,9 @@
     width: 100%;
 }
 
+textarea {
+	resize: none;
+}
 
 section .section-title {
     text-align: center;
