@@ -169,20 +169,20 @@ function getProducts(idCategory, idSubcategory) {
 }
 
 function deleteProduct(){
-    var idManagerUser = $("#delProd").attr('data-p');
+    var idProduct = $("#delProd").attr('data-p');
     $.ajax({
         url: ip_server +
-        "/logged/deleteUser",
+        "/logged/deleteProduct",
         type: "POST",
         data:{
             'bearer' : sessionStorage.token,
-            'idManagerUser' : idManagerUser
+            'idProduct' : idProduct
         },
         dataType: "json",
         success: function (response) {
-            toast('Se ha eliminado el usuario correctamente', 'is-info')
+            toast('Se ha eliminado el producto correctamente', 'is-info')
             modal.removeClass('is-active')
-            getUsers()
+            $('#modalDelProduct').modal('hide');
         }
     });
 }

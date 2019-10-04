@@ -322,6 +322,7 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
 /*Funcion para eliminar un registro*/
 function deleteUser(){
     var idManagerUser = $("#delUser").attr('data-u');
+    var modal = $(this).parent().parent().parent()
     $.ajax({
         url: ip_server +
         "/logged/deleteUser",
@@ -333,7 +334,8 @@ function deleteUser(){
         dataType: "json",
         success: function (response) {
             toast('Se ha eliminado el usuario correctamente', 'is-info')
-            modal.removeClass('is-active')
+            modal.removeClass('modal-active')
+            $("#modalDelUser").modal('hide');
             getUsers()
         }
     });
