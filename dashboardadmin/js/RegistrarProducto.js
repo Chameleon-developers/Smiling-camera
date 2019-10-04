@@ -24,11 +24,18 @@ function init() {
     var form = $("#example-advanced-form").show();
  
     form.steps({
-        headerTag: "h3",
+        headerTag: "h2",
         bodyTag: "fieldset",
         transitionEffect: "slideLeft",
         onStepChanging: function (event, currentIndex, newIndex)
         {
+            console.log(($("#addProductCategories option:selected").val()));
+            console.log(currentIndex);
+            if (currentIndex == 0 && ($("#addProductCategories option:selected").val()) == -1)
+            {
+                form.steps("previous");
+                return false;
+            }
             // Allways allow previous action even if the current form is not valid!
             if (currentIndex > newIndex)
             {
@@ -51,6 +58,8 @@ function init() {
         },
         onStepChanged: function (event, currentIndex, priorIndex)
         {
+            // Used to skip the "Warning" step if the user is old enough.
+            
             // Used to skip the "Warning" step if the user is old enough.
             if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
             {
