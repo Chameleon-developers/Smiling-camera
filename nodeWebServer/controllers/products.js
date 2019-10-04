@@ -11,17 +11,21 @@ module.exports.getAllProducts = function (req, res) {
     /* Establecer query para la consulta */
     let qry = ""
 
-    if (data.idSubcategory){
-        qry="SELECT PRO.idProduct, nameProduct, imageProduct, enableProduct, featuresProduct, idCategory, idSubcategory, idDimension, publicUtilityPrice, publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1 AND idSubcategory = ?"
-        values=[data.idSubcategory];
-    } else{
-        qry="SELECT PRO.idProduct, nameProduct, imageProduct, enableProduct, featuresProduct, idCategory, idSubcategory, idDimension, publicUtilityPrice, publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1"
-        values=[];
+    if(data.idSubcategory && data.idCategory) {
+        qry="SELECT PRO.idProduct, nameProduct, imageProduct, enableProduct, featuresProduct, idCategory, idSubcategory, idDimension, publicUtilityPrice, publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1 AND idCategory = ? AND idSubcategory=?"
+        values=[data.idSubcategory, data.idCategory];
     }
-
-    if (data.idCategory && !data.idSubcategory){
+    else if(!data.idSubcategory && data.idCategory) {
         qry="SELECT PRO.idProduct, nameProduct, imageProduct, enableProduct, featuresProduct, idCategory, idSubcategory, idDimension, publicUtilityPrice, publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1 AND idCategory = ?"
         values=[data.idCategory];
+    }
+    else if(data.idSubcategory && !data.idCategory) {
+        qry="SELECT PRO.idProduct, nameProduct, imageProduct, enableProduct, featuresProduct, idCategory, idSubcategory, idDimension, publicUtilityPrice, publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1 AND idSubcategory = ?"
+        values=[data.idSubcategory];
+    }
+    else {
+        qry="SELECT PRO.idProduct, nameProduct, imageProduct, enableProduct, featuresProduct, idCategory, idSubcategory, idDimension, publicUtilityPrice, publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1"
+        values=[]; 
     }
     
     /* Ejecutar la consulta para la obtención de tipos de productos */
@@ -97,6 +101,11 @@ module.exports.insertProduct = function (req, res) {
     //     }
     // })
     
+}
+
+/* Modificar un producto existente */
+module.exports.updateProduct = function (req, res) {
+
 }
 
 /* Elimina un producto (baja logica) */

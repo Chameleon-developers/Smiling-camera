@@ -45,6 +45,9 @@ module.exports = function (app,secureApp) {
     /* Obtener datos de productos registrados */
     secureApp.post('/getAllProducts' ,products.getAllProducts);
 
+    /* Modificar los datos de un producto existente */
+    secureApp.post('/updateProduct' ,products.updateProduct);
+
     /* Eliminar un producto (baja logica) */
     secureApp.post('/deleteProduct' ,products.deleteProduct);
 
