@@ -2,6 +2,7 @@ var users=require('../controllers/users');
 var login=require('../controllers/login');
 var products=require('../controllers/products');
 var categories=require('../controllers/categories');
+var dimensions=require('../controllers/dimensions');
 var multer = require("multer");
 
 module.exports = function (app,secureApp) {
@@ -37,6 +38,11 @@ module.exports = function (app,secureApp) {
     /* Obtener subcatehgorias existentes */
     secureApp.post('/getSubcategories' ,categories.getSubcategories);
 
+    /* DIMENSIONES */
+
+    /* Obtener las dimensiones existentes */
+    secureApp.post('/getDimensions' ,dimensions.getDimensions);
+
     /* PRODUCTOS */
 
     /* Obtener Las categorias de productos existentes */
@@ -67,8 +73,6 @@ module.exports = function (app,secureApp) {
     });
 
     /* Registrar un nuevo producto */
-    app.post('/insertProduct' , uploading.single('image'),products.insertProduct);
-
-    
+    app.post('/insertProduct' , uploading.single('image'),products.insertProduct);    
 }
  

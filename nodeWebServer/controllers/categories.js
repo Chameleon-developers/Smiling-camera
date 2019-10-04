@@ -19,7 +19,7 @@ module.exports.getCategories = function (req, res) {
                 // Setup and send of response
                 res.status(200).json({
                     Status: 'Success',
-                    typeUsers: result,
+                    categories: result,
                     message: 'Datos de las categorias'
                 })
             } else {
@@ -58,7 +58,7 @@ module.exports.getSubcategories = function (req, res) {
                 // Setup and send of response
                 res.status(200).json({
                     Status: 'Success',
-                    typeUsers: result,
+                    subcategories: result,
                     message: 'Datos de las subcategorias'
                 })
             } else {
