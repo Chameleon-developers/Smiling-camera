@@ -35,7 +35,7 @@ module.exports = function (app,secureApp) {
     secureApp.post('/getCategories' ,categories.getCategories);
 
     /* Obtener subcatehgorias existentes */
-    secureApp.post('getSubcategories' ,categories.getSubcategories);
+    secureApp.post('/getSubcategories' ,categories.getSubcategories);
 
     /* PRODUCTOS */
 
@@ -62,6 +62,9 @@ module.exports = function (app,secureApp) {
 
     /* Registrar un nuevo producto */
     app.post('/insertProduct' , uploading.single('image'),products.insertProduct);
+
+    /* Eliminar un producto (baja logica) */
+    secureApp.post('/deleteProduct' ,products.deleteProduct);
 
 }
  

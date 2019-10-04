@@ -128,4 +128,43 @@ function insertProductNext(lastInserted, con, data) {
 
         }
     })
+
+    /* Elimina un producto (baja logica) */
+    module.exports.deleteProduct = function (req, res) {
+        /* Obtener variable para la conexión a la BD */
+        const con = require('../controllers/dbconn')();
+
+        /* Obtener los datos del Body */
+        let data = req.body;
+        values=[data.idProduct];
+
+        /* Ejecutar la consulta para baja de productos */
+        con.query('UPDATE products SET statusProduct=0 WHERE idProduct=?',values, function (err, result, fields) {
+            if (err) {
+                // Internal error message send
+                res.status(500).json({
+                    Status: 'Internal Error',
+                    message: 'Internal Error'
+                });
+                con.end();
+                return;
+            } else {
+                if (result.length > 0) {
+
+                    // Setup and send of response
+                    res.status(200).json({
+                        Status: 'Success',
+                        typeUsers: result,
+                        message: 'Se elimino correctamente el el producto'
+                    })
+                } else {
+                    res.status(400).json({
+                        Status: 'Failure',
+                        message: 'No existe producto para dar de baja'
+                    })
+                    con.end();
+                }
+            }
+        });
+    }
 }
