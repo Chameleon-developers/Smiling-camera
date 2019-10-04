@@ -216,7 +216,7 @@ function getUsers(){
     });
 }
 
-/* Función para agregar un nuevo usuario 
+/* Función para agregar un nuevo usuario */
 function addProduct() {
     bulmaSteps.attach();
     var mainEmail = $('#mainEmail').val()
@@ -243,7 +243,7 @@ function addProduct() {
             dataType: "json",
             success: function (response) {
                 toast('Se ha registrado correctamente', 'is-info')
-                /* Vaciar inputs y cerrar modal 
+                /* Vaciar inputs y cerrar modal */
                 modal.removeClass('is-active')
                 var inputsAddModal = modal.find(".input")
                 $.each(inputsAddModal, function(idx, el) {
@@ -269,7 +269,7 @@ function addProduct() {
     }
 }
 
-/* Función para validar que los datos ingresados están correctos 
+/* Función para validar que los datos ingresados están correctos */
 function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser) {
     if (mainEmail == '' || resetEmail == '' || nameUser == '' || passwordUser == '' || cPasswordUser == '') {
         toast('Completa los campos', 'is-warning')
@@ -304,4 +304,3 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
     }
     return true
 }
-*/
