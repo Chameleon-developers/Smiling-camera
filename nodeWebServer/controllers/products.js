@@ -9,22 +9,21 @@ module.exports.getAllProducts = function (req, res) {
     let data = req.body;
 
     /* Establecer query para la consulta */
-    let qry = ""
+    let qry = "SELECT PRO.idProduct, PRO.nameProduct, PRO.imageProduct, PRO.enableProduct, PRO.featuresProduct, PRO.idCategory, C.nameCategory, PRO.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE statusProduct = 1"
 
     if(data.idSubcategory && data.idCategory) {
-        qry="SELECT PRO.idProduct, nameProduct, imageProduct, enableProduct, featuresProduct, idCategory, idSubcategory, idDimension, publicUtilityPrice, publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1 AND idCategory = ? AND idSubcategory=?"
+        qry+=" AND idCategory = ? AND idSubcategory=?"
         values=[data.idSubcategory, data.idCategory];
     }
     else if(!data.idSubcategory && data.idCategory) {
-        qry="SELECT PRO.idProduct, nameProduct, imageProduct, enableProduct, featuresProduct, idCategory, idSubcategory, idDimension, publicUtilityPrice, publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1 AND idCategory = ?"
+        qry+=" AND idCategory = ?"
         values=[data.idCategory];
     }
     else if(data.idSubcategory && !data.idCategory) {
-        qry="SELECT PRO.idProduct, nameProduct, imageProduct, enableProduct, featuresProduct, idCategory, idSubcategory, idDimension, publicUtilityPrice, publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1 AND idSubcategory = ?"
+        qry+=" AND idSubcategory = ?"
         values=[data.idSubcategory];
     }
     else {
-        qry="SELECT PRO.idProduct, nameProduct, imageProduct, enableProduct, featuresProduct, idCategory, idSubcategory, idDimension, publicUtilityPrice, publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1"
         values=[]; 
     }
     

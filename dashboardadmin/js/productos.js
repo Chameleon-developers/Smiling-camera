@@ -173,60 +173,14 @@ function apply_pagination(totalPages, recPerPage, records,displayRecords) {
 
 
 function generate_rows(displayRecords) {
-    var div;
+    var div = $('<div class="column">');
     var column1 = $('<div class="columns">');
     var column2 = $('<div class="columns">');
     var columnEmpty = $('<div class="column">');
     $('#content').html('');
     for (var i = 0; i < displayRecords.length; i++) {
 
-
         div = $('<div class="column">');
-            /* div.append('<div class="image-flip" ontouchstart="this.classList.toggle("hover");">')
-                div.append('<div class="mainflip">')
-                    div.append('<div class="frontside">')
-                        div.append('<div class="card">')
-                            div.append('<header class="card-header">')
-                                div.append('<p class="card-header-title">Producto nombre</p>')
-                            div.append('</header>')
-                            div.append('<div class="card-image">')
-                                div.append('<figure class="image is-4by3">')
-                                    div.append('<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">')
-                                div.append('</figure>')
-                            div.append('</div>')
-                            div.append('<div class="card-content">')
-                                div.append('<div class="content">')
-                                    div.append('<div class="card-text" *ngIf="user.Rol==1"><strong>Descripcion:</strong>Datos de todo el producto</div>')
-                                    div.append('<a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>')
-                                div.append('</div>')
-                            div.append('</div>')
-                        div.append('</div>')
-                    div.append('</div>')
-                    div.append('<div class="backside">')
-                        div.append('<div class="card">')
-                            div.append('<header class="card-header">')
-                                div.append('<p class="card-header-title">user</p>')
-                            div.append('</header>')
-                            div.append('<div class="card-content text-center">')
-                                div.append('<div class="content">')
-                                    div.append('<div class="card-text"><strong>Dimensiones:</strong>Dimensiones del P</div>')
-                                    div.append('<div class="card-text"><strong>Categoria:</strong>Termos</div>')
-                                    div.append('<div class="card-text">')
-                                        div.append('<strong>Acciones:</strong>')
-                                        div.append('<div class="has-addons">')
-                                            div.append('<a class=" button is-primary is-inverted" ><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>')
-                                            div.append('<a href="#" class=" button is-danger is-inverted" style="padding-left: 10px;"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>')
-                                        div.append('</div>')
-                                    div.append('</div>')
-                                div.append('</div>')
-                            div.append('</div>')
-                        div.append('</div>')
-                    div.append('</div>')
-                div.append('</div>')
-            div.append('</div>')
-        div.append('</div>') */
-        
-                            
 
         div.append('<div class="image-flip" ontouchstart="this.classList.toggle("hover");">' +
                 '<div class="mainflip">' +
@@ -266,9 +220,9 @@ function generate_rows(displayRecords) {
                                     '<div class="card-text">' +
                                         '<strong>Acciones:</strong> ' +
                                         '<div class="has-addons">' +
-                                            '<a class=" button is-primary is-inverted" user="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>' +
+                                            '<a class=" button is-primary is-inverted" publicPrice="' + displayRecords[i].publicPrice + '" publicUtilityPrice="' + displayRecords[i].publicUtilityPrice + '" idDimension="' + displayRecords[i].idDimension + '" nameSubcategory="' + displayRecords[i].nameSubcategory + '" idSubcategory="' + displayRecords[i].idSubcategory + '" nameCategory="' + displayRecords[i].nameCategory + '" idCategory="' + displayRecords[i].idCategory + '" featuresProduct="' + displayRecords[i].featuresProduct + '" enableProduct="' + displayRecords[i].enableProduct + '" nameProduct="' + displayRecords[i].nameProduct + '" idProduct="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>' +
 
-                                            '<a href="#" class=" button is-danger is-inverted" style="padding-left: 10px;" user="' + displayRecords[i].idProduct + '><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>');
+                                            '<a href="#" class=" button is-danger is-inverted" style="padding-left: 10px;" idProduct="' + displayRecords[i].idProduct + '><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>');
                                                 div.append('</div>');
 
                                             div.append('</div>');
