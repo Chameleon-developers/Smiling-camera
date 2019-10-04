@@ -45,6 +45,9 @@ module.exports = function (app,secureApp) {
     /* Obtener datos de productos registrados */
     secureApp.post('/getAllProducts' ,products.getAllProducts);
 
+    /* Eliminar un producto (baja logica) */
+    secureApp.post('/deleteProduct' ,products.deleteProduct);
+
     var storage = multer.diskStorage({
         destination: function(req, file, callback){
             callback(null, '../dashboardadmin/uploads'); // set the destination
@@ -63,8 +66,6 @@ module.exports = function (app,secureApp) {
     /* Registrar un nuevo producto */
     app.post('/insertProduct' , uploading.single('image'),products.insertProduct);
 
-    /* Eliminar un producto (baja logica) */
-    secureApp.post('/deleteProduct' ,products.deleteProduct);
-
+    
 }
  
