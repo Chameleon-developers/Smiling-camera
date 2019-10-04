@@ -128,7 +128,7 @@ function getProducts() {
     var totalRecords = 0,
     records = [],
     displayRecords = [],
-    recPerPage = 1,
+    recPerPage = 8,
     page = 1,
     totalPages = 0;
     console.log('entra al getProducts')
@@ -197,68 +197,101 @@ function apply_pagination(totalPages, recPerPage, records,displayRecords) {
 
 function generate_rows(displayRecords) {
     var div;
+    var column1 = $('<div class="columns">');
+    var column2 = $('<div class="columns">');
+    var columnEmpty = $('<div class="column">');
     $('#content').html('');
     for (var i = 0; i < displayRecords.length; i++) {
 
 
-        div = $('<div class="col-md-3 col-sm-6">');
-            div.append('<div class="single-shop-product">');
+        div = $('<div class="column">');
+            /* div.append('<div class="image-flip" ontouchstart="this.classList.toggle("hover");">')
+                div.append('<div class="mainflip">')
+                    div.append('<div class="frontside">')
+                        div.append('<div class="card">')
+                            div.append('<header class="card-header">')
+                                div.append('<p class="card-header-title">Producto nombre</p>')
+                            div.append('</header>')
+                            div.append('<div class="card-image">')
+                                div.append('<figure class="image is-4by3">')
+                                    div.append('<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">')
+                                div.append('</figure>')
+                            div.append('</div>')
+                            div.append('<div class="card-content">')
+                                div.append('<div class="content">')
+                                    div.append('<div class="card-text" *ngIf="user.Rol==1"><strong>Descripcion:</strong>Datos de todo el producto</div>')
+                                    div.append('<a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>')
+                                div.append('</div>')
+                            div.append('</div>')
+                        div.append('</div>')
+                    div.append('</div>')
+                    div.append('<div class="backside">')
+                        div.append('<div class="card">')
+                            div.append('<header class="card-header">')
+                                div.append('<p class="card-header-title">user</p>')
+                            div.append('</header>')
+                            div.append('<div class="card-content text-center">')
+                                div.append('<div class="content">')
+                                    div.append('<div class="card-text"><strong>Dimensiones:</strong>Dimensiones del P</div>')
+                                    div.append('<div class="card-text"><strong>Categoria:</strong>Termos</div>')
+                                    div.append('<div class="card-text">')
+                                        div.append('<strong>Acciones:</strong>')
+                                        div.append('<div class="has-addons">')
+                                            div.append('<a class=" button is-primary is-inverted" ><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>')
+                                            div.append('<a href="#" class=" button is-danger is-inverted" style="padding-left: 10px;"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>')
+                                        div.append('</div>')
+                                    div.append('</div>')
+                                div.append('</div>')
+                            div.append('</div>')
+                        div.append('</div>')
+                    div.append('</div>')
+                div.append('</div>')
+            div.append('</div>')
+        div.append('</div>') */
+        
+                            
 
-                div.append('<div class="product-upper" style="margin: 0 auto">');
-                        div.append('<a id="img' + displayRecords[i].idProducto + '"  class="sendProducto" style="width: 193px;height: 243px" itemprop="' + displayRecords[i].idProducto + '" href="#"><img src="imagenes/' + displayRecords[i].imagen + '" alt=""></a>');
-                div.append('</div>');
-
-                div.append('<h2><a id="text' + displayRecords[i].idProducto + '" class="sendProducto" itemprop="' + displayRecords[i].idProducto + '" href="#">' + displayRecords[i].nombre + '</a></h2>');
-
-                    div.append('<div class="product-carousel-price">');
-                    div.append('<ins style="text-decoration: none;margin-right: 5px;">$' + displayRecords[i].precio + '</ins>');
-                div.append('</div>');
-
-            div.append('</div>');
-        div.append('</div>');
-
-        div.append('<div class="column">' +
-            '<div class="image-flip" ontouchstart="this.classList.toggle("hover");">' +
-                '<div classcolumns="mainflip">' +
+        div.append('<div class="image-flip" ontouchstart="this.classList.toggle("hover");">' +
+                '<div class="mainflip">' +
                     '<div class="frontside">' +
                         '<div class="card">' +
 
                             '<header class="card-header">' +
                                 '<p class="card-header-title">' + displayRecords[i].nameProduct + ' </p>' +
                             '</header>' +
-                        '<div class="card-image">' +
-                        '<figure class="image is-4by3">' +
-                            '<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">' +
-                        '</figure>' +
+                            '<div class="card-image">' +
+                                '<figure class="image is-4by3">' +
+                                    '<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">' +
+                                '</figure>' +
+                            '</div>' +
+                            '<div class="card-content">' +
+                                '<div class="content">' +
+                                    '<div class="card-text"><strong>Categoría:</strong>' + displayRecords[i].nameCategory + '</div>' +
+                                    '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripción:</strong>' + displayRecords[i].featuresProduct + '</div>' +
+
+                                    '<a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>' + 
+                                '</div>' + 
+                            '</div>' +
+                        '</div>' +
                     '</div>' +
-                '<div class="card-content">' +
-                    '<div class="content">' +
-                        '<div class="card-text"><strong>Categoría:</strong>' + displayRecords[i].nameCategory + '</div>' +
-                            '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripción:</strong>' + displayRecords[i].featuresProduct + '</div>' +
+                    '<div class="backside">' +
+                        '<div class="card">' +
+                            '<header class="card-header">' +
+                                '<p class="card-header-title">' + displayRecords[i].nameProduct + '</p>' +
+                            '</header>' +
+                            '<div class="card-content text-center">' +
+                                '<div class="content">' +
+                                    '<div class="card-text"><strong>Categoría:</strong>' + displayRecords[i].nameCategory + '</div>' +
+                                    '<div class="card-text"><strong>Subcategoría:</strong>' + displayRecords[i].nameSubcategory + '</div>' +
+                                    '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripción:</strong>' + displayRecords[i].featuresProduct + '</div>' +
+                                    '<div class="card-text"><strong>Dimensiones:</strong>' + displayRecords[i].widthDimension + ' x ' + displayRecords[i].heightDimension + '</div>' +
+                                    '<div class="card-text"><strong>Costo:</strong>' + displayRecords[i].publicPrice + '</div>' +
+                                    '<div class="card-text">' +
+                                        '<strong>Acciones:</strong> ' +
+                                        '<div class="has-addons">' +
+                                            '<a class=" button is-primary is-inverted" user="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>' +
 
-                            '<a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>');
-                        div.append('</div>');
-                    div.append('</div>');
-                div.append('</div>');
-                div.append('</div>');
-            div.append('<div class="backside">' +
-                                '<div class="card">' +
-                                    '<header class="card-header">' +
-                                        '<p class="card-header-title">' + displayRecords[i].nameProduct + '</p>' +
-                                    '</header>' +
-                                    '<div class="card-content text-center">' +
-                                        '<div class="content">' +
-                                            '<div class="card-text"><strong>Categoría:</strong>' + displayRecords[i].nameCategory + '</div>' +
-                                            '<div class="card-text"><strong>Subcategoría:</strong>' + displayRecords[i].nameSubcategory + '</div>' +
-                                            '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripción:</strong>' + displayRecords[i].featuresProduct + '</div>' +
-                                            '<div class="card-text"><strong>Dimensiones:</strong>' + displayRecords[i].widthDimension + ' x ' + displayRecords[i].heightDimension + '</div>' +
-                                            '<div class="card-text"><strong>Costo:</strong>' + displayRecords[i].publicPrice + '</div>' +
-                                            '<div class="card-text">' +
-                                                '<strong>Acciones:</strong> ' +
-                                                '<div class="has-addons">' +
-                                                    '<a class=" button is-primary is-inverted" user="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>' +
-
-                                                    '<a href="#" class=" button is-danger is-inverted" style="padding-left: 10px;" user="' + displayRecords[i].idProduct + '><span class="icon"><i class="fas fa-lg fa-trash-alt deleteProduct" data-p="'+displayRecords[i].idProduct+'"></i></span></a>');
+                                            '<a href="#" class=" button is-danger is-inverted" style="padding-left: 10px;" user="' + displayRecords[i].idProduct + '><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>');
                                                 div.append('</div>');
 
                                             div.append('</div>');
@@ -266,14 +299,38 @@ function generate_rows(displayRecords) {
                                     div.append('</div>');
                                 div.append('</div>');
                         div.append('</div>');
-            div.append('</div>');
+                div.append('</div>');
             div.append('</div>');
         div.append('</div>');
 
+        if (displayRecords.length < 4) {
+            column1.append(div)
+            if ((i == displayRecords.length - 1) && i < 4) {
+                
+                for (let index = i + 1; index < 4; index++) {
+                    column1.append(columnEmpty.clone())
+                }
+            }
+        } else {
+            if (i < 4) {
+                column1.append(div)
+            } else {
+                column2.append(div)
+                if ((i == displayRecords.length - 1) && i < 8) {
+                
+                    for (let index = i + 1; index < 8; index++) {
+                        column2.append(columnEmpty.clone())
+                    }
+                }
+            }
+        }
 
-
-        $('#content').append(div);
-
+    }
+    if (displayRecords.length <= 4) {
+        $('#content').append(column1);
+    } else {
+        $('#content').append(column1);
+        $('#content').append(column2);
     }
     controlarClick();
 }

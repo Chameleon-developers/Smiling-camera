@@ -1,296 +1,46 @@
-
-    <div class="is-offset-1">
+<section class="columns">
+    <div class="column is-2 is-offset-1">
         <span class="subtitle is-size-3">
-            Productos
+                Productos
         </span>
     </div>
-    <div >
-        <a id="addProduct" class="button modal-button colorBlue" data-target="#ModalAddProduct">
-            Agregar Nuevo
-            <span class='icon' style="padding-left: 20px; padding-right: 10px"><i class='fas fa-lg fa-plus-square'></i></span>
-            
+    <div class="column is-3">
+        <div class="is-inline" style="padding-right: 20px;"><label class="label is-inline" for="searchCategory">Categoría: </label></div>
+        
+        <div class="control select  is-info is-inline-block">
+            <!--select  multiple size="8"-->
+            <select id="searchCategory" name="searchCategory">
+                <option value="-1">Seleccione Categoría</option>
+                <option value="ej">ej</option>
+                <option value="ej">ej</option>
+                <option value="ej">ej</option>
+            </select>
+        </div>
+    </div>
+    <div class="column is-3">
+        <div class="is-inline" style="padding-right: 20px;"><label class="label is-inline" for="searchSubCategory">Subcategoría: </label></div>
+        <!-- <label class="label" for="searchSubCategory">Subategoría: </label> -->
+        <div class="control select  is-info">
+            <!--select  multiple size="8"-->
+            <select id="searchSubCategory" class="searchSubCategory">
+                <option value="-1">Seleccion Subcategoría</option>
+                <option value="ej">ej</option>
+            </select>
+        </div>
+    </div>
+    <div class="column is-1">
+        <a id="searchProduct" name="searchProduct" class="button is-info is-rounded">
+            <span class='icon'><i class='fas fa-lg fa-search'></i></span>
         </a>
     </div>
-<section class="columns">
-  <div class="column is-5 is-offset-1">
-      <span class="subtitle is-size-3">
-        
-      </span>
-  </div>
-
-        <div style="padding-top: 36px">
-            <a id="searchProduct" name="searchProduct" class="button is-info is-rounded">
-                <span class='icon'><i class='fas fa-lg fa-search'></i></span>
-            </a>
-        </div>
-    
-  <div class="column is-2">
-    <label class="label" for="searchCategory">Categoría: </label>
-    <div class="control select  is-info">
-        <!--select  multiple size="8"-->
-          <select id="searchCategory" name="searchCategory">
-            <option value="-1">Seleccione Categoría</option>
-            <option value="ej">ej</option>
-            <option value="ej">ej</option>
-            <option value="ej">ej</option>
-        </select>
-      </div>
-   </div>
-   <div class="column is-3">
-    <label class="label" for="searchSubCategory">Subategoría: </label>
-    <div class="control select  is-info">
-        <!--select  multiple size="8"-->
-          <select id="searchSubCategory" class="searchSubCategory">
-            <option value="-1">Seleccion Subcategoría</option>
-            <option value="ej">ej</option>
-        </select>
-      </div>
-   </div>
-   
-</section>
-<br>
-<br>
-
-   
-    
-<!-- Team -->
-<section id="team" >
-    <div class="container is-medium box" id="contentProducts">
-        <div class="columns">
-            <!-- Team member -->
-            <div class="column ">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                              
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        Producto nombre
-                                    </p>
-                                </header>
-                                <div class="card-image">
-                                    <figure class="image is-4by3">
-                                      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                                    </figure>
-                                  </div>
-                                <div class="card-content">
-                                    <div class="content">
-                                      
-                                        <div class="card-text" *ngIf="user.Rol==1"><strong>Descripcion:</strong>Datos de todo el producto</div>
-                                      
-                                      <a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        user
-                                    </p>
-                                </header>
-                                <div class="card-content text-center">
-                                    <div class="content">
-                                        
-                                       
-                                            <div class="card-text"><strong>Dimensiones:</strong>Dimensiones del P</div>
-                                            <div class="card-text"><strong>Categoria:</strong>Termos</div>
-                                      <div class="card-text">
-                                        <strong>Acciones:</strong> 
-                                        <div class="has-addons">
-                                            <a class=" button is-primary is-inverted" ><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>
-                                        
-                                            <a href='#' class=" button is-danger is-inverted" style='padding-left: 10px;'><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>
-                                        </div>
-                                                
-                                      </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Team member -->
-            <!-- Team member -->
-            <div class="column ">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                              
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        Producto nombre
-                                    </p>
-                                </header>
-                                <div class="card-image">
-                                    <figure class="image is-4by3">
-                                      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                                    </figure>
-                                  </div>
-                                <div class="card-content">
-                                    <div class="content">
-                                      
-                                        <div class="card-text" *ngIf="user.Rol==1"><strong>Descripcion:</strong>Datos de todo el producto</div>
-                                      
-                                      <a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        user
-                                    </p>
-                                </header>
-                                <div class="card-content text-center">
-                                    <div class="content">
-                                        
-                                       
-                                            <div class="card-text"><strong>Dimensiones:</strong>Dimensiones del P</div>
-                                            <div class="card-text"><strong>Categoria:</strong>Termos</div>
-                                      <div class="card-text">
-                                        <strong>Acciones:</strong> 
-                                        <div class="has-addons">
-                                            <a class=" button is-primary is-inverted" ><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>
-                                        
-                                            <a href='#' class=" button is-danger is-inverted" style='padding-left: 10px;'><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>
-                                        </div>
-                                                
-                                      </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Team member -->
-            <!-- Team member -->
-            <div class="column ">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                              
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        Producto nombre
-                                    </p>
-                                </header>
-                                <div class="card-image">
-                                    <figure class="image is-4by3">
-                                      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                                    </figure>
-                                  </div>
-                                <div class="card-content">
-                                    <div class="content">
-                                      
-                                        <div class="card-text" *ngIf="user.Rol==1"><strong>Descripcion:</strong>Datos de todo el producto</div>
-                                      
-                                      <a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        user
-                                    </p>
-                                </header>
-                                <div class="card-content text-center">
-                                    <div class="content">
-                                        
-                                       
-                                            <div class="card-text"><strong>Dimensiones:</strong>Dimensiones del P</div>
-                                            <div class="card-text"><strong>Categoria:</strong>Termos</div>
-                                      <div class="card-text">
-                                        <strong>Acciones:</strong> 
-                                        <div class="has-addons">
-                                            <a class=" button is-primary is-inverted" ><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>
-                                        
-                                            <a href='#' class=" button is-danger is-inverted" style='padding-left: 10px;'><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>
-                                        </div>
-                                                
-                                      </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="column ">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                              
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        Producto nombre
-                                    </p>
-                                </header>
-                                <div class="card-image">
-                                    <figure class="image is-4by3">
-                                      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                                    </figure>
-                                  </div>
-                                <div class="card-content">
-                                    <div class="content">
-                                      
-                                        <div class="card-text" *ngIf="user.Rol==1"><strong>Descripcion:</strong>Datos de todo el producto</div>
-                                      
-                                      <a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <header class="card-header">
-                                    <p class="card-header-title">
-                                        user
-                                    </p>
-                                </header>
-                                <div class="card-content text-center">
-                                    <div class="content">
-                                        
-                                       
-                                            <div class="card-text"><strong>Dimensiones:</strong>Dimensiones del P</div>
-                                            <div class="card-text"><strong>Categoria:</strong>Termos</div>
-                                      <div class="card-text">
-                                        <strong>Acciones:</strong> 
-                                        <div class="has-addons">
-                                            <a class=" button is-primary is-inverted" ><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>
-                                        
-                                            <a href='#' class=" button is-danger is-inverted" style='padding-left: 10px;'><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>
-                                        </div>
-                                                
-                                      </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Team member -->
-            <div class="has-text-centered">
-                <pagination-controls (pageChange)="page = $event" [previousLabel]="atras"
-                [nextLabel]="adelante"></pagination-controls>
-            </div>
-        </div>
+    <div class="column is-2">
+        <a  id="addProduct" class="button modal-button colorBlue" data-target="#ModalAddProduct">
+            Agregar Nuevo
+        </a>
     </div>
 </section>
-<!-- Team -->
+<br>
+<br>
 
 <div class="container">
     <nav aria-label="Page navigation">
@@ -298,7 +48,7 @@
     </nav>
 </div>
 
-<section id="team" >
+<section id="team" class="has-text-centered">
     <div class="container is-medium box" id="content">
 
     </div>
