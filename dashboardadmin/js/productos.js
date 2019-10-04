@@ -14,6 +14,8 @@ function init() {
         loadFiles("RegistrarProducto.html", "js/RegistrarProducto.js")
     });
     getProducts()
+    $("#delProd").click(deleteProduct);
+    $('#updateProd').click(updateProduct);
 
     $('#searchProduct').click(function (e) {
         var cat = $('#searchCategory').value
@@ -152,6 +154,27 @@ function getProducts() {
         }
     });
 }
+function deleteProduct(){
+    var idManagerUser = $("#delProd").attr('data-p');
+    $.ajax({
+        url: ip_server +
+        "/logged/deleteUser",
+        type: "POST",
+        data:{
+            'bearer' : sessionStorage.token,
+            'idManagerUser' : idManagerUser
+        },
+        dataType: "json",
+        success: function (response) {
+            toast('Se ha eliminado el usuario correctamente', 'is-info')
+            modal.removeClass('is-active')
+            getUsers()
+        }
+    });
+}
+function updateProduct(){
+
+}
 
 function apply_pagination(totalPages, recPerPage, records,displayRecords) {
     $('.pagination').twbsPagination({
@@ -272,5 +295,9 @@ function controlarClick() {
         var send = document.getElementById(this.id).getAttribute('itemprop');
         sessionStorage.setItem('idProd', send);
         window.open('single-product.html', '_self');
+    });
+
+    $(".deleteProduct").click(function(e){
+        $("#delProd").attr('data-p', $(this).attr('data-p'));
     });
 }

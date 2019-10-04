@@ -28,23 +28,22 @@ function init() {
   //  console.log($('#stepsAddProduct').is-completed;
 }
 /*$('#stepsAddProduct').options.beforeNext(function(step_id){
-        switch( step_id ) {
-            case 1:
-              // DO YOUR VALIDATION FOR FIRST STEP (steps_id start at 0)
-            if($('#addProductCategories').value == -1)
-                $('#nextStep').disabled;
-            else
-                $('#nextStep').enabled;
-              break;
-            case 2:
-              // DO YOUR VALIDATION FOR 2nd step
-              break;
-            case 2:
-              // DO YOUR VALIDATION FOR 3rd STEP 
-              break;
-        }    
-    });
-}
+    switch( step_id ) {
+        case 1:
+          // DO YOUR VALIDATION FOR FIRST STEP (steps_id start at 0)
+        if($('#addProductCategories').value == -1)
+            $('#nextStep').disabled;
+        else
+            $('#nextStep').enabled;
+          break;
+        case 2:
+          // DO YOUR VALIDATION FOR 2nd step
+          break;
+        case 2:
+          // DO YOUR VALIDATION FOR 3rd STEP 
+          break;
+    }    
+});
 
 /*
 var stepsWizard = new StepsWizard(document.getElementById("stepsDemo"), {
@@ -161,7 +160,7 @@ function getDimensions() {
 function setSelectProductDimensions(productDimensions) {
     $.each(productDimensions, function (key, value) {
         let option = document.createElement('option')
-        option.textContent = value.dimension.split(' ')[0]
+        option.textContent = value.dimensions.split(' ')[0]
         option.value = value.idDimension
         $('#addProductDimensions').append(option)
     })
@@ -305,8 +304,4 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
     }
     return true
 }
-
-
-
-
 */
