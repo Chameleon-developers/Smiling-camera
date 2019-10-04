@@ -119,17 +119,12 @@
                         <div class="field">
                             <label for="productpic" class="label">Foto</label>
                             <p class="control has-icons-left">
-                                <input class="input " name="productpic" id="productpic" type="file" autofocus data-validate="require">
+                                <input class="input " name="productpic" id="productpic" accept=".PNG, .JPG, .JPEG" type="file" autofocus data-validate="require">
                                 <span class="icon is-small is-left">
                                     <i class="fa fa-image"></i>
                                 </span>
                             </p>
                         </div>
-
-                        
-
-
-
                       </div>
                    </div> 
                    
@@ -176,17 +171,3 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/js/bulma-steps.js"></script>
         <script>bulmaSteps.attach();</script>
-        <script>
-            var stepsWizard =new bulmaSteps(document.getElementById("stepsDemo"),{
-              'beforeNext':function(step_id){
-                switch (step_id) {
-                  case 1:
-                      
-                    break;
-                
-                  default:
-                    break;
-                }
-              }
-            });
-          </script>

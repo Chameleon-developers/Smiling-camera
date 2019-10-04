@@ -4,7 +4,7 @@ module.exports.getDimensions = function (req, res) {
     const con = require('../controllers/dbconn')();
 
     /* Ejecutar la consulta para la obtención de dimensiones */
-    con.query('SELECT idDimension, CONCAT(widthDimension, "X", heightDimension) AS dimension FROM dimensions', function (err, result, fields) {
+    con.query('SELECT idDimension, CONCAT(widthDimension, "X", heightDimension) AS dimensions FROM dimensions', function (err, result, fields) {
         if (err) {
             // Internal error message send
             res.status(500).json({
