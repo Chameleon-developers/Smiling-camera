@@ -43,7 +43,7 @@ module.exports = function (app,secureApp) {
 
 
     /* Obtener datos de productos registrados */
-    app.post('/getAllProducts' ,products.getAllProducts);
+    secureApp.post('/getAllProducts' ,products.getAllProducts);
 
     var storage = multer.diskStorage({
         destination: function(req, file, callback){
