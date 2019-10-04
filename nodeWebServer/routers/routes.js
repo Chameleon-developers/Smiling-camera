@@ -1,10 +1,15 @@
 var users=require('../controllers/users');
 var login=require('../controllers/login');
+var products=require('../controllers/products');
+var categories=require('../controllers/categories');
+var multer = require("multer");
 
 module.exports = function (app,secureApp) {
 
     /* Validar logIn */
     app.post('/logIn',login.logIn);
+
+    /* USUARIOS */
 
     /* Obtener Los tipos de usuario existentes */
     secureApp.post('/getTypeUsers',users.getTypeUsers);
@@ -24,8 +29,39 @@ module.exports = function (app,secureApp) {
     /* Eliminar usuario registrado */
     secureApp.post('/deleteUser' ,users.deleteUser);
 
+    /* CATEGORIAS Y SUBCATEGORIAS */
+
+    /* Obtener categorias existentes */
+    secureApp.post('/getCategories' ,categories.getCategories);
+
+    /* Obtener subcatehgorias existentes */
+    secureApp.post('getSubcategories' ,categories.getSubcategories);
+
+    /* PRODUCTOS */
+
     /* Obtener Las categorias de productos existentes */
-    
+
+
+    /* Obtener datos de productos registrados */
+    secureApp.post('/getAllProducts' ,products.getAllProducts);
+
+    var storage = multer.diskStorage({
+        destination: function(req, file, callback){
+            callback(null, '../dashboardadmin/uploads'); // set the destination
+        },
+        filename: function(req, file, callback){
+            callback(null, Date.now() + '.jpg'); // set the file name and extension
+        }
+    });
+
+    var uploading = multer({
+
+        storage: storage
+
+    });
+
+    /* Registrar un nuevo producto */
+    app.post('/insertProduct' , uploading.single('image'),products.insertProduct);
 
 }
  

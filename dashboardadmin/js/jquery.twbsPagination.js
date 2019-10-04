@@ -12,7 +12,7 @@
 
     var old = $.fn.twbsPagination;
 
-    // PROTOTYPE AND CONSaTRUCTOR
+    // PROTOTYPE AND CONSTRUCTOR
 
     var TwbsPagination = function (element, options) {
         this.$element = $(element);
