@@ -60,7 +60,7 @@ module.exports = function (app,secureApp) {
 
     });
 
-    /* Obtener datos de productos registrados */
+    /* Registrar un nuevo producto */
     app.post('/insertProduct' , uploading.single('image'),products.insertProduct);
 
 }
