@@ -10,8 +10,9 @@ function init() {
    /* $('#requestsKioks').click(function (e) {
         loadFiles("SolicitudesKioscos.html", "js/SolicitudesKioscos.js")
     });*/
-
+    
     setTable('table')
+    modal()
     //getKiosks()
     $('#addKiosk').click(addKiosk);
     //$('#modalAddKiosk').click(addKiosk);
