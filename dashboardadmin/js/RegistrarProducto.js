@@ -8,14 +8,52 @@ function init() {
     getCategories() 
     getDimensions()
     $('#returnProduct').click(function (e){
-       /* $('#addProductCategories')[0].reset();
-        $('#addproductSubCategories')[0].reset();
-        $('#productname')[0].reset();
-        $('#addProductDimensions')[0].reset();
-        $('#productcost')[0].reset();
-        $('#productpic')[0].reset();
-        $('#productcaract')[0].reset();*/
         loadFiles("productos.html","js/productos.js")
+    });
+
+    var form = $("#example-advanced-form").show();
+ 
+    form.steps({
+        headerTag: "h2",
+        bodyTag: "fieldset",
+        transitionEffect: "slideLeft",
+        onStepChanging: function (event, currentIndex, newIndex)
+        {
+            console.log(currentIndex);
+            if (currentIndex == 0 && ($("#addProductCategories option:selected").val()) == -1)
+            {
+                form.steps("previous");
+                return false;
+            }
+            if (currentIndex == 1 && ($("#addProductSubCategories option:selected").val()) == -1)
+            {
+                form.steps("previous");
+                return false;
+            }
+            // Allways allow previous action even if the current form is not valid!
+            if (currentIndex > newIndex)
+            {
+                return true;
+            }
+            // Needed in some cases if the user went back (clean up)
+            if (currentIndex < newIndex)
+            {
+                // To remove error styles
+                form.find(".body:eq(" + newIndex + ") label.error").remove();
+                form.find(".body:eq(" + newIndex + ") .error").removeClass("error");
+            }
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+        },
+        onFinishing: function (event, currentIndex)
+        {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+        },
+        onFinished: function (event, currentIndex)
+        {
+            addProduct()
+        }
     });
 
     $('#addProductCategories').change(function (e){
@@ -24,48 +62,7 @@ function init() {
             getSubCategories(category);
         }
     });
-
-  //  console.log($('#stepsAddProduct').is-completed;
 }
-/*$('#stepsAddProduct').options.beforeNext(function(step_id){
-    switch( step_id ) {
-        case 1:
-          // DO YOUR VALIDATION FOR FIRST STEP (steps_id start at 0)
-        if($('#addProductCategories').value == -1)
-            $('#nextStep').disabled;
-        else
-            $('#nextStep').enabled;
-          break;
-        case 2:
-          // DO YOUR VALIDATION FOR 2nd step
-          break;
-        case 2:
-          // DO YOUR VALIDATION FOR 3rd STEP 
-          break;
-    }    
-});
-
-/*
-var stepsWizard = new StepsWizard(document.getElementById("stepsDemo"), {
-    'beforeNext': function( step_id ) {
-      switch( step_id ) {
-        case 0:
-          // DO YOUR VALIDATION FOR FIRST STEP (steps_id start at 0)
-          break;
-        case 1:
-          // DO YOUR VALIDATION FOR 2nd step
-          break;
-        case 2:
-          // DO YOUR VALIDATION FOR 3rd STEP 
-          break;
-          
-          
-        }
-    }
-  } );*/
-
-
-
 
 /* Función para consultar las categorias de productos que existen */
 function getCategories() {
@@ -166,10 +163,6 @@ function setSelectProductDimensions(productDimensions) {
     })
 }
 
-
-
-
-
 /* Función para obtener los usuarios ya registrados 
 function getUsers(){
     $.ajax({
@@ -218,55 +211,49 @@ function getUsers(){
 
 /* Función para agregar un nuevo usuario */
 function addProduct() {
-    bulmaSteps.attach();
-    var mainEmail = $('#mainEmail').val()
-    var resetEmail = $('#resetEmail').val()
-    var nameUser = $('#nameUser').val()
-    var typeUser = $( "#addTypeUsers option:selected" ).val()
-    var passwordUser = $('#passwordUser').val()
-    var cPasswordUser = $('#cPasswordUser').val()
+    var category = $('#addProductCategories option:selected').val();
+    var subcategory = $('#addproductSubCategories option:selected').val();
+    var nameProduct = $('#productname').val();
+    var idDimension = $('#addProductDimensions option:selected').val();
+    var productCost = $('#productcost').val();
+    var productCaract = $('#productcaract').val();
 
-    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser)
-    if (check) {
-        var modal = $(this).parent().parent().parent()
-        $.ajax({
-            type: "POST",
-            url: ip_server + "/logged/insertUser",
-            data: {
-                'bearer' : sessionStorage.token,
-                'mainEmail' : mainEmail,
-                'resetEmail' : resetEmail,
-                'nameUser' : nameUser,
-                'idTypeUser' : typeUser,
-                'passwordUser' : passwordUser,
-            },
-            dataType: "json",
-            success: function (response) {
-                toast('Se ha registrado correctamente', 'is-info')
-                /* Vaciar inputs y cerrar modal */
-                modal.removeClass('is-active')
-                var inputsAddModal = modal.find(".input")
-                $.each(inputsAddModal, function(idx, el) {
-                    el.value = ""
-                });
-                getUsers() 
-            },
-            error: function (error) {
-                if(error.status == '401'){
-                    sessionStorage.removeItem('token')
-                    window.open("index.html",'_self');
-                }
-                if(error.status == '406'){
-                    toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
-                    window.open("index.html",'_self');
-                }
-                if(error.status == '406'){
-                    toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
-                    window.open("index.html",'_self');
-                }
+    const form_data = new FormData();
+    form_data.append('image', $('#productpic')[0].files[0]);
+    form_data.append('category', category);
+    form_data.append('subcategory', subcategory);
+    form_data.append('nameProduct', nameProduct);
+    form_data.append('idDimension', idDimension);
+    form_data.append('productCost', productCost);
+    form_data.append('productPic', productPic);
+    form_data.append('productCaract', productCaract);
+
+
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/logged/insertProduct",
+        data: form_data,
+        contentType : false,
+        processData: false,
+        dataType: "json",
+        success: function (response) {
+            toast('Se ha registrado correctamente', 'is-info')
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                sessionStorage.removeItem('token')
+                window.open("index.html",'_self');
             }
-        });
-    }
+            if(error.status == '406'){
+                toast('No se pudo registrar el producto, no se han procesado correctamente los datos', 'is-warning')
+                window.open("index.html",'_self');
+            }
+            if(error.status == '406'){
+                toast('No se pudo registrar el uproducto, Error interno del servidor', 'is-warning')
+                window.open("index.html",'_self');
+            }
+        }
+    });
 }
 
 /* Función para validar que los datos ingresados están correctos */
