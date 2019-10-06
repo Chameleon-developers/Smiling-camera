@@ -7,28 +7,90 @@ import {loadFiles, toast, modal, ip_server, setTable } from "./plugins.js"
 
 /* Función para establecer eventos y datos iniciales */
 function init() {
-    $('#requestsKioks').click(function (e) {
+   /* $('#requestsKioks').click(function (e) {
         loadFiles("SolicitudesKioscos.html", "js/SolicitudesKioscos.js")
-    });
+    });*/
 
     setTable('table')
-    getUsers()
+    getKiosks()
+    $('#addKiosk').click(addKiosk);
 }
 
 
 
-/* Función para agregar los usuarios al select de editar  */
-function setSelectUsers(Users) {
-    $.each(Users, function (key, value) {
-        let option = document.createElement('option')
-        option.textContent = value.idUser.split(' ')[0]
-        option.value = value.nameUser
-        $('#addUserKiosk').append(option)
-    })
+/* Función para agregar un nuevo kiosco */
+function addKiosk() {
+    var nameKiosk = $('#nameKiosk').val()
+    var userKiosk = $('#userKiosk').val()//correo
+    var passwordKiosk = $('#passwordKiosk').val()
+    var cPasswordKiosk = $('#cPasswordKiosk').val()
+
+    var check = validationsAddKiosk(nameKiosk,userKiosk, passwordKiosk, cPasswordKiosk)
+    if (check) {
+        var modal = $(this).parent().parent().parent()
+        $.ajax({
+            type: "POST",
+            url: ip_server + "/logged/insertKiosk",
+            data: {
+                'bearer' : sessionStorage.token,
+                'nameKiosk' : nameKiosk,
+                'userKiosk' : userKioskuserKiosk,
+                'passwordKiosk' : passwordKiosk,
+            },
+            dataType: "json",
+            success: function (response) {
+                toast('Se ha registrado correctamente', 'is-info')
+                /* Vaciar inputs y cerrar modal */
+                modal.removeClass('is-active')
+                var inputsAddModal = modal.find(".input")
+                $.each(inputsAddModal, function(idx, el) {
+                    el.value = ""
+                });
+                getUsers()
+            },
+            error: function (error) {
+                if(error.status == '401'){
+                    sessionStorage.removeItem('token')
+                    window.open("index.html",'_self');
+                }
+                if(error.status == '406'){
+                    toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
+                    window.open("index.html",'_self');
+                }
+                if(error.status == '406'){
+                    toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
+                    window.open("index.html",'_self');
+                }
+            }
+        });
+    }
+}
+
+/* Función para validar que los datos ingresados están correctos */
+function validationsAddKiosk(nameKiosk,userKiosk, passwordKiosk, cPasswordKiosk) {
+    if (nameKiosk == '' || userKiosk == '' || passwordKiosk == '' || cPasswordKiosk == '') {
+        toast('Completa los campos', 'is-warning')
+        return false
+    }
+    var pattMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (!pattMail.test(userKiosk) && userKiosk.lenght < 50) {
+        toast('El correo ingresado en "Correo (Usuario)" no es válido', 'is-warning')
+        return false
+    }
+    var pattPassword = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
+    if (!pattPassword.test(passwordKiosk)) {
+        toast('La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter no alfanumérico.', 'is-warning')
+        return false
+    }
+    if (passwordKiosk != cPasswordKiosk) {
+        toast('Las contraseñas ingresadas deben coincidir', 'is-warning')
+        return false
+    }
+    return true
 }
 
 /* Función para obtener los usuarios ya registrados */
-function getUsers(){
+function getKiosks(){
     $.ajax({
         url: ip_server +
         "/logged/getKiosks",
@@ -64,7 +126,7 @@ function getUsers(){
                     iconContainer
                 ])
             }
-            setSelectUsers(Users);
+            
             table.draw();
             modal()
         },
@@ -77,42 +139,6 @@ function getUsers(){
     });
 }
 
-
-/* Función para validar que los datos ingresados están correctos */
-function validationsEditKiosk(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser) {
-    if (mainEmail == '' || resetEmail == '' || nameUser == '' || passwordUser == '' || cPasswordUser == '') {
-        toast('Completa los campos', 'is-warning')
-        return false
-    }
-    if (typeUser == 0) {
-        toast('Selecciona un tipo de usuario', 'is-warning')
-        return false
-    }
-    
-    var pattMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (!pattMail.test(mainEmail) && mainEmail.lenght < 50) {
-        toast('El correo ingresado en "Correo (Usuario)" no es válido', 'is-warning')
-        return false
-    }
-    if (!pattMail.test(resetEmail) && resetEmail.lenght < 50) {
-        toast('El correo ingresado en "Correo para restablecer Contraseña" no es válido', 'is-warning')
-        return false
-    }
-    if (mainEmail == resetEmail) {
-        toast('Los correos ingresados deben ser diferentes', 'is-warning')
-        return false
-    }
-    var pattPassword = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
-    if (!pattPassword.test(passwordUser)) {
-        toast('La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter no alfanumérico.', 'is-warning')
-        return false
-    }
-    if (passwordUser != cPasswordUser) {
-        toast('Las contraseñas ingresadas deben coincidir', 'is-warning')
-        return false
-    }
-    return true
-}
 
 
 /*Funcion para eliminar un registro*/
