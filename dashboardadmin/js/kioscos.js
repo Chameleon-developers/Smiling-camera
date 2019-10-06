@@ -2,7 +2,7 @@
 export { init }
 
 //Importación de módulos
-import {loadFiles, toast, modal, ip_server, setTable } from "./plugins.js"
+import { toast, modal, ip_server, setTable } from "./plugins.js"
 /* toast options: is-info, is-success, is-warning, is-danger */
 
 /* Función para establecer eventos y datos iniciales */
@@ -12,8 +12,9 @@ function init() {
     });*/
 
     setTable('table')
-    getKiosks()
+    //getKiosks()
     $('#addKiosk').click(addKiosk);
+    //$('#modalAddKiosk').click(addKiosk);
 }
 
 

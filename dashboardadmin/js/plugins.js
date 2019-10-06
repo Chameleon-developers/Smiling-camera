@@ -35,7 +35,7 @@ function modal() {
     document.querySelectorAll('.modal-button').forEach(function(e) {
         e.addEventListener('click', function() {
             var target = document.querySelector(e.getAttribute('data-target'));
-
+            console.log(target);
             target.classList.add('modal-active');
 
             target.querySelector('.delete').addEventListener('click',   function() {
