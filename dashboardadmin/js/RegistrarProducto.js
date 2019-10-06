@@ -58,8 +58,7 @@ function init() {
         },
         onStepChanged: function (event, currentIndex, priorIndex)
         {
-            // Used to skip the "Warning" step if the user is old enough.
-            
+           
             // Used to skip the "Warning" step if the user is old enough.
             if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
             {

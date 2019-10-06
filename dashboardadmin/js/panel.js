@@ -16,6 +16,10 @@ $(function() {
         menu("productos")
     })
 
+    $("#Kioscos").click(function (e){
+        isActiveMenu(this)
+        menu("kioscos")
+    })
 
 })
 
@@ -36,6 +40,9 @@ function menu(page) {
         break;
      case "productos":
         loadFiles("productos.html", "js/productos.js");
+        break;
+    case "kioscos":
+        loadFiles("kioscos.html", "js/kioscos.js");
         break;
     }
 } 
