@@ -70,6 +70,8 @@
 .wizard > .steps .number
 {
     font-size: 1.429em;
+    background-color: white;
+    color: black;
 }
 
 .wizard > .steps > ul > li
@@ -201,8 +203,8 @@
 .wizard > .content > .body input.error
 {
     background: rgb(251, 227, 228);
-    border: 1px solid #fbc2c4;
-    color: #8a1f11;
+    border: 1px solid #F74784;
+    color: #F74784;
 }
 
 .wizard > .content > .body label
@@ -213,7 +215,7 @@
 
 .wizard > .content > .body label.error
 {
-    color: #8a1f11;
+    color: #F74784;
     display: inline-block;
     margin-left: 1.5em;
 }
