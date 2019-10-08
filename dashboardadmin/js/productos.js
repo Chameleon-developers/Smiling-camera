@@ -17,7 +17,7 @@ function init() {
     getProducts()
 
     $("#delProd").click(deleteProduct);
-    $('#updateProd').click(updateProduct);
+    $('#editProd').click(updateProduct);
 
     $('#searchProduct').click(function (e) {
         var cat = $('#searchCategory').val()
@@ -187,7 +187,7 @@ function deleteProduct(){
     });
 }
 function updateProduct(){
-
+    console.log(document.querySelector('input[name="enable"]:checked').value);
 }
 
 function apply_pagination(totalPages, recPerPage, records,displayRecords) {
@@ -259,7 +259,7 @@ function generate_rows(displayRecords) {
                                     '<div class="card-text">' +
                                         '<strong>Acciones:</strong> ' +
                                         '<div class="has-addons">' +
-                                            '<a class=" button is-primary is-inverted modal-button updateProduct" data-target="#modalEditProduct" publicPrice="' + displayRecords[i].publicPrice + '" publicUtilityPrice="' + displayRecords[i].publicUtilityPrice + '" idDimension="' + displayRecords[i].idDimension + '" nameSubcategory="' + displayRecords[i].nameSubcategory + '" idSubcategory="' + displayRecords[i].idSubcategory + '" nameCategory="' + displayRecords[i].nameCategory + '" idCategory="' + displayRecords[i].idCategory + '" featuresProduct="' + displayRecords[i].featuresProduct + '" enableProduct="' + displayRecords[i].enableProduct + '" nameProduct="' + displayRecords[i].nameProduct + '" idProduct="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>' +
+                                            '<a class=" button is-primary is-inverted modal-button updateProduct" data-target="#modalEditProduct" publicPrice="' + displayRecords[i].publicPrice + '" publicUtilityPrice="' + displayRecords[i].publicUtilityPrice + '" idDimension="' + displayRecords[i].idDimension + '" nameSubcategory="' + displayRecords[i].nameSubcategory + '" idSubcategory="' + displayRecords[i].idSubcategory + '" nameCategory="' + displayRecords[i].nameCategory + '" idCategory="' + displayRecords[i].idCategory + '" featuresProduct="' + displayRecords[i].featuresProduct + '" enabledProduct="' + displayRecords[i].enabledProduct + '" nameProduct="' + displayRecords[i].nameProduct + '" idProduct="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>' +
 
                                             '<a href="#" class=" button is-danger is-inverted modal-button deleteProduct"  data-target="#modalDelProduct" style="padding-left: 10px;" idProduct="' + displayRecords[i].idProduct + '><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>');
                                                 div.append('</div>');
@@ -310,6 +310,10 @@ function controlarClick() {
     $('.updateProduct').unbind();
     $('.updateProduct').on('click', function () {
         $("#editProd").attr('idProduct', $(this).attr('idProduct'));
+        $("#nameProdEdit").val($(this).attr('nameProduct'));
+        if ($(this).attr('enabledProduct') == '1') {
+            $('#checkEnable').attr('checked', true);
+        }
     });
 
     $(".deleteProduct").click(function(e){

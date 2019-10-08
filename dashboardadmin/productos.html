@@ -91,9 +91,9 @@
         <section class="modal-card-body">
             <div class="column is-10 is-offset-1">
                 <div class="field">
-                    <label for="mainEmailUpdate" class="label">Correo (Usuario):</label>
+                    <label for="nameProdEdit" class="label">Nombre del producto:</label>
                     <p class="control has-icons-left">
-                        <input id="mainEmailUpdate" class="input" type="text" placeholder="Correo (Usuario)">
+                        <input id="nameProdEdit" class="input" type="text" placeholder="Nombre del producto">
                         <span class="icon is-small is-left">
                             <i class="fa fa-envelope"></i>
                         </span>
@@ -101,55 +101,25 @@
                 </div>
                 <br>
                 <div class="field">
-                    <label for="resetEmailUpdate" class="label">Correo para restablecer Contraseña:</label>
+                    <label for="productpicEdit" class="label">Imagen</label>
                     <p class="control has-icons-left">
-                        <input id="resetEmailUpdate" class="input" type="text" placeholder="Correo">
+                        <input class="input " name="productpicEdit" id="productpicEdit" type="file" accept=".jpg, .png, .jpeg" autofocus data-validate="require">
                         <span class="icon is-small is-left">
-                            <i class="far fa-envelope"></i>
+                        <i class="fa fa-image"></i>
                         </span>
                     </p>
                 </div>
                 <br>
                 <div class="field">
-                    <label for="nameUserUpdate" class="label">Nombre:</label>
-                    <p class="control has-icons-left">
-                        <input id="nameUserUpdate" class="input" type="text" placeholder="Nombre">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-user"></i>
-                        </span>
-                    </p>
-                </div>
-                <br>
-                <label for="nameUserUpdate" class="label">Tipo:</label>
-                <div class="field">
+                    <label for="enable" class="label">Disponible para E-Commerce:</label>
                     <div class="control">
-                        <div class="select is-fullwidth">
-                            <select id="addTypeUsersUpdate">
-                                <option value="-1">Selecciona una Opción</option>
-                            </select>
-                        </div>
+                            <label class="checkbox">
+                                <input id="checkEnable" type="checkbox">
+                                Disponible
+                            </label>
                     </div>
                 </div>
                 <br>
-                <div class="field">
-                    <label for="passwordUserUpdate" class="label">Contraseña:</label>
-                    <p class="control has-icons-left">
-                        <input id="passwordUserUpdate" class="input" type="password" placeholder="Password">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                    </p>
-                </div>
-                <br>
-                <div class="field">
-                    <label for="cPasswordUserUpdate" class="label">Confirmar Contraseña:</label>
-                    <p class="control has-icons-left">
-                        <input id="cPasswordUserUpdate" class="input" type="password" placeholder="Password">
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                    </p>
-                </div>
             </div>
         </section>
         <footer class="modal-card-foot">
