@@ -26,7 +26,7 @@ function addKiosk() {
     var userKiosk = $('#userKiosk').val()//correo
     var passwordKiosk = $('#passwordKiosk').val()
     var cPasswordKiosk = $('#cPasswordKiosk').val()
-
+ 
     var check = validationsAddKiosk(nameKiosk,userKiosk, passwordKiosk, cPasswordKiosk)
     if (check) {
         var modal = $(this).parent().parent().parent()
@@ -36,7 +36,7 @@ function addKiosk() {
             data: {
                 'bearer' : sessionStorage.token,
                 'nameKiosk' : nameKiosk,
-                'userKiosk' : userKioskuserKiosk,
+                'userKiosk' : userKiosk,
                 'passwordKiosk' : passwordKiosk,
             },
             dataType: "json",
