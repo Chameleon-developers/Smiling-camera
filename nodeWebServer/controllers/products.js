@@ -102,9 +102,6 @@ module.exports.getProducts = function (req, res) {
 
 /* Registrar un nuevo Producto */
 module.exports.insertProduct = function (req, res) {
-    //fs.unlinkSync(req.file.path)
-    //res.send(req.file);
-
     /* Obtener variable para la conexión a la BD */
     const con = require('../controllers/dbconn')();
 
@@ -134,13 +131,41 @@ module.exports.insertProduct = function (req, res) {
                 })
             }
         }
-    })
-    
+    });    
 }
 
 /* Modificar un producto existente */
 module.exports.updateProduct = function (req, res) {
+    /* Obtener variable para la conexión a la BD */
+    const con = require('../controllers/dbconn')();
 
+    // /* Obtener los datos del Body */
+    let data = req.body;
+    
+    // /* Establecer query para la consulta del último insertado */
+    let qry="UPDATE  productsyouprint SET nameProduct=?, imageProduct=?, enabledProduct=? WHERE idProduct=?";
+    values = [data.nameProduct, req.file.filename, data.enabledProduct, data.idProduct];
+
+    /* Ejecutar la consulta para la obtención del último id insertado en productos */
+    con.query(qry,values,function (err, result, fields) {
+        if (err) {
+            // Internal error message send
+            res.status(500).json({
+                Status: 'internal error',
+                message: err
+            });
+            con.end();
+            return;
+        } 
+        else {
+            if (result.affectedRows == 1) {
+                res.status(200).json({
+                    Status: 'Success',
+                    message: 'Se actualizo correctamente el producto'
+                })
+            }
+        }
+    });
 }
 
 /* Elimina un producto (baja logica) */

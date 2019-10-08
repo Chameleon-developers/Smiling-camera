@@ -47,9 +47,6 @@ module.exports = function (app,secureApp) {
     /* obtener los datos basicos de productos registrados */
     secureApp.post('/getProducts', products.getProducts);
 
-    /* Modificar los datos de un producto existente */
-    secureApp.post('/updateProduct' ,products.updateProduct);
-
     /* Eliminar un producto (baja logica) */
     secureApp.post('/deleteProduct' ,products.deleteProduct);
 
@@ -69,7 +66,10 @@ module.exports = function (app,secureApp) {
     });
 
     /* Registrar un nuevo producto */
-    app.post('/insertProduct' , uploading.single('image'),products.insertProduct);    
+    app.post('/insertProduct' , uploading.single('image'),products.insertProduct);   
+    
+    /* Modificar los datos de un producto existente */
+    app.post('/updateProduct' , uploading.single('image'),products.updateProduct); 
 
 
     /* Kioscos */
