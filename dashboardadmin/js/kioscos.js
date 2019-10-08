@@ -13,7 +13,7 @@ function init() {
     
     setTable('table')
     modal()
-    //getKiosks()
+    getKiosks()
     $('#addKiosk').click(addKiosk);
     //$('#modalAddKiosk').click(addKiosk);
 }
@@ -32,7 +32,7 @@ function addKiosk() {
         var modal = $(this).parent().parent().parent()
         $.ajax({
             type: "POST",
-            url: ip_server + "/logged/insertKiosk",
+            url: ip_server + "/logged/insertKiosco",
             data: {
                 'bearer' : sessionStorage.token,
                 'nameKiosk' : nameKiosk,
@@ -95,7 +95,7 @@ function validationsAddKiosk(nameKiosk,userKiosk, passwordKiosk, cPasswordKiosk)
 function getKiosks(){
     $.ajax({
         url: ip_server +
-        "/logged/getKiosks",
+        "/logged/getAllKioscos",
         type: "POST",
         data:{
             'bearer' : sessionStorage.token,
