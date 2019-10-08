@@ -121,7 +121,7 @@ module.exports.updateKiosco = function(req, res) {
     let data = req.body;
     
     /* Ejecutar la consulta para eliminar kiosco */
-    con.query('UPDATE kioscos SET nameKiosco=? WHERE idKiosco=?', [data.nameKiosco, data.idKiosco] function (err, result, fields) {
+    con.query('UPDATE kioscos SET nameKiosco=? WHERE idKiosco=?', [data.nameKiosco, data.idKiosco], function (err, result, fields) {
         if (err) {
             // Internal error message send
             res.status(500).json({
@@ -157,7 +157,7 @@ module.exports.deleteKiosco = function (req, res) {
     let data = req.body;
 
     /* Ejecutar la consulta para eliminar kiosco */
-    con.query('UPDATE kioscos SET statusKiosco=0 WHERE idKiosco=?', [data.idKiosco] function (err, result, fields) {
+    con.query('UPDATE kioscos SET statusKiosco=0 WHERE idKiosco=?', [data.idKiosco], function (err, result, fields) {
         if (err) {
             // Internal error message send
             res.status(500).json({
