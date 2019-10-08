@@ -14,7 +14,10 @@ function init() {
     setTable('table')
     modal()
     getKiosks()
+
     $('#addKiosk').click(addKiosk);
+    $("#delKiosk").click(deleteKiosk);
+    $('#updateKiosk').click(updateKiosk);
     //$('#modalAddKiosk').click(addKiosk);
 }
 
@@ -44,7 +47,7 @@ function addKiosk() {
             success: function (response) {
                 toast('Se ha registrado correctamente', 'is-info')
                 /* Vaciar inputs y cerrar modal */
-                modal.removeClass('is-active')
+                modal.removeClass('modal-active')
                 var inputsAddModal = modal.find(".input")
                 $.each(inputsAddModal, function(idx, el) {
                     el.value = ""
@@ -117,7 +120,7 @@ function getKiosks(){
             //insertar datos
             for (const kiosco of dataSet) {
                 //<a class="button modal-button colorBlue" data-target="#modalAddUser">
-                var iconContainer = "<a class='modal-button' data-target='#modalEditKiosk' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a href='#' class='modal-button' data-target='#modalDelKiosk' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
+                var iconContainer = "<a class='modal-button updateKiosco' data-k='"+kiosco.idKiosco+"' data-target='#modalEditKiosk' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a href='#' class='modal-button deleteKiosco' data-k='"+kiosco.idKiosco+"' data-target='#modalDelKiosk' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
                 
                 table.row.add([
                     kiosco.nameKiosco,
@@ -129,6 +132,15 @@ function getKiosks(){
             
             table.draw();
             modal()
+
+            $(".deleteKiosco").click(function(e){
+                $("#delKiosk").attr('data-k', $(this).attr('data-k'));
+            });
+
+            $(".updateKiosco").click(function(e){
+                getUser($(this).attr('data-k'));
+                $('#updateKiosk').attr('data-k', $(this).attr('data-k'));
+            });
         },
         error: function (error) {
             if(error.status == '401'){
@@ -139,22 +151,60 @@ function getKiosks(){
     });
 }
 
+/* Funcion para actualizar kiosco */
+function updateKiosk() {
+    var idKiosco = $("#delKiosk").attr('data-k');
+    var nameKiosco = $("#nameKiosk").val();
 
+    if(nameKiosco != '') {
+        var modal = $(this).parent().parent().parent()
+        $.ajax({
+            url: ip_server + "/logged/updateKiosco",
+            type: "POST",
+            data:{
+                'bearer' : sessionStorage.token,
+                'idKiosco' : idKiosco,
+                'nameKiosco' : nameKiosco
+            },
+            dataType: "json",
+            success: function (response) {
+                toast('Se ha actualizado el kiosco correctamente', 'is-info')
+                /* Vaciar inputs y cerrar modal */
+                modal.removeClass('modal-active')
+                var inputsAddModal = modal.find(".input")
+                $.each(inputsAddModal, function(idx, el) {
+                    el.value = ""
+                });
+                getKiosks()
+            }
+        });
+    }
+    else {
+        toast("Ingrese un nombre al kiosco", "is-warning");
+    }
+}
 
 /*Funcion para eliminar un registro*/
-function deleteKiosk(idKiosk){
+function deleteKiosk(){
+    var idKiosco = $("#delKiosk").attr('data-k');
+    var modal = $(this).parent().parent().parent()
     $.ajax({
-        url: ip_server +
-        "/logged/deleteKiosk",
+        url: ip_server + "/logged/deleteKiosco",
         type: "POST",
         data:{
             'bearer' : sessionStorage.token,
-            'idKiosk' : idKiosk
+            'idKiosco' : idKiosco
         },
         dataType: "json",
         success: function (response) {
-            var dataSet = response.users;
-            console.log(dataSet);
+            toast('Se ha eliminado el kiosco correctamente', 'is-info')
+            /* Vaciar inputs y cerrar modal */
+            modal.removeClass('modal-active')
+            var inputsAddModal = modal.find(".input")
+            $.each(inputsAddModal, function(idx, el) {
+                el.value = ""
+            });
+            getKiosks()
         }
     });
 }
