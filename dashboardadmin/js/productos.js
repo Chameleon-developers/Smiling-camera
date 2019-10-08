@@ -79,7 +79,7 @@ function getCategories() {
 function setSelectProductCategories(productCategories) {
     $.each(productCategories, function (key, value) {
         let option = document.createElement('option')
-        option.textContent = value.nameCategory.split(' ')[0]
+        option.textContent = value.nameCategory
         option.value = value.idCategory
         $('#searchCategory').append(option)
     })
@@ -113,7 +113,7 @@ function getSubCategories(idCategory) {
 function setSelectProductSubCategories(productCategories, searchSubCategory) {
     $.each(productCategories, function (key, value) {
         let option = document.createElement('option')
-        option.textContent = value.nameSubcategory.split(' ')[0]
+        option.textContent = value.nameSubcategory
         option.value = value.idSubcategory
         $('#searchSubCategory').append(option)
     })
