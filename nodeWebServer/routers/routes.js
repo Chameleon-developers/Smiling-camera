@@ -79,7 +79,7 @@ module.exports = function (app,secureApp) {
     /* Kioscos */
 
     /* Registrar un nuevo kiosco */
-    app.post('/insertKiosco',kioscos.insertKiosco);
+    secureApp.post('/insertKiosco',kioscos.insertKiosco);
     
     /* Obtener datos de los kioscos registrados */
     secureApp.post('/getAllKioscos' ,kioscos.getAllKioscos);
