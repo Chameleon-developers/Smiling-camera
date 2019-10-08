@@ -214,9 +214,8 @@ function addProduct() {
     const subcategory = $('#addProductSubCategories option:selected').val()
     const nameProduct = $('#productname').val()
     const idproduct = $('#productid').val()
-    const productpic = $('#productpic').val()
 
-    if(validationsAddProduct(idproduct, productpic)) {
+    if(validationsAddProduct(idproduct)) {
         const form_data = new FormData()
         form_data.append('image', $('#productpic')[0].files[0])
         form_data.append('idCategory', category)
@@ -255,11 +254,6 @@ function addProduct() {
 function validationsAddProduct(idProduct, imageProduct) {
     if(idProduct == -1) {
         toast('Selecciona un producto', 'is-warning')
-        return false;
-    }
-
-    if(imageProduct == '') {
-        toast('Selecciona una imagen', 'is-warning')
         return false;
     }
 
