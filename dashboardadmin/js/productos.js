@@ -169,7 +169,8 @@ function getProducts(idCategory, idSubcategory) {
 }
 
 function deleteProduct(){
-    var idProduct = $("#delProd").attr('data-p');
+    var idProduct = $("#delProd").attr('idProduct');
+    var modal = $(this).parent().parent().parent()
     $.ajax({
         url: ip_server +
         "/logged/deleteProduct",
@@ -181,8 +182,13 @@ function deleteProduct(){
         dataType: "json",
         success: function (response) {
             toast('Se ha eliminado el producto correctamente', 'is-info')
-            modal.removeClass('is-active')
-            $('#modalDelProduct').modal('hide');
+            /* Vaciar inputs y cerrar modal */
+            modal.removeClass('modal-active')
+            var inputsAddModal = modal.find(".input")
+            $.each(inputsAddModal, function(idx, el) {
+                el.value = ""
+            });
+            getProducts();
         }
     });
 }
@@ -261,7 +267,7 @@ function generate_rows(displayRecords) {
                                         '<div class="has-addons">' +
                                             '<a class=" button is-primary is-inverted modal-button updateProduct" data-target="#modalEditProduct" publicPrice="' + displayRecords[i].publicPrice + '" publicUtilityPrice="' + displayRecords[i].publicUtilityPrice + '" idDimension="' + displayRecords[i].idDimension + '" nameSubcategory="' + displayRecords[i].nameSubcategory + '" idSubcategory="' + displayRecords[i].idSubcategory + '" nameCategory="' + displayRecords[i].nameCategory + '" idCategory="' + displayRecords[i].idCategory + '" featuresProduct="' + displayRecords[i].featuresProduct + '" enabledProduct="' + displayRecords[i].enabledProduct + '" nameProduct="' + displayRecords[i].nameProduct + '" idProduct="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>' +
 
-                                            '<a href="#" class=" button is-danger is-inverted modal-button deleteProduct"  data-target="#modalDelProduct" style="padding-left: 10px;" idProduct="' + displayRecords[i].idProduct + '><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>');
+                                            '<a href="#" class=" button is-danger is-inverted modal-button deleteProduct"  data-target="#modalDelProduct" style="padding-left: 10px;" idProduct="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>');
                                                 div.append('</div>');
 
                                             div.append('</div>');
