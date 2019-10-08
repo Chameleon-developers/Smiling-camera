@@ -14,6 +14,9 @@ function init() {
 
     /* Set Clics */
     $('#addUser').click(addUser);
+    $("#delUser").click(deleteUser);
+    $('#updateUser').click(updateUser);
+
 }
 
 /* Función para consultar los tipos de usuarios que existen */
@@ -28,6 +31,7 @@ function getTypeUsers() {
         success: function (response) {
 
             setSelectTypeUsers(response.typeUsers)
+            setSelectTypeUsersUpdate(response.typeUsers)
 
         },
         error: function (error) {
@@ -46,6 +50,16 @@ function setSelectTypeUsers(typeUsers) {
         option.textContent = value.typeUser.split(' ')[0]
         option.value = value.idTypeUser
         $('#addTypeUsers').append(option)
+    })
+}
+
+/* Función para agregar los tipos de usuarios a los selects  */
+function setSelectTypeUsersUpdate(typeUsers) {
+    $.each(typeUsers, function (key, value) {
+        let option = document.createElement('option')
+        option.textContent = value.typeUser.split(' ')[0]
+        option.value = value.idTypeUser
+        $('#addTypeUsersUpdate').append(option)
     })
 }
 
@@ -70,7 +84,10 @@ function getUsers(){
             //insertar datos
             for (const usr of dataSet) {
                 //<a class="button modal-button colorBlue" data-target="#modalAddUser">
-                var iconContainer = "<a class='modal-button' data-target='#modalEditUser' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a href='#' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
+                var iconContainer = "<a class='modal-button updateUser' data-u='"+usr.idManagerUser+"' data-target='#modalEditUser' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a class='modal-button deleteUsr' data-u='"+usr.idManagerUser+"' data-target='#modalDelUser' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
+                //boton eliminar
+                //$('#delUser').click(deleteUser(usr.idManagerUser));
+                //$(document).on('click','.deleteUsr',deleteUser(usr.idManagerUser));
                 
                 if (usr.idTypeUser == 1) {
                     tipo = "Administrador";
@@ -84,9 +101,50 @@ function getUsers(){
                     tipo,
                     iconContainer
                 ])
+                
             }
             table.draw();
             modal()
+
+            $(".deleteUsr").click(function(e){
+                $("#delUser").attr('data-u', $(this).attr('data-u'));
+            });
+
+            $(".updateUser").click(function(e){
+                getUser($(this).attr('data-u'));
+                $('#updateUser').attr('data-u', $(this).attr('data-u'));
+            });
+            
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                sessionStorage.removeItem('token')
+                window.open("index.html",'_self');
+            }
+        }
+    });
+}
+
+/* Funcion para obtener datos de un usuario especifico */
+function getUser(id) {
+    $.ajax({
+        url: ip_server +
+        "/logged/getUser",
+        type: "POST",
+        data:{
+            'bearer' : sessionStorage.token,
+            'idManagerUser' : id,
+        },
+        dataType: "json",
+        success: function (response) {
+            var dataSet = response.users;
+
+            for (const usr of dataSet) {
+                $('#mainEmailUpdate').val(usr.mainEmail);
+                $('#resetEmailUpdate').val(usr.resetEmail);
+                $('#nameUserUpdate').val(usr.nameUser);
+                $('#addTypeUsersUpdate option[value="'+usr.idTypeUser+'"]').attr("selected", true);
+            }
         },
         error: function (error) {
             if(error.status == '401'){
@@ -106,7 +164,7 @@ function addUser() {
     var passwordUser = $('#passwordUser').val()
     var cPasswordUser = $('#cPasswordUser').val()
 
-    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser)
+    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser, 1)
     if (check) {
         var modal = $(this).parent().parent().parent()
         $.ajax({
@@ -124,7 +182,7 @@ function addUser() {
             success: function (response) {
                 toast('Se ha registrado correctamente', 'is-info')
                 /* Vaciar inputs y cerrar modal */
-                modal.removeClass('is-active')
+                modal.removeClass('modal-active')
                 var inputsAddModal = modal.find(".input")
                 $.each(inputsAddModal, function(idx, el) {
                     el.value = ""
@@ -138,11 +196,77 @@ function addUser() {
                 }
                 if(error.status == '406'){
                     toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
-                    window.open("index.html",'_self');
                 }
                 if(error.status == '406'){
                     toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
+                }
+            }
+        });
+    }
+}
+
+/* Función para agregar un nuevo usuario */
+function updateUser() {
+    var idManagerUser = $("#updateUser").attr('data-u');
+    var mainEmail = $('#mainEmailUpdate').val()
+    var resetEmail = $('#resetEmailUpdate').val()
+    var nameUser = $('#nameUserUpdate').val()
+    var typeUser = $( "#addTypeUsersUpdate option:selected" ).val()
+    var passwordUser = $('#passwordUserUpdate').val()
+    var cPasswordUser = $('#cPasswordUserUpdate').val()
+
+    var update=0;
+    if(passwordUser.length > 0) {
+        update=1;
+        var dataTemp = {
+            'bearer' : sessionStorage.token,
+            'idManagerUser' : idManagerUser,
+            'mainEmail' : mainEmail,
+            'resetEmail' : resetEmail,
+            'nameUser' : nameUser,
+            'idTypeUser' : typeUser,
+            'passwordUser' : passwordUser,
+        }
+    }
+    else {
+        var dataTemp = {
+            'bearer' : sessionStorage.token,
+            'idManagerUser' : idManagerUser,
+            'mainEmail' : mainEmail,
+            'resetEmail' : resetEmail,
+            'nameUser' : nameUser,
+            'idTypeUser' : typeUser,
+        }
+    }
+
+    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser, update);
+    if (check) {
+        var modal = $(this).parent().parent().parent()
+        $.ajax({
+            type: "POST",
+            url: ip_server + "/logged/updateUser",
+            data: dataTemp,
+            dataType: "json",
+            success: function (response) {
+                toast('Se modificó correctamente el usuario', 'is-info')
+                /* Vaciar inputs y cerrar modal */
+                modal.removeClass('modal-active')
+                var inputsAddModal = modal.find(".input")
+                $.each(inputsAddModal, function(idx, el) {
+                    el.value = ""
+                });
+                getUsers()
+            },
+            error: function (error) {
+                if(error.status == '401'){
+                    sessionStorage.removeItem('token')
                     window.open("index.html",'_self');
+                }
+                if(error.status == '406'){
+                    toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
+                }
+                if(error.status == '406'){
+                    toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
                 }
             }
         });
@@ -150,10 +274,17 @@ function addUser() {
 }
 
 /* Función para validar que los datos ingresados están correctos */
-function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser) {
-    if (mainEmail == '' || resetEmail == '' || nameUser == '' || passwordUser == '' || cPasswordUser == '') {
-        toast('Completa los campos', 'is-warning')
-        return false
+function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser, update) {
+    if (update) {
+        if (mainEmail == '' || resetEmail == '' || nameUser == '' || passwordUser == '' || cPasswordUser == '') {
+            toast('Completa los campos', 'is-warning')
+            return false
+        }
+    } else {
+        if (mainEmail == '' || resetEmail == '' || nameUser == '') {
+            toast('Completa los campos', 'is-warning')
+            return false
+        }
     }
     if (typeUser == 0) {
         toast('Selecciona un tipo de usuario', 'is-warning')
@@ -173,22 +304,25 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
         toast('Los correos ingresados deben ser diferentes', 'is-warning')
         return false
     }
-    var pattPassword = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
-    if (!pattPassword.test(passwordUser)) {
-        toast('La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter no alfanumérico.', 'is-warning')
-        return false
-    }
-    if (passwordUser != cPasswordUser) {
-        toast('Las contraseñas ingresadas deben coincidir', 'is-warning')
-        return false
+
+    if(update) {
+        var pattPassword = /^(?=.*\d)(?=.*[!@#$&-.+,])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
+        if (!pattPassword.test(passwordUser)) {
+            toast('La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter no alfanumérico ! @ # $ & - . + ,', 'is-warning')
+            return false
+        }
+        if (passwordUser != cPasswordUser) {
+            toast('Las contraseñas ingresadas deben coincidir', 'is-warning')
+            return false
+        }
     }
     return true
 }
 
-
 /*Funcion para eliminar un registro*/
-function deleteUser(idManagerUser){
-
+function deleteUser(){
+    var idManagerUser = $("#delUser").attr('data-u');
+    var modal = $(this).parent().parent().parent()
     $.ajax({
         url: ip_server +
         "/logged/deleteUser",
@@ -199,8 +333,10 @@ function deleteUser(idManagerUser){
         },
         dataType: "json",
         success: function (response) {
-            var dataSet = response.users;
-            console.log(dataSet);
+            toast('Se ha eliminado el usuario correctamente', 'is-info')
+            modal.removeClass('modal-active')
+            $("#modalDelUser").modal('hide');
+            getUsers()
         }
     });
-}
+  }

@@ -18,14 +18,14 @@ module.exports = function () {
     return con;
 }
 
-/* 
+
 class Database {
     constructor() {
         this.connection = mysql.createConnection( { 
             host : 'localhost',
             user : 'root',
             password : '',
-            database : ''
+            database : 'youprint_shop'
         }); 
         
         this.connection.on('error',function (err) {  
@@ -58,4 +58,4 @@ class Database {
 
 module.exports.db_prom = function(){
     return new Database()
-} */
+}

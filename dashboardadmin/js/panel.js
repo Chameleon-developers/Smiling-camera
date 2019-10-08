@@ -7,8 +7,8 @@ $(function() {
     menu("usuarios")
 
     $("#Usuarios").click(function (e) {
-            isActiveMenu(this)
-            menu("usuarios")
+        isActiveMenu(this)
+        menu("usuarios")
     });
 
     $("#Productos").click(function (e){

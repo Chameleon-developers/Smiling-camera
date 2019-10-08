@@ -1,5 +1,5 @@
 //Importación de módulos
-import { toast, modal, ip_server, setTable } from "./plugins.js"
+import { toast, modal, ip_server, setTable, loadFiles } from "./plugins.js"
 /* toast options: is-info, is-success, is-warning, is-danger */
 import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
 
@@ -8,47 +8,41 @@ export { init }
 
 /* Función para establecer eventos y datos iniciales */
 function init() {
+    
     $('#addProduct').click(function (e) {
         loadFiles("RegistrarProducto.html", "js/RegistrarProducto.js")
     });
 
+    getCategories()
+    getProducts()
+
+    $("#delProd").click(deleteProduct);
+    $('#updateProd').click(updateProduct);
+
     $('#searchProduct').click(function (e) {
-        var cat = $('#searchCategory').value
-        var subcat = $('#searchSubCategory').value
+        var cat = $('#searchCategory').val()
+        var subcat = $('#searchSubCategory').val()
+        
         if (cat != -1) {
             if (subcat != -1) {
-                searchCatSubcat(cat, subcat)
+                getProducts(cat, subcat)
             }
             else {
-                searchCat(cat)
+                getProducts(cat)
             }
         }
     });
 
-    getCategories()
-
-    $('#searchCategory').change(function (e) {
-        var category = $('#searchCategory').value;
-        if (category != -1)
-            getSubCategories($('#searchCategory').value);
-        else {
-            $('#searchCategory').empty()
+    $('#searchCategory').change(function (e){
+        const category = $('#searchCategory option:selected').val()
+        if(category != -1) {
+            getSubCategories(category);
         }
     });
 
 }
 
-/*This function will load the content of the dashboard */
-function loadFiles(htmlFile, jsFile) {
 
-    $('#Content').load(htmlFile, function () {
-
-        importModule(jsFile).then((module) => {
-            module.init();
-        });
-
-    });
-}
 /*This function will load and search the products that belongs those categories or subcategories */
 function searchCatSubcat(idCategory, idSubcategory) {
 
@@ -65,32 +59,32 @@ function getCategories() {
         type: "POST",
         url: ip_server + "/logged/getCategories",
         data: {
-            'bearer': sessionStorage.token,
+            'bearer' : sessionStorage.token,
         },
         dataType: "json",
         success: function (response) {
 
-            setSelectProductCategories(response.categories, "searchCategory")
+            setSelectProductCategories(response.categories)
 
         },
         error: function (error) {
-            if (error.status == '401') {
+            if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html", '_self');
             }
         }
     });
 }
 
-/* Función para agregar las categorias de productos al select*/
-function setSelectProductCategories(productCategories, searchCategory) {
+/* Función para agregar las categorias de productos al select */
+function setSelectProductCategories(productCategories) {
     $.each(productCategories, function (key, value) {
         let option = document.createElement('option')
         option.textContent = value.nameCategory.split(' ')[0]
         option.value = value.idCategory
-        $('#' + searchCategory).append(option)
+        $('#searchCategory').append(option)
     })
 }
+
 /*--------------------------------------------------------------------------------------------------- 
 /* Función para consultar las subcategorias de productos que existen */
 function getSubCategories(idCategory) {
@@ -98,19 +92,18 @@ function getSubCategories(idCategory) {
         type: "POST",
         url: ip_server + "/logged/getSubcategories",
         data: {
-            'bearer': sessionStorage.token,
+            'bearer' : sessionStorage.token,
             'idCategory': idCategory,
         },
         dataType: "json",
         success: function (response) {
 
-            setSelectProductSubCategories(response.subcategories, "searchSubCategory")
+            setSelectProductSubCategories(response.subcategories)
 
         },
         error: function (error) {
-            if (error.status == '401') {
+            if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html", '_self');
             }
         }
     });
@@ -122,145 +115,206 @@ function setSelectProductSubCategories(productCategories, searchSubCategory) {
         let option = document.createElement('option')
         option.textContent = value.nameSubcategory.split(' ')[0]
         option.value = value.idSubcategory
-        $('#' + searchSubCategory).append(option)
+        $('#searchSubCategory').append(option)
     })
 }
 
 
 
 
-/*Funcion para paginar--------------------------------cargar()--------------------------------------------*/
-$(function () {
+function getProducts(idCategory, idSubcategory) {
+    var values = {
+        'bearer': sessionStorage.token
+    }
+    if (idCategory && !idSubcategory) {
+        values = {
+            'bearer': sessionStorage.token,
+            'idCategory': idCategory
+        }
+    } else if (idSubcategory){
+        values = {
+            'bearer': sessionStorage.token,
+            'idSubcategory': idSubcategory
+        }
+    }
+    
     var totalRecords = 0,
-        records = [],
-        displayRecords = [],
-        recPerPage = 8,
-        page = 1,
-        totalPages = 0;
+    records = [],
+    displayRecords = [],
+    recPerPage = 8,
+    page = 1,
+    totalPages = 0;
     $.ajax({
         type: "POST",
-        data: {
-            url: ip_server + "/logged/getProducts",
-            'bearer': sessionStorage.token,
-        },
+        url: ip_server + "/logged/getAllProducts",
+        data: values,
         dataType: 'json',
         success: function (data) {
-            records = data;
+            $('#searchSubCategory').val(-1)
+            
+            var selectList = $("#searchSubCategory")
+            selectList.find("option:gt(0)").remove()
+
+            records = data.products;
             totalRecords = records.length;
             if (totalRecords > 0) {
                 totalPages = Math.ceil(totalRecords / recPerPage);
-                apply_pagination();
+                apply_pagination(totalPages,recPerPage, records,displayRecords);
             } else {
-                $('#content').append('<center>No se encontró ningun Producto</center>');
+                $('#content').append('<center>No se encontró ningún Producto</center>');
             }
 
         }
     });
+}
 
-    function apply_pagination() {
-        $('.pagination').twbsPagination({
-            totalPages: totalPages,
-            visiblePages: 5,
-            onPageClick: function (event, page) {
-                displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
-                endRec = (displayRecordsIndex) + recPerPage;
+function deleteProduct(){
+    var idProduct = $("#delProd").attr('data-p');
+    $.ajax({
+        url: ip_server +
+        "/logged/deleteProduct",
+        type: "POST",
+        data:{
+            'bearer' : sessionStorage.token,
+            'idProduct' : idProduct
+        },
+        dataType: "json",
+        success: function (response) {
+            toast('Se ha eliminado el producto correctamente', 'is-info')
+            modal.removeClass('is-active')
+            $('#modalDelProduct').modal('hide');
+        }
+    });
+}
+function updateProduct(){
 
-                displayRecords = records.slice(displayRecordsIndex, endRec);
-                generate_rows();
-            }
-        });
-    }
+}
+
+function apply_pagination(totalPages, recPerPage, records,displayRecords) {
+    $('.pagination').twbsPagination('destroy');
+    $('.pagination').twbsPagination({
+        totalPages: totalPages,
+        visiblePages: 5,
+        first: 'Primera',
+        prev: 'Anterior',
+        next: 'Siguiente',
+        last: 'Última',
+        onPageClick: function (event, page) {
+            var displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
+            var endRec = (displayRecordsIndex) + recPerPage;
+            console.log('endRec',endRec);
+
+            displayRecords = records.slice(displayRecordsIndex, endRec);
+            generate_rows(displayRecords);
+        }
+    });
+}
 
 
-    function generate_rows() {
-        var div;
-        $('#contentProducts').html('');
-        for (var i = 0; i < displayRecords.length; i++) {
+function generate_rows(displayRecords) {
+    
+    var div = $('<div class="column">');
+    var column1 = $('<div class="columns">');
+    var column2 = $('<div class="columns">');
+    var columnEmpty = $('<div class="column">');
+    $('#content').html('');
+    for (var i = 0; i < displayRecords.length; i++) {
 
+        div = $('<div class="column">');
 
-            div = $('<div class="col-md-3 col-sm-6">');
-                div.append('<div class="single-shop-product">');
+        div.append('<div class="image-flip" ontouchstart="this.classList.toggle("hover");">' +
+                '<div class="mainflip">' +
+                    '<div class="frontside">' +
+                        '<div class="card">' +
 
-                    div.append('<div class="product-upper" style="margin: 0 auto">');
-                            div.append('<a id="img' + displayRecords[i].idProducto + '"  class="sendProducto" style="width: 193px;height: 243px" itemprop="' + displayRecords[i].idProducto + '" href="#"><img src="imagenes/' + displayRecords[i].imagen + '" alt=""></a>');
-                    div.append('</div>');
-
-                    div.append('<h2><a id="text' + displayRecords[i].idProducto + '" class="sendProducto" itemprop="' + displayRecords[i].idProducto + '" href="#">' + displayRecords[i].nombre + '</a></h2>');
-
-                     div.append('<div class="product-carousel-price">');
-                        div.append('<ins style="text-decoration: none;margin-right: 5px;">$' + displayRecords[i].precio + '</ins>');
-                    div.append('</div>');
-
-                div.append('</div>');
-            div.append('</div>');
-
-            div.append('<div class="column">' +
-                '<div class="image-flip" ontouchstart="this.classList.toggle("hover");">' +
-                    '<div classcolumns="mainflip">' +
-                        '<div class="frontside">' +
-                            '<div class="card">' +
-
-                                '<header class="card-header">' +
-                                    '<p class="card-header-title">' + displayRecords[i].nameProduct + ' </p>' +
-                                '</header>' +
+                            '<header class="card-header">' +
+                                '<p class="card-header-title">' + displayRecords[i].nameProduct + ' </p>' +
+                            '</header>' +
                             '<div class="card-image">' +
-                            '<figure class="image is-4by3">' +
-                                '<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">' +
-                            '</figure>' +
+                                '<figure class="image is-4by3">' +
+                                    '<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">' +
+                                '</figure>' +
+                            '</div>' +
+                            '<div class="card-content">' +
+                                '<div class="content">' +
+                                    '<div class="card-text"><strong>Categoría:</strong>' + displayRecords[i].nameCategory + '</div>' +
+                                    '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripción:</strong>' + displayRecords[i].featuresProduct + '</div>' +
+
+                                    '<a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>' + 
+                                '</div>' + 
+                            '</div>' +
                         '</div>' +
-                    '<div class="card-content">' +
-                        '<div class="content">' +
-                            '<div class="card-text"><strong>Categoría:</strong>' + displayRecords[i].nameCategory + '</div>' +
-                                '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripción:</strong>' + displayRecords[i].featuresProduct + '</div>' +
+                    '</div>' +
+                    '<div class="backside">' +
+                        '<div class="card">' +
+                            '<header class="card-header">' +
+                                '<p class="card-header-title">' + displayRecords[i].nameProduct + '</p>' +
+                            '</header>' +
+                            '<div class="card-content text-center">' +
+                                '<div class="content">' +
+                                    '<div class="card-text"><strong>Categoría:</strong>' + displayRecords[i].nameCategory + '</div>' +
+                                    '<div class="card-text"><strong>Subcategoría:</strong>' + displayRecords[i].nameSubcategory + '</div>' +
+                                    '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripción:</strong>' + displayRecords[i].featuresProduct + '</div>' +
+                                    '<div class="card-text"><strong>Dimensiones:</strong>' + displayRecords[i].widthDimension + ' x ' + displayRecords[i].heightDimension + '</div>' +
+                                    '<div class="card-text"><strong>Costo:</strong>' + displayRecords[i].publicPrice + '</div>' +
+                                    '<div class="card-text">' +
+                                        '<strong>Acciones:</strong> ' +
+                                        '<div class="has-addons">' +
+                                            '<a class=" button is-primary is-inverted" publicPrice="' + displayRecords[i].publicPrice + '" publicUtilityPrice="' + displayRecords[i].publicUtilityPrice + '" idDimension="' + displayRecords[i].idDimension + '" nameSubcategory="' + displayRecords[i].nameSubcategory + '" idSubcategory="' + displayRecords[i].idSubcategory + '" nameCategory="' + displayRecords[i].nameCategory + '" idCategory="' + displayRecords[i].idCategory + '" featuresProduct="' + displayRecords[i].featuresProduct + '" enableProduct="' + displayRecords[i].enableProduct + '" nameProduct="' + displayRecords[i].nameProduct + '" idProduct="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>' +
 
-                                '<a href="#" style="color: #4AE0B8"><i class="fa fa-plus"></i></a>');
-                            div.append('</div>');
-                        div.append('</div>');
-                    div.append('</div>');
-                 div.append('</div>');
-                div.append('<div class="backside">' +
-                                    '<div class="card">' +
-                                        '<header class="card-header">' +
-                                            '<p class="card-header-title">' + displayRecords[i].nameProduct + '</p>' +
-                                        '</header>' +
-                                        '<div class="card-content text-center">' +
-                                            '<div class="content">' +
-                                                '<div class="card-text"><strong>Categoría:</strong>' + displayRecords[i].nameCategory + '</div>' +
-                                                '<div class="card-text"><strong>Subcategoría:</strong>' + displayRecords[i].nameSubcategory + '</div>' +
-                                                '<div class="card-text" *ngIf="user.Rol==1"><strong>Descripción:</strong>' + displayRecords[i].featuresProduct + '</div>' +
-                                                '<div class="card-text"><strong>Dimensiones:</strong>' + displayRecords[i].widthDimension + ' x ' + displayRecords[i].heightDimension + '</div>' +
-                                                '<div class="card-text"><strong>Costo:</strong>' + displayRecords[i].publicPrice + '</div>' +
-                                                '<div class="card-text">' +
-                                                    '<strong>Acciones:</strong> ' +
-                                                    '<div class="has-addons">' +
-                                                        '<a class=" button is-primary is-inverted" user="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>' +
-
-                                                        '<a href="#" class=" button is-danger is-inverted" style="padding-left: 10px;" user="' + displayRecords[i].idProduct + '><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>');
-                                                    div.append('</div>');
-
+                                            '<a href="#" class=" button is-danger is-inverted" style="padding-left: 10px;" idProduct="' + displayRecords[i].idProduct + '><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>');
                                                 div.append('</div>');
+
                                             div.append('</div>');
                                         div.append('</div>');
                                     div.append('</div>');
-                            div.append('</div>');
-                div.append('</div>');
+                                div.append('</div>');
+                        div.append('</div>');
                 div.append('</div>');
             div.append('</div>');
+        div.append('</div>');
 
-
-
-            $('#content').append(div);
-
+        if (displayRecords.length < 4) {
+            column1.append(div)
+            if ((i == displayRecords.length - 1) && i < 4) {
+                
+                for (let index = i + 1; index < 4; index++) {
+                    column1.append(columnEmpty.clone())
+                }
+            }
+        } else {
+            if (i < 4) {
+                column1.append(div)
+            } else {
+                column2.append(div)
+                if ((i == displayRecords.length - 1) && i < 8) {
+                
+                    for (let index = i + 1; index < 8; index++) {
+                        column2.append(columnEmpty.clone())
+                    }
+                }
+            }
         }
-        controlarClick();
-    }
 
-    function controlarClick() {
-        $('.sendProducto').unbind();
-        $('.sendProducto').on('click', function () {
-            var send = document.getElementById(this.id).getAttribute('itemprop');
-            sessionStorage.setItem('idProd', send);
-            window.open('single-product.html', '_self');
-        });
     }
-});
+    if (displayRecords.length <= 4) {
+        $('#content').append(column1);
+    } else {
+        $('#content').append(column1);
+        $('#content').append(column2);
+    }
+    controlarClick();
+}
+
+function controlarClick() {
+    $('.sendProducto').unbind();
+    $('.sendProducto').on('click', function () {
+        var send = document.getElementById(this.id).getAttribute('itemprop');
+        sessionStorage.setItem('idProd', send);
+        window.open('single-product.html', '_self');
+    });
+
+    $(".deleteProduct").click(function(e){
+        $("#delProd").attr('data-p', $(this).attr('data-p'));
+    });
+}

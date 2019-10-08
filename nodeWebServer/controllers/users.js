@@ -40,6 +40,7 @@ module.exports.insertUser = function (req, res) {
 
     /* Obtener los datos del Body */
     let data = req.body;
+    
 
     /* Validar datos */
     let check = validationsAddUser(data.mainEmail,data.resetEmail,data.nameUser,data.passwordUser,data.idTypeUser);
@@ -53,11 +54,20 @@ module.exports.insertUser = function (req, res) {
         /* Ejecutar la consulta para la obtención de tipos de usuario */
         con.query(qry,[data.mainEmail,data.resetEmail,data.nameUser,data.passwordUser,typeUser],function (err, result, fields) {
             if (err) {
-                // Internal error message send
-                res.status(500).json({
-                    Status: 'internal error',
-                    message: err
-                });
+                console.log(err.errno);
+                if (err.errno == 1062) {
+                    // Internal error message send
+                    res.status(409).json({
+                        Status: 'Duplicated mainEmail',
+                        message: err
+                    });
+                } else {
+                    // Internal error message send
+                    res.status(500).json({
+                        Status: 'internal error',
+                        message: err
+                    });
+                }
                 con.end();
                 return;
             } else {
@@ -72,7 +82,7 @@ module.exports.insertUser = function (req, res) {
     } else {
         res.status(406).json({
             Status: 'internal error',
-            message: err
+            message: 'Datos no validos'
         });
     }
 
@@ -98,7 +108,7 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, passwordUser, typeU
         return false
     }
 
-    var pattPassword = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
+    var pattPassword = /^(?=.*\d)(?=.*[!@#$&-.+,])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
     if (!pattPassword.test(passwordUser)) {
         return false
     }
@@ -170,6 +180,49 @@ module.exports.getUsers = function (req, res) {
                     Status: 'Success',
                     users: result,
                     message: 'Datos de los usuarios'
+                })
+            } else {
+                res.status(400).json({
+                    Status: 'Failure',
+                    message: 'No existen usuarios para e-commerce YouPrint'
+                })
+                con.end();
+            }
+        }
+    });
+}
+
+/* Obtener usuarios registrados */
+module.exports.getUser = function (req, res) {
+    /* Obtener variable para la conexión a la BD */
+    const con = require('../controllers/dbconn')();
+
+    /* Obtener los datos del Body */
+    let data = req.body;
+
+    /* Establecer query para la obtencion de usuarios */
+    let qry = "SELECT mainEmail, resetEmail, nameUser, idTypeUser, passwordUser FROM managerusers WHERE statusUser=1 AND ecommerceYouPrint=1 AND idManagerUser=?";
+
+    /* Obtiene los valores para la consulta */
+    let values = [data.idManagerUser];
+
+    /* Ejecutar la consulta para la obtención de tipos de usuario */
+    con.query(qry, values, function (err, result, fields) {
+        if (err) {
+            // Internal error message send
+            res.status(500).json({
+                Status: 'Internal Error',
+                message: 'Internal Error'
+            });
+            con.end();
+            return;
+        } else {
+            if (result.length > 0) {
+                // Setup and send of response
+                res.status(200).json({
+                    Status: 'Success',
+                    users: result,
+                    message: 'Datos de los usuario'
                 })
             } else {
                 res.status(400).json({

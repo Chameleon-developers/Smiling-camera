@@ -5,21 +5,11 @@ export { init }
 
 /* Función para establecer eventos y datos iniciales */
 function init() {
-    //getCategories() 
-    //getDimensiones()
+    getCategories() 
+    getDimensions()
     $('#returnProduct').click(function (e){
-       /* $('#addProductCategories')[0].reset();
-        $('#addproductSubCategories')[0].reset();
-        $('#productname')[0].reset();
-        $('#addProductDimensions')[0].reset();
-        $('#productcost')[0].reset();
-        $('#productpic')[0].reset();
-        $('#productcaract')[0].reset();*/
         loadFiles("productos.html","js/productos.js")
     });
-
-    
-
 
     var form = $("#example-advanced-form").show();
  
@@ -29,9 +19,13 @@ function init() {
         transitionEffect: "slideLeft",
         onStepChanging: function (event, currentIndex, newIndex)
         {
-            console.log(($("#addProductCategories option:selected").val()));
             console.log(currentIndex);
             if (currentIndex == 0 && ($("#addProductCategories option:selected").val()) == -1)
+            {
+                form.steps("previous");
+                return false;
+            }
+            if (currentIndex == 1 && ($("#addProductSubCategories option:selected").val()) == -1)
             {
                 form.steps("previous");
                 return false;
@@ -40,11 +34,6 @@ function init() {
             if (currentIndex > newIndex)
             {
                 return true;
-            }
-            // Forbid next action on "Warning" step if the user is to young
-            if (newIndex === 3 && Number($("#age-2").val()) < 18)
-            {
-                return false;
             }
             // Needed in some cases if the user went back (clean up)
             if (currentIndex < newIndex)
@@ -77,53 +66,19 @@ function init() {
         },
         onFinished: function (event, currentIndex)
         {
-            alert("Submitted!");
-        }
-    }).validate({
-        errorPlacement: function errorPlacement(error, element) { element.before(error); },
-        rules: {
-            confirm: {
-                equalTo: "#password-2"
-            }
+            addProduct()
         }
     });
 
-
-    
-    
-    /*
     $('#addProductCategories').change(function (e){
-        if(category != -1) 
-            getSubCategories($('#addProductCategories').value);
+        const category = $('#addProductCategories option:selected').val()
+        if(category != -1) {
+            getSubCategories(category);
+        }
     });
-*/
-  //  console.log($('#stepsAddProduct').is-completed;
 }
 
-
-/*
-var stepsWizard = new StepsWizard(document.getElementById("stepsDemo"), {
-    'beforeNext': function( step_id ) {
-      switch( step_id ) {
-        case 0:
-          // DO YOUR VALIDATION FOR FIRST STEP (steps_id start at 0)
-          break;
-        case 1:
-          // DO YOUR VALIDATION FOR 2nd step
-          break;
-        case 2:
-          // DO YOUR VALIDATION FOR 3rd STEP 
-          break;
-          
-          
-        }
-    }
-  } );*/
-
-
-
-
-/* Función para consultar las categorias de productos que existen 
+/* Función para consultar las categorias de productos que existen */
 function getCategories() {
     $.ajax({
         type: "POST",
@@ -140,13 +95,12 @@ function getCategories() {
         error: function (error) {
             if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html",'_self');
             }
         }
     });
 }
 
-/* Función para agregar las categorias de productos al select  
+/* Función para agregar las categorias de productos al select */
 function setSelectProductCategories(productCategories) {
     $.each(productCategories, function (key, value) {
         let option = document.createElement('option')
@@ -156,7 +110,7 @@ function setSelectProductCategories(productCategories) {
     })
 }
 /*--------------------------------------------------------------------------------------------------- 
-/* Función para consultar las subcategorias de productos que existen 
+/* Función para consultar las subcategorias de productos que existen */
 function getSubCategories(idCategory) {
     $.ajax({
         type: "POST",
@@ -174,15 +128,14 @@ function getSubCategories(idCategory) {
         error: function (error) {
             if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html",'_self');
             }
         }
     });
 }
 
-/* Función para agregar las subcategorias de productos al select  
-function setSelectProductSubCategories(productCategories) {
-    $.each(productCategories, function (key, value) {
+/* Función para agregar las subcategorias de productos al select */
+function setSelectProductSubCategories(productSubcategories) {
+    $.each(productSubcategories, function (key, value) {
         let option = document.createElement('option')
         option.textContent = value.nameSubcategory.split(' ')[0]
         option.value = value.idSubcategory
@@ -191,8 +144,8 @@ function setSelectProductSubCategories(productCategories) {
 }
 
 /*--------------------------------------------------------------------------------------------------- 
-/* Función para consultar las dimensiones de productos que existen 
-function getDimensiones() {
+/* Función para consultar las dimensiones de productos que existen */
+function getDimensions() {
     $.ajax({
         type: "POST",
         url: ip_server + "/logged/getDimensions",
@@ -214,19 +167,15 @@ function getDimensiones() {
     });
 }
 
-/* Función para agregar las categorias de productos al select  
+/* Función para agregar las categorias de productos al select */
 function setSelectProductDimensions(productDimensions) {
     $.each(productDimensions, function (key, value) {
         let option = document.createElement('option')
-        option.textContent = value.widthDimension.split(' ')[0] +" X " + value.heightDimension.split(' ')[0] /*ESTO SE PUEDE???? 
+        option.textContent = value.dimensions.split(' ')[0]
         option.value = value.idDimension
         $('#addProductDimensions').append(option)
     })
 }
-
-
-
-
 
 /* Función para obtener los usuarios ya registrados 
 function getUsers(){
@@ -274,57 +223,51 @@ function getUsers(){
     });
 }
 
-/* Función para agregar un nuevo usuario 
+/* Función para agregar un nuevo usuario */
 function addProduct() {
-    bulmaSteps.attach();
-    var mainEmail = $('#mainEmail').val()
-    var resetEmail = $('#resetEmail').val()
-    var nameUser = $('#nameUser').val()
-    var typeUser = $( "#addTypeUsers option:selected" ).val()
-    var passwordUser = $('#passwordUser').val()
-    var cPasswordUser = $('#cPasswordUser').val()
+    var category = $('#addProductCategories option:selected').val();
+    var subcategory = $('#addproductSubCategories option:selected').val();
+    var nameProduct = $('#productname').val();
+    var idDimension = $('#addProductDimensions option:selected').val();
+    var productCost = $('#productcost').val();
+    var productCaract = $('#productcaract').val();
 
-    var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser)
-    if (check) {
-        var modal = $(this).parent().parent().parent()
-        $.ajax({
-            type: "POST",
-            url: ip_server + "/logged/insertUser",
-            data: {
-                'bearer' : sessionStorage.token,
-                'mainEmail' : mainEmail,
-                'resetEmail' : resetEmail,
-                'nameUser' : nameUser,
-                'idTypeUser' : typeUser,
-                'passwordUser' : passwordUser,
-            },
-            dataType: "json",
-            success: function (response) {
-                toast('Se ha registrado correctamente', 'is-info')
-                /* Vaciar inputs y cerrar modal 
-                modal.removeClass('is-active')
-                var inputsAddModal = modal.find(".input")
-                $.each(inputsAddModal, function(idx, el) {
-                    el.value = ""
-                });
-                getUsers() 
-            },
-            error: function (error) {
-                if(error.status == '401'){
-                    sessionStorage.removeItem('token')
-                    window.open("index.html",'_self');
-                }
-                if(error.status == '406'){
-                    toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
-                    window.open("index.html",'_self');
-                }
-                if(error.status == '406'){
-                    toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
-                    window.open("index.html",'_self');
-                }
+    const form_data = new FormData();
+    form_data.append('image', $('#productpic')[0].files[0]);
+    form_data.append('category', category);
+    form_data.append('subcategory', subcategory);
+    form_data.append('nameProduct', nameProduct);
+    form_data.append('idDimension', idDimension);
+    form_data.append('productCost', productCost);
+    form_data.append('productPic', productPic);
+    form_data.append('productCaract', productCaract);
+
+
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/logged/insertProduct",
+        data: form_data,
+        contentType : false,
+        processData: false,
+        dataType: "json",
+        success: function (response) {
+            toast('Se ha registrado correctamente', 'is-info')
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                sessionStorage.removeItem('token')
+                window.open("index.html",'_self');
             }
-        });
-    }
+            if(error.status == '406'){
+                toast('No se pudo registrar el producto, no se han procesado correctamente los datos', 'is-warning')
+                window.open("index.html",'_self');
+            }
+            if(error.status == '406'){
+                toast('No se pudo registrar el uproducto, Error interno del servidor', 'is-warning')
+                window.open("index.html",'_self');
+            }
+        }
+    });
 }
 
 /* Función para validar que los datos ingresados están correctos 
@@ -362,8 +305,4 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
     }
     return true
 }
-
-
-
-
 */
