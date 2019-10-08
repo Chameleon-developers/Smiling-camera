@@ -39,13 +39,14 @@ module.exports = function (app,secureApp) {
     /* Obtener subcatehgorias existentes */
     secureApp.post('/getSubcategories' ,categories.getSubcategories);
 
+    
     /* DIMENSIONES */
 
     /* Obtener las dimensiones existentes */
     secureApp.post('/getDimensions' ,dimensions.getDimensions);
 
+    
     /* PRODUCTOS */
-
 
     /* Obtener datos de productos registrados */
     secureApp.post('/getAllProducts' ,products.getAllProducts);
@@ -82,5 +83,11 @@ module.exports = function (app,secureApp) {
     
     /* Obtener datos de los kioscos registrados */
     secureApp.post('/getAllKioscos' ,kioscos.getAllKioscos);
+    
+    /* Actualizar datos de kiosko */
+    secureApp.post('/updateKiosco', kioscos.updateKiosco);
+
+    /* Eliminar kiosco (baja logica) */
+    secureApp.post('/deleteKiosco', kioscos.deleteKiosco);
 }
  
