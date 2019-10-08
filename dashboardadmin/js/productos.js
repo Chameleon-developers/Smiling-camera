@@ -203,7 +203,26 @@ function updateProduct(){
     } else {
         enabledProduct = '0'
     }
-    console.log(idProduct, imageProduct, nameProduct, enabledProduct);
+    // $.ajax({
+    //     url: ip_server +
+    //     "/logged/deleteProduct",
+    //     type: "POST",
+    //     data:{
+    //         'bearer' : sessionStorage.token,
+    //         'idProduct' : idProduct
+    //     },
+    //     dataType: "json",
+    //     success: function (response) {
+    //         toast('Se ha eliminado el producto correctamente', 'is-info')
+    //         /* Vaciar inputs y cerrar modal */
+    //         modal.removeClass('modal-active')
+    //         var inputsAddModal = modal.find(".input")
+    //         $.each(inputsAddModal, function(idx, el) {
+    //             el.value = ""
+    //         });
+    //         getProducts();
+    //     }
+    // });
     
 }
 
