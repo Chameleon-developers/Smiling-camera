@@ -202,7 +202,6 @@ function apply_pagination(totalPages, recPerPage, records,displayRecords) {
         onPageClick: function (event, page) {
             var displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
             var endRec = (displayRecordsIndex) + recPerPage;
-            console.log('endRec',endRec);
 
             displayRecords = records.slice(displayRecordsIndex, endRec);
             generate_rows(displayRecords);
@@ -260,9 +259,9 @@ function generate_rows(displayRecords) {
                                     '<div class="card-text">' +
                                         '<strong>Acciones:</strong> ' +
                                         '<div class="has-addons">' +
-                                            '<a class=" button is-primary is-inverted" publicPrice="' + displayRecords[i].publicPrice + '" publicUtilityPrice="' + displayRecords[i].publicUtilityPrice + '" idDimension="' + displayRecords[i].idDimension + '" nameSubcategory="' + displayRecords[i].nameSubcategory + '" idSubcategory="' + displayRecords[i].idSubcategory + '" nameCategory="' + displayRecords[i].nameCategory + '" idCategory="' + displayRecords[i].idCategory + '" featuresProduct="' + displayRecords[i].featuresProduct + '" enableProduct="' + displayRecords[i].enableProduct + '" nameProduct="' + displayRecords[i].nameProduct + '" idProduct="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>' +
+                                            '<a class=" button is-primary is-inverted modal-button updateProduct" data-target="#modalEditProduct" publicPrice="' + displayRecords[i].publicPrice + '" publicUtilityPrice="' + displayRecords[i].publicUtilityPrice + '" idDimension="' + displayRecords[i].idDimension + '" nameSubcategory="' + displayRecords[i].nameSubcategory + '" idSubcategory="' + displayRecords[i].idSubcategory + '" nameCategory="' + displayRecords[i].nameCategory + '" idCategory="' + displayRecords[i].idCategory + '" featuresProduct="' + displayRecords[i].featuresProduct + '" enableProduct="' + displayRecords[i].enableProduct + '" nameProduct="' + displayRecords[i].nameProduct + '" idProduct="' + displayRecords[i].idProduct + '"><span class="icon"><i class="fas fa-lg fa-pen"></i></span></a>' +
 
-                                            '<a href="#" class=" button is-danger is-inverted" style="padding-left: 10px;" idProduct="' + displayRecords[i].idProduct + '><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>');
+                                            '<a href="#" class=" button is-danger is-inverted modal-button deleteProduct"  data-target="#modalDelProduct" style="padding-left: 10px;" idProduct="' + displayRecords[i].idProduct + '><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>');
                                                 div.append('</div>');
 
                                             div.append('</div>');
@@ -303,18 +302,17 @@ function generate_rows(displayRecords) {
         $('#content').append(column1);
         $('#content').append(column2);
     }
+    modal()
     controlarClick();
 }
 
 function controlarClick() {
-    $('.sendProducto').unbind();
-    $('.sendProducto').on('click', function () {
-        var send = document.getElementById(this.id).getAttribute('itemprop');
-        sessionStorage.setItem('idProd', send);
-        window.open('single-product.html', '_self');
+    $('.updateProduct').unbind();
+    $('.updateProduct').on('click', function () {
+        $("#editProd").attr('idProduct', $(this).attr('idProduct'));
     });
 
     $(".deleteProduct").click(function(e){
-        $("#delProd").attr('data-p', $(this).attr('data-p'));
+        $("#delProd").attr('idProduct', $(this).attr('idProduct'));
     });
 }

@@ -25,7 +25,7 @@
         <div class="control select  is-info">
             <!--select  multiple size="8"-->
             <select id="searchSubCategory" class="searchSubCategory">
-                <option value="-1">Seleccion Subcategoría</option>
+                <option value="-1">Selecciona Subcategoría</option>
             </select>
             </div>
         </div>
@@ -55,5 +55,107 @@
     <nav aria-label="Page navigation">
         <center><ul class="pagination" id="pagination2"></ul></center>
     </nav>
+</div>
+
+<!-- Modal DeleteUser --> 
+<div id="modalDelProduct" class="modal modal-fx-fadeInScale">  
+	<div class="modal-background"></div>  
+	<div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Confirmación</p>
+            <button class="delete colorPink" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="column is-10 is-offset-1">
+                <div class="field">
+                    <label class="label">Desea eliminar el producto?</label>
+                </div>
+                <br>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button id="delProd" class="button colorBlue" style="float: right">Eliminar</button>
+            <button class="button deleteBtn colorPink" style="float: right">Cancelar</button>
+        </footer>
+    </div>
+</div>
+
+<!-- Modal EditUser --> 
+<div id="modalEditProduct" class="modal modal-fx-fadeInScale">  
+    <div class="modal-background"></div>  
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Modificar Usuario</p>
+            <button class="delete colorPink" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="column is-10 is-offset-1">
+                <div class="field">
+                    <label for="mainEmailUpdate" class="label">Correo (Usuario):</label>
+                    <p class="control has-icons-left">
+                        <input id="mainEmailUpdate" class="input" type="text" placeholder="Correo (Usuario)">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </p>
+                </div>
+                <br>
+                <div class="field">
+                    <label for="resetEmailUpdate" class="label">Correo para restablecer Contraseña:</label>
+                    <p class="control has-icons-left">
+                        <input id="resetEmailUpdate" class="input" type="text" placeholder="Correo">
+                        <span class="icon is-small is-left">
+                            <i class="far fa-envelope"></i>
+                        </span>
+                    </p>
+                </div>
+                <br>
+                <div class="field">
+                    <label for="nameUserUpdate" class="label">Nombre:</label>
+                    <p class="control has-icons-left">
+                        <input id="nameUserUpdate" class="input" type="text" placeholder="Nombre">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </p>
+                </div>
+                <br>
+                <label for="nameUserUpdate" class="label">Tipo:</label>
+                <div class="field">
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select id="addTypeUsersUpdate">
+                                <option value="-1">Selecciona una Opción</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="field">
+                    <label for="passwordUserUpdate" class="label">Contraseña:</label>
+                    <p class="control has-icons-left">
+                        <input id="passwordUserUpdate" class="input" type="password" placeholder="Password">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+                <br>
+                <div class="field">
+                    <label for="cPasswordUserUpdate" class="label">Confirmar Contraseña:</label>
+                    <p class="control has-icons-left">
+                        <input id="cPasswordUserUpdate" class="input" type="password" placeholder="Password">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button id="editProd" class="button colorBlue" style="float: right">Modificar</button>
+            <button class="button deleteBtn colorPink" style="float: right">Cancelar</button>
+        </footer>
+    </div>
 </div>
     
