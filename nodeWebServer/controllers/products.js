@@ -7,7 +7,7 @@ module.exports.getAllProducts = function (req, res) {
     let data = req.body;
 
     /* Establecer query para la consulta */
-    let qry = "SELECT PRO.idProduct, PRO.nameProduct, PRO.imageProduct, PRO.enableProduct, PRO.featuresProduct, PRO.idCategory, C.nameCategory, PRO.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE statusProduct = 1"
+    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.enabledProduct, PROYP.imageProduct, PRO.featuresProduct, PROYP.idCategory, C.nameCategory, PROYP.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE statusProduct = 1";
 
     if(data.idSubcategory && data.idCategory) {
         qry+=" AND PRO.idCategory = ? AND PRO.idSubcategory=?"
@@ -112,34 +112,29 @@ module.exports.insertProduct = function (req, res) {
     let data = req.body;
     
     // /* Establecer query para la consulta del último insertado */
-    let qry="INSERT INTO productsyouprint(idProduct, nameProduct, imageProduct, idCategory, idSubcategory, enableProduct) VALUES(?, ?, ?, ?, ?, ?)";
-    values = [data.idProduct, data.nameProduct, req.file, data.idCategory, data.idSubcategory, data.enableProduct];
-    console.log(values);
+    let qry="INSERT INTO productsyouprint(idProduct, nameProduct, imageProduct, idCategory, idSubcategory, enabledProduct) VALUES(?, ?, ?, ?, ?, ?)";
+    values = [data.idProduct, data.nameProduct, req.file.filename, data.idCategory, data.idSubcategory, data.enabledProduct];
 
-    // /* Ejecutar la consulta para la obtención del último id insertado en productos */
-    // con.query(qry,function (err, result, fields) {
-    //     if (err) {
-    //         // Internal error message send
-    //         res.status(500).json({
-    //             Status: 'internal error',
-    //             message: err
-    //         });
-    //         con.end();
-    //         return;
-    //     } else {
-
-    //         let lastInserted = ""
-
-    //         if (result[0].ID == null) {
-    //             lastInserted = 1
-    //         } else {
-    //             lastInserted = parseInt(result[0].ID) + 1
-    //         }
-
-    //         insertProductNext(lastInserted, con, data)
-
-    //     }
-    // })
+    /* Ejecutar la consulta para la obtención del último id insertado en productos */
+    con.query(qry,values,function (err, result, fields) {
+        if (err) {
+            // Internal error message send
+            res.status(500).json({
+                Status: 'internal error',
+                message: err
+            });
+            con.end();
+            return;
+        } 
+        else {
+            if (result.affectedRows == 1) {
+                res.status(200).json({
+                    Status: 'Success',
+                    message: 'Se registró correctamente el producto'
+                })
+            }
+        }
+    })
     
 }
 

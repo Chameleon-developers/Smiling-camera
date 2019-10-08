@@ -241,26 +241,24 @@ function addProduct() {
 
         $.ajax({
             type: "POST",
-            url: ip_server + "/logged/insertProduct",
+            url: ip_server + "/insertProduct",
             data: form_data,
             contentType : false,
             processData: false,
             dataType: "json",
             success: function (response) {
                 toast('Se ha registrado correctamente', 'is-info')
+                loadFiles("productos.html","js/productos.js")
             },
             error: function (error) {
                 if(error.status == '401'){
                     sessionStorage.removeItem('token')
-                    window.open("index.html",'_self');
                 }
                 if(error.status == '406'){
                     toast('No se pudo registrar el producto, no se han procesado correctamente los datos', 'is-warning')
-                    window.open("index.html",'_self');
                 }
                 if(error.status == '406'){
                     toast('No se pudo registrar el uproducto, Error interno del servidor', 'is-warning')
-                    window.open("index.html",'_self');
                 }
             }
         });
@@ -281,4 +279,3 @@ function validationsAddProduct(idProduct, imageProduct) {
 
     return true
 }
-*/
