@@ -7,7 +7,7 @@ module.exports.getAllProducts = function (req, res) {
     let data = req.body;
 
     /* Establecer query para la consulta */
-    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.enabledProduct, PROYP.imageProduct, PRO.featuresProduct, PROYP.idCategory, C.nameCategory, PROYP.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND enabledProduct=1 LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE statusProduct = 1";
+    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.enabledProduct, PROYP.imageProduct, PRO.featuresProduct, PROYP.idCategory, C.nameCategory, PROYP.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE PRO.statusProduct = 1";
 
     if(data.idSubcategory && data.idCategory) {
         qry+=" AND PRO.idCategory = ? AND PRO.idSubcategory=?"
@@ -108,9 +108,14 @@ module.exports.insertProduct = function (req, res) {
     // /* Obtener los datos del Body */
     let data = req.body;
     
-    // /* Establecer query para la consulta del último insertado */
+    // /* Establecer query para la consulta para insertar */
     let qry="INSERT INTO productsyouprint(idProduct, nameProduct, imageProduct, idCategory, idSubcategory, enabledProduct) VALUES(?, ?, ?, ?, ?, ?)";
-    values = [data.idProduct, data.nameProduct, req.file.filename, data.idCategory, data.idSubcategory, data.enabledProduct];
+    if(req.file) {
+        values = [data.idProduct, data.nameProduct, req.file.filename, data.idCategory, data.idSubcategory, data.enabledProduct];
+    }
+    else {
+        values = [data.idProduct, data.nameProduct, "default.png", data.idCategory, data.idSubcategory, data.enabledProduct];
+    }
 
     /* Ejecutar la consulta para la obtención del último id insertado en productos */
     con.query(qry,values,function (err, result, fields) {
@@ -142,9 +147,15 @@ module.exports.updateProduct = function (req, res) {
     // /* Obtener los datos del Body */
     let data = req.body;
     
-    // /* Establecer query para la consulta del último insertado */
+    // /* Establecer query para la consulta de modificar producto */
     let qry="UPDATE  productsyouprint SET nameProduct=?, imageProduct=?, enabledProduct=? WHERE idProduct=?";
-    values = [data.nameProduct, req.file.filename, data.enabledProduct, data.idProduct];
+
+    if(req.file) {
+        values = [data.nameProduct, req.file.filename, data.enabledProduct, data.idProduct];
+    }
+    else {
+        values = [data.nameProduct, "default.png", data.enabledProduct, data.idProduct];
+    }
 
     /* Ejecutar la consulta para la obtención del último id insertado en productos */
     con.query(qry,values,function (err, result, fields) {
@@ -179,7 +190,7 @@ module.exports.deleteProduct = function (req, res) {
     console.log(data)
 
     /* Ejecutar la consulta para baja de productos */
-    con.query('UPDATE productsyouprint SET enabledProduct=0 WHERE idProduct=?',values, function (err, result, fields) {
+    con.query('UPDATE productsyouprint SET statusProduct=0 WHERE idProduct=?',values, function (err, result, fields) {
         if (err) {
             // Internal error message send
             res.status(500).json({
