@@ -154,7 +154,7 @@ module.exports.updateProduct = function (req, res) {
         values = [data.nameProduct, req.file.filename, data.enabledProduct, data.idProduct];
     }
     else {
-        values = [data.nameProduct, "default.png", data.enabledProduct, data.idProduct];
+        values = [data.nameProduct, data.imageProduct, data.enabledProduct, data.idProduct];
     }
 
     /* Ejecutar la consulta para la obtención del último id insertado en productos */

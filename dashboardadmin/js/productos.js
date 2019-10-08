@@ -198,31 +198,50 @@ function updateProduct(){
     var imageProduct = $("#editProd").attr('imageProduct');
     var nameProduct = $("#nameProdEdit").val();
     var enabledProduct = ''
+    var modal = $(this).parent().parent().parent()
     if ($('#checkEnable').checked) {
         enabledProduct = '1'
     } else {
         enabledProduct = '0'
     }
-    // $.ajax({
-    //     url: ip_server +
-    //     "/logged/deleteProduct",
-    //     type: "POST",
-    //     data:{
-    //         'bearer' : sessionStorage.token,
-    //         'idProduct' : idProduct
-    //     },
-    //     dataType: "json",
-    //     success: function (response) {
-    //         toast('Se ha eliminado el producto correctamente', 'is-info')
-    //         /* Vaciar inputs y cerrar modal */
-    //         modal.removeClass('modal-active')
-    //         var inputsAddModal = modal.find(".input")
-    //         $.each(inputsAddModal, function(idx, el) {
-    //             el.value = ""
-    //         });
-    //         getProducts();
-    //     }
-    // });
+    const form_data = new FormData()
+    
+    form_data.append('idProduct', idProduct)
+    form_data.append('imageProduct', imageProduct)
+    form_data.append('nameProduct', nameProduct)
+    form_data.append('enabledProduct', enabledProduct)
+    if($('#productpicEdit')[0].files[0]) {
+        form_data.append('image', $('#productpicEdit')[0].files[0])
+    }
+    
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/updateProduct",
+        data: form_data,
+        contentType : false,
+        processData: false,
+        dataType: "json",
+        success: function (response) {
+            toast('Se ha modificado correctamente', 'is-info')
+            modal.removeClass('modal-active')
+            var inputsAddModal = modal.find(".input")
+            $.each(inputsAddModal, function(idx, el) {
+                el.value = ""
+            });
+            getProducts();
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                sessionStorage.removeItem('token')
+            }
+            if(error.status == '406'){
+                toast('No se pudo modificar el producto, no se han procesado correctamente los datos', 'is-warning')
+            }
+            if(error.status == '500'){
+                toast('No se pudo modificar el uproducto, Error interno del servidor', 'is-warning')
+            }
+        }
+    });
     
 }
 
