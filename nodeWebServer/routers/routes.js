@@ -2,7 +2,6 @@ var users=require('../controllers/users');
 var login=require('../controllers/login');
 var products=require('../controllers/products');
 var categories=require('../controllers/categories');
-var dimensions=require('../controllers/dimensions');
 var kioscos=require('../controllers/kioscos');
 var multer = require("multer");
 
@@ -38,12 +37,6 @@ module.exports = function (app,secureApp) {
 
     /* Obtener subcatehgorias existentes */
     secureApp.post('/getSubcategories' ,categories.getSubcategories);
-
-    
-    /* DIMENSIONES */
-
-    /* Obtener las dimensiones existentes */
-    secureApp.post('/getDimensions' ,dimensions.getDimensions);
 
     
     /* PRODUCTOS */
@@ -82,7 +75,7 @@ module.exports = function (app,secureApp) {
     /* Kioscos */
 
     /* Registrar un nuevo kiosco */
-    app.post('/insertKiosco',kioscos.insertKiosco);
+    secureApp.post('/insertKiosco',kioscos.insertKiosco);
     
     /* Obtener datos de los kioscos registrados */
     secureApp.post('/getAllKioscos' ,kioscos.getAllKioscos);

@@ -45,6 +45,20 @@ function init() {
             form.validate().settings.ignore = ":disabled,:hidden";
             return form.valid();
         },
+        onStepChanged: function (event, currentIndex, priorIndex)
+        {
+           
+            // Used to skip the "Warning" step if the user is old enough.
+            if (currentIndex === 2 && Number($("#age-2").val()) >= 18)
+            {
+                form.steps("next");
+            }
+            // Used to skip the "Warning" step if the user is old enough and wants to the previous step.
+            if (currentIndex === 2 && priorIndex === 3)
+            {
+                form.steps("previous");
+            }
+        },
         onFinishing: function (event, currentIndex)
         {
             form.validate().settings.ignore = ":disabled";
@@ -256,7 +270,7 @@ function addProduct() {
     });
 }
 
-/* Función para validar que los datos ingresados están correctos 
+/* Función para validar que los datos ingresados están correctos */
 function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser) {
     if (mainEmail == '' || resetEmail == '' || nameUser == '' || passwordUser == '' || cPasswordUser == '') {
         toast('Completa los campos', 'is-warning')
@@ -291,4 +305,3 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
     }
     return true
 }
-*/
