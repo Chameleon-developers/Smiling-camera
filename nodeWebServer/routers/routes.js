@@ -17,7 +17,7 @@ module.exports = function (app,secureApp) {
     secureApp.post('/getTypeUsers',users.getTypeUsers);
 
     /* Registrar un nuevo usuario */
-    app.post('/insertUser',users.insertUser);
+    secureApp.post('/insertUser',users.insertUser);
     
     /* Modificar datos de un usuario existente */
     secureApp.post('/updateUser',users.updateUser);

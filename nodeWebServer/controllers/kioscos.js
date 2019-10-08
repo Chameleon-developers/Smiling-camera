@@ -56,7 +56,6 @@ module.exports.insertKiosco = function (req, res) {
                 return con.query(qry,[data.nameKiosco,idShopUser])
             }
         } , err =>{
-            console.log(err);
             if (err.errno == 1062) {
                 con.close();
                 // Internal error message send
@@ -80,7 +79,6 @@ module.exports.insertKiosco = function (req, res) {
                 })
             }
         }, err => {
-            console.log(err);
             
             if (err.errno == 1062) {
                 con.close();
@@ -189,8 +187,13 @@ function validationsKioscos(nameUser, passwordUser) {
         return false
     }
     
-    var pattMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (!pattMail.test(nameUser) && nameUser.lenght < 50) {
+    var patt = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (!patt.test(nameUser)) {
+        console.log('entra');
+        
+        return false
+    }
+    if (nameUser.length > 50) {
         return false
     }
 

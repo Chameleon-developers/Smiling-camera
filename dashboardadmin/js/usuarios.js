@@ -291,13 +291,21 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
         return false
     }
     
-    var pattMail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (!pattMail.test(mainEmail) && mainEmail.lenght < 50) {
+    var patt = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (!patt.test(mainEmail)) {
         toast('El correo ingresado en "Correo (Usuario)" no es válido', 'is-warning')
         return false
     }
-    if (!pattMail.test(resetEmail) && resetEmail.lenght < 50) {
+    if (mainEmail.length > 50) {
+        toast('El correo ingresado en "Correo (Usuario)" no puede contener más de 50 caracteres', 'is-warning')
+        return false
+    }
+    if (!patt.test(resetEmail)) {
         toast('El correo ingresado en "Correo para restablecer Contraseña" no es válido', 'is-warning')
+        return false
+    }
+    if (resetEmail.length > 50) {
+        toast('El correo ingresado en "Correo para restablecer Contraseña" no puede contener más de 50 caracteres', 'is-warning')
         return false
     }
     if (mainEmail == resetEmail) {

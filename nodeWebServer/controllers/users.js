@@ -54,7 +54,6 @@ module.exports.insertUser = function (req, res) {
         /* Ejecutar la consulta para la obtención de tipos de usuario */
         con.query(qry,[data.mainEmail,data.resetEmail,data.nameUser,data.passwordUser,typeUser],function (err, result, fields) {
             if (err) {
-                console.log(err.errno);
                 if (err.errno == 1062) {
                     // Internal error message send
                     res.status(409).json({

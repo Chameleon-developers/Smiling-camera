@@ -30,14 +30,15 @@ function addKiosk() {
     var check = validationsAddKiosk(nameKiosk,userKiosk, passwordKiosk, cPasswordKiosk)
     if (check) {
         var modal = $(this).parent().parent().parent()
+        
         $.ajax({
             type: "POST",
-            url: ip_server + "/logged/insertKiosk",
+            url: ip_server + "/logged/insertKiosco",
             data: {
                 'bearer' : sessionStorage.token,
-                'nameKiosk' : nameKiosk,
+                'nameKiosco' : nameKiosk,
                 'userKiosk' : userKiosk,
-                'passwordKiosk' : passwordKiosk,
+                'passwordUser' : passwordKiosk,
             },
             dataType: "json",
             success: function (response) {
@@ -56,10 +57,10 @@ function addKiosk() {
                     window.open("index.html",'_self');
                 }
                 if(error.status == '406'){
-                    toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
+                    toast('No se pudo registrar el Kiosco, no se han procesado correctamente los datos', 'is-warning')
                 }
                 if(error.status == '500'){
-                    toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
+                    toast('No se pudo registrar el Kiosco, Error interno del servidor', 'is-warning')
                 }
             }
         });
@@ -72,11 +73,17 @@ function validationsAddKiosk(nameKiosk,userKiosk, passwordKiosk, cPasswordKiosk)
         toast('Completa los campos', 'is-warning')
         return false
     }
-    var pattMail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/
-    if (!pattMail.test(userKiosk) && userKiosk.lenght < 50) {
+
+    var patt = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if (!patt.test(userKiosk)) {
         toast('El correo ingresado en "Correo (Usuario)" no es válido', 'is-warning')
         return false
     }
+    if (userKiosk.length > 50) {
+        toast('El correo ingresado en "Correo (Usuario)" no puede contener más de 50 caracteres', 'is-warning')
+        return false
+    }
+
     var pattPassword = /^(?=.*\d)(?=.*[!@#$&-.+,])(?=.*[A-Z])(?=.*[a-z])\S{8,45}$/
     if (!pattPassword.test(passwordKiosk)) {
         toast('La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un carácter no alfanumérico ! @ # $ & - . + ,', 'is-warning')
