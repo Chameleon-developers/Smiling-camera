@@ -40,6 +40,7 @@ module.exports.insertUser = function (req, res) {
 
     /* Obtener los datos del Body */
     let data = req.body;
+    
 
     /* Validar datos */
     let check = validationsAddUser(data.mainEmail,data.resetEmail,data.nameUser,data.passwordUser,data.idTypeUser);
@@ -53,11 +54,20 @@ module.exports.insertUser = function (req, res) {
         /* Ejecutar la consulta para la obtención de tipos de usuario */
         con.query(qry,[data.mainEmail,data.resetEmail,data.nameUser,data.passwordUser,typeUser],function (err, result, fields) {
             if (err) {
-                // Internal error message send
-                res.status(500).json({
-                    Status: 'internal error',
-                    message: err
-                });
+                console.log(err.errno);
+                if (err.errno == 1062) {
+                    // Internal error message send
+                    res.status(409).json({
+                        Status: 'Duplicated mainEmail',
+                        message: err
+                    });
+                } else {
+                    // Internal error message send
+                    res.status(500).json({
+                        Status: 'internal error',
+                        message: err
+                    });
+                }
                 con.end();
                 return;
             } else {
@@ -72,7 +82,7 @@ module.exports.insertUser = function (req, res) {
     } else {
         res.status(406).json({
             Status: 'internal error',
-            message: err
+            message: 'Datos no validos'
         });
     }
 

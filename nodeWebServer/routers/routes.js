@@ -3,6 +3,7 @@ var login=require('../controllers/login');
 var products=require('../controllers/products');
 var categories=require('../controllers/categories');
 var dimensions=require('../controllers/dimensions');
+var kioscos=require('../controllers/kioscos');
 var multer = require("multer");
 
 module.exports = function (app,secureApp) {
@@ -16,7 +17,7 @@ module.exports = function (app,secureApp) {
     secureApp.post('/getTypeUsers',users.getTypeUsers);
 
     /* Registrar un nuevo usuario */
-    secureApp.post('/insertUser',users.insertUser);
+    app.post('/insertUser',users.insertUser);
     
     /* Modificar datos de un usuario existente */
     secureApp.post('/updateUser',users.updateUser);
@@ -38,13 +39,14 @@ module.exports = function (app,secureApp) {
     /* Obtener subcatehgorias existentes */
     secureApp.post('/getSubcategories' ,categories.getSubcategories);
 
+    
     /* DIMENSIONES */
 
     /* Obtener las dimensiones existentes */
     secureApp.post('/getDimensions' ,dimensions.getDimensions);
 
+    
     /* PRODUCTOS */
-
 
     /* Obtener datos de productos registrados */
     secureApp.post('/getAllProducts' ,products.getAllProducts);
@@ -72,5 +74,20 @@ module.exports = function (app,secureApp) {
 
     /* Registrar un nuevo producto */
     app.post('/insertProduct' , uploading.single('image'),products.insertProduct);    
+
+
+    /* Kioscos */
+
+    /* Registrar un nuevo kiosco */
+    secureApp.post('/insertKiosco',kioscos.insertKiosco);
+    
+    /* Obtener datos de los kioscos registrados */
+    secureApp.post('/getAllKioscos' ,kioscos.getAllKioscos);
+    
+    /* Actualizar datos de kiosko */
+    secureApp.post('/updateKiosco', kioscos.updateKiosco);
+
+    /* Eliminar kiosco (baja logica) */
+    secureApp.post('/deleteKiosco', kioscos.deleteKiosco);
 }
  
