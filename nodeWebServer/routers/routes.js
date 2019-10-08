@@ -2,7 +2,6 @@ var users=require('../controllers/users');
 var login=require('../controllers/login');
 var products=require('../controllers/products');
 var categories=require('../controllers/categories');
-var dimensions=require('../controllers/dimensions');
 var kioscos=require('../controllers/kioscos');
 var multer = require("multer");
 
@@ -40,19 +39,13 @@ module.exports = function (app,secureApp) {
     secureApp.post('/getSubcategories' ,categories.getSubcategories);
 
     
-    /* DIMENSIONES */
-
-    /* Obtener las dimensiones existentes */
-    secureApp.post('/getDimensions' ,dimensions.getDimensions);
-
-    
     /* PRODUCTOS */
 
     /* Obtener datos de productos registrados */
     secureApp.post('/getAllProducts' ,products.getAllProducts);
 
-    /* Modificar los datos de un producto existente */
-    secureApp.post('/updateProduct' ,products.updateProduct);
+    /* obtener los datos basicos de productos registrados */
+    secureApp.post('/getProducts', products.getProducts);
 
     /* Eliminar un producto (baja logica) */
     secureApp.post('/deleteProduct' ,products.deleteProduct);
@@ -73,7 +66,10 @@ module.exports = function (app,secureApp) {
     });
 
     /* Registrar un nuevo producto */
-    app.post('/insertProduct' , uploading.single('image'),products.insertProduct);    
+    app.post('/insertProduct' , uploading.single('image'),products.insertProduct);   
+    
+    /* Modificar los datos de un producto existente */
+    app.post('/updateProduct' , uploading.single('image'),products.updateProduct); 
 
 
     /* Kioscos */

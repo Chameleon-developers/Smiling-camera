@@ -37,7 +37,7 @@ function getTypeUsers() {
         error: function (error) {
             if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html",'_self');
+                window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/index.html");
             }
         }
     });
@@ -119,7 +119,7 @@ function getUsers(){
         error: function (error) {
             if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html",'_self');
+                window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/index.html");
             }
         }
     });
@@ -149,7 +149,7 @@ function getUser(id) {
         error: function (error) {
             if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html",'_self');
+                window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/index.html");
             }
         }
     });
@@ -192,7 +192,7 @@ function addUser() {
             error: function (error) {
                 if(error.status == '401'){
                     sessionStorage.removeItem('token')
-                    window.open("index.html",'_self');
+                    window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/index.html");
                 }
                 if(error.status == '406'){
                     toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
@@ -260,7 +260,7 @@ function updateUser() {
             error: function (error) {
                 if(error.status == '401'){
                     sessionStorage.removeItem('token')
-                    window.open("index.html",'_self');
+                    window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/index.html");
                 }
                 if(error.status == '406'){
                     toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')

@@ -25,7 +25,7 @@
         <div class="control select  is-info">
             <!--select  multiple size="8"-->
             <select id="searchSubCategory" class="searchSubCategory">
-                <option value="-1">Seleccion Subcategoría</option>
+                <option value="-1">Selecciona Subcategoría</option>
             </select>
             </div>
         </div>
@@ -55,5 +55,77 @@
     <nav aria-label="Page navigation">
         <center><ul class="pagination" id="pagination2"></ul></center>
     </nav>
+</div>
+
+<!-- Modal DeleteUser --> 
+<div id="modalDelProduct" class="modal modal-fx-fadeInScale">  
+	<div class="modal-background"></div>  
+	<div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Confirmación</p>
+            <button class="delete colorPink" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="column is-10 is-offset-1">
+                <div class="field">
+                    <label class="label">Desea eliminar el producto?</label>
+                </div>
+                <br>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button id="delProd" class="button colorBlue" style="float: right">Eliminar</button>
+            <button class="button deleteBtn colorPink" style="float: right">Cancelar</button>
+        </footer>
+    </div>
+</div>
+
+<!-- Modal EditUser --> 
+<div id="modalEditProduct" class="modal modal-fx-fadeInScale">  
+    <div class="modal-background"></div>  
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Modificar Usuario</p>
+            <button class="delete colorPink" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="column is-10 is-offset-1">
+                <div class="field">
+                    <label for="nameProdEdit" class="label">Nombre del producto:</label>
+                    <p class="control has-icons-left">
+                        <input id="nameProdEdit" class="input" type="text" placeholder="Nombre del producto">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                    </p>
+                </div>
+                <br>
+                <div class="field">
+                    <label for="productpicEdit" class="label">Imagen</label>
+                    <p class="control has-icons-left">
+                        <input class="input " name="productpicEdit" id="productpicEdit" type="file" accept=".jpg, .png, .jpeg" autofocus data-validate="require">
+                        <span class="icon is-small is-left">
+                        <i class="fa fa-image"></i>
+                        </span>
+                    </p>
+                </div>
+                <br>
+                <div class="field">
+                    <label for="enable" class="label">Disponible para E-Commerce:</label>
+                    <div class="control">
+                            <label class="checkbox">
+                                <input id="checkEnable" type="checkbox">
+                                Disponible
+                            </label>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button id="editProd" class="button colorBlue" style="float: right">Modificar</button>
+            <button class="button deleteBtn colorPink" style="float: right">Cancelar</button>
+        </footer>
+    </div>
 </div>
     

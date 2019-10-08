@@ -1,125 +1,124 @@
 <section class="columns">
-    <div class="column is-8 is-offset-1">
-        <span class="subtitle is-size-3">
-            Registrar producto
-        </span>
-    </div>
-    <div class="column is-2">
-        <a id="returnProduct" class="button colorBlue">
-            Regresar a Productos
-            <span class='icon' style="padding-left: 20px; padding-right: 10px"><i class='fas fa-lg fa-reply'></i></span>
-        </a>
-    </div>
-  </section>
-  <br>
-  <br>
+  <div class="column is-8 is-offset-1">
+    <span class="subtitle is-size-3">
+      Registrar producto
+    </span>
+  </div>
+
+  <div class="column is-2">
+    <a id="returnProduct" class="button colorBlue">
+      Regresar a Productos
+      <span class='icon' style="padding-left: 20px; padding-right: 10px"><i class='fas fa-lg fa-reply'></i></span>
+    </a>
+  </div>
+</section>
+ 
+<br>
+<br>
 
 
-  <form id="example-advanced-form" action="#">
-      <h2>Categoría</h2>
-      <fieldset style="width: 100%">
-          <div class="step-content has-text-centered">
-            <label for="productCategory" class="label" required>Categoría</label>
-            <div class="field">
-                <div class="control select ">
-                    <!--select  multiple size="8"-->
-                      <select id="addProductCategories" name="addProductCategories">
-                        <option value="-1">Selecciona una Opción</option>
-                    </select>
-                  </div>
-            </div>
+<form id="example-advanced-form" action="#">
+  <h2>Categoría</h2>
+  <fieldset style="width: 100%">
+    <div class="step-content has-text-centered">
+      <label for="productCategory" class="label" required>Categoría</label>
+      <div class="field">
+        <div class="control select">
+          <!--select  multiple size="8"-->
+          <select id="addProductCategories" name="addProductCategories">
+            <option value="-1">Selecciona una Opción</option>
+          </select>
         </div>
-      </fieldset>
-   
-      <h2>Subcategoría</h2>
-      <fieldset>
-          <div class="step-content has-text-centered">
-            <label for="productSubCategory" class="label">Subcategoría</label>
-            <div class="field">
-                <div class="control select ">
-                    <!--select  multiple size="8"-->
-                      <select id="addProductSubCategories">
-                        <option value="-1">Selecciona una Opción</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-      </fieldset>
-   
-      <h2>Info del producto</h2>
-      <fieldset>
-          <div class="step-content has-text-centered">
-            <div class="columns">
-               <div class="column">
-                 <div class="field">
-                   <label for="productname" class="label">Nombre</label>
-                   <p class="control has-icons-left">
-                       <input class="input " name="productname" id="productname" type="text" placeholder="Nombre del producto" autofocus data-validate="require">
-                       <span class="icon is-small is-left">
-                           <i class="fa fa-signature"></i>
-                       </span>
-                   </p>
-                 </div>
-                 <div class="field">
-                   <label class="label" for="addProductDimensions">Dimensiones</label>
-                   <div class="control select  is-fullwidth">
-                       <!--select  multiple size="8"-->
-                         <select name="addProductDimensions" id="addProductDimensions">
-                           <option value="-1">Selecciona una Opción (ancho x alto)</option>
-                       </select>
-                     </div>
-                  </div>
-                 
-               </div>
-               <div class="column">
-                 <div class="field">
-                   <label for="productcost" class="label">Costo</label>
-                   <p class="control has-icons-left">
-                       <input class="input " name="productcost" id="productcost" type="text" placeholder="Costo del producto" autofocus data-validate="require">
-                     <span class="icon is-small is-left">
-                           <i class="fa fa-dollar-sign"></i>
-                       </span>
-                   </p>
-                 </div>
-                       
-
-                 <div class="field">
-                     <label for="productpic" class="label">Foto</label>
-                     <p class="control has-icons-left">
-                         <input class="input " name="productpic" id="productpic" type="file" autofocus data-validate="require">
-                         <span class="icon is-small is-left">
-                             <i class="fa fa-image"></i>
-                         </span>
-                     </p>
-                 </div>
-
-                 
-
-
-
-               </div>
-            </div> 
-            
-            <div class="field">
-               <label for="productcaract" class="label">Características</label>
-               <p class="control has-icons-left">
-                   <textarea class="textarea " name="productcaract" id="productcaract" type="text" placeholder="Características del producto" autofocus data-validate="require"></textarea>
-                   <span class="icon is-small is-left">
-                       <i class="fa fa-signature"></i>
-                   </span>
-               </p>
-             </div>
-               
-
-                     
-                     <div class="field">
-                       <div class="control">
-                         <label class="checkbox">
-                             <input type="checkbox" name="producthabil" id="producthabil">
-                             Habilitado para e-commerce
-                         </label>
-                       </div>
-       </div>
       </div>
-      </fieldset>
-  </form>
+    </div>
+  </fieldset>
+   
+  <h2>Subcategoría</h2>
+  <fieldset>
+    <div class="step-content has-text-centered">
+      <label for="productSubCategory" class="label">Subcategoría</label>
+      <div class="field">
+        <div class="control select">
+          <!--select  multiple size="8"-->
+          <select id="addProductSubCategories">
+            <option value="-1">Selecciona una Opción</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+   
+  <h2>Info del producto</h2>
+  <fieldset>
+    <div class="step-content has-text-centered">
+      <div class="columns">
+        <div class="column">
+
+          <label for="addProduct" class="label">Producto</label>
+          <div class="field">
+            <div class="control select">
+              <!--select  multiple size="8"-->
+              <select id="addProduct">
+                <option value="-1">Selecciona una Opción</option>
+              </select>
+            </div>
+          </div>
+
+          <center>
+            <div class="field">
+              <label for="productid" class="label">Id del producto</label>
+              <p class="control has-icons-left">
+                <input class="input " name="productid" id="productid" type="text" placeholder="Id del producto" disabled>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-signature"></i>
+                </span>
+              </p>
+            <div class="field">
+
+            <div class="field">
+              <label for="productname" class="label">Nombre del producto</label>
+              <p class="control has-icons-left">
+                <input class="input " name="productname" id="productname" type="text" placeholder="Nombre del producto" autofocus data-validate="require">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-signature"></i>
+                </span>
+              </p>
+            <div class="field">
+
+            <div class="field">
+              <label for="productprice" class="label">Precio</label>
+              <p class="control has-icons-left">
+                <input class="input " name="productprice" id="productprice" type="text" placeholder="Precio del producto" disabled>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-signature"></i>
+                </span>
+              </p>
+            <div class="field">
+
+            <div class="field">
+              <label for="productpic" class="label">Imagen</label>
+              <p class="control has-icons-left">
+                <input class="input " name="productpic" id="productpic" type="file" accept=".jpg, .png, .jpeg" autofocus data-validate="require">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-image"></i>
+                </span>
+              </p>
+           </div>
+
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="producthabil" id="producthabil">
+                  Habilitado para e-commerce
+                </label>
+              </div>
+            </div>
+          </center>
+
+          
+
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</form>

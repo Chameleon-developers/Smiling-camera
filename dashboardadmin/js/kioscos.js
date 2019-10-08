@@ -14,7 +14,6 @@ function init() {
     setTable('table')
     modal()
     getKiosks()
-
     $('#addKiosk').click(addKiosk);
     $("#delKiosk").click(deleteKiosk);
     $('#updateKiosk').click(updateKiosk);
@@ -29,7 +28,7 @@ function addKiosk() {
     var userKiosk = $('#userKiosk').val()//correo
     var passwordKiosk = $('#passwordKiosk').val()
     var cPasswordKiosk = $('#cPasswordKiosk').val()
-
+ 
     var check = validationsAddKiosk(nameKiosk,userKiosk, passwordKiosk, cPasswordKiosk)
     if (check) {
         var modal = $(this).parent().parent().parent()
@@ -57,7 +56,7 @@ function addKiosk() {
             error: function (error) {
                 if(error.status == '401'){
                     sessionStorage.removeItem('token')
-                    window.open("index.html",'_self');
+                    window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/index.html");
                 }
                 if(error.status == '406'){
                     toast('No se pudo registrar el Kiosco, no se han procesado correctamente los datos', 'is-warning')
@@ -145,7 +144,7 @@ function getKiosks(){
         error: function (error) {
             if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html",'_self');
+                window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/index.html");
             }
         }
     });
@@ -172,7 +171,7 @@ function getKiosk(id) {
         error: function (error) {
             if(error.status == '401'){
                 sessionStorage.removeItem('token')
-                window.open("index.html",'_self');
+                window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/index.html");
             }
         }
     });
@@ -203,6 +202,12 @@ function updateKiosk() {
                     el.value = ""
                 });
                 getKiosks()
+            },
+            error: function (error) {
+                if(error.status == '401'){
+                    sessionStorage.removeItem('token')
+                    window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/index.html");
+                }
             }
         });
     }
@@ -232,6 +237,12 @@ function deleteKiosk(){
                 el.value = ""
             });
             getKiosks()
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                sessionStorage.removeItem('token')
+                window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/index.html");
+            }
         }
     });
 }

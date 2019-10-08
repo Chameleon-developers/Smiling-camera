@@ -1,0 +1,7 @@
+.select, .control { 
+	width: 80%;
+}
+
+#addProductCategories, #addProductSubCategories, #addProduct {
+	width: 100%;
+}
