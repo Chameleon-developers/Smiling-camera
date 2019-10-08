@@ -31,12 +31,6 @@ module.exports = function (app,secureApp) {
     /* Eliminar usuario registrado */
     secureApp.post('/deleteUser' ,users.deleteUser);
 
-<<<<<<< HEAD
-
-
-
-    /* Obtener Las categorias de productos existentes */
-=======
     /* CATEGORIAS Y SUBCATEGORIAS */
 
     /* Obtener categorias existentes */
@@ -89,7 +83,6 @@ module.exports = function (app,secureApp) {
     
     /* Obtener datos de los kioscos registrados */
     secureApp.post('/getAllKioscos' ,kioscos.getAllKioscos);
->>>>>>> FrontEnd
     
     /* Actualizar datos de kiosko */
     secureApp.post('/updateKiosco', kioscos.updateKiosco);

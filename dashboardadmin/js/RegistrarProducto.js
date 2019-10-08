@@ -19,7 +19,7 @@ function init() {
         transitionEffect: "slideLeft",
         onStepChanging: function (event, currentIndex, newIndex)
         {
-            console.log(currentIndex);
+            console.log(event);
             if (currentIndex == 0 && ($("#addProductCategories option:selected").val()) == -1)
             {
                 form.steps("previous");

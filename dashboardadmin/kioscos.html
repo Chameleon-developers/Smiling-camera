@@ -21,7 +21,7 @@
     <br>
     <br> 
     <section class="content is-medium box">
-        <table id="kioskTable">
+        <table id="table">
             <thead>
                 <tr>
                     <th>Nombre del kiosco</th>
@@ -143,6 +143,29 @@
                 </section>
                 <footer class="modal-card-foot">
                     <button id="editKiosk" class="button colorBlue" style="float: right">Registrar</button>
+                    <button class="button deleteBtn colorPink" style="float: right">Cancelar</button>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Modal DeleteUser --> 
+        <div id="modalDelKiosk" class="modal modal-fx-fadeInScale">  
+            <div class="modal-background"></div>  
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Confirmación</p>
+                    <button class="delete colorPink" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="column is-10 is-offset-1">
+                        <div class="field">
+                            <label class="label">Desea eliminar el kiosco?</label>
+                        </div>
+                        <br>
+                    </div>
+                </section>
+                <footer class="modal-card-foot">
+                    <button id="delKiosco" class="button colorBlue" style="float: right">Eliminar</button>
                     <button class="button deleteBtn colorPink" style="float: right">Cancelar</button>
                 </footer>
             </div>
