@@ -83,6 +83,9 @@ module.exports = function (app,secureApp) {
     
     /* Obtener datos de los kioscos registrados */
     secureApp.post('/getAllKioscos' ,kioscos.getAllKioscos);
+
+    /* Obtener datos de un kiosco registrado */
+    secureApp.post('/getKiosco' ,kioscos.getKiosco);
     
     /* Actualizar datos de kiosko */
     secureApp.post('/updateKiosco', kioscos.updateKiosco);

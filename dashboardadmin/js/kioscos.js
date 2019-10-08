@@ -138,7 +138,7 @@ function getKiosks(){
             });
 
             $(".updateKiosco").click(function(e){
-                getUser($(this).attr('data-k'));
+                getKiosk($(this).attr('data-k'));
                 $('#updateKiosk').attr('data-k', $(this).attr('data-k'));
             });
         },
@@ -151,10 +151,37 @@ function getKiosks(){
     });
 }
 
+/* Funcion para obtener nombre de kiosco */
+function getKiosk(id) {
+    $.ajax({
+        url: ip_server +
+        "/logged/getKiosco",
+        type: "POST",
+        data:{
+            'bearer' : sessionStorage.token,
+            'idKiosco' : id,
+        },
+        dataType: "json",
+        success: function (response) {
+            var dataSet = response.kiosco;
+
+            for (const kiosco of dataSet) {
+                $('#nameKioskUpdate').val(kiosco.nameKiosco);
+            }
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                sessionStorage.removeItem('token')
+                window.open("index.html",'_self');
+            }
+        }
+    });
+}
+
 /* Funcion para actualizar kiosco */
 function updateKiosk() {
-    var idKiosco = $("#delKiosk").attr('data-k');
-    var nameKiosco = $("#nameKiosk").val();
+    var idKiosco = $("#updateKiosk").attr('data-k');
+    var nameKiosco = $("#nameKioskUpdate").val();
 
     if(nameKiosco != '') {
         var modal = $(this).parent().parent().parent()

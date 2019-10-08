@@ -342,8 +342,12 @@ function deleteUser(){
         dataType: "json",
         success: function (response) {
             toast('Se ha eliminado el usuario correctamente', 'is-info')
+            /* Vaciar inputs y cerrar modal */
             modal.removeClass('modal-active')
-            $("#modalDelUser").modal('hide');
+            var inputsAddModal = modal.find(".input")
+            $.each(inputsAddModal, function(idx, el) {
+                el.value = ""
+            });
             getUsers()
         }
     });

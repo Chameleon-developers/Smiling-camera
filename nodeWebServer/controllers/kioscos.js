@@ -32,6 +32,43 @@ module.exports.getAllKioscos = function (req, res) {
     });
 }
 
+/* Obtener un kiosco existente */
+module.exports.getKiosco = function (req, res) {
+    /* Obtener variable para la conexión a la BD */
+    const con = require('../controllers/dbconn')();
+
+    /* Obtener los datos del Body */
+    let data = req.body;
+
+    /* Ejecutar la consulta para consulta de kioscos */
+    con.query('SELECT idKiosco, nameKiosco FROM kioscos WHERE idKiosco=?', [data.idKiosco], function (err, result, fields) {
+        if (err) {
+            // Internal error message send
+            res.status(500).json({
+                Status: 'Internal Error',
+                message: 'Internal Error'
+            });
+            con.end();
+            return;
+        } else {
+            if (result.length > 0) {
+                // Setup and send of response
+                res.status(200).json({
+                    Status: 'Success',
+                    kiosco: result,
+                    message: 'Consulta de Kioscos'
+                })
+            } else {
+                res.status(400).json({
+                    Status: 'Failure',
+                    message: 'No existen kioscos registrados'
+                })
+                con.end();
+            }
+        }
+    });
+}
+
 /* Registrar un nuevo kiosco */
 module.exports.insertKiosco = function (req, res) {
     /* Obtener variable para la conexión a la BD */
@@ -113,34 +150,29 @@ module.exports.insertKiosco = function (req, res) {
 /* Actualizar datos de un kiosco */
 module.exports.updateKiosco = function(req, res) {
      /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn').db_prom();
+    const con = require('../controllers/dbconn')();
 
     /* Obtener los datos del Body */
     let data = req.body;
+    console.log(data)
     
     /* Ejecutar la consulta para eliminar kiosco */
     con.query('UPDATE kioscos SET nameKiosco=? WHERE idKiosco=?', [data.nameKiosco, data.idKiosco], function (err, result, fields) {
         if (err) {
             // Internal error message send
             res.status(500).json({
-                Status: 'Internal Error',
-                message: 'Internal Error'
+                Status: 'internal error',
+                message: err
+                //message: 'Internal error'
             });
             con.end();
             return;
         } else {
-            if (result.length == 1) {
-                // Setup and send of response
+            if (result.affectedRows == 1) {
                 res.status(200).json({
                     Status: 'Success',
-                    message: 'Se actualizo correctamente el kiosco'
+                    message: 'Se modificó correctamente el kiosko'
                 })
-            } else {
-                res.status(400).json({
-                    Status: 'Failure',
-                    message: 'No existen kioscos registrados'
-                })
-                con.end();
             }
         }
     });
