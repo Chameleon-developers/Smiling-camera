@@ -37,7 +37,7 @@ function addKiosk() {
             data: {
                 'bearer' : sessionStorage.token,
                 'nameKiosco' : nameKiosk,
-                'userKiosk' : userKiosk,
+                'nameUser' : userKiosk,
                 'passwordUser' : passwordKiosk,
             },
             dataType: "json",
@@ -107,7 +107,6 @@ function getKiosks(){
         },
         dataType: "json",
         success: function (response) {
-            console.log(response.kioscos);
             
             const table=$("table").DataTable()
             var dataSet = response.kioscos;
@@ -119,8 +118,6 @@ function getKiosks(){
             for (const kiosco of dataSet) {
                 //<a class="button modal-button colorBlue" data-target="#modalAddUser">
                 var iconContainer = "<a class='modal-button' data-target='#modalEditKiosk' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a href='#' class='modal-button' data-target='#modalDelKiosk' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
-
-                console.log(kiosco);
                 
                 table.row.add([
                     kiosco.nameKiosco,
