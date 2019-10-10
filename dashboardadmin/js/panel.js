@@ -6,9 +6,14 @@ $(function() {
 
     menu("usuarios")
 
+    $(".logOut").click(function (e) {
+        sessionStorage.removeItem('token')
+        window.location.assign("http://" + window.location.hostname+"/Smiling-camera/dashboardadmin/index.html");
+    });
+
     $("#Usuarios").click(function (e) {
-            isActiveMenu(this)
-            menu("usuarios")
+        isActiveMenu(this)
+        menu("usuarios")
     });
 
     $("#Productos").click(function (e){

@@ -9,7 +9,7 @@
 
 /*@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');*/
 #team {
-    background: #eee !important;
+    background: #fafafa !important;
     width: 100%;
 }
 
@@ -119,7 +119,9 @@ section .section-title {
     min-height: 312px;
 }
 
-
+#searchCategory, #searchSubCategory {
+    width: 100%;
+}
 
 
 

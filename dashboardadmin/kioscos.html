@@ -21,7 +21,7 @@
     <br>
     <br> 
     <section class="content is-medium box">
-        <table id="kioskTable">
+        <table id="table">
             <thead>
                 <tr>
                     <th>Nombre del kiosco</th>
@@ -101,48 +101,40 @@
                 <section class="modal-card-body">
                     <div class="column is-10 is-offset-1">
                         <div class="field">
-                            <label for="nameKiosk" class="label">Nombre del kiosco:</label>
+                            <label for="nameKioskUpdate" class="label">Nombre del kiosco:</label>
                             <p class="control has-icons-left">
-                                <input id="nameKiosk" class="input" type="text" placeholder="Nombre">
+                                <input id="nameKioskUpdate" class="input" type="text" placeholder="Nombre">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-user"></i>
                                 </span>
                             </p>
                         </div>
-                        <br>
+                </section>
+                <footer class="modal-card-foot">
+                    <button id="updateKiosk" class="button colorBlue" style="float: right">Modificar</button>
+                    <button class="button deleteBtn colorPink" style="float: right">Cancelar</button>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Modal DeleteUser --> 
+        <div id="modalDelKiosk" class="modal modal-fx-fadeInScale">  
+            <div class="modal-background"></div>  
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Confirmación</p>
+                    <button class="delete colorPink" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <div class="column is-10 is-offset-1">
                         <div class="field">
-                                <label for="userKiosk" class="label">Correo (Usuario):</label>
-                                <p class="control has-icons-left">
-                                    <input id="userKiosk" name="userKiosk" class="input" type="text" placeholder="Correo (Usuario)">
-                                    <span class="icon is-small is-left">
-                                        <i class="fa fa-envelope"></i>
-                                    </span>
-                                </p>
-                            </div>
-                        <br>
-                        <div class="field">
-                            <label for="passwordKiosk" class="label">Contraseña:</label>
-                            <p class="control has-icons-left">
-                                <input id="passwordKiosk" class="input" type="password" placeholder="Password">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </p>
+                            <label class="label">Desea eliminar el kiosco?</label>
                         </div>
                         <br>
-                        <div class="field">
-                            <label for="cPasswordKiosk" class="label">Confirmar Contraseña:</label>
-                            <p class="control has-icons-left">
-                                <input id="cPasswordKiosk" class="input" type="password" placeholder="Password">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </p>
-                        </div>
                     </div>
                 </section>
                 <footer class="modal-card-foot">
-                    <button id="editKiosk" class="button colorBlue" style="float: right">Registrar</button>
+                    <button id="delKiosk" class="button colorBlue" style="float: right">Eliminar</button>
                     <button class="button deleteBtn colorPink" style="float: right">Cancelar</button>
                 </footer>
             </div>
