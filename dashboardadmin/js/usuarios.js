@@ -1,13 +1,13 @@
+//Exportación de módulos
+export { init }
+
 //Importación de módulos
 import { toast, modal, ip_server, setTable } from "./plugins.js"
 /* toast options: is-info, is-success, is-warning, is-danger */
 
-//Exportación de módulos
-export { init }
-
 /* Función para establecer eventos y datos iniciales */
 function init() {
-    modal()
+    
     setTable('table')
     getTypeUsers()
     getUsers()
@@ -69,7 +69,8 @@ function getUsers(){
 
             //insertar datos
             for (const usr of dataSet) {
-                var iconContainer = "<a style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a href='#' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
+                //<a class="button modal-button colorBlue" data-target="#modalAddUser">
+                var iconContainer = "<a class='modal-button' data-target='#modalEditUser' style='color: #9696D4'><span class='icon'><i class='fas fa-lg fa-pen'></i></span></a>" + "<a href='#' style='padding-left: 35px;color: #F74784' ><span class='icon'><i class='fas fa-lg fa-trash-alt'></i></span></a>";
                 
                 if (usr.idTypeUser == 1) {
                     tipo = "Administrador";
@@ -85,6 +86,7 @@ function getUsers(){
                 ])
             }
             table.draw();
+            modal()
         },
         error: function (error) {
             if(error.status == '401'){

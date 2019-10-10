@@ -3,8 +3,11 @@ export {
     toast, 
     modal, 
     ip_server, 
-    setTable 
+    setTable,
+    loadFiles
 }
+
+import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
 
 const ip_server = 'http://' + document.domain + ':3500'
 
@@ -32,26 +35,25 @@ function modal() {
     document.querySelectorAll('.modal-button').forEach(function(e) {
         e.addEventListener('click', function() {
             var target = document.querySelector(e.getAttribute('data-target'));
-            modal = target
 
-            target.classList.add('is-active');
+            target.classList.add('modal-active');
 
             target.querySelector('.delete').addEventListener('click',   function() {
-                target.classList.remove('is-active');
+                target.classList.remove('modal-active');
                 target.querySelectorAll(".input").forEach(
                     elemento => elemento.value = ""
                 );
             });
 
             target.querySelector('.deleteBtn').addEventListener('click',   function() {
-                target.classList.remove('is-active');
+                target.classList.remove('modal-active');
                 target.querySelectorAll(".input").forEach(
                     elemento => elemento.value = ""
                 );
             });
 
             target.querySelector('.modal-background').addEventListener('click',   function() {
-                target.classList.remove('is-active');
+                target.classList.remove('modal-active');
                 target.querySelectorAll(".input").forEach(
                     elemento => elemento.value = ""
                 );
@@ -86,5 +88,17 @@ function setTable(nameTable) {
                 '<option value="30">25</option>' +
                 '</select></div>'
         }
+    });
+}
+
+/* Función para cargar los archivos html y js */
+function loadFiles(htmlFile, jsFile) {
+
+    $('#Content').load(htmlFile, function () {
+
+        importModule(jsFile).then((module) => {
+            module.init();
+        });
+
     });
 }

@@ -1,28 +1,164 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>
-          Registrar Producto
-        </title>
-        <link rel="stylesheet" href="css/bulma.min.css">
-        <link rel="stylesheet" href="css/dataTables.bulma.min.css" />
-        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-        <link rel="stylesheet" href="css/bulma-dashboard.min.css">
-        <script src="js/jquery-3.4.1.js"></script>
-        <script src="js/jquery.dataTables.min.js"></script>
-        <script src="js/dataTables.bulma.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/css/bulma-steps.min.css">
-        
+<section class="columns">
+    <div class="column is-8 is-offset-1">
+        <span class="subtitle is-size-3">
+            Registrar producto
+        </span>
+    </div>
+    <div class="column is-2">
+        <a id="returnProduct" class="button colorBlue">
+            Regresar a Productos
+            <span class='icon' style="padding-left: 20px; padding-right: 10px"><i class='fas fa-lg fa-reply'></i></span>
+        </a>
+    </div>
+  </section>
+  <br>
+  <br>
 
-</head>
-<body>
-        <div class="container">
-          <div class="steps" id="stepsDemo">
-            <div class="step-item is-active is-success">
+
+  <form id="example-advanced-form" action="#">
+      <h2>Categoría</h2>
+      <fieldset style="width: 100%">
+          <legend><p class="step-title">Categoría</p></legend>
+          <div class="step-content has-text-centered">
+            <label for="productCategory" class="label" required>Categoría</label>
+            <div class="field">
+                <div class="control select ">
+                    <!--select  multiple size="8"-->
+                      <select id="addProductCategories" name="addProductCategories">
+                        <option value="-1">Selecciona una Opción</option>
+                        <option value="2">ej</option>
+                    </select>
+                  </div>
+            </div>
+        </div>
+
+
+
+
+
+          <input id="password-2" name="password" type="text" class="required">
+          <label for="confirm-2">Confirm Password *</label>
+          <input id="confirm-2" name="confirm" type="text" class="required is-primary">
+          <p>(*) Mandatory</p>
+      </fieldset>
+   
+      <h2>Subcategoría</h2>
+      <fieldset>
+          <legend><p class="step-title">Subcategoría</p></legend>
+          <label for="productSubCategory" class="label">Subcategoría</label>
+          <div class="step-content has-text-centered" beforeNext="{{console.log('siiiii')}}">
+            <label for="productSubCategory" class="label">Subcategoría</label>
+            <div class="field">
+                <div class="control select ">
+                    <!--select  multiple size="8"-->
+                      <select id="addproductSubCategories">
+                        <option value="-1">Selecciona una Opción</option>
+                        <option value="ej">ej</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+          <label for="age-2">Age (The warning step will show up if age is less than 18) *</label>
+          <input id="age-2" name="age" type="text" class="required number">
+          <p>(*) Mandatory</p>
+      </fieldset>
+   
+      <h2>Info del producto</h2>
+      <fieldset>
+          <legend><p class="step-title">Info del producto</p></legend>
+          <div class="step-content has-text-centered">
+            <div class="columns">
+               <div class="column">
+                 <div class="field">
+                   <label for="productname" class="label">Nombre</label>
+                   <p class="control has-icons-left">
+                       <input class="input " name="productname" id="productname" type="text" placeholder="Nombre del producto" autofocus data-validate="require">
+                       <span class="icon is-small is-left">
+                           <i class="fa fa-signature"></i>
+                       </span>
+                   </p>
+                 </div>
+                 <div class="field">
+                   <label class="label" for="addProductDimensions">Dimensiones</label>
+                   <div class="control select  is-fullwidth">
+                       <!--select  multiple size="8"-->
+                         <select name="addProductDimensions" id="addProductDimensions">
+                           <option value="-1">Selecciona una Opción (ancho x alto)</option>
+                           <option value="ej">ej</option>
+                       </select>
+                     </div>
+                  </div>
+                 
+               </div>
+               <div class="column">
+                 <div class="field">
+                   <label for="productcost" class="label">Costo</label>
+                   <p class="control has-icons-left">
+                       <input class="input " name="productcost" id="productcost" type="text" placeholder="Costo del producto" autofocus data-validate="require">
+                     <span class="icon is-small is-left">
+                           <i class="fa fa-dollar-sign"></i>
+                       </span>
+                   </p>
+                 </div>
+                       
+
+                 <div class="field">
+                     <label for="productpic" class="label">Foto</label>
+                     <p class="control has-icons-left">
+                         <input class="input " name="productpic" id="productpic" type="file" autofocus data-validate="require">
+                         <span class="icon is-small is-left">
+                             <i class="fa fa-image"></i>
+                         </span>
+                     </p>
+                 </div>
+
+                 
+
+
+
+               </div>
+            </div> 
+            
+            <div class="field">
+               <label for="productcaract" class="label">Características</label>
+               <p class="control has-icons-left">
+                   <textarea class="textarea " name="productcaract" id="productcaract" type="text" placeholder="Características del producto" autofocus data-validate="require"></textarea>
+                   <span class="icon is-small is-left">
+                       <i class="fa fa-signature"></i>
+                   </span>
+               </p>
+             </div>
+               
+
+                     
+                     <div class="field">
+                       <div class="control">
+                         <label class="checkbox">
+                             <input type="checkbox" name="producthabil" id="producthabil">
+                             Habilitado para e-commerce
+                         </label>
+                       </div>
+       </div>
+      </div>
+          <p>Please go away ;-)</p>
+      </fieldset>
+   
+      <h2>Fin</h2>
+      <fieldset>
+          <legend>Terms and Conditions</legend>
+   
+          <input id="acceptTerms-2" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
+      </fieldset>
+  </form>
+
+
+
+       
+       <div class="content is-medium">
+         <form id="formSteps"></form>
+          <div class="steps is-primary" id="stepsAddProduct">
+            <div class="step-item is-success is-primary is-active">
               <div class="step-marker">1</div>
               <div class="step-details">
                 <p class="step-title">Categoría</p>
@@ -47,186 +183,140 @@
               </div>
             </div>
             <div class="steps-content">
-
-              <div class="step-content has-text-centered is-active">
-                <div class="field is-horizontal">
-                  <div class="field-label is-normal">
-                    <label class="label">Categoría</label>
-                  </div>
-                  <div class="field-body">
+                <div class="step-content has-text-centered">
+                    <label for="productCategory" class="label" required>Categoría</label>
                     <div class="field">
-                          <!--div class="select is-primary is-multiple"-->
-                          <div class="select is-primary control">
+                        <div class="control select ">
                             <!--select  multiple size="8"-->
-                              <select>
-                              <option>Foto Libro</option>
-                              <option>Foto Regalo</option>
-                              <option>Marco con foto</option>
-                              <option>Marco sin foto</option>
+                              <select id="addProductCategories">
+                                <option value="-1">Selecciona una Opción</option>
+                                <option value="ej">ej</option>
                             </select>
                           </div>
                     </div>
-                  </div>
                 </div>
-                <!--div class="field is-horizontal">
-                  <div class="field-label is-normal">
-                    <label class="label">Confirm password</label>
-                  </div>
-                  <div class="field-body">
+  
+  
+                <div class="step-content has-text-centered" beforeNext="{{console.log('siiiii')}}">
+                    <label for="productSubCategory" class="label">Subcategoría</label>
                     <div class="field">
-                      <div class="control has-icon has-icon-right">
-                        <input class="input" type="password" name="password_confirm" id="password_confirm" placeholder="Confirm password" data-validate="require">
-                      </div>
-                    </div>
-                  </div>
-                </div-->
-
-              </div>
-
-
-              <div class="step-content has-text-centered">
-                <div class="field is-horizontal">
-                  <div class="field-label is-normal">
-                    <label class="label">Subcategoría</label>
-                  </div>
-                  <div class="field-body">
-                    <div class="field">
-                        <div class="select is-primary control">
+                        <div class="control select ">
                             <!--select  multiple size="8"-->
-                              <select>
-                              <option>Foto Libro</option>
-                              <option>Foto Regalo</option>
-                              <option>Marco con foto</option>
-                              <option>Marco sin foto</option>
+                              <select id="addproductSubCategories">
+                                <option value="-1">Selecciona una Opción</option>
+                                <option value="ej">ej</option>
                             </select>
-                          </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-
-                <!--div class="field is-horizontal">
-                  <div class="field-label is-normal">
-                    <label class="label">Email</label>
-                  </div>
-                  <div class="field-body">
-                    <div class="field">
-                      <div class="control has-icon has-icon-right">
-                        <input class="input" type="email" name="email" id="email" placeholder="Email" data-validate="require">
-                      </div>
-                    </div>
-                  </div>
-                </div-->
-              </div>
-
-              
-              <div class="step-content has-text-centered">
-                
-                <div class="field is-horizontal">
-                  <div class="field-label is-normal">
-                    <label class="label">Nombre</label>
-                  </div>
-                  <div class="field-body">
-                    <div class="field">
-                      <div class="control">
-                        <input class="input" name="productname" id="productname" type="text" placeholder="Nombre del producto" autofocus data-validate="require">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="field is-horizontal">
-                  <div class="field-label is-normal">
-                    <label class="label">Características</label>
-                  </div>
-                  <div class="field-body">
-                    <div class="field">
-                      <div class="control">
-                        <input class="input" name="productcaract" id="productcaract" type="text" placeholder="Características del producto" autofocus data-validate="require">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="field is-horizontal">
+  
+                  <!--div class="field is-horizontal">
                     <div class="field-label is-normal">
-                      <label class="label">Costo</label>
+                      <label class="label">Email</label>
                     </div>
                     <div class="field-body">
                       <div class="field">
-                        <div class="control">
-                          <input class="input" name="productcost" id="productcost" type="text" placeholder="Costo del producto" autofocus data-validate="require">
+                        <div class="control has-icon has-icon-right">
+                          <input class="input" type="email" name="email" id="email" placeholder="Email" data-validate="require">
                         </div>
                       </div>
                     </div>
-                  </div>
-                  
-                  <div class="field is-horizontal">
-                      <div class="field-label is-normal">
-                        <label class="label">Foto</label>
-                      </div>
-                      <div class="field-body">
+                  </div-->
+                </div>
+  
+                
+                <div class="step-content has-text-centered">
+                   <div class="columns">
+                      <div class="column">
                         <div class="field">
-                          <div class="control">
-                            <input class="input" name="productpic" id="productpic" type="file" autofocus data-validate="require">
-                          </div>
+                          <label for="productname" class="label">Nombre</label>
+                          <p class="control has-icons-left">
+                              <input class="input " name="productname" id="productname" type="text" placeholder="Nombre del producto" autofocus data-validate="require">
+                              <span class="icon is-small is-left">
+                                  <i class="fa fa-signature"></i>
+                              </span>
+                          </p>
                         </div>
-                      </div>
-                    </div>
-
-                  <div class="field is-horizontal">
-                      <div class="field-label is-normal">
-                        <label class="label">Dimensiones</label>
-                      </div>
-                      <div class="field-body">
                         <div class="field">
-                            <div class="select is-primary control">
-                                <!--select  multiple size="8"-->
-                                  <select>
-                                  <option>10 x 10</option>
-                                  <option>20 x 40</option>
-                                  <option>50 x 50</option>
-                                  <option>5 x 5</option>
-                                </select>
-                              </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                          <label class="label"></label>
-                        </div>
-                        <div class="field-body">
-                          <div class="field">
-                            <div class="control">
-                        
-                              <label class="checkbox">
-                                  <input type="checkbox" name="producthabil" id="producthabil">
-                                  Habilitado para e-commerce
-                              </label>
+                          <label class="label" for="addProductDimensions">Dimensiones</label>
+                          <div class="control select  is-fullwidth">
+                              <!--select  multiple size="8"-->
+                                <select name="addProductDimensions" id="addProductDimensions">
+                                  <option value="-1">Selecciona una Opción (ancho x alto)</option>
+                                  <option value="ej">ej</option>
+                              </select>
                             </div>
-                          </div>
+                         </div>
+                        
+                      </div>
+                      <div class="column">
+                        <div class="field">
+                          <label for="productcost" class="label">Costo</label>
+                          <p class="control has-icons-left">
+                              <input class="input " name="productcost" id="productcost" type="text" placeholder="Costo del producto" autofocus data-validate="require">
+                            <span class="icon is-small is-left">
+                                  <i class="fa fa-dollar-sign"></i>
+                              </span>
+                          </p>
                         </div>
+                              
+      
+                        <div class="field">
+                            <label for="productpic" class="label">Foto</label>
+                            <p class="control has-icons-left">
+                                <input class="input " name="productpic" id="productpic" type="file" autofocus data-validate="require">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-image"></i>
+                                </span>
+                            </p>
+                        </div>
+
+                        
+
+
+
+                      </div>
+                   </div> 
+                   
+                   <div class="field">
+                      <label for="productcaract" class="label">Características</label>
+                      <p class="control has-icons-left">
+                          <textarea class="textarea " name="productcaract" id="productcaract" type="text" placeholder="Características del producto" autofocus data-validate="require"></textarea>
+                          <span class="icon is-small is-left">
+                              <i class="fa fa-signature"></i>
+                          </span>
+                      </p>
                     </div>
+                      
+  
+                            
+                            <div class="field">
+                              <div class="control">
+                          
+                                <label class="checkbox">
+                                    <input type="checkbox" name="producthabil" id="producthabil">
+                                    Habilitado para e-commerce
+                                </label>
+                              </div>
+  
 
 
               </div>
-              <div class="step-content has-text-centered">
+
+              
+              
+            </div>
+            <div class="step-content has-text-centered">
                 <h1 class="title is-4">¡Producto registrado!</h1>
-              </div>
             </div>
             <div class="steps-actions">
               <div class="steps-action">
-                <a href="#" data-nav="previous" class="button is-light">Anterior</a>
+                <a href="#" data-nav="previous" class="button is-light" >Anterior</a>
               </div>
               <div class="steps-action">
-                <a href="#" data-nav="next" class="button is-light">Siguiente</a>
+                <a id="nextStep" href="#" data-nav="next" class="button is-light">Siguiente</a>
               </div>
             </div>
           </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/js/bulma-steps.js"></script>
         <script>bulmaSteps.attach();</script>
-</body>
-</html>

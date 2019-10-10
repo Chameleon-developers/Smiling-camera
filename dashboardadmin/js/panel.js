@@ -1,4 +1,5 @@
-import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
+//Importación de módulos
+import { loadFiles } from "./plugins.js"
 
 /* Función para declarar eventos eventos */
 $(function() {
@@ -6,18 +7,28 @@ $(function() {
     menu("usuarios")
 
     $("#Usuarios").click(function (e) {
-        isActiveMenu(this)
-        menu("usuarios")
+            isActiveMenu(this)
+            menu("usuarios")
     });
+
+    $("#Productos").click(function (e){
+        isActiveMenu(this)
+        menu("productos")
+    })
+
+    $("#Kioscos").click(function (e){
+        isActiveMenu(this)
+        menu("kioscos")
+    })
 
 })
 
 /* Función para agregar la clase is-active a una opción del menú */
 function isActiveMenu(element) {
 
-    $(".active").removeClass("active")
+    $(".is-active").removeClass("is-active")
     $(element).addClass("is-active");
-    
+
 }
 
 /* Función para saber que html y js cargar */
@@ -27,17 +38,12 @@ function menu(page) {
       case "usuarios":
         loadFiles("usuarios.html", "js/usuarios.js");
         break;
+     case "productos":
+        loadFiles("productos.html", "js/productos.js");
+        break;
+    case "kioscos":
+        loadFiles("kioscos.html", "js/kioscos.js");
+        break;
     }
-}
+} 
 
-/* Función para cargar los archivos html y js */
-function loadFiles(htmlFile, jsFile) {
-
-    $('#Content').load(htmlFile, function () {
-
-        importModule(jsFile).then((module) => {
-            module.init();
-        });
-
-    });
-}
