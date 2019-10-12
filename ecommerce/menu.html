@@ -11,19 +11,16 @@
   </title>
   <link rel="stylesheet" href="css/bulma.min.css">
    <link rel="stylesheet" type="text/css" href="css/bulma.css">
-  <link rel="stylesheet" href="css/dataTables.bulma.min.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-  <link rel="stylesheet" href="css/bulma-dashboard.min.css">
+  <link rel="stylesheet" href="css/bulma-ecommerce.min.css">
   <link  rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/css/bulma-steps.min.css">
   <link rel="stylesheet" type="text/css" href="css/home.css">
   <link rel="stylesheet" type="text/css" href="css/productos.css">
-  <link rel="stylesheet" type="text/css" href="css/registrarProductos.css">
   <script src="js/jquery-3.4.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
   <script src="js/jquery.twbsPagination.js" type="text/javascript"></script>
-  <link rel="stylesheet" type="text/css" href="css/steps.css">
 
   
   
@@ -37,7 +34,7 @@
           <!-- Left side -->
           <div class="level-left">
             <div class="level-item">
-                <a  href="#">
+                <a  >
                   <img class="logo" src="resources/logo.png" >
                 </a>
             </div>
@@ -83,50 +80,73 @@
 
 
 
-  <div class="dashboard">
-    
+  <div class="ecommerce">
     <!-- main section -->
-    <div class="dashboard-main is-scrollable" style="width: 100">
-        <nav id="MenuEcommerce" class="navbar is-fixed-top is-purple has-text-centered">
-            <div class="navbar-menu has-text-centered">
-                <div class="navbar-start">
-                    <a class="navbar-item">
-                      Home
-                    </a>
-              
-                    <a class="navbar-item">
-                      Documentation
-                    </a>
-              
-                    <div class="navbar-item has-dropdown is-hoverable">
-                      <a class="navbar-link">
-                        More
+    <div class="ecommerce-main is-scrollable" style="width: 100">
+      <div id="MenuEcommerce">
+          <nav  class="navbar is-fixed-top is-purple has-text-centered">
+              <div class="navbar-menu has-text-centered">
+                  <div class="navbar-start">
+                      <a class="navbar-item">
+                        Home
                       </a>
-              
-                      <div class="navbar-dropdown">
-                        <a class="navbar-item">
-                          About
+                
+                      <a class="navbar-item">
+                        Documentation
+                      </a>
+                
+                      <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                          More
                         </a>
-                        <a class="navbar-item">
-                          Jobs
-                        </a>
-                        <a class="navbar-item">
-                          Contact
-                        </a>
-                        <hr class="navbar-divider">
-                        <a class="navbar-item">
-                          Report an issue
-                        </a>
+                
+                        <div class="navbar-dropdown">
+                          <div class="columns">
+                            <div class="column">
+                                <a class="navbar-item">
+                                    <img  src="resources/logo.png" >
+                                  </a>
+                                  <a class="navbar-item">
+                                    Jobs
+                                    <img  src="resources/logo.png" >
+                                  </a>
+                            </div>
+                            <div class="column">
+                                <a class="navbar-item">
+                                    About
+                                  </a>
+                                  <a class="navbar-item">
+                                    Jobs
+                                  </a>
+                                  <a class="navbar-item">
+                                    Contact
+                                  </a>
+                                  <hr class="navbar-divider">
+                                  <a class="navbar-item">
+                                    Report an issue
+                                  </a>
+                            </div>
+                            <div class="column">
+                                <a class="navbar-item">
+                                    Contact
+                                  </a>
+                                  <hr class="navbar-divider">
+                                  <a class="navbar-item">
+                                    Report an issue
+                                  </a>
+                                  
+                            </div>
+                          </div>
+                          
+                        </div>
                       </div>
                     </div>
-                  </div>
-              
-            </div>
-          </nav>
-      <!-- Sección donde se agregará los demás elementos html -->
+              </div>
+            </nav>  
+      </div>
+        <!-- Sección donde se agregará los demás elementos html -->
       <section id="Content" class="section"></section>
     </div>
-
   </div>
   <!-- Contenedor para los Toast -->
   <div class="toast-container">
@@ -135,8 +155,6 @@
 
   <!-- Scripts DataTables -->
   <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-  <script src="js/jquery.dataTables.min.js"></script>
-  <script src="js/dataTables.bulma.min.js"></script>
   <!--Paginacion de productos-->
   <script src="js/jquery.twbsPagination.js" type="text/javascript"></script>
   <!-- Panel Script -->
@@ -144,10 +162,7 @@
   <script src="js/panel.js" type="module"></script>
   <!--Scripts Steps productos-->
   <!--<script src="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/js/bulma-steps.js"></script>-->
-  <script src="js/bulma-steps.js"></script>
   
-  <script>bulmaSteps.attach();</script>
-
 
   <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>

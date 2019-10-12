@@ -1,5 +1,5 @@
 //Importación de módulos
-//import { loadFiles } from "./plugins.js"
+import { loadFiles } from "./plugins.js"
 
 /* Función para declarar eventos eventos */
 $(function() {

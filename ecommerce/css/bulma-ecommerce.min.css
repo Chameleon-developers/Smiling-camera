@@ -1,0 +1,28 @@
+.is-scrollable{overflow-y:auto}
+.ecommerce{display:flex;flex-direction:row;height:100vh}
+.ecommerce-panel{display:flex;flex-direction:column;padding:2rem 1.5rem;flex:0 0 25rem;height:100%}
+.ecommerce-panel.left{width:25rem}
+.ecommerce-panel.right{width:25rem}
+.ecommerce-panel.has-thick-padding{padding:3rem 2rem}
+.ecommerce-panel.is-one-quarter{flex:0 0 25%}
+.ecommerce-panel.is-half{flex:0 0 50%}
+.ecommerce-panel.is-one-third{flex:0 0 33.3333333333%}
+.ecommerce-panel.is-small{flex:0 0 15rem}
+.ecommerce-panel.is-medium{flex:0 0 20rem}
+.ecommerce-panel.is-large{flex:0 0 30rem}
+.ecommerce-panel-header.is-centered,
+.ecommerce-panel-content.is-centered,
+.ecommerce-panel-footer.is-centered{display:flex;justify-content:center}
+.ecommerce-panel-header{margin-bottom:2rem}
+.ecommerce-panel-main{flex:1}
+.ecommerce-panel-footer{margin-top:2rem}
+.ecommerce-main, .ecommerce-main{display:flex;flex:1;display:flex;flex-direction:column;min-height:100vh}
+.ecommerce-main .navbar.is-fixed-top, .ecommerce-main .navbar.is-fixed-top{position:-webkit-sticky;position:sticky;top:0}
+.ecommerce-main .footer, .ecommerce-main .footer{flex:1}
+/*# sourceMappingURL=bulma-ecommerce.min.css.map */
+
+
+.menu-list a:hover{
+    background-color: #9696D4;
+    color: white;
+}

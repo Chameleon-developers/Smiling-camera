@@ -1,6 +1,12 @@
 .headerEcommerce{
     padding: 0.2% 4%;
 }
+
+.ml-auto .dropdown-menu {
+    left: auto !important;
+    right: 0px;
+}
+
 .headerEcommerce img {
     width: 122px;
 }
@@ -9,13 +15,13 @@
     width: 100%;
 }
 
-a {
+.headerEcommerce a {
     color: #1CD5EA;
     cursor: pointer;
     text-decoration: none;
   }
   
-  a strong {
+a strong {
     color: currentColor;
   }
   
@@ -102,23 +108,21 @@ a {
   }
   */
   
-  a {
-    text-decoration: none;
-    background-image: linear-gradient(currentColor, currentColor);
-    background-position: 0% 100%;
-    background-repeat: no-repeat;
-    background-size: 0% 2px;
-    transition: background-size .3s;
-}
+ 
 
-a:hover, a:focus {
-    background-size: 100% 2px;
+.ecommerce-main a:hover, a:focus {
+    background-size: 50% 2px;
 }
- a {
+.ecommerce-main a {
     text-decoration: none;
     background-image: linear-gradient(#4AE0B8, #4AE0B8);
     background-position: 0% 100%;
     background-repeat: no-repeat;
     background-size: 0% 2px;
     transition: background-size .3s;
+}
+
+#MenuEcommerce {
+  padding: 0% 5%;
+  background-color: #9696D4;
 }
