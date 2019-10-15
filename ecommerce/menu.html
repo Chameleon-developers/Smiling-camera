@@ -30,7 +30,7 @@
 <body>
   <section class="headerEcommerce"> 
     <!-- Main container -->
-      <nav class="level">
+      <nav id="mainNav" class="navbar level is-fixed-top">
           <!-- Left side -->
           <div class="level-left">
             <div class="level-item">
@@ -74,80 +74,74 @@
                 </div>
           </div>
         </nav>
-  </section>
-
-
-
-
-
-  <div class="ecommerce">
-    <!-- main section -->
-    <div class="ecommerce-main is-scrollable" style="width: 100">
-      <div id="MenuEcommerce">
-          <nav  class="navbar is-fixed-top is-purple has-text-centered">
-              <div class="navbar-menu has-text-centered">
-                  <div class="navbar-start">
-                      <a class="navbar-item">
-                        Home
-                      </a>
-                
-                      <a class="navbar-item">
-                        Documentation
-                      </a>
-                
-                      <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                          More
+        <div id="MenuEcommerce">
+            <nav id="secondNav" class="navbar is-fixed-top is-purple has-text-centered" style="margin-top: 68px;">
+                <div class="navbar-menu has-text-centered">
+                    <div class="navbar-start" style="padding-left: 100px;">
+                        <a class="navbar-item">
+                          Home
                         </a>
-                
-                        <div class="navbar-dropdown">
-                          <div class="columns">
-                            <div class="column">
-                                <a class="navbar-item">
-                                    <img  src="resources/logo.png" >
-                                  </a>
+                  
+                        <a class="navbar-item">
+                          Documentation
+                        </a>
+                  
+                        <div class="navbar-item has-dropdown is-hoverable">
+                          <a class="navbar-link">
+                            More
+                          </a>
+                  
+                          <div class="navbar-dropdown">
+                            <div class="columns">
+                              <div class="column">
                                   <a class="navbar-item">
-                                    Jobs
-                                    <img  src="resources/logo.png" >
-                                  </a>
+                                      <img  src="resources/logo.png" >
+                                    </a>
+                                    <a class="navbar-item">
+                                      Jobs
+                                      <img  src="resources/logo.png" >
+                                    </a>
+                              </div>
+                              <div class="column">
+                                  <a class="navbar-item">
+                                      About
+                                    </a>
+                                    <a class="navbar-item">
+                                      Jobs
+                                    </a>
+                                    <a class="navbar-item">
+                                      Contact
+                                    </a>
+                                    <hr class="navbar-divider">
+                                    <a class="navbar-item">
+                                      Report an issue
+                                    </a>
+                              </div>
+                              <div class="column">
+                                  <a class="navbar-item">
+                                      Contact
+                                    </a>
+                                    <hr class="navbar-divider">
+                                    <a class="navbar-item">
+                                      Report an issue
+                                    </a>
+                                    
+                              </div>
                             </div>
-                            <div class="column">
-                                <a class="navbar-item">
-                                    About
-                                  </a>
-                                  <a class="navbar-item">
-                                    Jobs
-                                  </a>
-                                  <a class="navbar-item">
-                                    Contact
-                                  </a>
-                                  <hr class="navbar-divider">
-                                  <a class="navbar-item">
-                                    Report an issue
-                                  </a>
-                            </div>
-                            <div class="column">
-                                <a class="navbar-item">
-                                    Contact
-                                  </a>
-                                  <hr class="navbar-divider">
-                                  <a class="navbar-item">
-                                    Report an issue
-                                  </a>
-                                  
-                            </div>
+                            
                           </div>
-                          
                         </div>
                       </div>
-                    </div>
-              </div>
-            </nav>  
-      </div>
-        <!-- Sección donde se agregará los demás elementos html -->
+                </div>
+              </nav>  
+        </div>
+  </section>
+
+  <div class="ecommerce">
+      <!-- Sección donde se agregará los demás elementos html -->
       <section id="Content" class="section"></section>
-    </div>
   </div>
+  
   <!-- Contenedor para los Toast -->
   <div class="toast-container">
 
