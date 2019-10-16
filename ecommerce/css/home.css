@@ -111,7 +111,7 @@ a strong {
  
 
 .ecommerce-main a:hover, a:focus {
-    background-size: 50% 2px;
+    background-size: 100% 2px;
 }
 .ecommerce-main a {
     text-decoration: none;
@@ -125,4 +125,16 @@ a strong {
 #MenuEcommerce {
   padding: 0% 5%;
   background-color: #9696D4;
+}
+
+#MenuEcommerce .navbar-item img {
+  max-height: 8rem !important;
+}
+
+#titMenu {
+  color: #4AE0B8;
+  font-weight: 700;
+  font-size: 200%;
+ /* font-family: 'Quicksand', sans-serif;*/
+ font-family: 'Amatic SC', cursive;
 }
