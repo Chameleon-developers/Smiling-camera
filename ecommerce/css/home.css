@@ -7,15 +7,15 @@
     right: 0px;
 }
 
-.headerEcommerce img {
+#mainNav img {
     width: 122px;
 }
 
-.headerEcommerce .navbar-dropdown {
+#mainNav .navbar-dropdown {
     width: 100%;
 }
 
-.headerEcommerce a {
+#mainNav a {
     color: #1CD5EA;
     cursor: pointer;
     text-decoration: none;
@@ -31,7 +31,18 @@ a strong {
   }
   
 
+#secondNav a {
+    text-decoration: none;
+    background-image: linear-gradient(#4AE0B8, #4AE0B8);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size .3s;
+}
 
+#secondNav a:hover, a:focus {
+  background-size: 50% 2px;
+}
 
 .navbar.is-purple {
     background-color: #9696D4;
