@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="lena.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.css" rel="stylesheet"/>
+</head>
+<body>
+    
+    
+
+    <h1>1 Introduce tu imagen</h1>
+    <!-- Input file donde se adjunta la imagen -->
+    <input type="file" id="image">
+
+    <h1>2 Recorta</h1>
+    <!-- Editor donde se recortará la imagen con la ayuda de croppr.js -->
+    <div id="editor"></div>
+
+    <h1>3 Previsualiza el resultado</h1>
+    <!-- Previa del recorte -->
+    <canvas id="preview"></canvas>
+
+    <h1>4 Resultado en Base64</h1>
+    <!-- Muestra de la imagen recortada en Base64 -->
+    <code id="base64"></code>
+
+    <canvas id="canvas"></canvas>
+    <div id="imagen"></div>
+
+    
+    <!-- Inicia la seccion de filtros-->
+    <div id="main">
+            <!--<canvas id="canvas" width="800" height="600"></canvas>
+            <img id="imagen" width="100px" src="entropy.jpg"/>-->
+            <p>Carga una imagen desde tu equipo para comenzar a editar:</p>
+    
+            <div class="field">
+                <div class="file is-info has-name">
+                    <label class="file-label">
+                        <input type="file" id="imageLoader" class="file-input">
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                Info de la foto
+                            </span>
+                        </span>
+                        <span class="file-name">
+                            Screen Shot 2017-07-29 at 15.54.25.png
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <br>
+            <label for="filter-changer">Selecciona un filtro a aplicar:</label>
+            <div class="field">
+                    <div class="control">
+                        <div class="select is-primary">
+                            <select id="filter-changer">
+                                <option value="none">Ninguno</option>
+                                <option value="gaussian">Gaussiano</option>
+                                <option value="grayscale">Grises</option>
+                                <option value="invert">Invertir color</option>
+                                <option value="saturation">Saturacion</option>
+                                <option value="sepia">Sepia</option>
+                                <option value="sharpen">sharpen</option>
+                                <option value="thresholding">thresholding</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!--<img id="original-image"/>-->
+                <canvas id="filtered-image" ></canvas>
+        </div>
+        <section class="section">
+            <div class="container">
+                <!-- Start Carousel -->
+                <div id="carousel-demo" class="carousel">
+                    
+                    <div class="item-1">
+                        <!-- Slide Content -->
+                        <p>Normal</p>
+                        <br>
+                        <canvas class="filtered-image-carousel"></canvas>
+                        <a class="button is-primary">Probar</a>
+                    </div>
+                    <div class="item-2">
+                        <!-- Slide Content -->
+                        <p>Gaussiano</p>
+                        <br>
+                        <canvas class="filtered-image-carousel"></canvas>
+                        <a class="button is-primary">Probar</a>
+                    </div>
+                    <div class="item-3">
+                        <!-- Slide Content -->
+                        <p>Escala de Grises</p>
+                        <br>
+                        <canvas class="filtered-image-carousel"></canvas>
+                        <a class="button is-primary">Probar</a>
+                    </div>
+                    <div class="item-1">
+                        <!-- Slide Content -->
+                        <p>Invertir color</p>
+                        <br>
+                        <canvas class="filtered-image-carousel" ></canvas>
+                        <a class="button is-primary">Probar</a>
+                    </div>
+                    <div class="item-2">
+                        <!-- Slide Content -->
+                        <p>Saturacion</p>
+                        <br>
+                        <canvas width="160px" height="90px" class="filtered-image-carousel" ></canvas>
+                        <a class="button is-primary">Probar</a>
+                    </div>
+                    <div class="item-3">
+                        <!-- Slide Content -->
+                        <p>Sepia</p>
+                        <br>
+                        <canvas class="filtered-image-carousel" ></canvas>
+                        <a class="button is-primary">Probar</a>
+                    </div>
+                    <div class="item-1">
+                        <!-- Slide Content -->
+                        <p>sharpen</p>
+                        <br>
+                        <canvas class="filtered-image-carousel" ></canvas>
+                        <a class="button is-primary">Probar</a>
+                    </div>
+                    <div class="item-2">
+                        <!-- Slide Content -->
+                        <p>thresholding</p>
+                        <br>
+                        <canvas class="filtered-image-carousel" ></canvas>
+                        <a class="button is-primary">Probar</a>
+                    </div>
+                            
+                </div>
+                <!-- End Carousel -->
+            </div>
+        </section>
+        <script>
+                // Esperamos a que todo el HTML esté cargado antes de ejecutar Javascrip
+            document.addEventListener('DOMContentLoaded', () => {
+        
+            // Input File
+            const inputImage = document.querySelector('#image');
+            // Nodo donde estará el editor
+            const editor = document.querySelector('#editor');
+            // El canvas donde se mostrará la previa
+            const miCanvas = document.querySelector('#preview');
+            // Contexto del canvas
+            const contexto = miCanvas.getContext('2d');
+            // Ruta de la imagen seleccionada
+            let urlImage = undefined;
+            // Evento disparado cuando se adjunte una imagen
+            inputImage.addEventListener('change', abrirEditor, false);
+        
+            /**
+            * Método que abre el editor con la imagen seleccionada
+            */
+            function abrirEditor(e) {
+                // Obtiene la imagen
+                urlImage = URL.createObjectURL(e.target.files[0]);
+        
+                // Borra editor en caso que existiera una imagen previa
+                editor.innerHTML = '';
+                let cropprImg = document.createElement('img');
+                cropprImg.setAttribute('id', 'croppr');
+                editor.appendChild(cropprImg);
+        
+                // Limpia la previa en caso que existiera algún elemento previo
+                contexto.clearRect(0, 0, miCanvas.width, miCanvas.height);
+        
+                // Envia la imagen al editor para su recorte
+                document.querySelector('#croppr').setAttribute('src', urlImage);
+        
+                // Crea el editor
+                new Croppr('#croppr', {
+                    aspectRatio: 1,
+                    startSize: [70, 70],
+                    onCropEnd: recortarImagen
+                })
+            }
+        
+            /**
+            * Método que recorta la imagen con las coordenadas proporcionadas con croppr.js
+            */
+            function recortarImagen(data) {
+                // Variables
+                const inicioX = data.x;
+                const inicioY = data.y;
+                const nuevoAncho = data.width;
+                const nuevaAltura = data.height;
+                const zoom = 1;
+                let imagenEn64 = '';
+                // La imprimo
+                miCanvas.width = nuevoAncho;
+                miCanvas.height = nuevaAltura;
+                // La declaro
+                let miNuevaImagenTemp = new Image();
+                // Cuando la imagen se carge se procederá al recorte
+                miNuevaImagenTemp.onload = function() {
+                    // Se recorta
+                    contexto.drawImage(miNuevaImagenTemp, inicioX, inicioY, nuevoAncho * zoom, nuevaAltura * zoom, 0, 0, nuevoAncho, nuevaAltura);
+                    
+                    // Se transforma a base64
+                    imagenEn64 = miCanvas.toDataURL("image/jpeg");
+                    // Mostramos el código generado
+                    document.querySelector('#base64').textContent = imagenEn64;
+                    
+                    var img = document.getElementById("imagen");
+                    img.innerHTML='<img id="original-image" src="'+imagenEn64+'"/>'; 
+
+                    var originalImage = document.getElementById("original-image");
+                    console.log(typeof originalImage);
+                    var filteredImageCanvas = document.getElementById("filtered-image");
+                    var filteredImage= document.getElementsByClassName("filtered-image-carousel");
+                    var filterChanger = document.getElementById("filter-changer");
+                    var imageUploaded = false;
+                    var reader;
+                    originalImage.onload = function(){
+                        console.log("Image Succesfully Loaded");
+                        imageUploaded = true;
+                        LenaJS.filterImage(filteredImage[0], LenaJS["none"], originalImage,160,90);
+                        LenaJS.filterImage(filteredImage[1], LenaJS["gaussian"], originalImage,160,90);
+                        LenaJS.filterImage(filteredImage[2], LenaJS["grayscale"], originalImage,160,90);
+                        LenaJS.filterImage(filteredImage[3], LenaJS["invert"], originalImage,160,90);
+                        LenaJS.filterImage(filteredImage[4], LenaJS["saturation"], originalImage,160,90);
+                        LenaJS.filterImage(filteredImage[5], LenaJS["sepia"], originalImage,160,90);
+                        LenaJS.filterImage(filteredImage[6], LenaJS["sharpen"], originalImage,160,90);
+                        LenaJS.filterImage(filteredImage[7], LenaJS["thresholding"], originalImage,160,90);
+                    };
+                    
+                   // document.querySelector('#base64HTML').textContent = '<img src="' + imagenEn64.slice(0, 40) + '...">';            
+                }
+                // Proporciona la imagen cruda, sin editarla por ahora
+                miNuevaImagenTemp.src = urlImage;
+            }
+            });
+            //https://programadorwebvalencia.com/javascript-recortar-y-previsualizar-imagen/?fbclid=IwAR2EJk0BqzVhaMxk3NooBlSUO4_EyMr930FywILraB-YaB06ylFU58kxPUE
+            </script>
+        <script>
+           // var imageLoader = document.getElementById('imageLoader');
+            
+
+            // Handle image upload into img tag
+            /*imageLoader.addEventListener('change', function(e){
+                reader = new FileReader();
+                
+                reader.onload = function(event){
+                    originalImage.onload = function(){
+                        console.log("Image Succesfully Loaded");
+    
+                        imageUploaded = true;
+                    };
+                    originalImage.src = event.target.result;
+                };
+                reader.readAsDataURL(event.target.files[0]);
+                
+                var prom = new Promise((resolve,reject)=>{
+                    window.setTimeout(function(){       
+                        resolve(imageUploaded);
+                    },3000);
+                    
+                });
+                prom.then(function(){
+                    LenaJS.filterImage(filteredImage[0], LenaJS["none"], originalImage,160,90);
+                    LenaJS.filterImage(filteredImage[1], LenaJS["gaussian"], originalImage,160,90);
+                    LenaJS.filterImage(filteredImage[2], LenaJS["grayscale"], originalImage,160,90);
+                    LenaJS.filterImage(filteredImage[3], LenaJS["invert"], originalImage,160,90);
+                    LenaJS.filterImage(filteredImage[4], LenaJS["saturation"], originalImage,160,90);
+                    LenaJS.filterImage(filteredImage[5], LenaJS["sepia"], originalImage,160,90);
+                    LenaJS.filterImage(filteredImage[6], LenaJS["sharpen"], originalImage,160,90);
+                    LenaJS.filterImage(filteredImage[7], LenaJS["thresholding"], originalImage,160,90);
+                });
+    
+            }, false);
+            originalImage.onload = function(){
+                console.log("Image Succesfully Loaded");
+                imageUploaded = true;
+            };*/
+            
+            /*
+            filterChanger.addEventListener("change", function(e){
+                var filter = filterChanger.value;
+                
+                if(imageUploaded && filter != "none"){
+                
+                    // Apply filter
+                    LenaJS.filterImage(filteredImageCanvas, LenaJS[filter], originalImage);
+                }
+            }, false);   
+            */
+        </script>
+        
+        <script>
+            bulmaCarousel.attach('#carousel-demo', {
+                slidesToScroll: 1,
+                slidesToShow: 4
+            });
+        </script>
+</body>
+</html>
