@@ -41,13 +41,13 @@ function menu(page) {
     
     switch (page) {
       case "usuarios":
-        loadFiles("usuarios.html", "js/usuarios.js");
+      //  loadFiles("usuarios.html", "js/usuarios.js");
         break;
      case "productos":
-        loadFiles("productos.html", "js/productos.js");
+      //  loadFiles("productos.html", "js/productos.js");
         break;
     case "kioscos":
-        loadFiles("kioscos.html", "js/kioscos.js");
+      //  loadFiles("kioscos.html", "js/kioscos.js");
         break;
     }
 } 
