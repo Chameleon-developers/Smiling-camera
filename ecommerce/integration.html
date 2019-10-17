@@ -19,8 +19,27 @@
 
     <h1>1 Introduce tu imagen</h1>
     <!-- Input file donde se adjunta la imagen -->
-    <input type="file" id="image">
-
+    
+    <p>Carga una imagen desde tu equipo para comenzar a editar:</p>
+    <div class="field">
+        <div class="file is-info has-name">
+            <label class="file-label">
+                <input type="file" id="image" class="file-input">
+                <span class="file-cta">
+                    <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                        Info de la foto
+                    </span>
+                </span>
+                <span class="file-name">
+                    Screen Shot 2017-07-29 at 15.54.25.png
+                </span>
+            </label>
+        </div>
+    </div>
+    <br>
     <h1>2 Recorta</h1>
     <!-- Editor donde se recortará la imagen con la ayuda de croppr.js -->
     <div id="editor"></div>
@@ -29,9 +48,9 @@
     <!-- Previa del recorte -->
     <canvas id="preview"></canvas>
 
-    <h1>4 Resultado en Base64</h1>
+    <!--<h1>4 Resultado en Base64</h1>-->
     <!-- Muestra de la imagen recortada en Base64 -->
-    <code id="base64"></code>
+    <!--<code id="base64"></code>-->
 
     <canvas id="canvas"></canvas>
     <div id="imagen"></div>
@@ -39,48 +58,10 @@
     
     <!-- Inicia la seccion de filtros-->
     <div id="main">
-            <!--<canvas id="canvas" width="800" height="600"></canvas>
-            <img id="imagen" width="100px" src="entropy.jpg"/>-->
-            <p>Carga una imagen desde tu equipo para comenzar a editar:</p>
-    
-            <div class="field">
-                <div class="file is-info has-name">
-                    <label class="file-label">
-                        <input type="file" id="imageLoader" class="file-input">
-                        <span class="file-cta">
-                            <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                            </span>
-                            <span class="file-label">
-                                Info de la foto
-                            </span>
-                        </span>
-                        <span class="file-name">
-                            Screen Shot 2017-07-29 at 15.54.25.png
-                        </span>
-                    </label>
-                </div>
-            </div>
-            <br>
-            <label for="filter-changer">Selecciona un filtro a aplicar:</label>
-            <div class="field">
-                    <div class="control">
-                        <div class="select is-primary">
-                            <select id="filter-changer">
-                                <option value="none">Ninguno</option>
-                                <option value="gaussian">Gaussiano</option>
-                                <option value="grayscale">Grises</option>
-                                <option value="invert">Invertir color</option>
-                                <option value="saturation">Saturacion</option>
-                                <option value="sepia">Sepia</option>
-                                <option value="sharpen">sharpen</option>
-                                <option value="thresholding">thresholding</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <!--<img id="original-image"/>-->
+            
+    <label for="filter-changer">Selecciona un filtro a aplicar:</label>
+ 
+    <br>
                 <canvas id="filtered-image" ></canvas>
         </div>
         <section class="section">
@@ -217,7 +198,7 @@
                     // Se transforma a base64
                     imagenEn64 = miCanvas.toDataURL("image/jpeg");
                     // Mostramos el código generado
-                    document.querySelector('#base64').textContent = imagenEn64;
+                    //document.querySelector('#base64').textContent = imagenEn64;
                     
                     var img = document.getElementById("imagen");
                     img.innerHTML='<img id="original-image" src="'+imagenEn64+'"/>'; 
@@ -248,61 +229,9 @@
                 miNuevaImagenTemp.src = urlImage;
             }
             });
-            //https://programadorwebvalencia.com/javascript-recortar-y-previsualizar-imagen/?fbclid=IwAR2EJk0BqzVhaMxk3NooBlSUO4_EyMr930FywILraB-YaB06ylFU58kxPUE
+            
             </script>
-        <script>
-           // var imageLoader = document.getElementById('imageLoader');
-            
-
-            // Handle image upload into img tag
-            /*imageLoader.addEventListener('change', function(e){
-                reader = new FileReader();
-                
-                reader.onload = function(event){
-                    originalImage.onload = function(){
-                        console.log("Image Succesfully Loaded");
-    
-                        imageUploaded = true;
-                    };
-                    originalImage.src = event.target.result;
-                };
-                reader.readAsDataURL(event.target.files[0]);
-                
-                var prom = new Promise((resolve,reject)=>{
-                    window.setTimeout(function(){       
-                        resolve(imageUploaded);
-                    },3000);
-                    
-                });
-                prom.then(function(){
-                    LenaJS.filterImage(filteredImage[0], LenaJS["none"], originalImage,160,90);
-                    LenaJS.filterImage(filteredImage[1], LenaJS["gaussian"], originalImage,160,90);
-                    LenaJS.filterImage(filteredImage[2], LenaJS["grayscale"], originalImage,160,90);
-                    LenaJS.filterImage(filteredImage[3], LenaJS["invert"], originalImage,160,90);
-                    LenaJS.filterImage(filteredImage[4], LenaJS["saturation"], originalImage,160,90);
-                    LenaJS.filterImage(filteredImage[5], LenaJS["sepia"], originalImage,160,90);
-                    LenaJS.filterImage(filteredImage[6], LenaJS["sharpen"], originalImage,160,90);
-                    LenaJS.filterImage(filteredImage[7], LenaJS["thresholding"], originalImage,160,90);
-                });
-    
-            }, false);
-            originalImage.onload = function(){
-                console.log("Image Succesfully Loaded");
-                imageUploaded = true;
-            };*/
-            
-            /*
-            filterChanger.addEventListener("change", function(e){
-                var filter = filterChanger.value;
-                
-                if(imageUploaded && filter != "none"){
-                
-                    // Apply filter
-                    LenaJS.filterImage(filteredImageCanvas, LenaJS[filter], originalImage);
-                }
-            }, false);   
-            */
-        </script>
+        
         
         <script>
             bulmaCarousel.attach('#carousel-demo', {
