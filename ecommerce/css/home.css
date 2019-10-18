@@ -2,10 +2,6 @@
     padding: 0.2% 4%;
 }
 
-#mainNav {
-  padding: 0% 3%;
-}
-
 .ml-auto .dropdown-menu {
     left: auto !important;
     right: 0px;
