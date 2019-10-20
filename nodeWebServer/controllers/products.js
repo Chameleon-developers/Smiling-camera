@@ -58,7 +58,7 @@ module.exports.getAllProducts = function (req, res) {
     });
 }
 
-/* Obtener caracteristicas basicas de productos */
+/* Obtener nombre e id de productos */
 module.exports.getProducts = function (req, res) {
     /* Obtener variable para la conexión a la BD */
     const con = require('./dbconn')();
@@ -67,11 +67,11 @@ module.exports.getProducts = function (req, res) {
     let data = req.body;
 
     /* Establecer query para la consulta */
-    let qry = "SELECT PRO.idProduct, PRO.nameProduct, PRO.imageProduct, PRI.publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1 AND PRO.idCategory = ? AND PRO.idSubcategory=?";
+    let qry = "SELECT idProduct, nameProduct FROM products  WHERE statusProduct = 1 AND idCategory = ? AND idSubcategory=?";
 
     values=[data.idCategory, data.idSubcategory];
     
-    /* Ejecutar la consulta para la obtención de tipos de productos */
+    /* Ejecutar la consulta para la obtención de productos */
     con.query(qry,values, function (err, result, fields) {
         if (err) {
             // Internal error message send
@@ -99,6 +99,49 @@ module.exports.getProducts = function (req, res) {
         }
     });
 }
+
+/* Obtener caracteristicas basicas de productos */
+module.exports.getProductsById = function (req, res) {
+    /* Obtener variable para la conexión a la BD */
+    const con = require('./dbconn')();
+
+    /* Obtener los datos del Body */
+    let data = req.body;
+
+    /* Establecer query para la consulta */
+    let qry = "SELECT PRO.idProduct, PRO.nameProduct, PRO.imageProduct, PRI.publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1 AND PRO.idProduct=?";
+
+    values=[data.idProduct];
+    
+    /* Ejecutar la consulta para la obtención de producto */
+    con.query(qry,values, function (err, result, fields) {
+        if (err) {
+            // Internal error message send
+            res.status(500).json({
+                Status: 'Internal Error',
+                message: 'Internal Error'
+            });
+            con.end();
+            return;
+        } else {
+            if (result.length >= 0) {
+                // Setup and send of response
+                res.status(200).json({
+                    Status: 'Success',
+                    products: result,
+                    message: 'Datos de los productos'
+                })
+            } else {
+                res.status(400).json({
+                    Status: 'Failure',
+                    message: 'No existen productos'
+                })
+                con.end();
+            }
+        }
+    });
+}
+
 
 /* Registrar un nuevo Producto */
 module.exports.insertProduct = function (req, res) {

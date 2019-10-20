@@ -2,8 +2,7 @@
 import {loadFiles, toast, modal, ip_server } from "./plugins.js"
 //Exportación de módulos
 export { init }
-//Variable para guardar productos
-var tmpProducts;
+//variable para definir si esta activo checkbox
 var producthabil = 0;
 
 /* Función para establecer eventos y datos iniciales */
@@ -75,7 +74,7 @@ function init() {
     $('#addProduct').change(function (e){
         const idProduct = $('#addProduct option:selected').val()
         if(idProduct != -1) {
-            setProductInformation(idProduct);
+            getProductInformation(idProduct);
         }
         else {
             $('#productid').val(null);
@@ -176,9 +175,8 @@ function getProducts(){
         },
         dataType: "json",
         success: function (response) {
-            tmpProducts = response.products
 
-            setSelectProduct(tmpProducts);
+            setSelectProduct(response.products);
         },
         error: function (error) {
             if(error.status == '401'){
@@ -190,24 +188,46 @@ function getProducts(){
 }
 
 /* Función para agregar las subcategorias de productos al select */
-function setSelectProduct(tmpProducts) {
+function setSelectProduct(products) {
     $('#addProduct option[value!="-1"]').remove();
-    $.each(tmpProducts, function (key, value) {
+    $.each(products, function (key, value) {
         let option = document.createElement('option')
         option.textContent = value.nameProduct
         option.value = value.idProduct
         $('#addProduct').append(option)
     })
 }
+
 /*--------------------------------------------------------------------------------------------------- 
-/* Funcion para cargar informacion de producto */
-function setProductInformation(idProduct) {
-    $.each(tmpProducts, function (key, value) {
-        if(value.idProduct == idProduct) {
-            $('#productid').val(value.idProduct);
-            $('#productname').val(value.nameProduct);
-            $('#productprice').val(value.publicPrice);
+/* Funcion para obtener informacion de producto */
+function getProductInformation(idProduct) {
+    $.ajax({
+        url: ip_server + "/logged/getProductsById",
+        type: "POST",
+        data:{
+            'bearer' : sessionStorage.token,
+            'idProduct' : idProduct,
+        },
+        dataType: "json",
+        success: function (response) {
+
+            setProductInformation(response.products);
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                sessionStorage.removeItem('token')
+                window.open("index.html",'_self')
+            }
         }
+    });   
+}
+
+/* Funcion para cargar informacion de producto */
+function setProductInformation(products) {
+    $.each(products, function (key, value) {
+        $('#productid').val(value.idProduct);
+        $('#productname').val(value.nameProduct);
+        $('#productprice').val(value.publicPrice);
     })
 }
 
