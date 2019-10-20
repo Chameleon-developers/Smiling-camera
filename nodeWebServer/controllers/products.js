@@ -67,7 +67,7 @@ module.exports.getProducts = function (req, res) {
     let data = req.body;
 
     /* Establecer query para la consulta */
-    let qry = "SELECT idProduct, nameProduct FROM products  WHERE statusProduct = 1 AND idCategory = ? AND idSubcategory=?";
+    let qry = "SELECT idProduct, nameProduct FROM products WHERE statusProduct = 1 AND idCategory = ? AND idSubcategory=? AND idProduct NOT IN (SELECT idProduct FROM productsyouprint WHERE statusProduct=1)";
 
     values=[data.idCategory, data.idSubcategory];
     
