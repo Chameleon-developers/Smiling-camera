@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="jquery.steps.js"></script>
     <script src="lena.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.css" rel="stylesheet"/>
@@ -50,7 +51,7 @@
 
     <!--<h1>4 Resultado en Base64</h1>-->
     <!-- Muestra de la imagen recortada en Base64 -->
-    
+    <!--<code id="base64"></code>-->
 
     <canvas id="canvas"></canvas>
     <div id="imagen"></div>
@@ -63,7 +64,8 @@
  
     <br>
         <canvas id="filtered-image" ></canvas>
-        <code id="base64"></code>
+        
+        <a id="submit" class="button is-primary">Terminar Edición</a>
         </div>
         <section class="section">
             <div class="container">
@@ -247,15 +249,49 @@
                         
                     };
                     //agregamos los eventos
-                    document.getElementById("filtro1").onclick = function(){LenaJS.filterImage(filteredImageCanvas, LenaJS['none'], originalImage,originalImage.width,originalImage.height);};
-                    document.getElementById("filtro2").onclick = function(){LenaJS.filterImage(filteredImageCanvas, LenaJS['gaussian'], originalImage,originalImage.width,originalImage.height);};
-                    document.getElementById("filtro3").onclick = function(){LenaJS.filterImage(filteredImageCanvas, LenaJS['grayscale'], originalImage,originalImage.width,originalImage.height);};
-                    document.getElementById("filtro4").onclick = function(){LenaJS.filterImage(filteredImageCanvas, LenaJS['invert'], originalImage,originalImage.width,originalImage.height);};
-                    document.getElementById("filtro5").onclick = function(){LenaJS.filterImage(filteredImageCanvas, LenaJS['saturation'], originalImage,originalImage.width,originalImage.height);};
-                    document.getElementById("filtro6").onclick = function(){LenaJS.filterImage(filteredImageCanvas, LenaJS['sepia'], originalImage,originalImage.width,originalImage.height);};
-                    document.getElementById("filtro7").onclick = function(){LenaJS.filterImage(filteredImageCanvas, LenaJS['sharpen'], originalImage,originalImage.width,originalImage.height);};
-                    document.getElementById("filtro8").onclick = function(){LenaJS.filterImage(filteredImageCanvas, LenaJS['thresholding'], originalImage,originalImage.width,originalImage.height);};
-                     document.querySelector('#base64HTML').textContent = '<img src="' + imagenEn64.slice(0, 40) + '...">';            
+                    document.getElementById("filtro1").onclick = function(){
+                        LenaJS.filterImage(filteredImageCanvas, LenaJS['none'], originalImage,originalImage.width,originalImage.height);
+                        //generamos el nuevo base 64
+                        imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                        console.log(imagenFinal64)
+                    };
+                    document.getElementById("filtro2").onclick = function(){
+                        LenaJS.filterImage(filteredImageCanvas, LenaJS['gaussian'], originalImage,originalImage.width,originalImage.height);
+                        imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                        console.log(imagenFinal64)
+                    };
+                    document.getElementById("filtro3").onclick = function(){
+                        LenaJS.filterImage(filteredImageCanvas, LenaJS['grayscale'], originalImage,originalImage.width,originalImage.height);
+                        imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                        console.log(imagenFinal64)
+                    };
+                    document.getElementById("filtro4").onclick = function(){
+                        LenaJS.filterImage(filteredImageCanvas, LenaJS['invert'], originalImage,originalImage.width,originalImage.height);
+                        imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                        console.log(imagenEn64)
+                    };
+                    document.getElementById("filtro5").onclick = function(){
+                        LenaJS.filterImage(filteredImageCanvas, LenaJS['saturation'], originalImage,originalImage.width,originalImage.height);
+                        imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                        console.log(imagenEn64)
+                    };
+                    document.getElementById("filtro6").onclick = function(){
+                        LenaJS.filterImage(filteredImageCanvas, LenaJS['sepia'], originalImage,originalImage.width,originalImage.height);
+                        imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                        console.log(imagenEn64)
+                    };
+                    document.getElementById("filtro7").onclick = function(){
+                        LenaJS.filterImage(filteredImageCanvas, LenaJS['sharpen'], originalImage,originalImage.width,originalImage.height);
+                        imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                        console.log(imagenEn64)
+                    };
+                    document.getElementById("filtro8").onclick = function(){
+                        LenaJS.filterImage(filteredImageCanvas, LenaJS['thresholding'], originalImage,originalImage.width,originalImage.height);
+                        imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                        console.log(imagenEn64)
+                    };
+                    //document.querySelector('#base64HTML').textContent = '<img src="' + imagenEn64.slice(0, 40) + '...">';            
+                
                 }
                 // Proporciona la imagen cruda, sin editarla por ahora
                 miNuevaImagenTemp.src = urlImage;
