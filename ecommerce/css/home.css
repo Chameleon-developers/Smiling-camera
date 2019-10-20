@@ -6,6 +6,9 @@
     left: auto !important;
     right: 0px;
 }
+#mainNav {
+  padding: 0% 5%;
+}
 
 #mainNav img {
     width: 122px;
@@ -108,6 +111,11 @@ a strong {
       text-decoration-style: solid;
       text-decoration-line: none;
     }
+
+  
+    .navbar-dropdown a.navbar-item:hover .icon { 
+        color: #4AE0B8;
+    }
   }
 /*
   .navbar-item.has-dropdown:focus .navbar-link, .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
@@ -140,6 +148,14 @@ a strong {
 
 #MenuEcommerce .navbar-item img {
   max-height: 8rem !important;
+}
+#MenuEcommerce .rightSide img {
+  max-width: 70% !important;
+}
+
+#secondNav .navbar-dropdown .navbar-item .icon {
+  padding-right: 7px;
+  font-size: 85%;
 }
 
 #titMenu {
