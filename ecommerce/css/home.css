@@ -28,15 +28,15 @@
     cursor: pointer;
     text-decoration: none;
   }
+  #mainNav  a:hover {
+    color: #F74784;
+  }
   
 a strong {
     color: currentColor;
   }
   
-  a:hover {
-    color: #F74784;
-    
-  }
+ 
   
 
 #secondNav a {
@@ -169,4 +169,45 @@ a strong {
   font-size: 200%;
  /* font-family: 'Quicksand', sans-serif;*/
  font-family: 'Amatic SC', cursive;
+}
+
+
+.firstFooter hr{
+  background-color: #F74784;
+}
+.firstFooter h6{
+  color: #F74784;
+  font-weight: bold;
+  font-size: 14px;
+}
+.firstFooter .line {
+  padding: 0% 5%;
+}
+.firstFooter .pBody {
+  padding: 0% 10%;
+  font-weight: bold;
+  font-size: 12px;
+  padding-bottom: 2%;
+}
+
+.secondFooter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  background-color: #9696D4;
+  font-size: 13px;
+  height: 50px;
+}
+
+.firstFooter a { 
+  color: #afa5a5;
+  font-weight: lighter;
+  font-style: italic;
+}
+.firstFooter a:hover { 
+  color: #4a4a4a;
+  font-weight: bold;
+  font-style: italic;
 }
