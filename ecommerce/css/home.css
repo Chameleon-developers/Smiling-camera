@@ -167,6 +167,24 @@ a strong {
 }
 
 
+
+#firstPartPromotion {
+  padding: 0% 15%;
+}
+
+#firstPartPromotion p{
+  font-size: 14px;
+}
+#firstPartPromotion h2{
+  font-size: 17px;
+  font-weight: 700;
+  color: #1CD5EA;
+  padding-bottom: 2%;
+}
+
+#firstPartPromotion img {
+  height: 200px;
+}
 .firstFooter hr{
   background-color: #F74784;
 }
@@ -195,6 +213,7 @@ a strong {
   font-size: 13px;
   height: 50px;
 }
+
 
 .firstFooter a { 
   color: #afa5a5;
