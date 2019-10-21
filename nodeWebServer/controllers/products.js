@@ -100,6 +100,43 @@ module.exports.getProducts = function (req, res) {
     });
 }
 
+/* Obtener 3 a 9 productos de manera aleatoria para carrusel */
+module.exports.getProductsRandom = function(req, res) {
+     /* Obtener variable para la conexión a la BD */
+    const con = require('./dbconn')();
+
+    /* Establecer query para la consulta */
+    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.imageProduct, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 INNER JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct  WHERE PRO.statusProduct = 1 ORDER BY RAND() LIMIT 9";
+
+    /* Ejecutar la consulta para la obtención de tipos de productos */
+    con.query(qry,[], function (err, result, fields) {
+        if (err) {
+            // Internal error message send
+            res.status(500).json({
+                Status: 'Internal Error',
+                message: 'Internal Error'
+            });
+            con.end();
+            return;
+        } else {
+            if (result.length >= 0) {
+                // Setup and send of response
+                res.status(200).json({
+                    Status: 'Success',
+                    products: result,
+                    message: 'Datos de los productos'
+                })
+            } else {
+                res.status(400).json({
+                    Status: 'Failure',
+                    message: 'No existen productos'
+                })
+                con.end();
+            }
+        }
+    });
+}
+
 /* Registrar un nuevo Producto */
 module.exports.insertProduct = function (req, res) {
     /* Obtener variable para la conexión a la BD */
