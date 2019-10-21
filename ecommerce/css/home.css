@@ -1,5 +1,10 @@
 .headerEcommerce{
     padding: 0.2% 4%;
+    display: block;
+}
+#step-section{
+  padding-top:150px;
+  position: relative;
 }
 
 .ml-auto .dropdown-menu {

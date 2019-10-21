@@ -9,7 +9,8 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="jquery.steps.js"></script>
+    <script src="js/jquery.steps.js"></script>
+
     <script src="lena.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.css" rel="stylesheet"/>
@@ -62,33 +63,33 @@
             
     <label for="filter-changer">Selecciona un filtro a aplicar:</label>
  
-    <br>
+        <br>
         <canvas id="filtered-image" ></canvas>
         
         <a id="submit" class="button is-primary">Terminar Edición</a>
-        </div>
+    </div>
         <section class="section">
             <div class="container">
                 <!-- Start Carousel -->
                 <div id="carousel-demo" class="carousel">
                     
-                    <div class="item-1">
+                    <div id="filtro1" class="item-1">
                         <!-- Slide Content -->
                         <p>Normal</p>
                         <br>
                         <canvas class="filtered-image-carousel"></canvas>
-                        <a id="filtro1" class="button is-primary">Seleccionar</a>
+                        <a class="button is-primary">Seleccionar</a>
                         <br>
-                        <div><p>Vista Previa </p></div>
+                        <!--<div><p>Vista Previa </p></div>-->
                     </div>
-                    <div class="item-2">
+                    <div id="filtro2" class="item-2">
                         <!-- Slide Content -->
                         <p>Desenfoque</p>
                         <br>
                         <canvas class="filtered-image-carousel"></canvas>
-                        <a id="filtro2" class="button is-primary">Seleccionar</a>
+                        <a class="button is-primary">Seleccionar</a>
                         <br>
-                        <div><p>Vista Previa</p></div>
+                        <!--<div><p>Vista Previa</p></div>-->
                     </div>
                     <div class="item-3">
                         <!-- Slide Content -->
