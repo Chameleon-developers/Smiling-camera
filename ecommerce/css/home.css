@@ -174,7 +174,7 @@ a strong {
 
 
 #firstPartPromotion {
-  padding: 0% 15%;
+  padding: 4% 15%;
 }
 
 #firstPartPromotion p{
@@ -190,6 +190,25 @@ a strong {
 #firstPartPromotion img {
   height: 200px;
 }
+
+#secondPartPromotion {
+  padding: 0% 11%;
+}
+#secondPartPromotion h2 {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 2%;
+}
+
+#carousel-products .costPCaroussel {
+  color: #F74784;
+}
+
+
+
+
+
+
 .firstFooter hr{
   background-color: #F74784;
 }
@@ -207,7 +226,6 @@ a strong {
   font-size: 12px;
   padding-bottom: 2%;
 }
-
 .secondFooter {
   display: flex;
   justify-content: center;
@@ -230,3 +248,4 @@ a strong {
   font-weight: bold;
   font-style: italic;
 }
+/*--------------------------------------------------------------------*/
