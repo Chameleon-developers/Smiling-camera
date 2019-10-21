@@ -205,6 +205,11 @@ a strong {
 }
 
 
+#carousel-products .button:hover {
+  color: rgb(71, 247, 100);
+}
+
+
 
 
 
