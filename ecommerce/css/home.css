@@ -171,24 +171,28 @@ a strong {
  font-family: 'Amatic SC', cursive;
 }
 
-
+#Content {
+  height: 100vh;
+}
 
 #firstPartPromotion {
-  padding: 4% 15%;
+  padding: 10% 15% 10% 15%;
+  height: 100vh;
 }
 
 #firstPartPromotion p{
-  font-size: 14px;
+  font-size: 24px;
 }
 #firstPartPromotion h2{
-  font-size: 17px;
+  font-size: 27px;
   font-weight: 700;
   color: #1CD5EA;
   padding-bottom: 2%;
 }
 
 #firstPartPromotion img {
-  height: 200px;
+  height: 350px;
+  padding-left: 17%;
 }
 
 #secondPartPromotion {
@@ -197,7 +201,7 @@ a strong {
 #secondPartPromotion h2 {
   font-size: 25px;
   font-weight: bold;
-  padding: 2%;
+  padding: 0.5%;
 }
 
 #carousel-products .costPCaroussel {
@@ -210,21 +214,25 @@ a strong {
 
 
 .firstFooter hr{
-  background-color: #F74784;
+  background-color: #9696D4;
+  height: 3px;
 }
 .firstFooter h6{
-  color: #F74784;
+  color: #1CD5EA;
   font-weight: bold;
   font-size: 14px;
 }
 .firstFooter .line {
-  padding: 0% 5%;
+  padding: 0.5% 5%;
 }
 .firstFooter .pBody {
-  padding: 0% 10%;
-  font-weight: bold;
-  font-size: 12px;
-  padding-bottom: 2%;
+  padding: 0.5% 10%;
+  font-size: 10px;
+}
+
+.firstFooter .pBody .button {
+  background-color: #9696D4;
+  color: white;
 }
 .secondFooter {
   display: flex;
@@ -234,7 +242,7 @@ a strong {
   color: white;
   background-color: #9696D4;
   font-size: 13px;
-  height: 50px;
+  height: 40px;
 }
 
 

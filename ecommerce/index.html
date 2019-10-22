@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="css/bulma.min.css">
   <link rel="stylesheet" type="text/css" href="css/bulma.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/bulma-ecommerce.min.css">
   <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
@@ -252,7 +254,7 @@
 
   </section>
 
-  <div id="main">
+  
     <!-- Start Hero Carousel -->
     <section class="hero is-large has-carousel" style="padding-top: 120px;">
       <div id="carousel-demo" class="hero-carousel">
@@ -267,21 +269,21 @@
         </div>
       </div>
       <div class="hero-head"></div>
-      <div class="hero-body"></div>
+      <div class="hero-body" style="height: 100vh;"></div>
       <div class="hero-foot"></div>
     </section>
     <!-- End Hero Carousel -->
     
     <!-- Sección donde se agregará los demás elementos html -->
-    <section id="Content" class="section">
+    <div id="Content">
         <section id="firstPartPromotion">
             <div class="columns">
               <div class="column ">
                   <h2>Personaliza tus regalos con nosotros</h2>
                   <p>
-                      Prueba nuestra aplicación web y crea <br>
+                      <br>Prueba nuestra aplicación web y crea <br>
                       regalos inolvidables con tus increíbles fotos de <br>
-                      tecnicamara o diseños personalizados. <br>
+                      YouPrint o diseños personalizados. <br>
                       
                       Las posibilidades son tantas como la imaginación lo permita.<br>
                   </p>
@@ -300,7 +302,7 @@
                   <!-- Start Hero Carousel -->
                   <section class="hero is-large has-carousel" style="padding-top: 140px;">
                       
-                      <div class="hero-body" style="height: 350px; padding: 0px;">
+                      <div class="hero-body" style="height: 310px; padding: 0px;">
                           <div id="carousel-products" class="hero-carousel">
                               <div class="item-1 columns">
                                   <div class="column">
@@ -454,8 +456,8 @@
                     <!-- End Hero Carousel -->
               </section>
           </div>
-    </section>
-  </div>
+  
+  
 
 
   <!-- Contenedor para los Toast -->
@@ -466,7 +468,7 @@
   <section class="footerEcommerce">
     <div class="firstFooter">
       <div class="line">
-          <hr></hr>
+          <hr style="margin: 3px"></hr>
       </div>
       <div class="pBody columns">
         <div class="column">
@@ -475,22 +477,39 @@
               Centro <br>
               Aquiles Serdán No. 521, Col. Centro C.P. 58000. Morelia, Mich. <br>
               Tel. (443) 3 13 96 94
-          </p>
+          </p><br>
+          
         </div>
         <div class="column">
-          <h6>General</h6>
-          <p>
-              <a>Terminos y condiciones</a>
-              
-          </p>
+          <h6>Redes Sociales</h6>
+          <div class="field has-addons">
+            <p class="control">
+              <button class="button is-rounded is-small is-outlined">
+                <i class="fa fa-facebook"></i>
+              </button>
+            </p>
+            <p class="control">
+                <button class="button is-rounded is-small is-outlined">
+                    <i class="fa fa-instagram"></i>
+                </button>
+            </p>
+            <p class="control">
+                <button class="button is-rounded is-small is-outlined">
+                    <i class="fa fa-twitter"></i>
+                </button>
+            </p>
+          </div>
+        </div>
+        <div class="column">
+            <h6>General</h6>
+            <p>
+                <a>Terminos y condiciones</a>
+            </p>
         </div>
       </div>
     </div>
-    <div class="secondFooter has-text-centered">
-        Todos los derechos reservados
-    </div>
   </section>
-
+</div>
 
 
   <!-- Scripts DataTables -->
