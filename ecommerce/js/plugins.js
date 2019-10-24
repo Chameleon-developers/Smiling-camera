@@ -91,12 +91,12 @@ function setTable(nameTable) {
 }
 
 /* Función para cargar los archivos html y js */
-function loadFiles(htmlFile, jsFile) {
+function loadFiles(htmlFile, jsFile, idSubcategory) {
 
     $('#Content').load(htmlFile, function () {
 
         importModule(jsFile).then((module) => {
-            module.init();
+            module.init(idSubcategory);
         });
 
     });
