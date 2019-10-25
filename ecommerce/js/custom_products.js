@@ -1,11 +1,11 @@
 //Importación de módulos
-import { toast, modal, ip_server, setTable, loadFiles } from "./plugins.js"
+import { toast, modal, ip_server, setTable, loadFilesHomeCategory } from "./plugins.js"
 
 //Exportación de módulos
 export { init }
 
 /* Función para establecer eventos y datos iniciales */
-function init(idSubcategory) {
+function init(idSubcategory, idCategory) {
 
     $("#example-basic").steps({
         headerTag: "h3",
@@ -15,6 +15,7 @@ function init(idSubcategory) {
     });
     
     console.log(idSubcategory);
+    console.log(idCategory);
     
     // Input File
     const inputImage = document.querySelector('#image');

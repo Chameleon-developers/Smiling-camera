@@ -4,7 +4,7 @@ export {
     modal, 
     ip_server, 
     setTable,
-    loadFiles
+    loadFilesHomeCategory
 }
 
 import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
@@ -91,12 +91,12 @@ function setTable(nameTable) {
 }
 
 /* Función para cargar los archivos html y js */
-function loadFiles(htmlFile, jsFile, idSubcategory) {
+function loadFilesHomeCategory(htmlFile, jsFile, idSubcategory, idCategory) {
 
     $('#Content').load(htmlFile, function () {
 
         importModule(jsFile).then((module) => {
-            module.init(idSubcategory);
+            module.init(idSubcategory, idCategory);
         });
 
     });
