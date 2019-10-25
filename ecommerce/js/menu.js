@@ -1,5 +1,5 @@
 //Importación de módulos
-import { loadFiles } from "./plugins.js"
+import { loadFilesHomeCategory } from "./plugins.js"
 
 /* Función para declarar eventos eventos */
 $(function() {
@@ -7,16 +7,16 @@ $(function() {
 
 	$(".Subcategory").click(function (e) {
 		e.preventDefault()
-		getSubcategory($(this).attr('data-Subcategory'))
+		getSubcategory($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
     });
 })
 
 /* Función para saber que html y js cargar */
-function getSubcategory(idSubcategory) {
+function getSubcategory(idSubcategory, idCategory) {
 	if (idSubcategory == 0) {
 		window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/index.html");
 	} else {
-		loadFiles("custom_products.html", "js/custom_products.js", idSubcategory);
+		loadFilesHomeCategory("custom_products.html", "js/custom_products.js", idSubcategory, idCategory);
 	}
 
 } 
@@ -85,6 +85,9 @@ function setCarrucel(products) {
 
 		cont++
 	})
+	if (slides == 0) {
+		slides = 1
+	}
 	if (slides == 1) {
 		$('.item-2').remove()
 		$('.item-3').remove()
@@ -94,7 +97,7 @@ function setCarrucel(products) {
 	
 	bulmaCarousel.attach('.hero-carousel', {
 		slidesToScroll: 1,
-		slidesToShow: 1,
+		slidesToShow: slides,
 		pagination: false,
 		effect: 'fade',
 		loop: true
