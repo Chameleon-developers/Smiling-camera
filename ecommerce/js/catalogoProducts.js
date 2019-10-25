@@ -69,41 +69,46 @@ function getProducts(idCategory, idSubcategory) {
 
 /* Funcion para cargar productos */
 function setProducts(products) {
-	var cont = 0
-	var contColumns = cont/4
-	$.each(products, function (key, value) {
-		if(cont%4 == 0) {
-			if(cont != 0) {
-				contColumns = cont/4
+	if(products.length != 0) { 
+		var cont = 0
+		var contColumns = cont/4
+		$.each(products, function (key, value) {
+			if(cont%4 == 0) {
+				if(cont != 0) {
+					contColumns = cont/4
+				}
 			}
-		}
 
-		var columns = $('<div class="columns" id="columns'+contColumns+'">')
-		var column = $('<div class="column is-one-quarter">')
-		
-		column.append('<div class="card">' +
-                      	'<div class="card-image">' +
-                        	'<figure class="image is-4by3">' +
-                          		'<img src="../dashboardadmin/uploads/' + value.imageProduct + '" height="10px" alt="Placeholder image">' +
-                        	'</figure>' +
-                      	'</div>' +
-                        '<div class="card-content">' +
-                            '<div class="content">' +
-                              	'<p><span class="titPCaroussel" id="titP1">' + value.nameProduct + '</span><br><span class="costPCaroussel">$' + value.publicPrice + '</span></p>' +
-                              	'<button id="selectProduct" data-product="' + value.idProduct + '" class="button is-danger" style="width: 100%;">Comprar</button>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>')
+			var columns = $('<div class="columns" id="columns'+contColumns+'">')
+			var column = $('<div class="column is-one-quarter">')
+			
+			column.append('<div class="card">' +
+	                      	'<div class="card-image">' +
+	                        	'<figure class="image is-4by3">' +
+	                          		'<img src="../dashboardadmin/uploads/' + value.imageProduct + '" height="10px" alt="Placeholder image">' +
+	                        	'</figure>' +
+	                      	'</div>' +
+	                        '<div class="card-content">' +
+	                            '<div class="content">' +
+	                              	'<p><span class="titPCaroussel" id="titP1">' + value.nameProduct + '</span><br><span class="costPCaroussel">$' + value.publicPrice + '</span></p>' +
+	                              	'<button id="selectProduct" data-product="' + value.idProduct + '" class="button is-danger" style="width: 100%;">Comprar</button>' +
+	                            '</div>' +
+	                        '</div>' +
+	                    '</div>')
 
 
-		if(cont%4 == 0) {
-			columns.append(column)
-			$('#products').append(columns)
-		}
-		else {
-			$('#columns'+contColumns).append(column)
-		}
+			if(cont%4 == 0) {
+				columns.append(column)
+				$('#products').append(columns)
+			}
+			else {
+				$('#columns'+contColumns).append(column)
+			}
 
-		cont++
-	})
+			cont++
+		})
+	}
+	else {
+        $('#products').append('<center><div class="notification is-warning" style="width: 90%;"><center>No se encontró ningún producto, <strong>intente mas tarde</strong></div></center>');
+	}
 }
