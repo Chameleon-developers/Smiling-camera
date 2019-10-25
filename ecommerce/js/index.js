@@ -5,21 +5,35 @@ import { loadFilesHomeCategory } from "./plugins.js"
 $(function() {
 	getProducts()
 
-	$(".Subcategory").click(function (e) {
+	$(".Customizable").click(function (e) {
 		e.preventDefault()
-		getSubcategory($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
+		coutomizableProduct($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
+    });
+
+    $(".Subcategory").click(function (e) {
+		e.preventDefault()
+		catalogoProducts($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
     });
 })
 
 /* Función para saber que html y js cargar */
-function getSubcategory(idSubcategory, idCategory) {
-	if (idSubcategory == 0) {
-		window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/index.html");
+function coutomizableProduct(idSubcategory, idCategory) {
+	if (idCategory == 0) {
+		window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
 	} else {
 		loadFilesHomeCategory("custom_products.html", "js/custom_products.js", idSubcategory, idCategory);
 	}
 
 } 
+
+/* Funcion para cargar catalogo de productos */
+function catalogoProducts(idSubcategory, idCategory) {
+	if (idCategory == 0) {
+		window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
+	} else {
+		loadFilesHomeCategory("catalogoProducts.html", "js/catalogoProducts.js", idSubcategory, idCategory);
+	}
+}
 
 
 /* Obtener productos para carrucel */
