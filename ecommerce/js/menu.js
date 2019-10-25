@@ -97,7 +97,7 @@ function setCarrucel(products) {
 	
 	bulmaCarousel.attach('.hero-carousel', {
 		slidesToScroll: 1,
-		slidesToShow: 1,
+		slidesToShow: slides,
 		pagination: false,
 		effect: 'fade',
 		loop: true
