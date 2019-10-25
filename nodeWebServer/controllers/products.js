@@ -11,7 +11,7 @@ module.exports.getAllProducts = function (req, res) {
 
     if(data.idSubcategory && data.idCategory) {
         qry+=" AND PRO.idCategory = ? AND PRO.idSubcategory=?"
-        values=[data.idSubcategory, data.idCategory];
+        values=[data.idCategory, data.idSubcategory];
     }
     else if(!data.idSubcategory && data.idCategory) {
         qry+=" AND PRO.idCategory = ?"
