@@ -53,7 +53,7 @@ function setCarrucel(products) {
 
 	let slides = 0
 	$.each(products, function (key, value) {
-		var div = $('<div class="column">')
+		var div = $('<div class="column is-one-third">')
 
 		div.append('<div class="card">' +
                       	'<div class="card-image">' +
@@ -85,9 +85,9 @@ function setCarrucel(products) {
 
 		cont++
 	})
-	if (slides == 0) {
+	/* if (slides == 0) {
 		slides = 1
-	}
+	} */
 	if (slides == 1) {
 		$('.item-2').remove()
 		$('.item-3').remove()
