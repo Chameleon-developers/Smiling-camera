@@ -167,7 +167,7 @@ function getProducts(idCategory, idSubcategory) {
                 apply_pagination(totalPages,recPerPage, records,displayRecords);
             } else {
                 $('#content').html('');
-                $('#content').append('<center>No se encontró ningún Producto</center>');
+                $('#content').append('<center><div class="notification is-warning" style="width: 90%;"><center>No se encontró ningún producto</div></center>');
             }
 
         },

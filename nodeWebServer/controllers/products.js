@@ -11,7 +11,7 @@ module.exports.getAllProducts = function (req, res) {
 
     if(data.idSubcategory && data.idCategory) {
         qry+=" AND PRO.idCategory = ? AND PRO.idSubcategory=?"
-        values=[data.idSubcategory, data.idCategory];
+        values=[data.idCategory, data.idSubcategory];
     }
     else if(!data.idSubcategory && data.idCategory) {
         qry+=" AND PRO.idCategory = ?"
@@ -20,6 +20,11 @@ module.exports.getAllProducts = function (req, res) {
     else if(data.idSubcategory && !data.idCategory) {
         qry+=" AND PRO.idSubcategory = ?"
         values=[data.idSubcategory];
+    }
+    else if(data.search) {
+        qry+=" AND PROYP.nameProduct LIKE ?"
+        values= ["%"+data.search+"%"]
+
     }
     else {
         values=[]; 
@@ -120,6 +125,51 @@ module.exports.getProductsRandom = function(req, res) {
             return;
         } else {
             if (result.length >= 0) {
+                // Setup and send of response
+                res.status(200).json({
+                    Status: 'Success',
+                    products: result,
+                    message: 'Datos de los productos'
+                })
+            } else {
+                res.status(400).json({
+                    Status: 'Failure',
+                    message: 'No existen productos'
+                })
+                con.end();
+            }
+        }
+    });
+}
+
+/* Obtiene las caracteristicas de un producto en especifico */
+module.exports.getProductById = function(req, res) {
+    /* Obtener variable para la conexión a la BD */
+    const con = require('./dbconn')();
+
+    /* Obtener los datos del Body */
+    let data = req.body;
+
+    /* Establecer query para la consulta */
+    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.enabledProduct, PROYP.imageProduct, PRO.featuresProduct, PROYP.idCategory, C.nameCategory, PROYP.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE PRO.statusProduct = 1 AND PROYP.idProduct=?";
+    values = [data.idProduct];
+    
+    /* Ejecutar la consulta para la obtención de tipos de productos */
+    con.query(qry,values, function (err, result, fields) {
+        if (err) {
+            // Internal error message send
+            res.status(500).json({
+                Status: 'Internal Error',
+                message: 'Internal Error'
+            });
+            con.end();
+            return;
+        } else {
+            if (result.length >= 0) {
+                result.forEach(function(element) {
+                    element.featuresProduct = JSON.parse(element.featuresProduct);
+                });
+
                 // Setup and send of response
                 res.status(200).json({
                     Status: 'Success',

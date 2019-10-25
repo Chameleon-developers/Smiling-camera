@@ -1,25 +1,51 @@
 //Importación de módulos
-import { loadFilesHomeCategory } from "./plugins.js"
+import { loadFilesHomeCategory, loadFilesHomeSearch } from "./plugins.js"
 
 /* Función para declarar eventos eventos */
 $(function() {
 	getProducts()
 
-	$(".Subcategory").click(function (e) {
+	$(".Customizable").click(function (e) {
 		e.preventDefault()
-		getSubcategory($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
+		coutomizableProduct($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
     });
+
+    $(".Subcategory").click(function (e) {
+		e.preventDefault()
+		catalogoProducts($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
+    });
+
+    $(".columns").on("click", "#selectProduct", function(e) { 
+    	console.log($(this).attr('data-product'))
+    	//loadFilesHomeCategory("custom_products.html", "js/custom_products.js", idSubcategory, idCategory);
+    });
+
+    $('#search').click(function (e) {
+    	var search = $('#inputSearch').val()
+
+    	if (search.length != 0) {
+			loadFilesHomeSearch("catalogoProducts.html", "js/catalogoProducts.js", search);
+		}
+    })
 })
 
 /* Función para saber que html y js cargar */
-function getSubcategory(idSubcategory, idCategory) {
-	if (idSubcategory == 0) {
-		window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/index.html");
+function coutomizableProduct(idSubcategory, idCategory) {
+	if (idCategory == 0) {
+		window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
 	} else {
 		loadFilesHomeCategory("custom_products.html", "js/custom_products.js", idSubcategory, idCategory);
 	}
-
 } 
+
+/* Funcion para cargar catalogo de productos */
+function catalogoProducts(idSubcategory, idCategory) {
+	if (idCategory == 0) {
+		window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
+	} else {
+		loadFilesHomeCategory("catalogoProducts.html", "js/catalogoProducts.js", idSubcategory, idCategory);
+	}
+}
 
 
 /* Obtener productos para carrucel */
@@ -64,7 +90,7 @@ function setCarrucel(products) {
                         '<div class="card-content">' +
                             '<div class="content">' +
                               	'<p><span class="titPCaroussel" id="titP1">' + value.nameProduct + '</span><br><span class="costPCaroussel">$' + value.publicPrice + '</span></p>' +
-                              	'<button class="button is-danger">Personalizar</button>' +
+                              	'<button id="selectProduct" data-product="' + value.idProduct + '" class="button is-danger" style="width: 100%;">Comprar</button>' +
                             '</div>' +
                         '</div>' +
                     '</div>')
@@ -85,9 +111,6 @@ function setCarrucel(products) {
 
 		cont++
 	})
-	/* if (slides == 0) {
-		slides = 1
-	} */
 	if (slides == 1) {
 		$('.item-2').remove()
 		$('.item-3').remove()
@@ -100,7 +123,9 @@ function setCarrucel(products) {
 		slidesToShow: slides,
 		pagination: false,
 		effect: 'fade',
-		loop: true
+		loop: true,
+		autoplay: true,
+		duration: 5000
 	  });
 }
 

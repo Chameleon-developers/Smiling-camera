@@ -1,0 +1,95 @@
+<!-- Sección donde se agregará los demás elementos html -->
+<section id="infoProduct" style="padding-top: 120px;padding-left: 20px;padding-right: 20px;">
+    <div class="columns">
+        <div class="is-half">
+            <div class="product-images">
+                <div class="product-main-img">
+                    <img id="imageProd" style="width: 300px;height: 300px">
+                </div>
+            </div>
+        </div>
+        
+        <div class="is-half">
+            <div id="numProd"></div>
+            <div class="product-inner">
+                <h2 id="NombreProd" class="product-name">Prueba</h2>
+                <div class="product-inner-price">
+                    <ins id="Precio">Nose</ins> <del></del>
+                    <br>
+                </div>  
+                
+                <form action="" class="cart">
+                    <div class="quantity">
+                        <input id="cant" type="number" size="4"  title="Qty" value="1" name="quantity" min="1" max="20" step="1">
+                    </div>
+                    <button id="addtocart" class="add_to_cart_button" type="submit" data-toggle="popover" data-placement="top" data-content="Se agregó correctamente">Agregar al Carrito</button>
+                </form>   
+            </div>
+        </div>
+        <div class="is-full">
+            <div role="tabpanel">
+                    <ul class="product-tab" role="tablist">
+                        <li role="presentation" class="active"><a aria-controls="home" role="tab" data-toggle="tab">Descripción</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                            <h2>Producto:</h2>  
+                            <p id="Descripcion"></p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contenedor para los Toast -->
+<div class="toast-container">
+
+</div>
+
+<section class="footerEcommerce">
+    <div class="firstFooter">
+        <div class="line">
+            <hr style="margin: 3px">
+            </hr>
+        </div>
+        <div class="pBody columns">
+            <div class="column">
+                <h6>Sucursales</h6>
+                <p>
+                    Centro <br>
+                    Aquiles Serdán No. 521, Col. Centro C.P. 58000. Morelia, Mich. <br>
+                    Tel. (443) 3 13 96 94
+                </p><br>
+
+            </div>
+            <div class="column">
+                <h6>Redes Sociales</h6>
+                <div class="field has-addons">
+                    <p class="control">
+                        <a href="#">
+                            <img src="resources/facebook-box.png" width="25px">
+                        </a>
+                    </p>
+                    <p class="control">
+                        <a href="#">
+                            <img src="resources/instagram.png" width="25px">
+                        </a>
+                    </p>
+                    <p class="control">
+                        <a href="#">
+                            <img src="resources/twitter-box.png" width="25px">
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="column">
+                <h6>General</h6>
+                <p>
+                    <a>Terminos y condiciones</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+</div>

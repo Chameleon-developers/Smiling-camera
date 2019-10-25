@@ -43,6 +43,7 @@ module.exports = function (app,secureApp) {
 
     /* Obtener datos de productos registrados */
     secureApp.post('/getAllProducts' ,products.getAllProducts);
+    app.post('/getAllProducts' ,products.getAllProducts);
 
     /* obtener los datos basicos de productos registrados */
     secureApp.post('/getProducts', products.getProducts);
@@ -93,7 +94,12 @@ module.exports = function (app,secureApp) {
     /* Home ecommerce */
 
     /* Obtener 3 a 9 productos de manera aleatoria para carrucel */
+    secureApp.post('getProductsRandom', products.getProductsRandom);
     app.post('/getProductsRandom', products.getProductsRandom);
-    //secureApp.post('getProductsRandom', products.getProductsRandom);
+
+    /* Obtener caracteristicas de un producto */
+    secureApp.post('getProductById', products.getProductById);
+    app.post('/getProductById', products.getProductById);
+    
 }
  

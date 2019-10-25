@@ -4,7 +4,9 @@ export {
     modal, 
     ip_server, 
     setTable,
-    loadFilesHomeCategory
+    loadFilesHomeCategory,
+    loadFilesHomeSearch,
+    loadFilesInfo
 }
 
 import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
@@ -97,6 +99,30 @@ function loadFilesHomeCategory(htmlFile, jsFile, idSubcategory, idCategory) {
 
         importModule(jsFile).then((module) => {
             module.init(idSubcategory, idCategory);
+        });
+
+    });
+}
+
+/* Función para cargar los archivos html y js */
+function loadFilesHomeSearch(htmlFile, jsFile, search) {
+
+    $('#Content').load(htmlFile, function () {
+
+        importModule(jsFile).then((module) => {
+            module.initS(search);
+        });
+
+    });
+}
+
+/* Función para cargar los archivos html y js */
+function loadFilesInfo(htmlFile, jsFile, idProduct) {
+
+    $('#Content').load(htmlFile, function () {
+
+        importModule(jsFile).then((module) => {
+            module.init(idProduct);
         });
 
     });
