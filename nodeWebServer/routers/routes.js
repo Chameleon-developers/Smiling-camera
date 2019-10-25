@@ -43,6 +43,7 @@ module.exports = function (app,secureApp) {
 
     /* Obtener datos de productos registrados */
     secureApp.post('/getAllProducts' ,products.getAllProducts);
+    app.post('/getAllProducts' ,products.getAllProducts);
 
     /* obtener los datos basicos de productos registrados */
     secureApp.post('/getProducts', products.getProducts);

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="icon" href="./resources/logo.png">
+  <title>
+    YouPrint Dashboard
+  </title>
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bulma.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='//fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/bulma-ecommerce.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/css/bulma-steps.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
+  <link rel="stylesheet" type="text/css" href="css/home.css">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+  <script src="js/jquery-3.4.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+
+
+  <link rel="stylesheet" type="text/css" href="css/steps.css">
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="css/home.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+  <link href="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+  <section class="headerEcommerce">
+    <nav id="mainNav" class="navbar level is-fixed-top">
+      <div class="level-left">
+        <div class="level-item">
+          <a>
+            <img class="logo" src="resources/logo.png">
+          </a>
+        </div>
+      </div>
+      </div>
+
+      <div class="level-right navbar-end">
+
+        <div class="level-item">
+          <div class="field has-addons">
+            <p class="control">
+              <button class="button is-danger">
+                <span class="icon">
+                  <i class="fas fa-search"></i>
+                </span>
+              </button>
+            </p>
+            <p class="control">
+              <input class="input is-danger" type="text" placeholder="Buscar">
+            </p>
+          </div>
+        </div>
+        <div class="level-item">
+          <a class="is-danger">
+            <span class="icon">
+              <i class="fas fa-user-circle fa-lg"></i>
+            </span>
+          </a>
+        </div>
+        <div class="level-item">
+          <a>
+            <span class="icon">
+              <i class="fas fa-shopping-cart fa-lg"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div id="MenuEcommerce">
+      <nav id="secondNav" class="navbar is-fixed-top is-purple has-text-centered" style="margin-top: 68px;">
+        <div class="navbar-menu has-text-centered">
+          <div class="navbar-start" style="padding-left: 100px;">
+            <a class="navbar-item Subcategory" data-Category="0">
+              Home
+            </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Foto-Libros
+              </a>
+              <div class="navbar-dropdown">
+                <div class="columns">
+                  <div class="column">
+                    <span id="titMenu" class="navbar-item">
+                      Artículos Personalizados<br>
+                    </span>
+                    <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
+                  </div>
+
+                  <div class="column">
+                    <br><br>
+                    <a class="navbar-item Subcategory" data-Subcategory="1" data-Category="1" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Foto-Libro con Fotos
+                    </a>
+
+
+                    <a class="navbar-item Subcategory" data-Subcategory="2" data-Category="1" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Foto-Libro sin Fotos
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item Subcategory" data-Subcategory="3" data-Category="1" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Caja con Fotos
+                    </a>
+                  </div>
+                  <div class="column rightSide">
+                    <br><br>
+                    <img src="resources/pexels-photo-970076.jpeg" alt="img1">
+                    <br>
+                    <span class="navbar-item">
+                      <strong> ¡Conócelos!</strong>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Foto-Regalos
+              </a>
+              <div class="navbar-dropdown">
+                <div class="columns">
+                  <div class="column">
+                    <span id="titMenu" class="navbar-item">
+                      Artículos Personalizados<br>
+                    </span>
+                    <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
+                    <br>
+                    <br>
+                    <div>
+                      <img src="resources/background-notebook-pencil-544115.jpg" alt="img3">
+                    </div>
+
+                  </div>
+                  <div class="column">
+                    <br><br>
+                    <a class="navbar-item Subcategory" data-Subcategory="4" data-Category="2" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Carcasa para Celular
+                    </a>
+                    <a class="navbar-item Subcategory" data-Subcategory="5" data-Category="2" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Invitación a evento - Tarjeta de felicitación
+                    </a>
+                    <a class="navbar-item Subcategory" data-Subcategory="6" data-Category="2" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Portavasos
+                    </a>
+                    <a class="navbar-item Subcategory" data-Subcategory="7" data-Category="2" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Porta-retrato
+                    </a>
+                    <a class="navbar-item Subcategory" data-Subcategory="8" data-Category="2" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Rompecabezas
+                    </a>
+                    <a class="navbar-item Subcategory"data-Subcategory="9" data-Category="2" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Termo
+                    </a>
+                    <a class="navbar-item Subcategory" data-Subcategory="10" data-Category="2" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Libreta
+                    </a>
+                    <a class="navbar-item Subcategory" data-Subcategory="11" data-Category="2" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Mousepad
+                    </a>
+                    <a class="navbar-item Subcategory" data-Subcategory="12" data-Category="2" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Playera
+                    </a>
+                    <a class="navbar-item Subcategory" data-Subcategory="13" data-Category="2" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Lapicero
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Foto-Marcos
+              </a>
+              <div class="navbar-dropdown">
+                <div class="columns">
+                  <div class="column">
+                    <span id="titMenu" class="navbar-item">
+                      Artículos Personalizados<br>
+                    </span>
+                    <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
+                  </div>
+                  <div class="column">
+                    <br><br>
+                    <a class="navbar-item Subcategory" data-Subcategory="14" data-Category="3" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Marco con Foto
+                    </a>
+                    <a class="navbar-item Subcategory" data-Subcategory="16" data-Category="3" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Marco sin Foto
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item Subcategory" data-Subcategory="15" data-Category="3" href="custom_products.html">
+                      <span class="icon">
+                        <i class="fas fa-feather-alt"></i>
+                      </span> Bastidor con Foto
+                    </a>
+                  </div>
+                  <div class="column rightSide">
+                    <br><br>
+                    <img src="resources/frame.jpg" alt="img1">
+                    <br>
+                    <span class="navbar-item">
+                      <strong> ¡Conócelos!</strong>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+      </nav>
+    </div>
+
+  </section>
+
+    <!-- Sección donde se agregará los demás elementos html -->
+    <div id="Content">
+      <!-- Start Hero Carousel -->
+      <section  style="padding-top: 120px;">
+      </section>
+    </div>
+
+
+
+
+    <!-- Contenedor para los Toast -->
+    <div class="toast-container">
+
+    </div>
+
+    <section class="footerEcommerce">
+      <div class="firstFooter">
+        <div class="line">
+          <hr style="margin: 3px">
+          </hr>
+        </div>
+        <div class="pBody columns">
+          <div class="column">
+            <h6>Sucursales</h6>
+            <p>
+              Centro <br>
+              Aquiles Serdán No. 521, Col. Centro C.P. 58000. Morelia, Mich. <br>
+              Tel. (443) 3 13 96 94
+            </p><br>
+
+          </div>
+          <div class="column">
+            <h6>Redes Sociales</h6>
+            <div class="field has-addons">
+              <p class="control">
+                <button class="button is-rounded is-small is-outlined">
+                  <i class="fa fa-facebook"></i>
+                </button>
+              </p>
+              <p class="control">
+                <button class="button is-rounded is-small is-outlined">
+                  <i class="fa fa-instagram"></i>
+                </button>
+              </p>
+              <p class="control">
+                <button class="button is-rounded is-small is-outlined">
+                  <i class="fa fa-twitter"></i>
+                </button>
+              </p>
+            </div>
+          </div>
+          <div class="column">
+            <h6>General</h6>
+            <p>
+              <a>Terminos y condiciones</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- Scripts DataTables -->
+  <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+  <!--Paginacion de productos-->
+  <script src="js/jquery.twbsPagination.js" type="text/javascript"></script>
+  <!-- Menu Script -->
+  <script type="text/javascript" src="https://unpkg.com/bulma-modal-fx/dist/js/modal-fx.min.js"></script>
+  <script src="js/catalogoProducts.js" type="module"></script>
+  <!--Scripts Steps productos-->
+  <script src="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/js/bulma-steps.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+  <script src="js/lena.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="js/jquery.steps.js"></script>
+
+  <script type="text/javascript"
+    src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.js"></script>
+
+</body>
+
+</html>
