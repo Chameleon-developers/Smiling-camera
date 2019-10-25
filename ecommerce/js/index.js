@@ -14,6 +14,11 @@ $(function() {
 		e.preventDefault()
 		catalogoProducts($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
     });
+
+    $(".columns").on("click", "#selectProduct", function(e) { 
+    	console.log($(this).attr('data-product'))
+    	//loadFilesHomeCategory("custom_products.html", "js/custom_products.js", idSubcategory, idCategory);
+    });
 })
 
 /* Función para saber que html y js cargar */
@@ -78,7 +83,7 @@ function setCarrucel(products) {
                         '<div class="card-content">' +
                             '<div class="content">' +
                               	'<p><span class="titPCaroussel" id="titP1">' + value.nameProduct + '</span><br><span class="costPCaroussel">$' + value.publicPrice + '</span></p>' +
-                              	'<button class="button is-danger" style="width: 100%;">Comprar</button>' +
+                              	'<button id="selectProduct" data-product="' + value.idProduct + '" class="button is-danger" style="width: 100%;">Comprar</button>' +
                             '</div>' +
                         '</div>' +
                     '</div>')

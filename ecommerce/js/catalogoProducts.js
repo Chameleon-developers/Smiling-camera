@@ -7,6 +7,11 @@ export { init }
 /* Función para establecer eventos y datos iniciales */
 function init(idSubcategory, idCategory) {
 	getProducts(idCategory, idSubcategory)
+
+	$("#products").on("click", "#selectProduct", function(e) { 
+    	console.log($(this).attr('data-product'))
+    	//loadFilesHomeCategory("custom_products.html", "js/custom_products.js", idSubcategory, idCategory);
+    });
 }
 
 function getProducts(idCategory, idSubcategory) {
@@ -53,7 +58,7 @@ function setProducts(products) {
                         '<div class="card-content">' +
                             '<div class="content">' +
                               	'<p><span class="titPCaroussel" id="titP1">' + value.nameProduct + '</span><br><span class="costPCaroussel">$' + value.publicPrice + '</span></p>' +
-                              	'<button class="button is-danger" style="width: 100%;">Comprar</button>' +
+                              	'<button id="selectProduct" data-product="' + value.idProduct + '" class="button is-danger" style="width: 100%;">Comprar</button>' +
                             '</div>' +
                         '</div>' +
                     '</div>')
