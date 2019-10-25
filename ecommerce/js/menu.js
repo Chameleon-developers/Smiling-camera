@@ -85,6 +85,9 @@ function setCarrucel(products) {
 
 		cont++
 	})
+	if (slides == 0) {
+		slides = 1
+	}
 	if (slides == 1) {
 		$('.item-2').remove()
 		$('.item-3').remove()
