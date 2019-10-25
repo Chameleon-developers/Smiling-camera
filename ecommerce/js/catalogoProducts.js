@@ -7,19 +7,10 @@ export { init }
 /* Función para establecer eventos y datos iniciales */
 function init(idSubcategory, idCategory) {
 	getProducts(idCategory, idSubcategory)
-
-	$(".Subcategory").click(function (e) {
-		e.preventDefault()
-		getProducts($(this).attr('data-Category'), $(this).attr('data-Subcategory'))
-    });
 }
 
 function getProducts(idCategory, idSubcategory) {
-	console.log(idCategory, idSubcategory)
-	if (idCategory == 0) {
-		window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
-	} else {
-		$.ajax({
+	$.ajax({
 	        type: "POST",
 	        url: ip_server + "/getAllProducts",
 	        data: {
@@ -37,7 +28,6 @@ function getProducts(idCategory, idSubcategory) {
 	        error: function (error) {
 	        }
 	    })
-	}
 }
 
 /* Funcion para cargar productos */

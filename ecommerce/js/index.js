@@ -99,7 +99,7 @@ function setCarrucel(products) {
 
 		cont++
 	})
-	
+
 	if (slides == 1) {
 		$('.item-2').remove()
 		$('.item-3').remove()
@@ -112,7 +112,9 @@ function setCarrucel(products) {
 		slidesToShow: slides,
 		pagination: false,
 		effect: 'fade',
-		loop: true
+		loop: true,
+		autoplay: true,
+		duration: 5000
 	  });
 }
 
