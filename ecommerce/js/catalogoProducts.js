@@ -1,10 +1,10 @@
 //Importación de módulos
-import { toast, modal, ip_server, setTable, loadFilesHomeCategory } from "./plugins.js"
+import { toast, modal, ip_server, setTable, loadFilesHomeCategory, loadFilesHomeSearch } from "./plugins.js"
 
 //Exportación de módulos
-export { init }
+export { init, initS }
 
-/* Función para establecer eventos y datos iniciales */
+/* Función para establecer eventos y datos iniciales (idSubcategory e idCategory) */
 function init(idSubcategory, idCategory) {
 	getProducts(idCategory, idSubcategory)
 
@@ -14,6 +14,38 @@ function init(idSubcategory, idCategory) {
     });
 }
 
+/* Función para establecer eventos y datos iniciales (busqueda) */
+function initS(search) {
+	getProductsBySearch(search)
+
+	$("#products").on("click", "#selectProduct", function(e) { 
+    	console.log($(this).attr('data-product'))
+    	//loadFilesHomeCategory("custom_products.html", "js/custom_products.js", idSubcategory, idCategory);
+    });
+}
+
+/* Funcion para obtener productos por busqueda */
+function getProductsBySearch(search) {
+	$.ajax({
+	        type: "POST",
+	        url: ip_server + "/getAllProducts",
+	        data: {
+	        	'search': search, 
+	        },
+	        dataType: 'json',
+	        success: function (data) {
+
+
+    			$('#products').html('');	        	
+	        	setProducts(data.products)
+
+	        },
+	        error: function (error) {
+	        }
+	    })
+}
+
+/* Funcion para obtener productos por categorias y subcategoria */
 function getProducts(idCategory, idSubcategory) {
 	$.ajax({
 	        type: "POST",

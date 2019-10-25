@@ -1,5 +1,5 @@
 //Importación de módulos
-import { loadFilesHomeCategory } from "./plugins.js"
+import { loadFilesHomeCategory, loadFilesHomeSearch } from "./plugins.js"
 
 /* Función para declarar eventos eventos */
 $(function() {
@@ -19,6 +19,14 @@ $(function() {
     	console.log($(this).attr('data-product'))
     	//loadFilesHomeCategory("custom_products.html", "js/custom_products.js", idSubcategory, idCategory);
     });
+
+    $('#search').click(function (e) {
+    	var search = $('#inputSearch').val()
+
+    	if (search.length != 0) {
+			loadFilesHomeSearch("catalogoProducts.html", "js/catalogoProducts.js", search);
+		}
+    })
 })
 
 /* Función para saber que html y js cargar */
@@ -28,7 +36,6 @@ function coutomizableProduct(idSubcategory, idCategory) {
 	} else {
 		loadFilesHomeCategory("custom_products.html", "js/custom_products.js", idSubcategory, idCategory);
 	}
-
 } 
 
 /* Funcion para cargar catalogo de productos */
