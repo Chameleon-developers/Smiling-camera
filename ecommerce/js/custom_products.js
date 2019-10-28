@@ -134,96 +134,25 @@ function init(idSubcategory, idCategory) {
             document.getElementById("filtro4").onclick = function(){
                 LenaJS.filterImage(filteredImageCanvas, LenaJS['saturation'], originalImage,originalImage.width,originalImage.height);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
-                console.log(imagenEn64)
+                console.log(imagenFinal64)
             };
             document.getElementById("filtro5").onclick = function(){
                 LenaJS.filterImage(filteredImageCanvas, LenaJS['sepia'], originalImage,originalImage.width,originalImage.height);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
-
-                console.log(imagenEn64)
+                cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
+                console.log(imagenFinal64)
             };
             document.getElementById("filtro6").onclick = function(){
                 LenaJS.filterImage(filteredImageCanvas, LenaJS['sharpen'], originalImage,originalImage.width,originalImage.height);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
-                console.log(imagenEn64)
+                console.log(imagenFinal64)
             };
             
             
             //document.querySelector('#base64HTML').textContent = '<img src="' + imagenEn64.slice(0, 40) + '...">';            
             //var width = window.innerWidth;
             //var height = window.innerHeight;
-            var width = miNuevaImagenTemp.width;
-            var height = miNuevaImagenTemp.height;
-
-
-            var stage = new Konva.Stage({
-                container: 'container',
-                width: width,
-                height: height
-            });
-
-            var layer = new Konva.Layer();
-            var rectX = stage.width() / 2 - 50;
-            var rectY = stage.height() / 2 - 25;
-
-            var box = new Konva.Rect({
-                x: rectX,
-                y: rectY,
-                width: 100,
-                height: 50,
-                fill: '#00D2FF',
-                stroke: 'black',
-                strokeWidth: 4,
-                draggable: true
-            });
-
-            var fondoObj = new Image();
-            fondoObj.onload = function() {
-                var fondo = new Konva.Image({
-                x: 0,
-                y: 0,
-                image: fondoObj,
-                width: width,
-                height: height,
-                draggable: false
-                });
-
-                // add the shape to the layer
-                layer.add(fondo);
-                //layer.batchDraw();
-            };
-            console.log("base64"+urlImage);
-            fondoObj.src = urlImage;
-
-
-            var imageObj = new Image();
-            imageObj.onload = function() {
-                var yoda = new Konva.Image({
-                x: 100,
-                y: 100,
-                image: imageObj,
-                width: 64,
-                height: 64,
-                draggable: true
-                });
-
-                // add the shape to the layer
-                layer.add(yoda);
-                //layer.batchDraw();
-            };
-            imageObj.src = 'emoji-data/img-apple-64/1f600.png';
-
             
-            // add cursor styling
-            box.on('mouseover', function() {
-                document.body.style.cursor = 'pointer';
-            });
-            box.on('mouseout', function() {
-                document.body.style.cursor = 'default';
-            });
-
-            layer.add(box);
-            stage.add(layer);
         }
         // Proporciona la imagen cruda, sin editarla por ahora
         miNuevaImagenTemp.src = urlImage;
@@ -231,4 +160,78 @@ function init(idSubcategory, idCategory) {
 
     }
 
+}
+function cargarEmoji(w,h,imagenFinal64){
+    var width = w;
+    var height = h;
+
+
+    var stage = new Konva.Stage({
+        container: 'container',
+        width: width,
+        height: height
+    });
+
+    var layer = new Konva.Layer();
+    var rectX = stage.width() / 2 - 50;
+    var rectY = stage.height() / 2 - 25;
+
+    var box = new Konva.Rect({
+        x: rectX,
+        y: rectY,
+        width: 100,
+        height: 50,
+        fill: '#00D2FF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    var fondoObj = new Image();
+    fondoObj.onload = function() {
+        var fondo = new Konva.Image({
+        x: 0,
+        y: 0,
+        image: fondoObj,
+        width: width,
+        height: height,
+        draggable: false
+        });
+
+        // add the shape to the layer
+        layer.add(fondo);
+        //layer.batchDraw();
+    };
+    console.log("base64"+imagenFinal64);
+    fondoObj.src = imagenFinal64;
+
+
+    var imageObj = new Image();
+    imageObj.onload = function() {
+        var yoda = new Konva.Image({
+        x: 100,
+        y: 100,
+        image: imageObj,
+        width: 64,
+        height: 64,
+        draggable: true
+        });
+
+        // add the shape to the layer
+        layer.add(yoda);
+        //layer.batchDraw();
+    };
+    imageObj.src = 'emoji-data/img-apple-64/1f600.png';
+
+    
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
 }
