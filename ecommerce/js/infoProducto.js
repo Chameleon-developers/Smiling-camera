@@ -18,10 +18,18 @@ function getInfoProduct(idProduct) {
 		},
 		dataType: 'json',
 		success: function (data) {
-
+			let features = ""
 			console.log(data.products[0].imageProduct);
 			$('#imageProd').attr('src','../dashboardadmin/uploads/' + data.products[0].imageProduct)
-			$('#Descripcion').text(data.products[0].featuresProduct)
+			$('#NameProduct').text(data.products[0].nameProduct)
+			for (var key in data.products[0].featuresProduct.Caracteristicas) {
+				features += key + ": "
+				features += data.products[0].featuresProduct.Caracteristicas[key] + " \n"
+			}
+			console.log(features);
+			
+			$('#Descripcion').html(features)
+			$('#Precio').text('$' + data.products[0].publicPrice)
 
 		},
 		error: function (error) {
