@@ -29,14 +29,16 @@ function init(idSubcategory, idCategory) {
     let urlImage = undefined;
     // Evento disparado cuando se adjunte una imagen
     inputImage.addEventListener('change', abrirEditor, false);
-
+   
     /**
     * Método que abre el editor con la imagen seleccionada
     */
     function abrirEditor(e) {
         // Obtiene la imagen
         urlImage = URL.createObjectURL(e.target.files[0]);
-
+        //escribe el nombre de la imagen en el footer
+        const fileName = document.querySelector('#nombre-archivo');
+        fileName.textContent = e.target.files[0].name;
         // Borra editor en caso que existiera una imagen previa
         editor.innerHTML = '';
         let cropprImg = document.createElement('img');
@@ -104,16 +106,12 @@ function init(idSubcategory, idCategory) {
                 LenaJS.filterImage(filteredImage[0], LenaJS["none"], originalImage,160,90);
                 LenaJS.filterImage(filteredImage[1], LenaJS["gaussian"], originalImage,160,90);
                 LenaJS.filterImage(filteredImage[2], LenaJS["grayscale"], originalImage,160,90);
-                LenaJS.filterImage(filteredImage[3], LenaJS["invert"], originalImage,160,90);
-                LenaJS.filterImage(filteredImage[4], LenaJS["saturation"], originalImage,160,90);
-                LenaJS.filterImage(filteredImage[5], LenaJS["sepia"], originalImage,160,90);
-                LenaJS.filterImage(filteredImage[6], LenaJS["sharpen"], originalImage,160,90);
-                LenaJS.filterImage(filteredImage[7], LenaJS["thresholding"], originalImage,160,90);
-                $('.multiple-items').slick({
-                    infinite: true,
-                    slidesToShow: 4,
-                    slidesToScroll: 4
-                });
+                //LenaJS.filterImage(filteredImage[3], LenaJS["invert"], originalImage,160,90);
+                LenaJS.filterImage(filteredImage[3], LenaJS["saturation"], originalImage,160,90);
+                LenaJS.filterImage(filteredImage[4], LenaJS["sepia"], originalImage,160,90);
+                LenaJS.filterImage(filteredImage[5], LenaJS["sharpen"], originalImage,160,90);
+                //LenaJS.filterImage(filteredImage[7], LenaJS["thresholding"], originalImage,160,90);
+                
             };
             //agregamos los eventos
             document.getElementById("filtro1").onclick = function(){
@@ -134,31 +132,23 @@ function init(idSubcategory, idCategory) {
                 console.log(imagenFinal64)
             };
             document.getElementById("filtro4").onclick = function(){
-                LenaJS.filterImage(filteredImageCanvas, LenaJS['invert'], originalImage,originalImage.width,originalImage.height);
+                LenaJS.filterImage(filteredImageCanvas, LenaJS['saturation'], originalImage,originalImage.width,originalImage.height);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
                 console.log(imagenEn64)
             };
             document.getElementById("filtro5").onclick = function(){
-                LenaJS.filterImage(filteredImageCanvas, LenaJS['saturation'], originalImage,originalImage.width,originalImage.height);
+                LenaJS.filterImage(filteredImageCanvas, LenaJS['sepia'], originalImage,originalImage.width,originalImage.height);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
 
                 console.log(imagenEn64)
             };
             document.getElementById("filtro6").onclick = function(){
-                LenaJS.filterImage(filteredImageCanvas, LenaJS['sepia'], originalImage,originalImage.width,originalImage.height);
-                imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
-                console.log(imagenEn64)
-            };
-            document.getElementById("filtro7").onclick = function(){
                 LenaJS.filterImage(filteredImageCanvas, LenaJS['sharpen'], originalImage,originalImage.width,originalImage.height);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
                 console.log(imagenEn64)
             };
-            document.getElementById("filtro8").onclick = function(){
-                LenaJS.filterImage(filteredImageCanvas, LenaJS['thresholding'], originalImage,originalImage.width,originalImage.height);
-                imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
-                console.log(imagenEn64)
-            };
+            
+            
             //document.querySelector('#base64HTML').textContent = '<img src="' + imagenEn64.slice(0, 40) + '...">';            
         
         }
