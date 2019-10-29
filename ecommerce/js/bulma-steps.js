@@ -202,7 +202,7 @@ var bulmaSteps = function (_EventEmitter) {
     key: onStepsPrevious,
     value: function value(e) {
       e.preventDefault();
-
+      
       if (!e.target.getAttribute('disabled')) {
         this.previous_step();
       }
@@ -213,6 +213,7 @@ var bulmaSteps = function (_EventEmitter) {
       e.preventDefault();
 
       if (!e.target.getAttribute('disabled')) {
+        
         this.next_step();
       }
     }
@@ -223,6 +224,7 @@ var bulmaSteps = function (_EventEmitter) {
         var step = this.steps[i];
 
         if (step.classList.contains(this.options.active_class)) {
+          
           return parseInt(step.getAttribute('data-step-id'));
         }
       }
@@ -269,6 +271,7 @@ var bulmaSteps = function (_EventEmitter) {
           errors = [];
 
       if (typeof this.options.beforeNext != 'undefined' && this.options.beforeNext != null && this.options.beforeNext) {
+        
         errors = this.options.beforeNext(current_id);
       }
       this.emit('bulmasteps:before:next', current_id);
@@ -337,6 +340,7 @@ var bulmaSteps = function (_EventEmitter) {
       }
 
       if (typeof this.options.onShow != 'undefined' && this.options.onShow != null && this.options.onShow) {
+
         this.options.onShow(step_id);
       }
 
@@ -369,13 +373,14 @@ var bulmaSteps = function (_EventEmitter) {
       var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       var instances = new Array();
-
+     
       var elements = document.querySelectorAll(selector);
       [].forEach.call(elements, function (element) {
         setTimeout(function () {
           instances.push(new bulmaSteps(element, options));
         }, 100);
       });
+      
       return instances;
     }
   }]);

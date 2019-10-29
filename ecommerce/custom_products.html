@@ -73,37 +73,47 @@
       <div class="step-content has-text-centered">
        <!--<div class="field is-horizontal"></div>-->
           <label>Selecciona un filtro a aplicar:</label>
-          <br>
-            
+          
+         <!--  <section class="section">
+            <div class="container">
+              Start Carousel -->
+              
+              <!-- End Carousel 
+            </div>
+          </section>-->
+          
           <div class="field is-horizontal">
-              <div>
-                  <p>Normal</p>
-                  <canvas id="filtro1" maxHeight="100px" class="filtered-image-carousel"></canvas>
-              </div>
-              <div>
-                  <p>Desenfoque</p>
-                  <canvas id="filtro2" maxHeight="100px" class="filtered-image-carousel"></canvas>
-              </div>
-              <div>
-                  <p>Escala de Grises</p>
-                  <canvas id="filtro3" maxHeight="100px" class="filtered-image-carousel"></canvas>
-              </div>
-              <div>
-                  <p>Saturacion</p>
-                  <canvas id="filtro4" maxHeight="100px" class="filtered-image-carousel"></canvas>
-                </div>
-              <div>
-                  <p>Sepia</p>
-                  <canvas id="filtro5" maxHeight="100px" class="filtered-image-carousel"></canvas>
-              </div>
-              <div>
-                  <p>Resaltar bordes</p>
-                  <canvas id="filtro6" maxHeight="100px" maxWidth="100px" class="filtered-image-carousel"></canvas>
-              </div>
+              
+            <div class="filtros-carousel" >
+              <p>Normal</p>
+              <canvas id="filtro1" maxHeight="100px" class="filtered-image-carousel"></canvas>
+            </div>
+            <div class="filtros-carousel">
+              <p>Desenfoque</p>
+              <canvas id="filtro2" maxHeight="100px" class="filtered-image-carousel"></canvas>
+            </div>
+            <div class="filtros-carousel">
+              <p>Escala de Grises</p>
+              <canvas id="filtro3" maxHeight="100px" class="filtered-image-carousel"></canvas>
+            </div>
+            <div class="filtros-carousel">
+              <p>Saturacion</p>
+              <canvas id="filtro4" maxHeight="100px" class="filtered-image-carousel"></canvas>
+            </div>
+            <div class="filtros-carousel">
+              <p>Sepia</p>
+              <canvas id="filtro5" maxHeight="100px" class="filtered-image-carousel"></canvas>
+            </div> 
+            <div class="filtros-carousel">
+              <p>Resaltar bordes</p>
+              <canvas id="filtro6" maxHeight="100px" class="filtered-image-carousel"></canvas>
+            </div>
+              
           </div>
 
           <div id="imagen" maxWidth="400px" style="display: inline;"></div>
           <canvas id="filtered-image" style="display: inline;"></canvas>
+          
       </div>
       <div class="step-content has-text-centered">
         <h3>Agrega emojis a tu gusto</h3>
@@ -123,7 +133,7 @@
     </div>
   </div>
 
-
+  
 
 
     <!-- Contenedor para los Toast -->
@@ -177,7 +187,19 @@
       </div>
     </section>
   </div>
-  <script> bulmaSteps.attach(); </script>
+  <script> 
+    
+    
+    //bulmaSteps.attach();
+    //const mySteps = new bulmaSteps("#stepsDemo");
+    
+    //bulmaSteps.beforeNext = null;
+    //mySteps.defaultOptions={'beforeNext':true};
+    //defaultOptions={'beforeNext':true};
+
+    
+   // console.log();
+  </script>
   
     
   <script type="text/javascript"
@@ -194,8 +216,9 @@
   <script type="text/javascript" src="https://unpkg.com/bulma-modal-fx/dist/js/modal-fx.min.js"></script>
   <script src="js/catalogoProducts.js" type="module"></script>
   <!--Scripts Steps productos-->
-  <script src="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/js/bulma-steps.js"></script>
+  <!--<script src="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/js/bulma-steps.js"></script>-->
   <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/js/bulma-carousel.min.js"></script>
+  
   <script src="js/lena.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/jamesssooi/Croppr.js@2.3.0/dist/croppr.min.js"></script>
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

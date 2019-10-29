@@ -4,15 +4,25 @@ import { toast, modal, ip_server, setTable, loadFilesHomeCategory } from "./plug
 //Exportación de módulos
 export { init }
 
+/*funcion de bulma */
+
 /* Función para establecer eventos y datos iniciales */
 function init(idSubcategory, idCategory) {
+    var bulma = new bulmaSteps(document.getElementById('stepsDemo'), {
+        onShow: (id) => console.log(id),
+        beforeNext:true,
+    });
+    
 
+    console.log(bulma.options.beforeNext);
+    /*
     $("#example-basic").steps({
         headerTag: "h3",
         bodyTag: "section",
         transitionEffect: "slideLeft",
         autoFocus: true
-    });
+    });*/
+    
     
     console.log(idSubcategory);
     console.log(idCategory);
@@ -34,6 +44,8 @@ function init(idSubcategory, idCategory) {
     * Método que abre el editor con la imagen seleccionada
     */
     function abrirEditor(e) {
+        //revisamos que se haya cargado una imagen y ponemos como false la bandera
+        bulma.options.beforeNext=false;
         // Obtiene la imagen
         urlImage = URL.createObjectURL(e.target.files[0]);
         //escribe el nombre de la imagen en el footer
@@ -53,7 +65,7 @@ function init(idSubcategory, idCategory) {
 
         // Crea el editor
         new Croppr('#croppr', {
-            aspectRatio: 1,
+            aspectRatio: 0.5,
             startSize: [70, 70],
             onCropEnd: recortarImagen
         })
@@ -81,6 +93,7 @@ function init(idSubcategory, idCategory) {
         let miNuevaImagenTemp = new Image();
         // Cuando la imagen se carge se procederá al recorte
         miNuevaImagenTemp.onload = function() {
+            
             // Se recorta
             contexto.drawImage(miNuevaImagenTemp, inicioX, inicioY, nuevoAncho * zoom, nuevaAltura * zoom, 0, 0, nuevoAncho, nuevaAltura);
             
@@ -118,22 +131,26 @@ function init(idSubcategory, idCategory) {
                 LenaJS.filterImage(filteredImageCanvas, LenaJS['none'], originalImage,originalImage.width,originalImage.height);
                 //generamos el nuevo base 64
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
                 //this.attr('selected','selected');
                 console.log(imagenFinal64)
             };
             document.getElementById("filtro2").onclick = function(){
                 LenaJS.filterImage(filteredImageCanvas, LenaJS['gaussian'], originalImage,originalImage.width,originalImage.height);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
                 console.log(imagenFinal64)
             };
             document.getElementById("filtro3").onclick = function(){
                 LenaJS.filterImage(filteredImageCanvas, LenaJS['grayscale'], originalImage,originalImage.width,originalImage.height);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
                 console.log(imagenFinal64)
             };
             document.getElementById("filtro4").onclick = function(){
                 LenaJS.filterImage(filteredImageCanvas, LenaJS['saturation'], originalImage,originalImage.width,originalImage.height);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
                 console.log(imagenFinal64)
             };
             document.getElementById("filtro5").onclick = function(){
@@ -145,6 +162,7 @@ function init(idSubcategory, idCategory) {
             document.getElementById("filtro6").onclick = function(){
                 LenaJS.filterImage(filteredImageCanvas, LenaJS['sharpen'], originalImage,originalImage.width,originalImage.height);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
                 console.log(imagenFinal64)
             };
             
