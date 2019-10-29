@@ -59,37 +59,28 @@
             </div>
 
             <div>
-              <img src=""/>
+              <img id="vista-previa" src=""/>
             </div>
         </div>
         
       </div>
       <div class="step-content has-text-centered">
+          <p>Previsualiza el resultado</p>
+          <div>
+              <div style="display: inline-block; max-width: 350px; " class="image-container" id="editor"></div>
+              <canvas style="display: inline;max-width: 350px;" class="image-container" id="preview"></canvas>
+          </div>  
           
-          <div style="display: inline-block;max-width: 350px;" id="editor"></div>
-
-              <p>Previsualiza el resultado</p>
-    
-              <canvas style="display: inline;max-width: 350px; max-height: 250px;" id="preview"></canvas>
-          <!--<canvas id="canvas"></canvas>-->
         
       </div>
       <div class="step-content has-text-centered">
        <!--<div class="field is-horizontal"></div>-->
           <label>Selecciona un filtro a aplicar:</label>
           
-         <!--  <section class="section">
-            <div class="container">
-              Start Carousel -->
-              
-              <!-- End Carousel 
-            </div>
-          </section>-->
-          
           <div class="field is-horizontal">
               
             <div class="filtros-carousel" >
-              <p>Normal</p>
+              <p>Ninguno</p>
               <canvas id="filtro1" maxHeight="100px" class="filtered-image-carousel"></canvas>
             </div>
             <div class="filtros-carousel">
@@ -116,7 +107,7 @@
           </div>
 
           <div id="imagen" maxWidth="400px" style="display: inline;"></div>
-          <canvas id="filtered-image" style="display: inline;"></canvas>
+          <canvas id="filtered-image" maxWidth="400px" style="display: inline;"></canvas>
           
       </div>
       <div class="step-content has-text-centered">

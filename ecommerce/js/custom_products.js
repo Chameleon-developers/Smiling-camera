@@ -124,7 +124,8 @@ function init(idSubcategory, idCategory) {
                 LenaJS.filterImage(filteredImage[4], LenaJS["sepia"], originalImage,160,90);
                 LenaJS.filterImage(filteredImage[5], LenaJS["sharpen"], originalImage,160,90);
                 //LenaJS.filterImage(filteredImage[7], LenaJS["thresholding"], originalImage,160,90);
-                
+                LenaJS.filterImage(filteredImageCanvas, LenaJS['none'], originalImage,originalImage.width,originalImage.height);
+                cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
             };
             //agregamos los eventos
             document.getElementById("filtro1").onclick = function(){
@@ -177,7 +178,7 @@ function init(idSubcategory, idCategory) {
         
 
     }
-
+    
 }
 function cargarEmoji(w,h,imagenFinal64){
     var width = w;

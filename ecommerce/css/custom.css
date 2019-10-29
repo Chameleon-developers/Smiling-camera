@@ -355,3 +355,11 @@
    overflow:auto;
    margin:0 auto;
  }
+
+.image-container{
+  padding: 5px 10px;
+}
+
+.is-horizontal{
+  position:relative;
+}
