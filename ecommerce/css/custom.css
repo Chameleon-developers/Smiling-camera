@@ -347,8 +347,11 @@
   [hidden] {
     display: none;
   }
+  /*estilos para los filtros*/
 
  .filtros-carousel{
    padding: 10px 5px;
    display: inline-block;
+   overflow:auto;
+   margin:0 auto;
  }
