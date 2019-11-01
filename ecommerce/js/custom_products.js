@@ -103,7 +103,7 @@ function init(idSubcategory, idCategory) {
             //document.querySelector('#base64').textContent = imagenEn64;
             
             var img = document.getElementById("imagen");
-            img.innerHTML='<img id="original-image" maxWidth="400px" src="'+imagenEn64+'"/>'; 
+            img.innerHTML='<img id="original-image" class="original" src="'+imagenEn64+'"/>'; 
 
             //obtenemos la imagen base
             var originalImage = document.getElementById("original-image");
@@ -187,6 +187,17 @@ var layer;
 function cargarEmoji(w,h,imagenFinal64){
     var width = w;
     var height = h;
+    if(w<500){
+        width = w;
+    }else{
+        width = 400;
+    }
+    if(h<350){
+        height = h;
+    }else{
+        height = 300;
+    }
+    
 
 
     stage = new Konva.Stage({
@@ -243,6 +254,7 @@ function cargarEmojis (){
         emojisTable[i].onclick = function (){
             console.log("emoji");
             var imagen = new Image();
+            imagen = this;
             var em = new Konva.Image({
                 x: 0,
                 y: 0,

@@ -363,3 +363,12 @@
 .is-horizontal{
   position:relative;
 }
+
+.emojis-table{
+  max-width: 32px;
+  max-height: 32px;
+}
+.original{
+  max-width: 400px;
+  display: inline-flex;
+}
