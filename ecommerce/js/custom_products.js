@@ -65,7 +65,7 @@ function init(idSubcategory, idCategory) {
 
         // Crea el editor
         new Croppr('#croppr', {
-            aspectRatio: 0.5,
+            aspectRatio: null,
             startSize: [70, 70],
             onCropEnd: recortarImagen
         })
@@ -103,7 +103,7 @@ function init(idSubcategory, idCategory) {
             //document.querySelector('#base64').textContent = imagenEn64;
             
             var img = document.getElementById("imagen");
-            img.innerHTML='<img id="original-image" src="'+imagenEn64+'"/>'; 
+            img.innerHTML='<img id="original-image" maxWidth="400px" src="'+imagenEn64+'"/>'; 
 
             //obtenemos la imagen base
             var originalImage = document.getElementById("original-image");
@@ -125,7 +125,9 @@ function init(idSubcategory, idCategory) {
                 LenaJS.filterImage(filteredImage[5], LenaJS["sharpen"], originalImage,160,90);
                 //LenaJS.filterImage(filteredImage[7], LenaJS["thresholding"], originalImage,160,90);
                 LenaJS.filterImage(filteredImageCanvas, LenaJS['none'], originalImage,originalImage.width,originalImage.height);
+                imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
                 cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
+                
             };
             //agregamos los eventos
             document.getElementById("filtro1").onclick = function(){
@@ -178,33 +180,22 @@ function init(idSubcategory, idCategory) {
         
 
     }
-    
+    cargarEmojis();
 }
+var stage;
+var layer;
 function cargarEmoji(w,h,imagenFinal64){
     var width = w;
     var height = h;
 
 
-    var stage = new Konva.Stage({
+    stage = new Konva.Stage({
         container: 'container',
         width: width,
         height: height
     });
 
-    var layer = new Konva.Layer();
-    var rectX = stage.width() / 2 - 50;
-    var rectY = stage.height() / 2 - 25;
-
-    var box = new Konva.Rect({
-        x: rectX,
-        y: rectY,
-        width: 100,
-        height: 50,
-        fill: '#00D2FF',
-        stroke: 'black',
-        strokeWidth: 4,
-        draggable: true
-    });
+    layer = new Konva.Layer();
 
     var fondoObj = new Image();
     fondoObj.onload = function() {
@@ -219,7 +210,7 @@ function cargarEmoji(w,h,imagenFinal64){
 
         // add the shape to the layer
         layer.add(fondo);
-        //layer.batchDraw();
+        layer.batchDraw();
     };
     console.log("base64"+imagenFinal64);
     fondoObj.src = imagenFinal64;
@@ -228,8 +219,8 @@ function cargarEmoji(w,h,imagenFinal64){
     var imageObj = new Image();
     imageObj.onload = function() {
         var yoda = new Konva.Image({
-        x: 100,
-        y: 100,
+        x: 0,
+        y: 0,
         image: imageObj,
         width: 64,
         height: 64,
@@ -238,19 +229,30 @@ function cargarEmoji(w,h,imagenFinal64){
 
         // add the shape to the layer
         layer.add(yoda);
-        //layer.batchDraw();
+        layer.batchDraw();
     };
     imageObj.src = 'emoji-data/img-apple-64/1f600.png';
-
-    
-    // add cursor styling
-    box.on('mouseover', function() {
-        document.body.style.cursor = 'pointer';
-    });
-    box.on('mouseout', function() {
-        document.body.style.cursor = 'default';
-    });
-
-    layer.add(box);
     stage.add(layer);
+}
+
+
+function cargarEmojis (){
+    var emojisTable = document.getElementsByClassName("emojis-table");
+    console.log(emojisTable.length);
+    for(let i=0;i<emojisTable.length;i++){
+        emojisTable[i].onclick = function (){
+            console.log("emoji");
+            var imagen = new Image();
+            var em = new Konva.Image({
+                x: 0,
+                y: 0,
+                image: imagen,
+                width: 64,
+                height: 64,
+                draggable: true
+            });
+            layer.add(em);
+            layer.batchDraw();
+        }
+    }
 }
