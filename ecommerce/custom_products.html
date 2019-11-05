@@ -35,33 +35,53 @@
     <!--Contenido-->
     <div class="steps-content">
       <div class="step-content has-text-centered is-active">
-        <div >
-            <p>Carga una imagen desde tu equipo para comenzar a editar:</p>
-            <br>
-
-            <div class="field">
-              <div class="file is-centered is-boxed is-success is-large has-name">
-                <label class="file-label">
-                  <input class="file-input" type="file" id="image" name="resume">
-                  <span class="file-cta">
-                    <span class="file-icon">
-                      <i class="fas fa-upload"></i>
-                    </span>
-                    <span class="file-label">
-                      Carga una foto
-                    </span>
-                  </span>
-                  <span id="nombre-archivo" class="file-name">
-                    Archivo...
-                  </span>
-                </label>
+        <div style="display: inline-flex;">
+          <div class="contenedor">
+              <p>Carga una imagen desde tu equipo para comenzar a editar:</p>
+              <br>
+              <div class="select">
+                <select>
+                  <option>Selecciona un producto</option>
+                  <option>Carcasa para celular</option>
+                  <option>Invitación / Tarjeta de felicitación</option>
+                  <option>Portavasos</option>
+                  <option>Porta-retrato</option>
+                  <option>Rompecabezas</option>
+                  <option>Termo</option>
+                  <option>Libreta</option>
+                  <option>Mousepad</option>
+                  <option>Playera</option>
+                  <option>Lapicero</option>
+                </select>
               </div>
-            </div>
-
-            <div>
-              <img id="vista-previa" src=""/>
-            </div>
-        </div>
+              <br>
+              <br>
+              <div class="field">
+                <div class="file is-centered is-boxed is-success is-large has-name">
+                  <label class="file-label">
+                    <input class="file-input" type="file" id="image" name="resume">
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                      </span>
+                      <span class="file-label">
+                        Carga una foto
+                      </span>
+                    </span>
+                    <span id="nombre-archivo" class="file-name">
+                      Archivo...
+                    </span>
+                    
+                  </label>
+                </div>
+                
+              </div>
+          </div>
+          <div style="display: inline;" class="contenedor">
+            <img id="vista-previa"/>
+          </div>
+        </div>  
+        
         
       </div>
       <div class="step-content has-text-centered">
@@ -110,8 +130,8 @@
       </div>
       <div class="step-content has-text-centered">
         <h3>Agrega emojis a tu gusto</h3>
-        <div id="container"></div>
-        <div class="table-container">
+        <div id="container" class="contenedor" style="max-width: 35%; position: absolute;"></div>
+        <div class="table-container contenedor" style="position: relative; display: inline-block;">
           <table class="table is-bordered">
             <!-- Your table content -->
             <tr>

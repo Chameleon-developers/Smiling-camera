@@ -372,3 +372,31 @@
   max-width: 400px;
   display: inline-flex;
 }
+
+#vista-previa{
+  padding: 15px;
+}
+.contenedor{
+  padding: 5px 20px;
+}
+.contenedor-emo{
+  padding: 5px;
+  max-width: 45%;
+  display: inline-block;
+}
+
+.file.is-success .file-cta{
+  background-color: #4AE0B8;
+}
+.file.is-success:hover .file-cta{
+  background-color: #4AE0B8;
+}
+
+.steps .step-item.is-success.is-active .step-marker{
+  border-color: #4AE0B8;
+  color: #4AE0B8;
+}
+
+.steps .step-item.is-success.is-completed .step-marker{
+  background-color: #4AE0B8;
+}

@@ -39,7 +39,10 @@ function init(idSubcategory, idCategory) {
     let urlImage = undefined;
     // Evento disparado cuando se adjunte una imagen
     inputImage.addEventListener('change', abrirEditor, false);
-   
+    //Imagen de vista previa
+    const vistaPrevia = document.querySelector('#vista-previa');
+    
+    
     /**
     * Método que abre el editor con la imagen seleccionada
     */
@@ -51,6 +54,8 @@ function init(idSubcategory, idCategory) {
         //escribe el nombre de la imagen en el footer
         const fileName = document.querySelector('#nombre-archivo');
         fileName.textContent = e.target.files[0].name;
+
+        vistaPrevia.setAttribute('src',urlImage);
         // Borra editor en caso que existiera una imagen previa
         editor.innerHTML = '';
         let cropprImg = document.createElement('img');
