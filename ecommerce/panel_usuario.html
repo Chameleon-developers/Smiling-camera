@@ -11,32 +11,48 @@
     </div>
     
     <div id="datos" class="tabcontent">
-      <form id="form" class="" method="post">        
-        <div class="field">
-          <label></label>
-          <input class="input" placeholder="Nombre(s)" type="text" name="name" value="">
-        </div>
-        <div class="field">
-          <input class="input" placeholder="Apellido paterno" type="text" name="paterno" value="">
-        </div>
-        <div class="field">
-          <input class="input" placeholder="Apellido materno" type="text" name="materno" value="">
-        </div>
-        <div class="field">
-          <input class="input" placeholder="Codigo postal" type="number" name="cp" value="">
-        </div>
-        <div class="field">
-          <input class="input" placeholder="Calle" type="text" name="calle" value="">
-        </div>
-        <div class="field">
-          <input class="input" placeholder="Numero" type="number" name="numero" value="">
-        </div>
-        <div class="field">
-          <input class="input" placeholder="Ciudad" type="text" name="ciudad" value="">
-        </div>
-        <div class="field">
-          <input class="input" placeholder="Estado" type="text" name="estado" value="">
-        </div>
+      <form id="form" class="" method="post">
+          <div class="columns">
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label">Nombre</label>
+                    <input class="input" type="text" name="name" value="">
+                  </div>
+                  <div class="field">
+                    <label class="label">Apellido paterno</label>
+                    <input class="input" type="text" name="paterno" value="">
+                  </div>
+                  <div class="field">
+                      <label class="label">Apellido materno</label>
+                    <input class="input" type="text" name="materno" value="">
+                  </div>
+            </div>
+            <div class="column is-half">
+                <div class="field">
+                    <label class="label">Código postal</label>
+                    <input class="input" type="number" name="cp" value="">
+                  </div>
+                  <div class="field">
+                    <label class="label">Calle</label>
+                    <input class="input" type="text" name="calle" value="">
+                  </div>
+                  <div class="field">
+                      <label class="label">Número</label>
+                    <input class="input" type="number" name="numero" value="">
+                  </div>
+                  <div class="field">
+                      <label class="label">Ciudad</label>
+                    <input class="input" type="text" name="ciudad" value="">
+                  </div>
+                  <div class="field">
+                      <label class="label">Estado</label>
+                    <input class="input" type="text" name="estado" value="">
+                  </div>
+            </div>
+          </div>
+               
+        
+        
         <div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
           <a class="button is-primary" onclick="completarRegistro()" name="button">Agregar</a>
         </div>
@@ -64,7 +80,7 @@
             </ul>
         </div>
     </div>
-    
+</div>
     <script>
       tabcontent = document.getElementsByClassName("tabcontent");
       for (i = 0; i < tabcontent.length; i++) {
@@ -85,3 +101,162 @@
         evt.currentTarget.className += " is-active";
       }
     </script>
+<!-- Contenedor para los Toast -->
+<div class="toast-container">
+  </div>
+
+  <footer class="footerEcommerce " style="padding-top: 12%;">
+    <div class="firstFooter">
+      <div class="line">
+        <hr style="margin: 3px">
+        </hr>
+      </div>
+      <div class="pBody columns">
+        <div class="column" >
+          <div class="columns">
+            <div class="column">
+                <h6>Sucursales</h6>
+                <p>
+                  Centro <br>
+                  Aquiles Serdán No. 521, Col. Centro  <br>
+                  C.P. 58000. Morelia, Mich. <br>
+                  Tel. (443) 3 13 96 94
+                </p><br>
+            </div>
+            <div class="column">
+                <h6>Redes Sociales</h6>
+                <div class="field has-addons" >
+                  <p class="control">
+                    <a href="#">
+                      <img src="resources/facebook-box.png" width="25px">
+                    </a>
+                  </p>
+                  <p class="control">
+                    <a href="#">
+                      <img src="resources/instagram.png" width="25px">
+                    </a>
+                  </p>
+                  <p class="control">
+                    <a href="#">
+                      <img src="resources/twitter-box.png" width="25px">
+                    </a>
+                  </p>
+              </div>
+          </div>
+          
+
+        </div>
+        </div>
+        <div class="productosFoot column">
+            <div class="columns">
+              <div class="column">
+                  <h6>Foto-Libros</h6>
+                    <a class="navbar-item Subcategory" data-Subcategory="1" data-Category="1">
+                        <span class="icon">
+                          <i class="fas fa-feather-alt"></i>
+                        </span> Foto-Libro con Fotos
+                      </a>
+                      <a class="navbar-item Subcategory" data-Subcategory="2" data-Category="1">
+                        <span class="icon">
+                          <i class="fas fa-feather-alt"></i>
+                        </span> Foto-Libro sin Fotos
+                      </a>
+                      <a class="navbar-item Subcategory" data-Subcategory="3" data-Category="1">
+                        <span class="icon">
+                          <i class="fas fa-feather-alt"></i>
+                        </span> Caja con Fotos
+                      </a>
+              </div>
+              
+              <div class="column">
+                 <h6>Foto-Marcos</h6>
+                 <a class="navbar-item Subcategory" data-Subcategory="14" data-Category="3">
+                    <span class="icon">
+                      <i class="fas fa-feather-alt"></i>
+                    </span> Marco con Foto
+                  </a>
+                  <a class="navbar-item Subcategory" data-Subcategory="16" data-Category="3">
+                    <span class="icon">
+                      <i class="fas fa-feather-alt"></i>
+                    </span> Marco sin Foto
+                  </a>
+                  <a class="navbar-item Subcategory" data-Subcategory="15" data-Category="3">
+                    <span class="icon">
+                      <i class="fas fa-feather-alt"></i>
+                    </span> Bastidor con Foto
+                  </a>
+              </div>
+              <div class="column is-half">
+                  <h6>Foto-Regalos</h6>
+                  <div class="columns">
+                      <div class="column">
+                          <a class="navbar-item Subcategory" data-Subcategory="4" data-Category="2">
+                              <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                              </span> Carcasa Cel.
+                            </a>
+                            <a class="navbar-item Subcategory" data-Subcategory="5" data-Category="2">
+                              <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                              </span> Invitación/Tarjeta
+                            </a>
+                            <a class="navbar-item Subcategory" data-Subcategory="6" data-Category="2">
+                              <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                              </span> Portavasos
+                            </a>
+                            <a class="navbar-item Subcategory" data-Subcategory="7" data-Category="2">
+                              <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                              </span> Porta-retrato
+                            </a>
+                            <a class="navbar-item Subcategory" data-Subcategory="8" data-Category="2">
+                                <span class="icon">
+                                  <i class="fas fa-feather-alt"></i>
+                                </span> Rompecabezas
+                              </a>
+                      </div>
+                      <div class="column">
+                          
+                            <a class="navbar-item Subcategory"data-Subcategory="9" data-Category="2">
+                              <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                              </span> Termo
+                            </a>
+                            <a class="navbar-item Subcategory" data-Subcategory="10" data-Category="2">
+                              <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                              </span> Libreta
+                            </a>
+                          <a class="navbar-item Subcategory" data-Subcategory="11" data-Category="2">
+                              <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                              </span> Mousepad
+                            </a>
+                            <a class="navbar-item Subcategory" data-Subcategory="12" data-Category="2">
+                              <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                              </span> Playera
+                            </a>
+                            <a class="navbar-item Subcategory" data-Subcategory="13" data-Category="2">
+                              <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                              </span> Lapicero
+                            </a>
+
+                      </div>
+                  </div>
+              </div>
+
+            </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="secondFooter">
+      <p>
+        <a>Terminos y condiciones</a>
+      </p>
+    </div>
+    
+  </footer>
