@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/css/bulma-steps.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-divider@0.2.0/dist/css/bulma-divider.min.css">
   <link rel="stylesheet" type="text/css" href="css/home.css">
   <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
@@ -41,7 +42,7 @@
     <nav id="mainNav" class="navbar level is-fixed-top">
       <div class="level-left">
         <div class="level-item">
-          <a>
+          <a class="Subcategory" data-Category="0">
             <img class="logo" src="resources/logo.png">
           </a>
         </div>
@@ -64,12 +65,19 @@
             </p>
           </div>
         </div>
-        <div class="level-item" id="Usuario">
-          <a class="is-danger">
-            <span class="icon">
-              <i class="fas fa-user-circle fa-lg"></i>
-            </span>
-          </a>
+        <div class="level-item" id="logIn">
+          <div class="field has-addons">
+            <p class="control">
+              <button class="button is-white">Iniciar sesion</button>
+            </p>
+          </div>
+        </div>
+        <div class="level-item" id="usuario" data-user="0">
+          <div class="field has-addons">
+            <p class="control">
+              <button class="button is-white">asd</button>
+            </p>
+          </div>
         </div>
         <div class="level-item">
           <a>
@@ -516,7 +524,7 @@
       }
     });
   </script>
-
+  
   <!-- Scripts DataTables -->
   <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
   <!--Paginacion de productos-->

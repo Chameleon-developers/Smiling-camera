@@ -36,8 +36,21 @@ a strong {
     color: currentColor;
   }
   
- 
-  
+#usuario {
+  display: none;
+}
+
+#logIn {
+  display: flex;
+}
+
+.is-half {
+  width: 47% !important;
+}  
+
+.is-divider-vertical {
+  margin-top: 120px;
+}
 
 #secondNav a {
     text-decoration: none;

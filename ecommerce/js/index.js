@@ -21,9 +21,13 @@ $(function() {
 			loadFilesHomeSearch("catalogoProducts.html", "js/catalogoProducts.js", search);
 		}
 	});
+
+	$('#logIn').click(function (e) {
+		loadFilesUser("signIn.html", "js/signIn.js")
+	})
 	
-	$('#Usuario').click(function (e) {
-		panelUser("catalogoProducts.html", "js/catalogoProducts.js");	
+	$('#usuario').click(function (e) {
+		loadFilesUser("panel_usuario.html", "js/usuario.js");	
     });
 
     $("#secondPartPromotion").on("click", ".infoProduct", function(e) { 
@@ -48,16 +52,6 @@ function catalogoProducts(idSubcategory, idCategory) {
 		loadFilesHomeCategory("catalogoProducts.html", "js/catalogoProducts.js", idSubcategory, idCategory);
 	}
 }
-
-/* Función para saber que html y js cargar */
-function panelUser() {
-	/*if (idCategory == 0) {
-		window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
-	} else {
-		loadFilesHomeCategory("panel_usuario.html", "js/usuario.js", idSubcategory, idCategory);
-	}*/
-	loadFilesUser("panel_usuario.html", "js/usuario.js");
-} 
 
 /* Obtener productos para carrucel */
 function getProducts() {
