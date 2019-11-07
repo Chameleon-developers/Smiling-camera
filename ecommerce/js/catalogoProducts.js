@@ -8,6 +8,8 @@ export { init, initS }
 function init(idSubcategory, idCategory) {
 	getProducts(idCategory, idSubcategory)
 
+	$('html, body').animate({scrollTop:0}, 'slow');
+
 	$("#products").on("click", ".infoProduct", function(e) { 
     	loadFilesInfo("infoProducto.html", "js/infoProducto.js", $(this).attr('data-product'));
     });

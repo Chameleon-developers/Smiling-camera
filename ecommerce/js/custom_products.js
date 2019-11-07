@@ -26,6 +26,8 @@ function init(idSubcategory, idCategory) {
     
     console.log(idSubcategory);
     console.log(idCategory);
+
+    $('html, body').animate({scrollTop:0}, 'slow');
     
     // Input File
     const inputImage = document.querySelector('#image');

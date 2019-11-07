@@ -6,7 +6,8 @@ export { init }
 
 /* Función para establecer eventos y datos iniciales (idSubcategory e idCategory) */
 function init(idProduct) {
-    getInfoProduct(idProduct)
+	getInfoProduct(idProduct)
+	$('html, body').animate({scrollTop:0}, 'slow');
 }
 
 function getInfoProduct(idProduct) {
