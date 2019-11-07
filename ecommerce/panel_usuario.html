@@ -1,0 +1,86 @@
+
+<div class="seccion">
+    <div class="tabs"><!--class="tablinks"-->
+      <!--<button class="tablinks" onclick="openCity(event, 'London')">London</button>
+      <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+      <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>-->
+        <ul>
+            <li class="is-active tablinks" onclick="openTab(event, 'datos')"><a>Mis datos</a></li>
+            <li class="tablinks"  onclick="openTab(event, 'pedidos')"><a>Mis pedidos</a></li>
+        </ul>
+    </div>
+    
+    <div id="datos" class="tabcontent">
+      <form id="form" class="" method="post">        
+        <div class="field">
+          <input class="input" placeholder="Nombre(s)" type="text" name="name" value="">
+        </div>
+        <div class="field">
+          <input class="input" placeholder="Apellido paterno" type="text" name="paterno" value="">
+        </div>
+        <div class="field">
+          <input class="input" placeholder="Apellido materno" type="text" name="materno" value="">
+        </div>
+        <div class="field">
+          <input class="input" placeholder="Codigo postal" type="number" name="cp" value="">
+        </div>
+        <div class="field">
+          <input class="input" placeholder="Calle" type="text" name="calle" value="">
+        </div>
+        <div class="field">
+          <input class="input" placeholder="Numero" type="number" name="numero" value="">
+        </div>
+        <div class="field">
+          <input class="input" placeholder="Ciudad" type="text" name="ciudad" value="">
+        </div>
+        <div class="field">
+          <input class="input" placeholder="Estado" type="text" name="estado" value="">
+        </div>
+        <div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
+          <a class="button is-primary" onclick="completarRegistro()" name="button">Agregar</a>
+        </div>
+      </form>
+    </div>
+    
+    <div id="pedidos" class="tabcontent">
+        <table class="table">
+        <thead>
+            <tr>
+            <th>Folio</th>
+            <th>Monto pagado</th>
+            <th>Fecha</th>
+            <th>Estado del pedido</th>
+            <th>Num. de guía</th>
+            <th>Ver producto</th>
+            </tr>
+        </thead>
+        <tbody id="ventas">
+
+        </tbody>
+        </table>
+        <div class="paginador">
+            <ul id="paginasVentas" style="list-style: none; ">
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        if(tabcontent[i].id != "datos") tabcontent[i].style.display = "none";
+      }
+
+      function openTab(evt, pestana) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace("is-active", "");
+        }
+        document.getElementById(pestana).style.display = "block";
+        evt.currentTarget.className += " is-active";
+      }
+    </script>

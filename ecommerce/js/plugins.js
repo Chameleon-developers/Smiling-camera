@@ -6,7 +6,8 @@ export {
     setTable,
     loadFilesHomeCategory,
     loadFilesHomeSearch,
-    loadFilesInfo
+    loadFilesInfo,
+    loadFilesUser
 }
 
 import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
@@ -123,6 +124,18 @@ function loadFilesInfo(htmlFile, jsFile, idProduct) {
 
         importModule(jsFile).then((module) => {
             module.init(idProduct);
+        });
+
+    });
+}
+
+/* Función para cargar los archivos html y js del panel de usuario*/
+function loadFilesUser(htmlFile, jsFile) {
+
+    $('#Content').load(htmlFile, function () {
+
+        importModule(jsFile).then((module) => {
+            module.init();
         });
 
     });

@@ -1,5 +1,5 @@
 //Importación de módulos
-import { loadFilesHomeCategory, loadFilesHomeSearch } from "./plugins.js"
+import { loadFilesHomeCategory, loadFilesHomeSearch , loadFilesUser} from "./plugins.js"
 
 /* Función para declarar eventos eventos */
 $(function() {
@@ -22,11 +22,14 @@ $(function() {
 
     $('#search').click(function (e) {
     	var search = $('#inputSearch').val()
-
     	if (search.length != 0) {
 			loadFilesHomeSearch("catalogoProducts.html", "js/catalogoProducts.js", search);
 		}
-    })
+	});
+	
+	$('#Usuario').click(function (e) {
+		panelUser("catalogoProducts.html", "js/catalogoProducts.js");	
+    });
 })
 
 /* Función para saber que html y js cargar */
@@ -47,6 +50,15 @@ function catalogoProducts(idSubcategory, idCategory) {
 	}
 }
 
+/* Función para saber que html y js cargar */
+function panelUser() {
+	/*if (idCategory == 0) {
+		window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
+	} else {
+		loadFilesHomeCategory("panel_usuario.html", "js/usuario.js", idSubcategory, idCategory);
+	}*/
+	loadFilesUser("panel_usuario.html", "js/usuario.js");
+} 
 
 /* Obtener productos para carrucel */
 function getProducts() {

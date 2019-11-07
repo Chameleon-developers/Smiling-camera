@@ -349,6 +349,7 @@
   }
   /*estilos para los filtros*/
 
+  /*Personalizacion de productos*/
  .filtros-carousel{
    padding: 10px 5px;
    display: inline-block;
@@ -400,3 +401,16 @@
 .steps .step-item.is-success.is-completed .step-marker{
   background-color: #4AE0B8;
 }
+
+/*Panel de usuarios*/
+.seccion{
+  padding-top: 130px;
+  padding-left:10px;
+}
+
+#datos{
+  display: block;
+  max-width: 45%;
+}
+
+
