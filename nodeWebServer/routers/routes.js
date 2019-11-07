@@ -10,6 +10,7 @@ module.exports = function (app,secureApp) {
 
     /* Validar logIn */
     app.post('/logIn',login.logIn)
+    app.post('/changePassword',login.changePassword)
 
     /* USUARIOS */
 

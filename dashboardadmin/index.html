@@ -39,26 +39,31 @@
                 </div>
                 <div class="column is-4 is-offset-4 has-text-centered">
                     <i class="fas fa-2x fa-user-lock"></i>
-                    <h1 class="MuiTypography-root MuiTypography-h5">Iniciar Sesión</h1>
+                    <h1 id="titleLogIn" class="MuiTypography-root MuiTypography-h5">Iniciar Sesión</h1>
                 </div>
                 <!-- Form para LogIn -->
                 <form novalidate="" class="column is-4 is-offset-4">
                     <div class="column is-8 is-offset-2">
-                        <div class="control has-icons-left">
+                        <div class="has-text-centered">
+                            <p id="messageEmail" style="visibility: hidden" class="help">Se enviara un mail a su correo electrónico de recuperación con la nueva contraseña. <strong>La contraseña anterior se borrará</strong></p>
+                        </div>
+                        <br>
+                        <div id="mailContainer" class="control has-icons-left">
                             <input id="email" class="input is-large" type="email" placeholder="Correo (Usuario)">
                             <span class="icon is-left">
                                 <i class="fa fa-envelope"></i>
                             </span>
                         </div>
                         <br>
-                        <div class="control has-icons-left">
+                        <div id="pwdContainer" class="control has-icons-left has-text-centered">
                             <input id="password" class="input is-large" type="password" placeholder="Contraseña">
                             <span class="icon is-left">
                                 <i class="fa fa-lock"></i>
                             </span>
+                            <a id="changePWD" href="#"><p class="help">¿Olvidaste tu Contraseña?</p></a>
                         </div>
                         <br>
-                        <div class="has-text-centered">
+                        <div id="captchaGoogle" class="has-text-centered">
                             <div class="g-recaptcha has-text-centered" data-sitekey="6Ld-g7oUAAAAAI-HUfcZOGiFRkAx4VjJfMkKUnlQ"></div><!-- style="display: inline-block;" -->
                             <div style="visibility: hidden">
                                 <a href="https://policies.google.com/privacy">Privacy Policy</a> and
@@ -68,6 +73,10 @@
                         <br>
                         <div class="has-text-centered boton">
                             <a id="login" class="button is-medium is-primary is-fullwidth">Iniciar sesión</a>
+                        </div>
+                        <br>
+                        <div class="has-text-centered boton">
+                            <a id="getBack" style="visibility: hidden" class="button is-medium is-danger is-fullwidth">Cancelar</a>
                         </div>
                     </div>
                 </form>

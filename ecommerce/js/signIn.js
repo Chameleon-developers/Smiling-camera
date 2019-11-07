@@ -2,6 +2,8 @@
 import { toast, ip_server } from "./plugins.js"
 
 $(function() {
+	$('html, body').animate({scrollTop:0}, 'slow');
+	
 	$('#iniciarSesion').click(function (e) {
 		logIn()
     });

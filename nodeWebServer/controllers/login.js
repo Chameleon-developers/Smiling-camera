@@ -8,7 +8,7 @@ module.exports.logIn = function (req, res) {
     var check = true
 
     /* Validar si el captcha existe */
-    if(data.captcha === undefined || data.captcha === '' || data.captcha === null ) {
+    if (data.captcha === undefined || data.captcha === '' || data.captcha === null) {
         res.status(400).json({
             Status: 'Failure',
             message: 'Bad_Captcha'
@@ -19,13 +19,13 @@ module.exports.logIn = function (req, res) {
 
         // Verify URL
         const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${data.captcha}&remoteip=${req.connection.remoteAddress}`
-        
+
         // Make Request To VerifyURL
         request(verifyUrl, (err, response, body) => {
             body = JSON.parse(body)
 
             // If Not Successful
-            if(body.success !== undefined && !body.success){
+            if (body.success !== undefined && !body.success) {
                 check = false
             }
         })
@@ -61,10 +61,10 @@ module.exports.logIn = function (req, res) {
                             type: result[0].typeUser,
                             idType: result[0].idTypeUser
                         }, process.env.SEC_KEY, {
-                                expiresIn: '24h',
+                            expiresIn: '24h',
                         })
-                        var cipher = crypto.createCipher('aes128',process.env.SEC_AES_KEY)
-                        let encrypted = cipher.update( token , 'utf8' , 'hex')
+                        var cipher = crypto.createCipher('aes128', process.env.SEC_AES_KEY)
+                        let encrypted = cipher.update(token, 'utf8', 'hex')
                         encrypted += cipher.final('hex')
 
                         //Ruta después de LogIn
@@ -106,6 +106,124 @@ module.exports.logIn = function (req, res) {
                                     return
                                 }
                             }
+                        })
+                    }
+                }
+            })
+        } else {
+            res.status(400).json({
+                Status: 'Failure',
+                message: 'Bad_Captcha'
+            })
+        }
+    }
+}
+
+module.exports.changePassword = function (req, res) {
+    /* Obtener variable para hacer petición del Captcha */
+    var request = require('request')
+    var nodemailer = require('nodemailer');
+
+    /* Obtener los datos del Body */
+    var data = req.body
+    var check = true
+
+    if (data.captcha === undefined || data.captcha === '' || data.captcha === null) {
+        res.status(400).json({
+            Status: 'Failure',
+            message: 'Bad_Captcha'
+        })
+    } else {
+        // Secret Key
+        const secretKey = '6Ld-g7oUAAAAAJwuo_zduQp_3TaJhpLBzA5XAAlL'
+
+        // Verify URL
+        const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${data.captcha}&remoteip=${req.connection.remoteAddress}`
+
+        // Make Request To VerifyURL
+        request(verifyUrl, (err, response, body) => {
+            body = JSON.parse(body)
+
+            // If Not Successful
+            if (body.success !== undefined && !body.success) {
+                check = false
+            }
+        })
+
+        if (check) {
+            var con = require('../controllers/dbconn')()
+
+            /* Ejecutar la consulta para la validación de datos de LogIn */
+            con.query('SELECT mainEmail FROM managerusers WHERE resetEmail=? AND statusUser = 1 AND ecommerceYouPrint = 1', [data.resetEmail], function (err, result, fields) {
+                if (err) {
+                    con.end()
+                    // Internal error message send
+                    res.status(500).json({
+                        Status: 'internal error',
+                        message: 'Internal error'
+                    })
+                } else {
+                    if (result.length == 1) {
+                        try {
+                            var randomstring = Math.random().toString(36).slice(-8);
+
+                            // Definimos el transporter
+                            var transporter = nodemailer.createTransport({
+                                service: 'Gmail',
+                                auth: {
+                                    user: 'chameleon.developers.send@gmail.com',
+                                    pass: 'Develop4'
+                                }
+                            });
+                            // Definimos el email
+                            var mailOptions = {
+                                from: 'chameleon.developers.send@gmail.com',
+                                to: data.resetEmail,
+                                subject: 'Recuperación de Contraseña YouPrint Administrador',
+                                text: 'La contraseña para ingresar es: ' + randomstring
+                            };
+                            // Enviamos el email
+                            transporter.sendMail(mailOptions, function (error, info) {
+                                if (error) {
+                                    con.end()
+                                    res.status(500).json({
+                                        Status: 'internal error',
+                                        message: error
+                                    })
+                                } else {
+                                    con.query("UPDATE `managerusers` SET `passwordUser` = ? WHERE resetEmail = ?", [randomstring, data.resetEmail], function (err, result, fields) {
+                                        if (err) {
+                                            con.end()
+                                            // Internal error message send
+                                            res.status(500).json({
+                                                Status: 'internal error',
+                                                message: 'Internal error ' + err
+                                            })
+                                        } else {
+                                            //if (result.affectedRows == 1) {
+                                                // Setup and send of response
+                                                res.status(200).json({
+                                                    Status: 'Success',
+                                                    result: result
+                                                })
+                                            //}
+                                        }
+                                    })
+                                }
+                            });
+                        } catch (error) {
+                            con.end()
+                            // Internal error message send
+                            res.status(500).json({
+                                Status: 'internal error',
+                                message: 'Internal error Catch'
+                            })
+                        }
+                    } else {
+                        con.end()
+                        res.status(401).json({
+                            Status: 'Failure',
+                            message: 'Bad_Credentials'
                         })
                     }
                 }

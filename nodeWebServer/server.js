@@ -21,6 +21,7 @@ app.use(express.static('login'))
 /* NOTE Variables para encriptar y desencriptar el token */
 process.env.SEC_KEY = "$$#&Ch@rMel30nD3v3loP3rS%$$"
 process.env.SEC_AES_KEY = "$$@#&Ch@rMel30nD3v3loP3rST0k3Ns12%$$"
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 router(app,secureApp)
 
 // Server initialization
