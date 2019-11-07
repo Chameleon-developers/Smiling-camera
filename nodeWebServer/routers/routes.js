@@ -3,6 +3,7 @@ var login=require('../controllers/login')
 var products=require('../controllers/products')
 var categories=require('../controllers/categories')
 var kioscos=require('../controllers/kioscos')
+var shop=require('../controllers/shop')
 var multer = require("multer")
 
 module.exports = function (app,secureApp) {
@@ -100,6 +101,9 @@ module.exports = function (app,secureApp) {
     /* Obtener caracteristicas de un producto */
     secureApp.post('/getProductById', products.getProductById)
     app.post('/getProductById', products.getProductById)
+
+    /* Agregar a carrito un producto */
+    secureApp.post('/addShop', uploading.single('image'), shop.addShop)
     
 }
  
