@@ -1,5 +1,5 @@
 //Importación de módulos
-import { loadFilesHomeCategory, loadFilesHomeSearch } from "./plugins.js"
+import { loadFilesHomeCategory, loadFilesHomeSearch, loadFilesInfo } from "./plugins.js"
 
 /* Función para declarar eventos eventos */
 $(function() {
@@ -15,11 +15,6 @@ $(function() {
 		catalogoProducts($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
     });
 
-    $(".columns").on("click", "#selectProduct", function(e) { 
-    	console.log($(this).attr('data-product'))
-    	//loadFilesHomeCategory("custom_products.html", "js/custom_products.js", idSubcategory, idCategory);
-    });
-
     $('#search').click(function (e) {
     	var search = $('#inputSearch').val()
 
@@ -27,6 +22,10 @@ $(function() {
 			loadFilesHomeSearch("catalogoProducts.html", "js/catalogoProducts.js", search);
 		}
     })
+
+    $("#secondPartPromotion").on("click", ".infoProduct", function(e) { 
+    	loadFilesInfo("infoProducto.html", "js/infoProducto.js", $(this).attr('data-product'));
+    });
 })
 
 /* Función para saber que html y js cargar */
@@ -90,7 +89,7 @@ function setCarrucel(products) {
                         '<div class="card-content">' +
                             '<div class="content">' +
                               	'<p><span class="titPCaroussel" id="titP1">' + value.nameProduct + '</span><br><span class="costPCaroussel">$' + value.publicPrice + '</span></p>' +
-                              	'<button id="selectProduct" data-product="' + value.idProduct + '" class="button is-danger" style="width: 100%;">Comprar</button>' +
+                              	'<button id="selectProduct" data-product="' + value.idProduct + '" class="button is-danger infoProduct" style="width: 100%;">Comprar</button>' +
                             '</div>' +
                         '</div>' +
                     '</div>')

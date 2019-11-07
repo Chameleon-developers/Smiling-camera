@@ -9,7 +9,6 @@ function init(idSubcategory, idCategory) {
 	getProducts(idCategory, idSubcategory)
 
 	$("#products").on("click", ".infoProduct", function(e) { 
-    	//console.log($(this).attr('data-product'))
     	loadFilesInfo("infoProducto.html", "js/infoProducto.js", $(this).attr('data-product'));
     });
 }
@@ -19,7 +18,6 @@ function initS(search) {
 	getProductsBySearch(search)
 
 	$("#products").on("click", ".infoProduct", function(e) { 
-    	//console.log($(this).attr('data-product'))
     	loadFilesInfo("infoProducto.html", "js/infoProducto.js", $(this).attr('data-product'));
     });
 }
