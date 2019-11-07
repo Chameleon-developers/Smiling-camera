@@ -1,5 +1,5 @@
 //Importación de módulos
-import { loadFilesHomeCategory, loadFilesHomeSearch , loadFilesUser} from "./plugins.js"
+import { loadFilesHomeCategory, loadFilesHomeSearch, loadFilesInfo, loadFilesUser } from "./plugins.js"
 
 /* Función para declarar eventos eventos */
 $(function() {
@@ -15,11 +15,6 @@ $(function() {
 		catalogoProducts($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
     });
 
-    $(".columns").on("click", "#selectProduct", function(e) { 
-    	console.log($(this).attr('data-product'))
-    	//loadFilesHomeCategory("custom_products.html", "js/custom_products.js", idSubcategory, idCategory);
-    });
-
     $('#search').click(function (e) {
     	var search = $('#inputSearch').val()
     	if (search.length != 0) {
@@ -29,6 +24,10 @@ $(function() {
 	
 	$('#Usuario').click(function (e) {
 		panelUser("catalogoProducts.html", "js/catalogoProducts.js");	
+    });
+
+    $("#secondPartPromotion").on("click", ".infoProduct", function(e) { 
+    	loadFilesInfo("infoProducto.html", "js/infoProducto.js", $(this).attr('data-product'));
     });
 })
 
@@ -102,7 +101,7 @@ function setCarrucel(products) {
                         '<div class="card-content">' +
                             '<div class="content">' +
                               	'<p><span class="titPCaroussel" id="titP1">' + value.nameProduct + '</span><br><span class="costPCaroussel">$' + value.publicPrice + '</span></p>' +
-                              	'<button id="selectProduct" data-product="' + value.idProduct + '" class="button is-danger" style="width: 100%;">Comprar</button>' +
+                              	'<button id="selectProduct" data-product="' + value.idProduct + '" class="button is-danger infoProduct" style="width: 100%;">Comprar</button>' +
                             '</div>' +
                         '</div>' +
                     '</div>')
@@ -137,7 +136,7 @@ function setCarrucel(products) {
 		effect: 'fade',
 		loop: true,
 		autoplay: true,
-		duration: 5000
+		autoplaySpeed: 10000
 	  });
 }
 
