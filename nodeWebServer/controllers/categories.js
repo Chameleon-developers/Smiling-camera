@@ -1,7 +1,7 @@
 /* Obtener las categorias existentes */
 module.exports.getCategories = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn')();
+    const con = require('../controllers/dbconn')()
 
     /* Ejecutar la consulta para la obtención de categorias */
     con.query('SELECT idCategory, nameCategory FROM categories WHERE statusCategory=1', function (err, result, fields) {
@@ -10,9 +10,9 @@ module.exports.getCategories = function (req, res) {
             res.status(500).json({
                 Status: 'Internal Error',
                 message: 'Internal Error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.length > 0) {
 
@@ -27,20 +27,20 @@ module.exports.getCategories = function (req, res) {
                     Status: 'Failure',
                     message: 'No existen categorias para e-commerce YouPrint'
                 })
-                con.end();
+                con.end()
             }
         }
-    });
+    })
 }
 
 /* Obtener las subcategorias existentes */
 module.exports.getSubcategories = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn')();
+    const con = require('../controllers/dbconn')()
 
     /* Obtener los datos del Body */
-    let data = req.body;
-    values=[data.idCategory];
+    let data = req.body
+    values=[data.idCategory]
 
     /* Ejecutar la consulta para la obtención de subcategorias */
     con.query('SELECT idSubcategory, nameSubcategory FROM subcategories WHERE statusSubcategory=1 AND idCategory=?',values, function (err, result, fields) {
@@ -49,9 +49,9 @@ module.exports.getSubcategories = function (req, res) {
             res.status(500).json({
                 Status: 'Internal Error',
                 message: 'Internal Error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.length > 0) {
 
@@ -66,8 +66,8 @@ module.exports.getSubcategories = function (req, res) {
                     Status: 'Failure',
                     message: 'No existen subcategorias para e-commerce YouPrint'
                 })
-                con.end();
+                con.end()
             }
         }
-    });
+    })
 }

@@ -1,25 +1,25 @@
 /* Obtener Los tipos de usuario existentes */
 module.exports.getAllProducts = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('./dbconn')();
+    const con = require('./dbconn')()
 
     /* Obtener los datos del Body */
-    let data = req.body;
+    let data = req.body
 
     /* Establecer query para la consulta */
-    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.enabledProduct, PROYP.imageProduct, PRO.featuresProduct, PROYP.idCategory, C.nameCategory, PROYP.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE PRO.statusProduct = 1";
+    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.enabledProduct, PROYP.imageProduct, PRO.featuresProduct, PROYP.idCategory, C.nameCategory, PROYP.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE PRO.statusProduct = 1"
 
     if(data.idSubcategory && data.idCategory) {
         qry+=" AND PRO.idCategory = ? AND PRO.idSubcategory=?"
-        values=[data.idCategory, data.idSubcategory];
+        values=[data.idCategory, data.idSubcategory]
     }
     else if(!data.idSubcategory && data.idCategory) {
         qry+=" AND PRO.idCategory = ?"
-        values=[data.idCategory];
+        values=[data.idCategory]
     }
     else if(data.idSubcategory && !data.idCategory) {
         qry+=" AND PRO.idSubcategory = ?"
-        values=[data.idSubcategory];
+        values=[data.idSubcategory]
     }
     else if(data.search) {
         qry+=" AND PROYP.nameProduct LIKE ?"
@@ -27,7 +27,7 @@ module.exports.getAllProducts = function (req, res) {
 
     }
     else {
-        values=[]; 
+        values=[]
     }
     
     /* Ejecutar la consulta para la obtención de tipos de productos */
@@ -37,14 +37,14 @@ module.exports.getAllProducts = function (req, res) {
             res.status(500).json({
                 Status: 'Internal Error',
                 message: 'Internal Error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.length >= 0) {
                 result.forEach(function(element) {
-                    element.featuresProduct = JSON.parse(element.featuresProduct);
-                });
+                    element.featuresProduct = JSON.parse(element.featuresProduct)
+                })
 
                 // Setup and send of response
                 res.status(200).json({
@@ -57,24 +57,24 @@ module.exports.getAllProducts = function (req, res) {
                     Status: 'Failure',
                     message: 'No existen productos'
                 })
-                con.end();
+                con.end()
             }
         }
-    });
+    })
 }
 
 /* Obtener caracteristicas basicas de productos */
 module.exports.getProducts = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('./dbconn')();
+    const con = require('./dbconn')()
 
     /* Obtener los datos del Body */
-    let data = req.body;
+    let data = req.body
 
     /* Establecer query para la consulta */
-    let qry = "SELECT PRO.idProduct, PRO.nameProduct, PRO.imageProduct, PRI.publicPrice FROM products AS PRO LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE statusProduct = 1 AND PRO.idCategory = ? AND PRO.idSubcategory=?";
+    let qry = "SELECT idProduct, nameProduct FROM products WHERE statusProduct = 1 AND idCategory = ? AND idSubcategory=? AND idProduct NOT IN (SELECT idProduct FROM productsyouprint WHERE statusProduct=1)"
 
-    values=[data.idCategory, data.idSubcategory];
+    values=[data.idCategory, data.idSubcategory]
     
     /* Ejecutar la consulta para la obtención de tipos de productos */
     con.query(qry,values, function (err, result, fields) {
@@ -83,9 +83,9 @@ module.exports.getProducts = function (req, res) {
             res.status(500).json({
                 Status: 'Internal Error',
                 message: 'Internal Error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.length >= 0) {
                 // Setup and send of response
@@ -99,19 +99,19 @@ module.exports.getProducts = function (req, res) {
                     Status: 'Failure',
                     message: 'No existen productos'
                 })
-                con.end();
+                con.end()
             }
         }
-    });
+    })
 }
 
 /* Obtener 3 a 9 productos de manera aleatoria para carrusel */
 module.exports.getProductsRandom = function(req, res) {
      /* Obtener variable para la conexión a la BD */
-    const con = require('./dbconn')();
+    const con = require('./dbconn')()
 
     /* Establecer query para la consulta */
-    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.imageProduct, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 INNER JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct  WHERE PRO.statusProduct = 1 ORDER BY RAND() LIMIT 9";
+    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.imageProduct, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 INNER JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct  WHERE PRO.statusProduct = 1 ORDER BY RAND() LIMIT 9"
 
     /* Ejecutar la consulta para la obtención de tipos de productos */
     con.query(qry,[], function (err, result, fields) {
@@ -120,9 +120,9 @@ module.exports.getProductsRandom = function(req, res) {
             res.status(500).json({
                 Status: 'Internal Error',
                 message: 'Internal Error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.length >= 0) {
                 // Setup and send of response
@@ -136,23 +136,23 @@ module.exports.getProductsRandom = function(req, res) {
                     Status: 'Failure',
                     message: 'No existen productos'
                 })
-                con.end();
+                con.end()
             }
         }
-    });
+    })
 }
 
 /* Obtiene las caracteristicas de un producto en especifico */
 module.exports.getProductById = function(req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('./dbconn')();
+    const con = require('./dbconn')()
 
     /* Obtener los datos del Body */
-    let data = req.body;
+    let data = req.body
 
     /* Establecer query para la consulta */
-    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.enabledProduct, PROYP.imageProduct, PRO.featuresProduct, PROYP.idCategory, C.nameCategory, PROYP.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE PRO.statusProduct = 1 AND PROYP.idProduct=?";
-    values = [data.idProduct];
+    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.enabledProduct, PROYP.imageProduct, PRO.featuresProduct, PROYP.idCategory, C.nameCategory, PROYP.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE PRO.statusProduct = 1 AND PROYP.idProduct=?"
+    values = [data.idProduct]
     
     /* Ejecutar la consulta para la obtención de tipos de productos */
     con.query(qry,values, function (err, result, fields) {
@@ -161,14 +161,14 @@ module.exports.getProductById = function(req, res) {
             res.status(500).json({
                 Status: 'Internal Error',
                 message: 'Internal Error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.length >= 0) {
                 result.forEach(function(element) {
-                    element.featuresProduct = JSON.parse(element.featuresProduct);
-                });
+                    element.featuresProduct = JSON.parse(element.featuresProduct)
+                })
 
                 // Setup and send of response
                 res.status(200).json({
@@ -181,27 +181,27 @@ module.exports.getProductById = function(req, res) {
                     Status: 'Failure',
                     message: 'No existen productos'
                 })
-                con.end();
+                con.end()
             }
         }
-    });
+    })
 }
 
 /* Registrar un nuevo Producto */
 module.exports.insertProduct = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn')();
+    const con = require('../controllers/dbconn')()
 
     // /* Obtener los datos del Body */
-    let data = req.body;
+    let data = req.body
     
     // /* Establecer query para la consulta para insertar */
-    let qry="INSERT INTO productsyouprint(idProduct, nameProduct, imageProduct, idCategory, idSubcategory, enabledProduct) VALUES(?, ?, ?, ?, ?, ?)";
+    let qry="INSERT INTO productsyouprint(idProduct, nameProduct, imageProduct, idCategory, idSubcategory, enabledProduct) VALUES(?, ?, ?, ?, ?, ?)"
     if(req.file) {
-        values = [data.idProduct, data.nameProduct, req.file.filename, data.idCategory, data.idSubcategory, data.enabledProduct];
+        values = [data.idProduct, data.nameProduct, req.file.filename, data.idCategory, data.idSubcategory, data.enabledProduct]
     }
     else {
-        values = [data.idProduct, data.nameProduct, "default.png", data.idCategory, data.idSubcategory, data.enabledProduct];
+        values = [data.idProduct, data.nameProduct, "default.png", data.idCategory, data.idSubcategory, data.enabledProduct]
     }
 
     /* Ejecutar la consulta para la obtención del último id insertado en productos */
@@ -211,9 +211,9 @@ module.exports.insertProduct = function (req, res) {
             res.status(500).json({
                 Status: 'internal error',
                 message: err
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } 
         else {
             if (result.affectedRows == 1) {
@@ -223,25 +223,25 @@ module.exports.insertProduct = function (req, res) {
                 })
             }
         }
-    });    
+    })    
 }
 
 /* Modificar un producto existente */
 module.exports.updateProduct = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn')();
+    const con = require('../controllers/dbconn')()
 
     // /* Obtener los datos del Body */
-    let data = req.body;
+    let data = req.body
     
     // /* Establecer query para la consulta de modificar producto */
-    let qry="UPDATE  productsyouprint SET nameProduct=?, imageProduct=?, enabledProduct=? WHERE idProduct=?";
+    let qry="UPDATE  productsyouprint SET nameProduct=?, imageProduct=?, enabledProduct=? WHERE idProduct=?"
 
     if(req.file) {
-        values = [data.nameProduct, req.file.filename, data.enabledProduct, data.idProduct];
+        values = [data.nameProduct, req.file.filename, data.enabledProduct, data.idProduct]
     }
     else {
-        values = [data.nameProduct, data.imageProduct, data.enabledProduct, data.idProduct];
+        values = [data.nameProduct, data.imageProduct, data.enabledProduct, data.idProduct]
     }
 
     /* Ejecutar la consulta para la obtención del último id insertado en productos */
@@ -251,9 +251,9 @@ module.exports.updateProduct = function (req, res) {
             res.status(500).json({
                 Status: 'internal error',
                 message: err
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } 
         else {
             if (result.affectedRows == 1) {
@@ -263,17 +263,17 @@ module.exports.updateProduct = function (req, res) {
                 })
             }
         }
-    });
+    })
 }
 
 /* Elimina un producto (baja logica) */
 module.exports.deleteProduct = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn')();
+    const con = require('../controllers/dbconn')()
 
     /* Obtener los datos del Body */
-    let data = req.body;
-    values=[data.idProduct];
+    let data = req.body
+    values=[data.idProduct]
     console.log(data)
 
     /* Ejecutar la consulta para baja de productos */
@@ -284,9 +284,9 @@ module.exports.deleteProduct = function (req, res) {
                 Status: 'internal error',
                 message: err
                 //message: 'Internal error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.affectedRows == 1) {
                 res.status(200).json({
@@ -295,5 +295,5 @@ module.exports.deleteProduct = function (req, res) {
                 })
             }
         }
-    });
+    })
 }

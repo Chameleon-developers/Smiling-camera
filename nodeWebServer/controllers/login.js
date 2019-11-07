@@ -1,11 +1,11 @@
 /* Verificar datos de logIn */
 module.exports.logIn = function (req, res) {
     /* Obtener variable para hacer petición del Captcha */
-    var request = require('request');
+    var request = require('request')
 
     /* Obtener los datos del Body */
-    var data = req.body;
-    var check = true;
+    var data = req.body
+    var check = true
 
     /* Validar si el captcha existe */
     if(data.captcha === undefined || data.captcha === '' || data.captcha === null ) {
@@ -15,28 +15,28 @@ module.exports.logIn = function (req, res) {
         })
     } else {
         // Secret Key
-        const secretKey = '6Ld-g7oUAAAAAJwuo_zduQp_3TaJhpLBzA5XAAlL';
+        const secretKey = '6Ld-g7oUAAAAAJwuo_zduQp_3TaJhpLBzA5XAAlL'
 
         // Verify URL
-        const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${data.captcha}&remoteip=${req.connection.remoteAddress}`;
+        const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${data.captcha}&remoteip=${req.connection.remoteAddress}`
         
         // Make Request To VerifyURL
         request(verifyUrl, (err, response, body) => {
-            body = JSON.parse(body);
+            body = JSON.parse(body)
 
             // If Not Successful
             if(body.success !== undefined && !body.success){
-                check = false;
+                check = false
             }
-        });
+        })
 
         if (check) {
             /* Obtener variable para encriptar el JWT */
             var crypto = require('crypto')
             /* Obtener variable para generar un token */
-            var jwt = require('jsonwebtoken');
+            var jwt = require('jsonwebtoken')
             /* Obtener variable para la conexión a la BD */
-            var con = require('../controllers/dbconn')();
+            var con = require('../controllers/dbconn')()
 
             /* Establecer query para la consulta de logIn y saber si los datos son correctos */
             let qry = "SELECT MU.idManagerUser,MU.nameUser, T.idTypeUser, T.typeUser FROM managerusers AS MU INNER JOIN typeusers AS T ON MU.idTypeUser = T.idTypeUser WHERE MU.mainEmail = ? AND MU.passwordUser = ? AND MU.statusUser = 1 AND MU.ecommerceYouPrint = 1"
@@ -48,9 +48,9 @@ module.exports.logIn = function (req, res) {
                     res.status(500).json({
                         Status: 'internal error',
                         message: 'Internal error'
-                    });
-                    con.end();
-                    return;
+                    })
+                    con.end()
+                    return
                 } else {
                     if (result.length == 1) {
 
@@ -62,7 +62,7 @@ module.exports.logIn = function (req, res) {
                             idType: result[0].idTypeUser
                         }, process.env.SEC_KEY, {
                                 expiresIn: '24h',
-                        });
+                        })
                         var cipher = crypto.createCipher('aes128',process.env.SEC_AES_KEY)
                         let encrypted = cipher.update( token , 'utf8' , 'hex')
                         encrypted += cipher.final('hex')
@@ -84,9 +84,9 @@ module.exports.logIn = function (req, res) {
                                 res.status(500).json({
                                     Status: 'internal error',
                                     message: err,
-                                });
-                                con.end();
-                                return;
+                                })
+                                con.end()
+                                return
                             } else {
                                 if (result.length == 1) {
                                     // Bad password
@@ -94,22 +94,22 @@ module.exports.logIn = function (req, res) {
                                         Status: 'Failure',
                                         message: 'Bad_Password'
                                     })
-                                    con.end();
-                                    return;
+                                    con.end()
+                                    return
                                 } else {
                                     // Bad username
                                     res.status(401).json({
                                         Status: 'Failure',
                                         message: 'Bad_Credentials'
-                                    });
-                                    con.end();
-                                    return;
+                                    })
+                                    con.end()
+                                    return
                                 }
                             }
                         })
                     }
                 }
-            });
+            })
         } else {
             res.status(400).json({
                 Status: 'Failure',

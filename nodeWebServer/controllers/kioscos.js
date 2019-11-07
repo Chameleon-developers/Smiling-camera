@@ -1,7 +1,7 @@
 /* Obtener los kioscos existentes */
 module.exports.getAllKioscos = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn')();
+    const con = require('../controllers/dbconn')()
 
     /* Ejecutar la consulta para consulta de kioscos */
     con.query('SELECT K.`idKiosco`, K.`nameKiosco`, K.`idShopUser`, S.nameUser FROM `kioscos` AS K INNER JOIN shopusers AS S ON K.idShopUser = S.idShopUser WHERE statusKiosco = 1', function (err, result, fields) {
@@ -10,9 +10,9 @@ module.exports.getAllKioscos = function (req, res) {
             res.status(500).json({
                 Status: 'Internal Error',
                 message: 'Internal Error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.length > 0) {
                 // Setup and send of response
@@ -26,19 +26,19 @@ module.exports.getAllKioscos = function (req, res) {
                     Status: 'Failure',
                     message: 'No existen kioscos registrados'
                 })
-                con.end();
+                con.end()
             }
         }
-    });
+    })
 }
 
 /* Obtener un kiosco existente */
 module.exports.getKiosco = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn')();
+    const con = require('../controllers/dbconn')()
 
     /* Obtener los datos del Body */
-    let data = req.body;
+    let data = req.body
 
     /* Ejecutar la consulta para consulta de kioscos */
     con.query('SELECT idKiosco, nameKiosco FROM kioscos WHERE idKiosco=?', [data.idKiosco], function (err, result, fields) {
@@ -47,9 +47,9 @@ module.exports.getKiosco = function (req, res) {
             res.status(500).json({
                 Status: 'Internal Error',
                 message: 'Internal Error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.length > 0) {
                 // Setup and send of response
@@ -63,23 +63,23 @@ module.exports.getKiosco = function (req, res) {
                     Status: 'Failure',
                     message: 'No existen kioscos registrados'
                 })
-                con.end();
+                con.end()
             }
         }
-    });
+    })
 }
 
 /* Registrar un nuevo kiosco */
 module.exports.insertKiosco = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn').db_prom();
+    const con = require('../controllers/dbconn').db_prom()
 
     /* Obtener los datos del Body */
-    let data = req.body;
+    let data = req.body
     
 
     /* Validar datos */
-    let check = validationsKioscos(data.nameUser,data.passwordUser);
+    let check = validationsKioscos(data.nameUser,data.passwordUser)
     
     if (check) {
         
@@ -94,19 +94,19 @@ module.exports.insertKiosco = function (req, res) {
             }
         } , err =>{
             if (err.errno == 1062) {
-                con.close();
+                con.close()
                 // Internal error message send
                 res.status(409).json({
                     Status: 'Duplicated nameUser',
                     message: err
-                });
+                })
             } else {
-                con.close();
+                con.close()
                 // Internal error message send
                 res.status(500).json({
                     Status: 'internal error',
                     message: err
-                });
+                })
             }
         }).then(result =>{
             if(result.affectedRows > 0){
@@ -118,19 +118,19 @@ module.exports.insertKiosco = function (req, res) {
         }, err => {
             
             if (err.errno == 1062) {
-                con.close();
+                con.close()
                 // Internal error message send
                 res.status(409).json({
                     Status: 'Duplicated nameUser',
                     message: err
-                });
+                })
             } else {
-                con.close();
+                con.close()
                 // Internal error message send
                 res.status(500).json({
                     Status: 'internal error',
                     message: err
-                });
+                })
             }
         }).catch(err => {
             res.status(500).json({
@@ -143,17 +143,17 @@ module.exports.insertKiosco = function (req, res) {
         res.status(406).json({
             Status: 'internal error',
             message: 'Datos no validos'
-        });
+        })
     }
 }
 
 /* Actualizar datos de un kiosco */
 module.exports.updateKiosco = function(req, res) {
      /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn')();
+    const con = require('../controllers/dbconn')()
 
     /* Obtener los datos del Body */
-    let data = req.body;
+    let data = req.body
     console.log(data)
     
     /* Ejecutar la consulta para eliminar kiosco */
@@ -164,9 +164,9 @@ module.exports.updateKiosco = function(req, res) {
                 Status: 'internal error',
                 message: err
                 //message: 'Internal error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.affectedRows == 1) {
                 res.status(200).json({
@@ -175,17 +175,17 @@ module.exports.updateKiosco = function(req, res) {
                 })
             }
         }
-    });
+    })
 }
 
 /* Elimina kiosco (baja logica) */
 module.exports.deleteKiosco = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn')();
+    const con = require('../controllers/dbconn')()
 
     /* Obtener los datos del Body */
-    let data = req.body;
-    console.log(data);
+    let data = req.body
+    console.log(data)
 
     /* Ejecutar la consulta para eliminar kiosco */
     con.query('UPDATE kioscos SET statusKiosco=0 WHERE idKiosco=?', [data.idKiosco], function (err, result, fields) {
@@ -195,9 +195,9 @@ module.exports.deleteKiosco = function (req, res) {
                 Status: 'internal error',
                 message: err
                 //message: 'Internal error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.affectedRows == 1) {
                 res.status(200).json({
@@ -206,7 +206,7 @@ module.exports.deleteKiosco = function (req, res) {
                 })
             }
         }
-    });
+    })
 }
 
 function validationsKioscos(nameUser, passwordUser) {
@@ -214,9 +214,9 @@ function validationsKioscos(nameUser, passwordUser) {
         return false
     }
     
-    var patt = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    var patt = /^(([^<>()[\]\\.,:\s@\"]+(\.[^<>()[\]\\.,:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if (!patt.test(nameUser)) {
-        console.log(nameUser);
+        console.log(nameUser)
         
         return false
     }

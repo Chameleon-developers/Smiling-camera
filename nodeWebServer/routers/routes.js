@@ -1,105 +1,105 @@
-var users=require('../controllers/users');
-var login=require('../controllers/login');
-var products=require('../controllers/products');
-var categories=require('../controllers/categories');
-var kioscos=require('../controllers/kioscos');
-var multer = require("multer");
+var users=require('../controllers/users')
+var login=require('../controllers/login')
+var products=require('../controllers/products')
+var categories=require('../controllers/categories')
+var kioscos=require('../controllers/kioscos')
+var multer = require("multer")
 
 module.exports = function (app,secureApp) {
 
     /* Validar logIn */
-    app.post('/logIn',login.logIn);
+    app.post('/logIn',login.logIn)
 
     /* USUARIOS */
 
     /* Obtener Los tipos de usuario existentes */
-    secureApp.post('/getTypeUsers',users.getTypeUsers);
+    secureApp.post('/getTypeUsers',users.getTypeUsers)
 
     /* Registrar un nuevo usuario */
-    secureApp.post('/insertUser',users.insertUser);
+    secureApp.post('/insertUser',users.insertUser)
     
     /* Modificar datos de un usuario existente */
-    secureApp.post('/updateUser',users.updateUser);
+    secureApp.post('/updateUser',users.updateUser)
     
     /* Obtener datos de los usuarios registrados */
-    secureApp.post('/getUsers' ,users.getUsers);
+    secureApp.post('/getUsers' ,users.getUsers)
 
     /* Obtener datos de un usuario especifico */
-    secureApp.post('/getUser' ,users.getUser);
+    secureApp.post('/getUser' ,users.getUser)
 
     /* Eliminar usuario registrado */
-    secureApp.post('/deleteUser' ,users.deleteUser);
+    secureApp.post('/deleteUser' ,users.deleteUser)
 
     /* CATEGORIAS Y SUBCATEGORIAS */
 
     /* Obtener categorias existentes */
-    secureApp.post('/getCategories' ,categories.getCategories);
+    secureApp.post('/getCategories' ,categories.getCategories)
 
     /* Obtener subcatehgorias existentes */
-    secureApp.post('/getSubcategories' ,categories.getSubcategories);
+    secureApp.post('/getSubcategories' ,categories.getSubcategories)
 
     
     /* PRODUCTOS */
 
     /* Obtener datos de productos registrados */
-    secureApp.post('/getAllProducts' ,products.getAllProducts);
-    app.post('/getAllProducts' ,products.getAllProducts);
+    secureApp.post('/getAllProducts' ,products.getAllProducts)
+    app.post('/getAllProducts' ,products.getAllProducts)
 
     /* obtener los datos basicos de productos registrados */
-    secureApp.post('/getProducts', products.getProducts);
+    secureApp.post('/getProducts', products.getProducts)
 
     /* Eliminar un producto (baja logica) */
-    secureApp.post('/deleteProduct' ,products.deleteProduct);
+    secureApp.post('/deleteProduct' ,products.deleteProduct)
 
     var storage = multer.diskStorage({
         destination: function(req, file, callback){
-            callback(null, '../dashboardadmin/uploads'); // set the destination
+            callback(null, '../dashboardadmin/uploads') // set the destination
         },
         filename: function(req, file, callback){
-            callback(null, Date.now() + '.jpg'); // set the file name and extension
+            callback(null, Date.now() + '.jpg') // set the file name and extension
         }
-    });
+    })
 
     var uploading = multer({
 
         storage: storage
 
-    });
+    })
 
     /* Registrar un nuevo producto */
-    app.post('/insertProduct' , uploading.single('image'),products.insertProduct);   
+    app.post('/insertProduct' , uploading.single('image'),products.insertProduct)   
     
     /* Modificar los datos de un producto existente */
-    app.post('/updateProduct' , uploading.single('image'),products.updateProduct); 
+    app.post('/updateProduct' , uploading.single('image'),products.updateProduct) 
 
 
     /* Kioscos */
 
     /* Registrar un nuevo kiosco */
-    secureApp.post('/insertKiosco',kioscos.insertKiosco);
+    secureApp.post('/insertKiosco',kioscos.insertKiosco)
     
     /* Obtener datos de los kioscos registrados */
-    secureApp.post('/getAllKioscos' ,kioscos.getAllKioscos);
+    secureApp.post('/getAllKioscos' ,kioscos.getAllKioscos)
 
     /* Obtener datos de un kiosco registrado */
-    secureApp.post('/getKiosco' ,kioscos.getKiosco);
+    secureApp.post('/getKiosco' ,kioscos.getKiosco)
     
     /* Actualizar datos de kiosko */
-    secureApp.post('/updateKiosco', kioscos.updateKiosco);
+    secureApp.post('/updateKiosco', kioscos.updateKiosco)
 
     /* Eliminar kiosco (baja logica) */
-    secureApp.post('/deleteKiosco', kioscos.deleteKiosco);
+    secureApp.post('/deleteKiosco', kioscos.deleteKiosco)
 
 
     /* Home ecommerce */
 
     /* Obtener 3 a 9 productos de manera aleatoria para carrucel */
-    secureApp.post('getProductsRandom', products.getProductsRandom);
-    app.post('/getProductsRandom', products.getProductsRandom);
+    secureApp.post('/getProductsRandom', products.getProductsRandom)
+    app.post('/getProductsRandom', products.getProductsRandom)
 
     /* Obtener caracteristicas de un producto */
-    secureApp.post('getProductById', products.getProductById);
-    app.post('/getProductById', products.getProductById);
+    secureApp.post('/getProductById', products.getProductById)
+    app.post('/getProductById', products.getProductById)
     
 }
  
