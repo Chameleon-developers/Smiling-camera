@@ -154,7 +154,7 @@ module.exports.changePassword = function (req, res) {
             var con = require('../controllers/dbconn')()
 
             /* Ejecutar la consulta para la validación de datos de LogIn */
-            con.query('SELECT mainEmail FROM managerusers WHERE resetEmail=? AND statusUser = 1 AND ecommerceYouPrint = 1', [data.resetEmail], function (err, result, fields) {
+            con.query('SELECT resetEmail FROM managerusers WHERE mainEmail=? AND statusUser = 1 AND ecommerceYouPrint = 1', [data.mainEmail], function (err, result, fields) {
                 if (err) {
                     con.end()
                     // Internal error message send
@@ -164,6 +164,8 @@ module.exports.changePassword = function (req, res) {
                     })
                 } else {
                     if (result.length == 1) {
+                        var resetEmail = result[0].resetEmail;
+                        
                         try {
                             var randomstring = Math.random().toString(36).slice(-8);
 
@@ -178,7 +180,7 @@ module.exports.changePassword = function (req, res) {
                             // Definimos el email
                             var mailOptions = {
                                 from: 'chameleon.developers.send@gmail.com',
-                                to: data.resetEmail,
+                                to: resetEmail,
                                 subject: 'Recuperación de Contraseña YouPrint Administrador',
                                 text: 'La contraseña para ingresar es: ' + randomstring
                             };
@@ -191,7 +193,7 @@ module.exports.changePassword = function (req, res) {
                                         message: error
                                     })
                                 } else {
-                                    con.query("UPDATE `managerusers` SET `passwordUser` = ? WHERE resetEmail = ?", [randomstring, data.resetEmail], function (err, result, fields) {
+                                    con.query("UPDATE `managerusers` SET `passwordUser` = ? WHERE mainEmail = ?", [randomstring, data.mainEmail], function (err, result, fields) {
                                         if (err) {
                                             con.end()
                                             // Internal error message send
@@ -204,7 +206,7 @@ module.exports.changePassword = function (req, res) {
                                                 // Setup and send of response
                                                 res.status(200).json({
                                                     Status: 'Success',
-                                                    result: result
+                                                    result: resetEmail
                                                 })
                                             //}
                                         }

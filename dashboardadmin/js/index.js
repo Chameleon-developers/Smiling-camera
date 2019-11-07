@@ -21,7 +21,6 @@ function init() {
 
         $('#titleLogIn').text('Cambiar Contraseña')
         $('#login').prop('id','sendPwdEmail')
-        $('#email').prop('placeholder','Correo de Recuperación')
         $('#sendPwdEmail').text('Mandar Correo')
         $('#sendPwdEmail').unbind()
         $('#sendPwdEmail').click( function() {
@@ -42,7 +41,6 @@ function init() {
 
         $('#titleLogIn').text('Iniciar Sesión')
         $('#sendPwdEmail').prop('id','login')
-        $('#email').prop('placeholder','Correo (Usuario)')
         $('#login').text('Iniciar sesión')
         $('#login').unbind()
         $('#login').click( function() {
@@ -70,7 +68,7 @@ function sendPwdEmail(){
         type: "POST",
         url: ip_server + "/changePassword",
         data:{
-            'resetEmail' : email,
+            'mainEmail' : email,
             'captcha' : captcha
         },
         dataType: "json",
@@ -87,7 +85,7 @@ function sendPwdEmail(){
             $('#sendPwdEmail').click( function() {
                 $( "#getBack" ).click()
             });
-            toast('Se ha mandado el Correo con la nueva Contraseña','is-info')
+            toast('Se ha mandado la nueva Contraseña al correo "' + response.result + '"','is-info')
         },
         error: function (error) {
             if(error.status == '401'){

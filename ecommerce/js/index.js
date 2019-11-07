@@ -13,6 +13,10 @@ $(function() {
     $(".Subcategory").click(function (e) {
 		e.preventDefault()
 		catalogoProducts($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
+	});
+	
+	$('#inputSearch').keypress(function (e) {
+        if(e.keyCode == 13) $('#search').click()
     });
 
     $('#search').click(function (e) {
