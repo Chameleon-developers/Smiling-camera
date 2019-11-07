@@ -1,21 +1,21 @@
-var mysql = require('mysql');
+var mysql = require('mysql')
 module.exports = function () {  
     var con =  mysql.createConnection({ 
         host : 'localhost',
         user : 'root',
         password : '',
         database : 'youprint_shop'
-    }); 
+    }) 
 
     con.on('error',function (err) {  
         if(err.code === 'PROTOCOL_CONNECTION_LOST'){
-            console.log('Connection closed');
+            console.log('Connection closed')
         }else{
-            console.log(err);
+            console.log(err)
         }
     })
 
-    return con;
+    return con
 }
 
 
@@ -26,33 +26,33 @@ class Database {
             user : 'root',
             password : '',
             database : 'youprint_shop'
-        }); 
+        }) 
         
         this.connection.on('error',function (err) {  
             if(err.code === 'PROTOCOL_CONNECTION_LOST'){
-                console.log('Connection closed');
+                console.log('Connection closed')
             }else{
-                console.log(err);
+                console.log(err)
             }
-        } );
+        } )
     }
     query( sql, args ) {
         return new Promise( ( resolve, reject ) => {
             this.connection.query( sql, args, ( err, rows ) => {
                 if ( err )
-                return reject( err );
-                resolve( rows );
-            } );
-        } );
+                return reject( err )
+                resolve( rows )
+            } )
+        } )
     }
     close() {
         return new Promise( ( resolve, reject ) => {
             this.connection.end( err => {
                 if ( err )
-                return reject( err );
-                resolve();
-            } );
-        } );
+                return reject( err )
+                resolve()
+            } )
+        } )
     }
 }
 

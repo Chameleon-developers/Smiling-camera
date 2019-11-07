@@ -1,7 +1,7 @@
 /* Obtener las dimensiones existentes */
 module.exports.getDimensions = function (req, res) {
     /* Obtener variable para la conexión a la BD */
-    const con = require('../controllers/dbconn')();
+    const con = require('../controllers/dbconn')()
 
     /* Ejecutar la consulta para la obtención de dimensiones */
     con.query('SELECT idDimension, CONCAT(widthDimension, "X", heightDimension) AS dimensions FROM dimensions', function (err, result, fields) {
@@ -10,9 +10,9 @@ module.exports.getDimensions = function (req, res) {
             res.status(500).json({
                 Status: 'Internal Error',
                 message: 'Internal Error'
-            });
-            con.end();
-            return;
+            })
+            con.end()
+            return
         } else {
             if (result.length > 0) {
 
@@ -27,8 +27,8 @@ module.exports.getDimensions = function (req, res) {
                     Status: 'Failure',
                     message: 'No existen dimensiones para e-commerce YouPrint'
                 })
-                con.end();
+                con.end()
             }
         }
-    });
+    })
 }
