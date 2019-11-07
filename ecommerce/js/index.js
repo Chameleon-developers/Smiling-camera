@@ -125,7 +125,7 @@ function setCarrucel(products) {
 		effect: 'fade',
 		loop: true,
 		autoplay: true,
-		duration: 5000
+		autoplaySpeed: 10000
 	  });
 }
 
