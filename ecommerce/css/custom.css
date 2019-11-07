@@ -406,6 +406,8 @@
 .seccion{
   padding-top: 130px;
   padding-left:10px;
+  margin: 0 auto;
+  max-width: 70%;
 }
 
 #datos{
