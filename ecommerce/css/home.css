@@ -287,3 +287,55 @@ a strong {
   justify-items: center;
   text-justify: center;
 }
+
+
+.item-11 a{
+  position: absolute;
+  bottom:40%;
+  right:50%;
+  background-color:#FFC2E8;
+  border-radius:1.2em;
+  color: #F74784;
+  text-transform:uppercase;
+  padding:1em 1.5em;
+  font-size: 160%;
+  font-family: 'Lato', sans-serif;
+}
+.item-11 a:hover{
+  background-color:#1CD5EA;
+  color: white;
+}
+
+.item-22 a{
+  position: absolute;
+  bottom:60%;
+  right:74%;
+  background-color:#FFC2E8;
+  border-radius:1em;
+  color: #F74784;
+  text-transform:uppercase;
+  padding:0.7em 1.5em;
+  font-size: 140%;
+  font-family: 'Lato', sans-serif;
+}
+.item-22 a:hover{
+  background-color:#1CD5EA;
+  color: white;
+}
+
+.item-33 a{
+  position: absolute;
+  bottom:23%;
+  right:67.5%;
+  background-color:#FFC2E8;
+  border-radius:1em;
+  color: #F74784;
+  text-transform:uppercase;
+  padding:0.6em 1.5em;
+  font-size: 148%;
+  font-family: 'Lato', sans-serif;
+}
+.item-33 a:hover{
+  background-color:#1CD5EA;
+  color: white;
+}
