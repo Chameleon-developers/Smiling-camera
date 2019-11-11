@@ -38,7 +38,7 @@
 </head>
 
 <body>
-    <section>
+    <section style="overflow: auto;">
         <nav id="mainNav" class="navbar level is-fixed-top">
                 <div class="level-left">
                     <div class="level-item">
@@ -94,18 +94,41 @@
       <nav class="navbar " id="menuProductos">
           <div class="navbar-brand">
             
-        
-            <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
+                <a class="navbar-item is-hidden-desktop" href="#">
+                    <!--<img src="resources/facebook-box.png" width="25px">-->
+                    <span class="icon icon-social-media" >
+                        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                    </span>
+                </a>
+               
+                
+                <a class="navbar-item is-hidden-desktop" href="#">
+                    <!--<img src="resources/instagram.png" width="25px">-->
+                    <span class="icon icon-social-media">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </span>
+                </a>
+    
+                
+                <a class="navbar-item is-hidden-desktop" href="#">
+                    
+                    <!--<img src="resources/twitter-box.png" width="25px">-->
+                    <span class="icon icon-social-media">
+                        <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                    </span>
+                    
+                </a>
+            <!--<a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
               <span class="icon" style="color: #333;">
-                <i class="fa fa-github"></i>
+                <i class="fa fa-facebook-square" aria-hidden="true"></i>
               </span>
             </a>
         
             <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
               <span class="icon" style="color: #55acee;">
-                <i class="fa fa-twitter"></i>
+                <i class="fa fa-instagram" aria-hidden="true"></i>
               </span>
-            </a>
+            </a>-->
         
             <div class="navbar-burger burger" data-target="navMenubd-example">
               <span></span>
@@ -124,12 +147,12 @@
                     </a>
                 </div>
               <div class="navbar-item is-hoverable">
-                <a class="navbar-link  is-active" href="/documentation/overview/start/">
+                <a class="navbar-link" href="#">
                   Foto-Libros
                 </a>
                 <div class="navbar-dropdown ">
                         <div class="columns">
-                            <div class="column">
+                            <div class="column none-display">
                                 <span id="titMenu" class="navbar-item">
                                 Artículos Personalizados<br>
                                 </span>
@@ -157,7 +180,7 @@
                                 </span> Caja con Fotos
                                 </a>
                             </div>
-                            <div class="column rightSide">
+                            <div class="column rightSide none-display">
                                 <br><br>
                                 <img src="resources/pexels-photo-970076.jpeg" alt="img1">
                                 <br>
@@ -167,7 +190,6 @@
                             </div>
               
                         </div>
-        
                   
                 </div>
               </div>
@@ -180,121 +202,74 @@
                   <div class="container is-fluid">
                     <div class="columns">
                       <div class="column">
-                        <h1 class="title is-6 is-mega-menu-title">Sub Menu Title</h1>
-                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
-                          <div class="navbar-content">
-                            <p>
-                              <small class="has-text-info">03 Aug 2017</small>
-                            </p>
-                            <p>New feature: list of tags</p>
-                          </div>
-                        </a>
-                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
-                          <div class="navbar-content">
-                            <p>
-                              <small class="has-text-info">03 Aug 2017</small>
-                            </p>
-                            <p>New feature: list of tags</p>
-                          </div>
-                        </a>
-                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
-                          <div class="navbar-content">
-                            <p>
-                              <small class="has-text-info">03 Aug 2017</small>
-                            </p>
-                            <p>New feature: list of tags</p>
-                          </div>
-                        </a>
-                      </div>
-                      <div class="column">
-                        <h1 class="title is-6 is-mega-menu-title">Sub Menu Title</h1>
-                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
-                          <div class="navbar-content">
-        
-                            <p>
-                              <small class="has-text-info">03 Aug 2017</small>
-                            </p>
-                            <p>New feature: list of tags</p>
-                          </div>
-                        </a>
-                        <a class="navbar-item " href="/documentation/overview/start/">
-                    Overview
-                  </a>
-                        <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
-                    Modifiers
-                  </a>
-                        <a class="navbar-item " href="http://bulma.io/documentation/columns/basics/">
-                    Columns
-                  </a>
-                      </div>
-                      <div class="column">
-                        <h1 class="title is-6 is-mega-menu-title">Sub Menu Title</h1>
-                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
-                          <div class="navbar-content">
-                            <p>
-                              <small class="has-text-info">03 Aug 2017</small>
-                            </p>
-                            <p>New feature: list of tags</p>
-                          </div>
-                        </a>
-                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
-                          <div class="navbar-content">
-                            <p>
-                              <small class="has-text-info">03 Aug 2017</small>
-                            </p>
-                            <p>New feature: list of tags</p>
-                          </div>
-                        </a>
-                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
-                          <div class="navbar-content">
-                            <p>
-                              <small class="has-text-info">03 Aug 2017</small>
-                            </p>
-                            <p>New feature: list of tags</p>
-                          </div>
-                        </a>
-        
-                      </div>
-                      <div class="column">
-                        <h1 class="title is-6 is-mega-menu-title">Sub Menu Title</h1>
-                        <a class="navbar-item " href="/documentation/overview/start/">
-                    Overview
-                  </a>
-                        <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
-                    Modifiers
-                  </a>
-                        <a class="navbar-item " href="http://bulma.io/documentation/columns/basics/">
-                    Columns
-                  </a>
-                        <a class="navbar-item " href="http://bulma.io/documentation/layout/container/">
-                    Layout
-                  </a>
-                      </div>
-                    </div>
-                  </div>
-        
-                  <hr class="navbar-divider">
-                  <div class="navbar-item">
-                    <div class="navbar-content">
-                      <div class="level is-mobile">
-                        <div class="level-left">
-                          <div class="level-item">
-                            <strong>Stay up to date!</strong>
-                          </div>
-                        </div>
-                        <div class="level-right">
-                          <div class="level-item">
-                            <a class="button bd-is-rss is-small" href="http://bulma.io/atom.xml">
-                              <span class="icon is-small">
-                                <i class="fa fa-rss"></i>
+
+                        <span id="titMenu" class="navbar-item">
+                                Artículos Personalizados<br>
                               </span>
-                              <span>Subscribe</span>
-                            </a>
-                          </div>
-                        </div>
+                              <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
+                              <br>
+                              <br>
+                              <div>
+                                <img src="resources/background-notebook-pencil-544115.jpg" alt="img3">
+                              </div>
                       </div>
+                      <div class="column">
+                        <a class="navbar-item Subcategory" data-Subcategory="4" data-Category="2">
+                                <span class="icon">
+                                  <i class="fas fa-feather-alt"></i>
+                                </span> Carcasa para Celular
+                              </a>
+                              <a class="navbar-item Subcategory" data-Subcategory="5" data-Category="2">
+                                <span class="icon">
+                                  <i class="fas fa-feather-alt"></i>
+                                </span> Invitación a evento - Tarjeta de felicitación
+                              </a>
+                              <a class="navbar-item Subcategory" data-Subcategory="6" data-Category="2">
+                                <span class="icon">
+                                  <i class="fas fa-feather-alt"></i>
+                                </span> Portavasos
+                              </a>
+                              <a class="navbar-item Subcategory" data-Subcategory="7" data-Category="2">
+                                <span class="icon">
+                                  <i class="fas fa-feather-alt"></i>
+                                </span> Porta-retrato
+                              </a>
+                              <a class="navbar-item Subcategory" data-Subcategory="8" data-Category="2">
+                                <span class="icon">
+                                  <i class="fas fa-feather-alt"></i>
+                                </span> Rompecabezas
+                              </a>
+                              <a class="navbar-item Subcategory" data-Subcategory="9" data-Category="2">
+                                <span class="icon">
+                                  <i class="fas fa-feather-alt"></i>
+                                </span> Termo
+                              </a>
+                              <a class="navbar-item Subcategory" data-Subcategory="10" data-Category="2">
+                                <span class="icon">
+                                  <i class="fas fa-feather-alt"></i>
+                                </span> Libreta
+                              </a>
+                              <a class="navbar-item Subcategory" data-Subcategory="11" data-Category="2">
+                                <span class="icon">
+                                  <i class="fas fa-feather-alt"></i>
+                                </span> Mousepad
+                              </a>
+                              <a class="navbar-item Subcategory" data-Subcategory="12" data-Category="2">
+                                <span class="icon">
+                                  <i class="fas fa-feather-alt"></i>
+                                </span> Playera
+                              </a>
+                              <a class="navbar-item Subcategory" data-Subcategory="13" data-Category="2">
+                                <span class="icon">
+                                  <i class="fas fa-feather-alt"></i>
+                                </span> Lapicero
+                              </a>
+                      </div>
+                      
                     </div>
                   </div>
+        
+                  
                 </div>
               </div>
               <div class="navbar-item is-hoverable">
@@ -302,26 +277,43 @@
                   Foto-Regalos
                 </div>
                 <div id="moreDropdown" class="navbar-dropdown ">
-                  <a class="navbar-item " href="http://bulma.io/extensions/">
-                    <div class="level is-mobile">
-                      <div class="level-left">
-                        <div class="level-item">
-                          <p>
-                            <strong>Extensions</strong>
+                    <div class="columns">
+                        <div class="column">
+                            <span id="titMenu" class="navbar-item">
+                                Artículos Personalizados<br>
+                            </span>
+                            <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
+                        </div>
+                        <div class="column">
+                            <br><br>
+                            <a class="navbar-item Subcategory" data-Subcategory="14" data-Category="3">
+                                <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                                </span> Marco con Foto
+                            </a>
+                            <a class="navbar-item Subcategory" data-Subcategory="16" data-Category="3">
+                                <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                                </span> Marco sin Foto
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item Subcategory" data-Subcategory="15" data-Category="3">
+                                <span class="icon">
+                                <i class="fas fa-feather-alt"></i>
+                                </span> Bastidor con Foto
+                            </a>
+                            </div>
+                            <div class="column rightSide">
+                            <br><br>
+                            <img src="resources/frame.jpg" alt="img1">
                             <br>
-                            <small>Side projects to enhance Bulma</small>
-                          </p>
+                            <span class="navbar-item">
+                                <strong> ¡Conócelos!</strong>
+                            </span>
                         </div>
-                      </div>
-                      <div class="level-right">
-                        <div class="level-item">
-                          <span class="icon has-text-info">
-                            <i class="fa fa-plug"></i>
-                          </span>
-                        </div>
-                      </div>
                     </div>
-                  </a>
+                    
+                  
                 </div>
               </div>
               
