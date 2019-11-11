@@ -496,6 +496,9 @@ body::after{ content:''; display:block; height:100px; }
   #home a:focus{
     background-color: transparent;
   }
+  .productosFoot .columns .column a.navbar-item:hover{
+    background-color: #f5f5f5;
+  }
   /*estilos de tamaño pantalla completa*/
   /*.navbar-item.is-mega {
     position: static;
