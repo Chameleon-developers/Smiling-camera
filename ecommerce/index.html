@@ -33,240 +33,303 @@
   <script src="https://unpkg.com/konva@4.0.16/konva.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/steps.css">
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" href="css/custom.css" />
   <link rel="stylesheet" type="text/css" href="css/home.css">
   <!--link rel="stylesheet" href="css/custom.css" /-->
 
 </head>
 
 <body>
-  <section class="headerEcommerce">
+  <section style="overflow: auto;">
     <nav id="mainNav" class="navbar level is-fixed-top">
-      <div class="level-left">
-        <div class="level-item">
-          <a class="Subcategory" data-Category="0">
-            <img class="logo" src="resources/logo.png">
-          </a>
-        </div>
-      </div>
-      </div>
+            <div class="level-left">
+                <div class="level-item">
+                    <a class="Subcategory" data-Category="0">
+                        <img class="logo" src="resources/logo.png">
+                    </a>
+                </div>
+            </div>
+          </div>
+    
+          <div class="level-right navbar-end">
+    
+            <div class="level-item">
+                <div class="field has-addons">
+                    <p class="control">
+                        <button id="search" class="button is-danger">
+                            <span class="icon">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </button>
+                    </p>
+                    <p class="control">
+                        <input id="inputSearch" class="input is-danger" type="text" placeholder="Buscar">
+                    </p>
+                </div>
+            </div>
+            <div class="level-item" id="logIn">
+                <div class="field has-addons">
+                    <p class="control">
+                        <button class="button is-white">Iniciar sesion</button>
+                    </p>
+                </div>
+            </div>
+            <div class="level-item" id="usuario" data-user="0">
+                <div class="field has-addons">
+                    <p class="control">
+                        <button class="button is-white">asd</button>
+                    </p>
+                </div>
+            </div>
+            <div class="level-item">
+                <a>
+                    <span class="icon">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                    </span>
+                </a>
+            </div>
+          </div>
+    </nav>
 
-      <div class="level-right navbar-end">
+    
 
-        <div class="level-item">
-          <div class="field has-addons">
-            <p class="control">
-              <button id="search" class="button is-danger">
-                <span class="icon">
-                  <i class="fas fa-search"></i>
+  <nav class="navbar " id="menuProductos">
+      <div class="navbar-brand">
+        
+            <a class="navbar-item is-hidden-desktop" href="#">
+                <!--<img src="resources/facebook-box.png" width="25px">-->
+                <span class="icon icon-social-media" >
+                    <i class="fa fa-facebook-square" aria-hidden="true"></i>
                 </span>
-              </button>
-            </p>
-            <p class="control">
-              <input id="inputSearch" class="input is-danger" type="text" placeholder="Buscar">
-            </p>
-          </div>
+            </a>
+           
+            
+            <a class="navbar-item is-hidden-desktop" href="#">
+                <!--<img src="resources/instagram.png" width="25px">-->
+                <span class="icon icon-social-media">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                </span>
+            </a>
+
+            
+            <a class="navbar-item is-hidden-desktop" href="#">
+                
+                <!--<img src="resources/twitter-box.png" width="25px">-->
+                <span class="icon icon-social-media">
+                    <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                </span>
+                
+            </a>
+        <!--<a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
+          <span class="icon" style="color: #333;">
+            <i class="fa fa-facebook-square" aria-hidden="true"></i>
+          </span>
+        </a>
+    
+        <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
+          <span class="icon" style="color: #55acee;">
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+          </span>
+        </a>-->
+    
+        <div class="navbar-burger burger" data-target="navMenubd-example">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-        <div class="level-item" id="logIn">
-          <div class="field has-addons">
-            <p class="control">
-              <button class="button is-white">Iniciar sesion</button>
-            </p>
+      </div>
+    
+      <div id="navMenubd-example" class="navbar-menu">
+        <div class="navbar-start">
+            
+            <div class="navbar-item" id="home">
+
+                <a class="navbar-item Subcategory" href="./">
+                    Home
+                </a>
+            </div>
+            
+          <div class="navbar-item is-hoverable">
+            <a class="navbar-link" href="#">
+              Foto-Libros
+            </a>
+            <div class="navbar-dropdown ">
+                <div class="columns">
+                    <div class="column none-display">
+                        <span id="titMenu" class="navbar-item">
+                        Artículos Personalizados<br>
+                        </span>
+                        <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
+                    </div>
+    
+                    <div class="column">
+                        <br><br>
+                        <a class="navbar-item Subcategory" data-Subcategory="1" data-Category="1">
+                        <span class="icon">
+                            <i class="fas fa-feather-alt"></i>
+                        </span> Foto-Libro con Fotos
+                        </a>
+    
+    
+                        <a class="navbar-item Subcategory" data-Subcategory="2" data-Category="1">
+                        <span class="icon">
+                            <i class="fas fa-feather-alt"></i>
+                        </span> Foto-Libro sin Fotos
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item Subcategory" data-Subcategory="3" data-Category="1">
+                        <span class="icon">
+                            <i class="fas fa-feather-alt"></i>
+                        </span> Caja con Fotos
+                        </a>
+                    </div>
+                    
+                    <div class="column rightSide none-display">
+                        <br><br>
+                        <img src="resources/pexels-photo-970076.jpeg" alt="img1">
+                        <br>
+                        <span class="navbar-item">
+                        <strong> ¡Conócelos!</strong>
+                        </span>
+                    </div>
+        
+                </div>
+              
+            </div>
           </div>
-        </div>
-        <div class="level-item" id="usuario" data-user="0">
-          <div class="field has-addons">
-            <p class="control">
-              <button class="button is-white">asd</button>
-            </p>
+          <!--has-dropdown-->
+          <div class="navbar-item is-hoverable is-mega">
+            <div class="navbar-link">
+              Foto-Marcos
+            </div>
+            <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
+              <div class="container is-fluid">
+                <div class="columns">
+                  <div class="column">
+
+                    <span id="titMenu" class="navbar-item">
+                            Artículos Personalizados<br>
+                          </span>
+                          <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
+                          <br>
+                          <br>
+                          <div>
+                            <img src="resources/background-notebook-pencil-544115.jpg" alt="img3">
+                          </div>
+                  </div>
+                  <div class="column">
+                    <a class="navbar-item Subcategory" data-Subcategory="4" data-Category="2">
+                            <span class="icon">
+                              <i class="fas fa-feather-alt"></i>
+                            </span> Carcasa para Celular
+                          </a>
+                          <a class="navbar-item Subcategory" data-Subcategory="5" data-Category="2">
+                            <span class="icon">
+                              <i class="fas fa-feather-alt"></i>
+                            </span> Invitación a evento - Tarjeta de felicitación
+                          </a>
+                          <a class="navbar-item Subcategory" data-Subcategory="6" data-Category="2">
+                            <span class="icon">
+                              <i class="fas fa-feather-alt"></i>
+                            </span> Portavasos
+                          </a>
+                          <a class="navbar-item Subcategory" data-Subcategory="7" data-Category="2">
+                            <span class="icon">
+                              <i class="fas fa-feather-alt"></i>
+                            </span> Porta-retrato
+                          </a>
+                          <a class="navbar-item Subcategory" data-Subcategory="8" data-Category="2">
+                            <span class="icon">
+                              <i class="fas fa-feather-alt"></i>
+                            </span> Rompecabezas
+                          </a>
+                          <a class="navbar-item Subcategory" data-Subcategory="9" data-Category="2">
+                            <span class="icon">
+                              <i class="fas fa-feather-alt"></i>
+                            </span> Termo
+                          </a>
+                          <a class="navbar-item Subcategory" data-Subcategory="10" data-Category="2">
+                            <span class="icon">
+                              <i class="fas fa-feather-alt"></i>
+                            </span> Libreta
+                          </a>
+                          <a class="navbar-item Subcategory" data-Subcategory="11" data-Category="2">
+                            <span class="icon">
+                              <i class="fas fa-feather-alt"></i>
+                            </span> Mousepad
+                          </a>
+                          <a class="navbar-item Subcategory" data-Subcategory="12" data-Category="2">
+                            <span class="icon">
+                              <i class="fas fa-feather-alt"></i>
+                            </span> Playera
+                          </a>
+                          <a class="navbar-item Subcategory" data-Subcategory="13" data-Category="2">
+                            <span class="icon">
+                              <i class="fas fa-feather-alt"></i>
+                            </span> Lapicero
+                          </a>
+                  </div>
+                  
+                </div>
+              </div>
+    
+              
+            </div>
           </div>
+          <div class="navbar-item is-hoverable">
+            <div class="navbar-link">
+              Foto-Regalos
+            </div>
+            <div id="moreDropdown" class="navbar-dropdown ">
+                <div class="columns">
+                    <div class="column">
+                        <span id="titMenu" class="navbar-item">
+                            Artículos Personalizados<br>
+                        </span>
+                        <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
+                    </div>
+                    <div class="column">
+                        <br><br>
+                        <a class="navbar-item Subcategory" data-Subcategory="14" data-Category="3">
+                            <span class="icon">
+                            <i class="fas fa-feather-alt"></i>
+                            </span> Marco con Foto
+                        </a>
+                        <a class="navbar-item Subcategory" data-Subcategory="16" data-Category="3">
+                            <span class="icon">
+                            <i class="fas fa-feather-alt"></i>
+                            </span> Marco sin Foto
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item Subcategory" data-Subcategory="15" data-Category="3">
+                            <span class="icon">
+                            <i class="fas fa-feather-alt"></i>
+                            </span> Bastidor con Foto
+                        </a>
+                        </div>
+                        <div class="column rightSide">
+                        <br><br>
+                        <img src="resources/frame.jpg" alt="img1">
+                        <br>
+                        <span class="navbar-item">
+                            <strong> ¡Conócelos!</strong>
+                        </span>
+                    </div>
+                </div>
+                
+              
+            </div>
+          </div>
+          
         </div>
-        <div class="level-item">
-          <a>
-            <span class="icon">
-              <i class="fas fa-shopping-cart fa-lg"></i>
-            </span>
-          </a>
+    
+        <div class="navbar-end">
+          
         </div>
       </div>
     </nav>
-    <div id="MenuEcommerce">
-      <nav id="secondNav" class="navbar is-fixed-top is-purple has-text-centered" style="margin-top: 68px;">
-        <div class="navbar-menu has-text-centered">
-          <div class="navbar-start" style="padding-left: 100px;">
-            <a class="navbar-item Subcategory" data-Category="0">
-              Home
-            </a>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                Foto-Libros
-              </a>
-              <div class="navbar-dropdown">
-                <div class="columns">
-                  <div class="column">
-                    <span id="titMenu" class="navbar-item">
-                      Artículos Personalizados<br>
-                    </span>
-                    <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
-                  </div>
-
-                  <div class="column">
-                    <br><br>
-                    <a class="navbar-item Subcategory" data-Subcategory="1" data-Category="1">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Foto-Libro con Fotos
-                    </a>
-
-
-                    <a class="navbar-item Subcategory" data-Subcategory="2" data-Category="1">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Foto-Libro sin Fotos
-                    </a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item Subcategory" data-Subcategory="3" data-Category="1">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Caja con Fotos
-                    </a>
-                  </div>
-                  <div class="column rightSide">
-                    <br><br>
-                    <img src="resources/pexels-photo-970076.jpeg" alt="img1">
-                    <br>
-                    <span class="navbar-item">
-                      <strong> ¡Conócelos!</strong>
-                    </span>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                Foto-Regalos
-              </a>
-              <div class="navbar-dropdown">
-                <div class="columns">
-                  <div class="column">
-                    <span id="titMenu" class="navbar-item">
-                      Artículos Personalizados<br>
-                    </span>
-                    <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
-                    <br>
-                    <br>
-                    <div>
-                      <img src="resources/background-notebook-pencil-544115.jpg" alt="img3">
-                    </div>
-
-                  </div>
-                  <div class="column">
-                    <br><br>
-                    <a class="navbar-item Subcategory" data-Subcategory="4" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Carcasa para Celular
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="5" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Invitación a evento - Tarjeta de felicitación
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="6" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Portavasos
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="7" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Porta-retrato
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="8" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Rompecabezas
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="9" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Termo
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="10" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Libreta
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="11" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Mousepad
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="12" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Playera
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="13" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Lapicero
-                    </a>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                Foto-Marcos
-              </a>
-              <div class="navbar-dropdown">
-                <div class="columns">
-                  <div class="column">
-                    <span id="titMenu" class="navbar-item">
-                      Artículos Personalizados<br>
-                    </span>
-                    <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
-                  </div>
-                  <div class="column">
-                    <br><br>
-                    <a class="navbar-item Subcategory" data-Subcategory="14" data-Category="3">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Marco con Foto
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="16" data-Category="3">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Marco sin Foto
-                    </a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item Subcategory" data-Subcategory="15" data-Category="3">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Bastidor con Foto
-                    </a>
-                  </div>
-                  <div class="column rightSide">
-                    <br><br>
-                    <img src="resources/frame.jpg" alt="img1">
-                    <br>
-                    <span class="navbar-item">
-                      <strong> ¡Conócelos!</strong>
-                    </span>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-      </nav>
-    </div>
-
-  </section>
+    
+</section>
   
 
   <!-- Sección donde se agregará los demás elementos html -->
