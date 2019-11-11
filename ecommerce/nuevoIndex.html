@@ -17,7 +17,6 @@
   <link rel="stylesheet" type="text/css" href="css/bulma.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Lato:900&display=swap" rel="stylesheet">
   <link href='//fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/bulma-ecommerce.min.css">
   <link rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
@@ -25,7 +24,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/css/bulma-steps.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-divider@0.2.0/dist/css/bulma-divider.min.css">
-  <link rel="stylesheet" type="text/css" href="css/home.css">
   <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
   <script src="js/jquery-3.4.1.js"></script>
@@ -33,264 +31,322 @@
   <script src="https://unpkg.com/konva@4.0.16/konva.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/steps.css">
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-  <link rel="stylesheet" type="text/css" href="css/home.css">
+
   <link rel="stylesheet" href="css/custom.css" />
+  <link rel="stylesheet" type="text/css" href="css/home.css">
 
 </head>
 
 <body>
-  <section class="headerEcommerce">
-    <nav id="mainNav" class="navbar level is-fixed-top">
-      <div class="level-left">
-        <div class="level-item">
-          <a class="Subcategory" data-Category="0">
-            <img class="logo" src="resources/logo.png">
-          </a>
-        </div>
-      </div>
-      </div>
-
-      <div class="level-right navbar-end">
-
-        <div class="level-item">
-          <div class="field has-addons">
-            <p class="control">
-              <button id="search" class="button is-danger">
-                <span class="icon">
-                  <i class="fas fa-search"></i>
-                </span>
-              </button>
-            </p>
-            <p class="control">
-              <input id="inputSearch" class="input is-danger" type="text" placeholder="Buscar">
-            </p>
-          </div>
-        </div>
-        <div class="level-item" id="logIn">
-          <div class="field has-addons">
-            <p class="control">
-              <button class="button is-white">Iniciar sesion</button>
-            </p>
-          </div>
-        </div>
-        <div class="level-item" id="usuario" data-user="0">
-          <div class="field has-addons">
-            <p class="control">
-              <button class="button is-white">asd</button>
-            </p>
-          </div>
-        </div>
-        <div class="level-item">
-          <a>
-            <span class="icon">
-              <i class="fas fa-shopping-cart fa-lg"></i>
-            </span>
-          </a>
-        </div>
-      </div>
-    </nav>
-    <div id="MenuEcommerce">
-      <nav id="secondNav" class="navbar is-fixed-top is-purple has-text-centered" style="margin-top: 68px;">
-        <div class="navbar-menu has-text-centered">
-          <div class="navbar-start" style="padding-left: 100px;">
-            <a class="navbar-item Subcategory" data-Category="0">
-              Home
-            </a>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                Foto-Libros
-              </a>
-              <div class="navbar-dropdown">
-                <div class="columns">
-                  <div class="column">
-                    <span id="titMenu" class="navbar-item">
-                      Artículos Personalizados<br>
-                    </span>
-                    <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
-                  </div>
-
-                  <div class="column">
-                    <br><br>
-                    <a class="navbar-item Subcategory" data-Subcategory="1" data-Category="1">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Foto-Libro con Fotos
-                    </a>
-
-
-                    <a class="navbar-item Subcategory" data-Subcategory="2" data-Category="1">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Foto-Libro sin Fotos
-                    </a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item Subcategory" data-Subcategory="3" data-Category="1">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Caja con Fotos
-                    </a>
-                  </div>
-                  <div class="column rightSide">
-                    <br><br>
-                    <img src="resources/pexels-photo-970076.jpeg" alt="img1">
-                    <br>
-                    <span class="navbar-item">
-                      <strong> ¡Conócelos!</strong>
-                    </span>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                Foto-Regalos
-              </a>
-              <div class="navbar-dropdown">
-                <div class="columns">
-                  <div class="column">
-                    <span id="titMenu" class="navbar-item">
-                      Artículos Personalizados<br>
-                    </span>
-                    <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
-                    <br>
-                    <br>
-                    <div>
-                      <img src="resources/background-notebook-pencil-544115.jpg" alt="img3">
+    <section>
+        <nav id="mainNav" class="navbar level is-fixed-top">
+                <div class="level-left">
+                    <div class="level-item">
+                        <a class="Subcategory" data-Category="0">
+                            <img class="logo" src="resources/logo.png">
+                        </a>
                     </div>
-
-                  </div>
-                  <div class="column">
-                    <br><br>
-                    <a class="navbar-item Subcategory" data-Subcategory="4" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Carcasa para Celular
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="5" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Invitación a evento - Tarjeta de felicitación
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="6" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Portavasos
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="7" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Porta-retrato
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="8" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Rompecabezas
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="9" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Termo
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="10" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Libreta
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="11" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Mousepad
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="12" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Playera
-                    </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="13" data-Category="2">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Lapicero
-                    </a>
-                  </div>
-
                 </div>
               </div>
-            </div>
-
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                Foto-Marcos
-              </a>
-              <div class="navbar-dropdown">
-                <div class="columns">
-                  <div class="column">
-                    <span id="titMenu" class="navbar-item">
-                      Artículos Personalizados<br>
-                    </span>
-                    <img src="resources/blur-blurred-book-pages-46274.jpg" alt="img2">
-                  </div>
-                  <div class="column">
-                    <br><br>
-                    <a class="navbar-item Subcategory" data-Subcategory="14" data-Category="3">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Marco con Foto
+        
+              <div class="level-right navbar-end">
+        
+                <div class="level-item">
+                    <div class="field has-addons">
+                        <p class="control">
+                            <button id="search" class="button is-danger">
+                                <span class="icon">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </button>
+                        </p>
+                        <p class="control">
+                            <input id="inputSearch" class="input is-danger" type="text" placeholder="Buscar">
+                        </p>
+                    </div>
+                </div>
+                <div class="level-item" id="logIn">
+                    <div class="field has-addons">
+                        <p class="control">
+                            <button class="button is-white">Iniciar sesion</button>
+                        </p>
+                    </div>
+                </div>
+                <div class="level-item" id="usuario" data-user="0">
+                    <div class="field has-addons">
+                        <p class="control">
+                            <button class="button is-white">asd</button>
+                        </p>
+                    </div>
+                </div>
+                <div class="level-item">
+                    <a>
+                        <span class="icon">
+                            <i class="fas fa-shopping-cart fa-lg"></i>
+                        </span>
                     </a>
-                    <a class="navbar-item Subcategory" data-Subcategory="16" data-Category="3">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Marco sin Foto
-                    </a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item Subcategory" data-Subcategory="15" data-Category="3">
-                      <span class="icon">
-                        <i class="fas fa-feather-alt"></i>
-                      </span> Bastidor con Foto
-                    </a>
-                  </div>
-                  <div class="column rightSide">
-                    <br><br>
-                    <img src="resources/frame.jpg" alt="img1">
-                    <br>
-                    <span class="navbar-item">
-                      <strong> ¡Conócelos!</strong>
-                    </span>
-                  </div>
-
                 </div>
               </div>
+        </nav>
+    
+        
+  
+      <nav class="navbar " id="menuProductos">
+          <div class="navbar-brand">
+            
+        
+            <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
+              <span class="icon" style="color: #333;">
+                <i class="fa fa-github"></i>
+              </span>
+            </a>
+        
+            <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
+              <span class="icon" style="color: #55acee;">
+                <i class="fa fa-twitter"></i>
+              </span>
+            </a>
+        
+            <div class="navbar-burger burger" data-target="navMenubd-example">
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
           </div>
-      </nav>
-    </div>
+        
+          <div id="navMenubd-example" class="navbar-menu">
+            <div class="navbar-start">
+                
+                <div class="navbar-item">
 
+                    <a class="navbar-item Subcategory" href="./">
+                        Home
+                    </a>
+                </div>
+              <div class="navbar-item is-hoverable">
+                <a class="navbar-link  is-active" href="/documentation/overview/start/">
+                  Foto-Libros
+                </a>
+                <div class="navbar-dropdown ">
+                  <a class="navbar-item " href="/documentation/overview/start/">
+                    Overview
+                  </a>
+                  <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+                    Modifiers
+                  </a>
+                  <a class="navbar-item " href="http://bulma.io/documentation/columns/basics/">
+                    Columns
+                  </a>
+                  <a class="navbar-item " href="http://bulma.io/documentation/layout/container/">
+                    Layout
+                  </a>
+                  <a class="navbar-item " href="http://bulma.io/documentation/form/general/">
+                    Form
+                  </a>
+                  <a class="navbar-item " href="http://bulma.io/documentation/elements/box/">
+                    Elements
+                  </a>
+        
+                  <a class="navbar-item is-active" href="http://bulma.io/documentation/components/breadcrumb/">
+                      Components
+                    </a>
+        
+                  <hr class="navbar-divider">
+                  <div class="navbar-item">
+                    <div>
+                      <p class="is-size-6-desktop">
+                        <strong class="has-text-info">0.5.1</strong>
+                      </p>
+        
+                      <small>
+                          <a class="bd-view-all-versions" href="/versions">View all versions</a>
+                        </small>
+        
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--has-dropdown-->
+              <div class="navbar-item is-hoverable is-mega">
+                <div class="navbar-link">
+                  Foto-Marcos
+                </div>
+                <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
+                  <div class="container is-fluid">
+                    <div class="columns">
+                      <div class="column">
+                        <h1 class="title is-6 is-mega-menu-title">Sub Menu Title</h1>
+                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+                          <div class="navbar-content">
+                            <p>
+                              <small class="has-text-info">03 Aug 2017</small>
+                            </p>
+                            <p>New feature: list of tags</p>
+                          </div>
+                        </a>
+                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+                          <div class="navbar-content">
+                            <p>
+                              <small class="has-text-info">03 Aug 2017</small>
+                            </p>
+                            <p>New feature: list of tags</p>
+                          </div>
+                        </a>
+                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+                          <div class="navbar-content">
+                            <p>
+                              <small class="has-text-info">03 Aug 2017</small>
+                            </p>
+                            <p>New feature: list of tags</p>
+                          </div>
+                        </a>
+                      </div>
+                      <div class="column">
+                        <h1 class="title is-6 is-mega-menu-title">Sub Menu Title</h1>
+                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+                          <div class="navbar-content">
+        
+                            <p>
+                              <small class="has-text-info">03 Aug 2017</small>
+                            </p>
+                            <p>New feature: list of tags</p>
+                          </div>
+                        </a>
+                        <a class="navbar-item " href="/documentation/overview/start/">
+                    Overview
+                  </a>
+                        <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+                    Modifiers
+                  </a>
+                        <a class="navbar-item " href="http://bulma.io/documentation/columns/basics/">
+                    Columns
+                  </a>
+                      </div>
+                      <div class="column">
+                        <h1 class="title is-6 is-mega-menu-title">Sub Menu Title</h1>
+                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+                          <div class="navbar-content">
+                            <p>
+                              <small class="has-text-info">03 Aug 2017</small>
+                            </p>
+                            <p>New feature: list of tags</p>
+                          </div>
+                        </a>
+                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+                          <div class="navbar-content">
+                            <p>
+                              <small class="has-text-info">03 Aug 2017</small>
+                            </p>
+                            <p>New feature: list of tags</p>
+                          </div>
+                        </a>
+                        <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+                          <div class="navbar-content">
+                            <p>
+                              <small class="has-text-info">03 Aug 2017</small>
+                            </p>
+                            <p>New feature: list of tags</p>
+                          </div>
+                        </a>
+        
+                      </div>
+                      <div class="column">
+                        <h1 class="title is-6 is-mega-menu-title">Sub Menu Title</h1>
+                        <a class="navbar-item " href="/documentation/overview/start/">
+                    Overview
+                  </a>
+                        <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+                    Modifiers
+                  </a>
+                        <a class="navbar-item " href="http://bulma.io/documentation/columns/basics/">
+                    Columns
+                  </a>
+                        <a class="navbar-item " href="http://bulma.io/documentation/layout/container/">
+                    Layout
+                  </a>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <hr class="navbar-divider">
+                  <div class="navbar-item">
+                    <div class="navbar-content">
+                      <div class="level is-mobile">
+                        <div class="level-left">
+                          <div class="level-item">
+                            <strong>Stay up to date!</strong>
+                          </div>
+                        </div>
+                        <div class="level-right">
+                          <div class="level-item">
+                            <a class="button bd-is-rss is-small" href="http://bulma.io/atom.xml">
+                              <span class="icon is-small">
+                                <i class="fa fa-rss"></i>
+                              </span>
+                              <span>Subscribe</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="navbar-item is-hoverable">
+                <div class="navbar-link">
+                  Foto-Regalos
+                </div>
+                <div id="moreDropdown" class="navbar-dropdown ">
+                  <a class="navbar-item " href="http://bulma.io/extensions/">
+                    <div class="level is-mobile">
+                      <div class="level-left">
+                        <div class="level-item">
+                          <p>
+                            <strong>Extensions</strong>
+                            <br>
+                            <small>Side projects to enhance Bulma</small>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="level-right">
+                        <div class="level-item">
+                          <span class="icon has-text-info">
+                            <i class="fa fa-plug"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+        
+            <div class="navbar-end">
+              
+            </div>
+          </div>
+        </nav>
+        
   </section>
-  
 
   <!-- Sección donde se agregará los demás elementos html -->
   <div id="Content">
     <!-- Start Hero Carousel -->
     <section class="hero is-large has-carousel" style="padding-top: 120px;">
-      <div class="hero-head"></div>
-      <div class="hero-body" style="height: 100vh;">
-        <div id="carousel-demo" class="hero-carousel">
-          <div class="item-11">
-            <img src="resources/carcasaSINBOTON.png" alt="img0"/>
-            <a data-Subcategory="4" data-Category="2" class="Customizable">¡Diseña una propia!</a>
-          </div>
-          <div class="item-22">
-            <img src="resources/LibroSINBOTON2.png" alt="img1">
-            <a data-Subcategory="2" data-Category="1" class="Customizable">¡Aprovecha!</a>
-          </div>
-          <div class="item-33">
-            <img src="resources/TermoSINBOTON.png" alt="img2">
-            <a data-Subcategory="9" data-Category="2" class="Customizable">¡Diseña el tuyo!</a>
-          </div>
+      <div id="carousel-demo" class="hero-carousel">
+        <div class="item-11">
+          <img src="resources/tazaWeb 1920 - 1@2x (2).jpg" />
         </div>
-        
+        <div class="item-22">
+          <img src="resources/libroWeb 1920 - 1@2x (2).jpg" alt="img1">
+        </div>
+        <div class="item-33">
+          <img src="resources/termoWeb 1920 - 1@2x (2).jpg" alt="img2">
+        </div>
       </div>
+      <div class="hero-head"></div>
+      <div class="hero-body" style="height: 100vh;"></div>
       <div class="hero-foot"></div>
     </section>
     <!-- End Hero Carousel -->
@@ -310,7 +366,7 @@
           <a data-Subcategory="1" data-Category="1" class="Customizable"><button
               class="button is-primary is-focused is-medium">¡Probar ahora!</button></a>
         </div>
-        <div class="column im probar">
+        <div class="column im">
           <img src="resources/frame.jpg" alt="img1">
 
         </div>
