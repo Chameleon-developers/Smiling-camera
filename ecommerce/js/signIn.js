@@ -47,7 +47,7 @@ function logIn() {
 				$('#usuario').css('display', 'flex')
 				$('#usuario').attr('data-user', "'" + response.token + "'")
 				sessionStorage.token = response.token
-				//window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
+				window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
 	        },
 	        error: function (error) {
 	            if(error.status == '401'){

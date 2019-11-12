@@ -3,6 +3,11 @@ import { loadFilesHomeCategory, loadFilesHomeSearch, loadFilesInfo, loadFilesUse
 
 /* Función para declarar eventos eventos */
 $(function() {
+
+	if (sessionStorage.token) {
+		$('#logIn').css('display', 'none')
+		$('#usuario').css('display', 'flex')
+	}
 	getProducts()
 
 	$(".Customizable").click(function (e) {
