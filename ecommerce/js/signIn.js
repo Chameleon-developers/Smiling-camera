@@ -1,17 +1,28 @@
 //Importación de módulos
 import { toast, ip_server } from "./plugins.js"
 
-$(function() {
+//Exportación de módulos
+export { init }
+
+function init() {
+
+	$('.g-recaptcha').each(function(index, el) {
+        var widgetId = grecaptcha.render(el, {'sitekey' : '6Ld-g7oUAAAAAI-HUfcZOGiFRkAx4VjJfMkKUnlQ'});
+        jQuery(this).attr('data-widget-id', widgetId);
+    });
+
 	$('html, body').animate({scrollTop:0}, 'slow');
 	
 	$('#iniciarSesion').click(function (e) {
+		//console.log(grecaptcha.getResponse(jQuery('#captchaGoogle').attr('data-widget-id')));
 		logIn()
     });
 
     $('#registrar').click(function (e) {
+		//console.log(grecaptcha.getResponse(jQuery('#captchaGoogle2').attr('data-widget-id')));
 		registrar()
     });
-})
+}
 
 /* Funcion para iniciar sesion */
 function logIn() {
@@ -25,13 +36,17 @@ function logIn() {
 	        url: ip_server + "/logInEcommerce",
 	        data: {
 	            'mainEmail' : mainEmail,
-	            'passwordUser' : passwordUser,
+				'passwordUser' : passwordUser,
+				'captcha': grecaptcha.getResponse(jQuery('#captchaGoogle').attr('data-widget-id'))
 	        },
 	        dataType: "json",
 	        success: function (response) {
+				//console.log(response);
+				
 	        	$('#logIn').css('display', 'none')
 				$('#usuario').css('display', 'flex')
 				//$('#usuario').attr('data-user', "'" + response.idUser + "'")
+				sessionStorage.token = response.token
 				window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
 	        },
 	        error: function (error) {
@@ -39,9 +54,19 @@ function logIn() {
 	            	$('#logIn').css('display', 'flex')
 					$('#usuario').css('display', 'none')
 					$('#usuario').attr('data-user', '0')
-	                sessionStorage.removeItem('token')
-	                window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
-	            }
+	                /* sessionStorage.removeItem('token')
+					window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/"); */
+					toast('Error de Usuario o Contraseña','is-danger')
+				}
+                else if(error.status == '406'){
+                    toast('La contraseña ingresada es incorrecta','is-danger')
+                }
+				if(error.status == '400'){
+					toast('¿Eres un Robot?','is-danger')
+				}
+				if(error.status == '500'){
+					toast('No se pudo iniciar sesión, Error interno del servidor', 'is-danger')
+				}
 	        }
 	    })
 	}
@@ -59,29 +84,44 @@ function registrar() {
 	if(check) {
 		$.ajax({
 	        type: "POST",
-	        url: ip_server + "/registeruser",
+	        url: ip_server + "/registerUser",
 	        data: {
 	            'mainEmail' : mainEmail,
 	            'resetEmail' : resetEmail,
 	            'nameUser' : nameUser,
 	            'passwordUser' : passwordUser,
-	            'cPasswordUser' : cPasswordUser,
+				'cPasswordUser' : cPasswordUser,
+				'captcha': grecaptcha.getResponse(jQuery('#captchaGoogle2').attr('data-widget-id'))
 	        },
 	        dataType: "json",
 	        success: function (response) {
 	        	$('#logIn').css('display', 'none')
 				$('#usuario').css('display', 'flex')
 				//$('#usuario').attr('data-user', "'" + response.idUser + "'")
-				window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
+				//window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
+				toast('Se registró correctamente, ya puede Iniciar Sesión','is-info')
 	        },
 	        error: function (error) {
-	            if(error.status == '401'){
+	            /* if(error.status == '401'){
 	            	$('#logIn').css('display', 'flex')
 					$('#usuario').css('display', 'none')
 					$('#usuario').attr('data-user', '0')
-	                sessionStorage.removeItem('token')
-	                window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
-	            }
+	                //sessionStorage.removeItem('token')
+					//window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
+					toast('401', 'is-warning')
+				} */
+				if(error.status == '400'){
+					toast('¿Eres un Robot?','is-danger')
+				}
+                if(error.status == '406'){
+                    toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
+                }
+                if(error.status == '409'){
+                    toast('El correo ingresado ya se encuentra registrado', 'is-warning')
+                }
+                if(error.status == '500'){
+                    toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
+                }
 	        }
 	    })
 	}

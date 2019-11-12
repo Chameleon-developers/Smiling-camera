@@ -659,3 +659,19 @@ a strong {
 
   }
 }
+
+.toast-container {
+  position: fixed;
+  bottom: 5%;
+  left: 5%;
+  width: 300px !important;
+  z-index: 999;
+}
+.toast-container .notification {
+  transition: all 300ms ease;
+}
+
+.toast-container .notification.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
