@@ -430,6 +430,17 @@ body::after{ content:''; display:block; height:100px; }
   margin-top:200px;
 }
 /*home*/
+
+@media (max-width: 1087px){
+  body{
+    overflow: hidden;
+  }
+
+  #navMenubd-example{
+    height:536px;
+    overflow-y: scroll;
+  }
+}
 @media (max-width: 768px) {
   #menuProductos {
     margin-top: 215px;
@@ -481,6 +492,7 @@ body::after{ content:''; display:block; height:100px; }
   }
   
 }
+
 .navbar-start{
   margin-left: 100px;
 }
