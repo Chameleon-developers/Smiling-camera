@@ -451,7 +451,19 @@ body::after{ content:''; display:block; height:100px; }
   .navbar-link{
     color: #4a4a4a;
   }
-  
+  .dropdown{
+    vertical-align:top;
+  }
+  body{
+    overflow: hidden;
+    /*height: 100%;*/
+  }
+
+  #navMenubd-example{
+    height:390px;
+
+    overflow-y: scroll;
+  }
 }
 
 @media (min-width:769px){
