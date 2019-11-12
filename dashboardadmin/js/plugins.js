@@ -65,6 +65,7 @@ function modal() {
 function setTable(nameTable) {
     $.fn.dataTableExt.sErrMode = 'throw'
     $("#" + nameTable).DataTable({
+        "lengthMenu": [ 5, 10, 15, 20, 25 ],
         "oLanguage": {
             "sZeroRecords": "No se encontraron resultados",
             "sEmptyTable": "No existe información para mostrar",
@@ -79,13 +80,13 @@ function setTable(nameTable) {
             "sSearch": "Buscar en tabla:",
             "sSearchPlaceholder": "BUSCAR",
             "sInfo": "Mostrando _START_-_END_ de _TOTAL_",
-            "sLengthMenu": '<span>Filas mostradas: </span><select class="browser-default">' +
-                '<option value="10">5</option>' +
-                '<option value="20">10</option>' +
-                '<option value="30">15</option>' +
-                '<option value="30">20</option>' +
-                '<option value="30">25</option>' +
-                '</select></div>'
+            "sLengthMenu": '<span>Mostrar: _MENU_ Filas</span>' /* + <select class="browser-default"> */
+            //     '<option value="10">5</option>' +
+            //     '<option value="20">10</option>' +
+            //     '<option value="30">15</option>' +
+            //     '<option value="30">20</option>' +
+            //     '<option value="30">25</option>' +
+            //     '</select></div>'
         }
     });
 }

@@ -197,7 +197,7 @@ function addUser() {
                 if(error.status == '406'){
                     toast('No se pudo registrar el usuario, no se han procesado correctamente los datos', 'is-warning')
                 }
-                if(error.status == '406'){
+                if(error.status == '500'){
                     toast('No se pudo registrar el usuario, Error interno del servidor', 'is-warning')
                 }
             }
