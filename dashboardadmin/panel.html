@@ -17,8 +17,10 @@
   <link  rel="stylesheet" href="https://unpkg.com/bulma-modal-fx/dist/css/modal-fx.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-steps@2.2.1/dist/css/bulma-steps.min.css">
+  <link rel="stylesheet" type="text/css" href="css/panel.css">
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <link rel="stylesheet" type="text/css" href="css/productos.css">
+  
   <link rel="stylesheet" type="text/css" href="css/registrarProductos.css">
   <script src="js/jquery-3.4.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -82,8 +84,77 @@
 
 
       </aside>
+      
+      
     </div>
-
+    <!--Menu para móviles-->
+    <nav class="navbar " id="menu-movil">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          <img src="resources/logo.png" alt="YouPrint logo" height="28">
+        </a>
+    
+        <div class="navbar-burger burger" data-target="navMenubd-example">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    
+      <div id="navMenubd-example" class="navbar-menu">
+        <div class="navbar-start">
+          <div class="navbar-item">
+            <!--<a class="navbar-link  is-active" href="/documentation/overview/start/">
+              Docs
+            </a>-->
+            <a id="Usuarios" class="navbar-item">
+              <span class="icon">
+                <i class="fas fa-users"></i>
+              </span> Usuarios
+            </a>
+              
+          </div>
+          <div class="navbar-item">
+            <a id="Productos" class="navbar-item">
+              <span class="icon">
+                <i class="fas fa-clipboard-list"></i>
+              </span> Productos
+            </a>
+            
+          </div>
+          <div class="navbar-item">
+            <a id="Kioscos" class="navbar-item"> 
+              <span class="icon">
+                <i class="fas fa-bezier-curve"></i>
+              </span> Kioscos
+            </a>
+            
+          </div>
+          <div class="navbar-item">
+            <a id="Pedidos" class="navbar-item">
+              <span class="icon">
+                <i class="fas fa-truck-loading"></i>
+              </span> Pedidos
+            </a>
+            
+          </div>
+          <div class="navbar-item">
+            <a id="Estadísticas" class="navbar-item">
+              <span class="icon">
+                <i class="fas fa-chart-bar"></i>
+              </span> Estadísticas
+            </a>
+            
+          </div>
+        </div>
+    
+        <div class="navbar-end">
+          
+          
+        </div>
+      </div>
+    </nav>
+    
     <!-- main section -->
     <div class="dashboard-main is-scrollable" style="width: 100">
       <nav class="navbar is-fixed-top is-dark has-text-centered">
@@ -119,6 +190,32 @@
   <script src="js/bulma-steps.js"></script>
   
   <script>bulmaSteps.attach();</script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get all "navbar-burger" elements
+      var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Check if there are any nav burgers
+      if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach(function ($el) {
+          $el.addEventListener('click', function () {
+
+            // Get the target from the "data-target" attribute
+            var target = $el.dataset.target;
+            var $target = document.getElementById(target);
+
+            // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+            $el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+
+          });
+        });
+      }
+    });
+  </script>
 
 
   <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
