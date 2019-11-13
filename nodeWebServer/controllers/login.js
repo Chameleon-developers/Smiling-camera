@@ -168,6 +168,7 @@ module.exports.changePassword = function (req, res) {
 
                         try {
                             var randomstring = Math.random().toString(36).slice(-8);
+                            randomstring += 'M9@.'
 
                             // Definimos el transporter
                             var transporter = nodemailer.createTransport({
@@ -194,6 +195,127 @@ module.exports.changePassword = function (req, res) {
                                     })
                                 } else {
                                     con.query("UPDATE `managerusers` SET `passwordUser` = ? WHERE mainEmail = ?", [randomstring, data.mainEmail], function (err, result, fields) {
+                                        if (err) {
+                                            con.end()
+                                            // Internal error message send
+                                            res.status(500).json({
+                                                Status: 'internal error',
+                                                message: 'Internal error ' + err
+                                            })
+                                        } else {
+                                            //if (result.affectedRows == 1) {
+                                            // Setup and send of response
+                                            res.status(200).json({
+                                                Status: 'Success',
+                                                result: resetEmail
+                                            })
+                                            //}
+                                        }
+                                    })
+                                }
+                            });
+                        } catch (error) {
+                            con.end()
+                            // Internal error message send
+                            res.status(500).json({
+                                Status: 'internal error',
+                                message: 'Internal error Catch'
+                            })
+                        }
+                    } else {
+                        con.end()
+                        res.status(401).json({
+                            Status: 'Failure',
+                            message: 'Bad_Credentials'
+                        })
+                    }
+                }
+            })
+        } else {
+            res.status(400).json({
+                Status: 'Failure',
+                message: 'Bad_Captcha'
+            })
+        }
+    }
+}
+
+module.exports.changePasswordEcommerce = function (req, res) {
+    /* Obtener variable para hacer petición del Captcha */
+    var request = require('request')
+    var nodemailer = require('nodemailer');
+
+    /* Obtener los datos del Body */
+    var data = req.body
+    var check = true
+
+    if (data.captcha === undefined || data.captcha === '' || data.captcha === null) {
+        res.status(400).json({
+            Status: 'Failure',
+            message: 'Bad_Captcha'
+        })
+    } else {
+        // Secret Key
+        const secretKey = '6Ld-g7oUAAAAAJwuo_zduQp_3TaJhpLBzA5XAAlL'
+
+        // Verify URL
+        const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${data.captcha}&remoteip=${req.connection.remoteAddress}`
+
+        // Make Request To VerifyURL
+        request(verifyUrl, (err, response, body) => {
+            body = JSON.parse(body)
+
+            // If Not Successful
+            if (body.success !== undefined && !body.success) {
+                check = false
+            }
+        })
+
+        if (check) {
+            var con = require('../controllers/dbconn')()
+
+            /* Ejecutar la consulta para la validación de datos de LogIn */
+            con.query('SELECT resetEmail FROM shopusers WHERE nameUser=? AND statusUser = 1 AND ecommerceYouPrint = 1', [data.mainEmail], function (err, result, fields) {
+                if (err) {
+                    con.end()
+                    // Internal error message send
+                    res.status(500).json({
+                        Status: 'internal error',
+                        message: 'Internal error'
+                    })
+                } else {
+                    if (result.length == 1) {
+                        var resetEmail = result[0].resetEmail;
+
+                        try {
+                            var randomstring = Math.random().toString(36).slice(-8);
+                            randomstring += 'M9@.'
+
+                            // Definimos el transporter
+                            var transporter = nodemailer.createTransport({
+                                service: 'Gmail',
+                                auth: {
+                                    user: 'chameleon.developers.send@gmail.com',
+                                    pass: 'Develop4'
+                                }
+                            });
+                            // Definimos el email
+                            var mailOptions = {
+                                from: 'chameleon.developers.send@gmail.com',
+                                to: resetEmail,
+                                subject: 'Recuperación de Contraseña YouPrint Administrador',
+                                text: 'La contraseña para ingresar es: ' + randomstring
+                            };
+                            // Enviamos el email
+                            transporter.sendMail(mailOptions, function (error, info) {
+                                if (error) {
+                                    con.end()
+                                    res.status(500).json({
+                                        Status: 'internal error',
+                                        message: error
+                                    })
+                                } else {
+                                    con.query("UPDATE `shopusers` SET `passwordUser` = ? WHERE nameUser = ?", [randomstring, data.mainEmail], function (err, result, fields) {
                                         if (err) {
                                             con.end()
                                             // Internal error message send

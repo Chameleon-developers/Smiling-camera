@@ -13,6 +13,8 @@ module.exports = function (app,secureApp) {
     
     app.post('/changePassword',login.changePassword)
 
+    app.post('/changePasswordEcommerce',login.changePasswordEcommerce)
+
     /* Validar LogIn E-commerce */
     app.post('/logInEcommerce',login.logInEcommerce)
 

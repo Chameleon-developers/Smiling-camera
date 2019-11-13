@@ -5,7 +5,7 @@
 				
 			<div class="column is-half">
 				<h1>Iniciar sesion</h1>
-				<div class="field">
+				<div id="mailContainer" class="field">
                     <label for="mainEmail" class="label">Correo:</label>
                     <p class="control has-icons-left">
                         <input id="mainEmail" class="input" type="text" placeholder="Correo">
@@ -14,8 +14,11 @@
                         </span>
                     </p>
                 </div>
+                <div class="has-text-centered">
+                    <p id="messageEmail" style="visibility: hidden" class="help">Se enviara un mail a su correo electrónico de recuperación con la nueva contraseña. <strong>La contraseña anterior se borrará</strong></p>
+                </div>
                 <br>
-				<div class="field">
+				<div id="pwdContainer" class="field">
                     <label for="passwordUser" class="label">Contraseña:</label>
                     <p class="control has-icons-left">
                         <input id="passwordUser" class="input" type="password" placeholder="Contraseña">
@@ -23,6 +26,7 @@
                             <i class="fas fa-lock"></i>
                         </span>
                     </p>
+                    <div class="has-text-centered"><a id="changePWD" href="#"><p class="help">¿Olvidaste tu Contraseña?</p></a></div>
                 </div>
                 <br>
                 <div class="has-text-centered">
@@ -31,9 +35,14 @@
                 <br>
                 <p class="buttons">
                 	<button class="button is-success is-fullwidth" id="iniciarSesion">
-					    <span>Iniciar sesion</span>
+					    <span>Iniciar sesión</span>
 					</button>
-                </p>                
+                </p>
+                <p class="buttons">
+                	<button class="button is-danger is-fullwidth" id="getBack" style="visibility: hidden">
+					    <span>Cancelar</span>
+					</button>
+                </p>        
             </div>
 
             <div class="is-divider-vertical" data-content="O"></div>
