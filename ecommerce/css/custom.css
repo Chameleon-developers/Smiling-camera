@@ -576,3 +576,10 @@ a.navbar-item:hover{
 .navbar-burger{
   color: #FFFFFF;
 }
+
+/*CUSTOM PRODUCTS*/
+.Tit_custom {
+  font-size: 20px;
+  font-family: 'Quicksand', sans-serif;
+
+}
