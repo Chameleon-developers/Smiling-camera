@@ -9,19 +9,102 @@ function init() {
 	$('.g-recaptcha').each(function(index, el) {
         var widgetId = grecaptcha.render(el, {'sitekey' : '6Ld-g7oUAAAAAI-HUfcZOGiFRkAx4VjJfMkKUnlQ'});
         jQuery(this).attr('data-widget-id', widgetId);
+	});
+	
+	$( "#changePWD" ).on( "click", function() {
+        $('#mainEmail').val('');
+        $('#passwordUser').val('');
+		grecaptcha.reset();
+        $('#getBack').css('visibility', 'visible')
+        $('#messageEmail').css('visibility', 'visible')
+
+        $('#iniciarSesion').prop('id','sendPwdEmail')
+        $('#sendPwdEmail').text('Mandar Correo')
+        $('#sendPwdEmail').unbind()
+        $('#sendPwdEmail').click( function() {
+            sendPwdEmail()
+        });
+        
+        $('#pwdContainer').toggle()
+    });
+
+    $( "#getBack" ).on( "click", function() {
+        $('#mainEmail').val('');
+        grecaptcha.reset();
+        $('#mailContainer').css('visibility', 'visible')
+        $('#getBack').css('visibility', 'hidden')
+        $('#captchaGoogle').css('visibility', 'visible')
+        $('#messageEmail').css('visibility', 'hidden')
+        $('#messageEmail').html('Se enviara un mail a su correo electrónico de recuperación con la nueva contraseña. <strong>La contraseña anterior se borrará</strong>')
+
+        $('#sendPwdEmail').prop('id','iniciarSesion')
+        $('#iniciarSesion').text('Iniciar sesión')
+        $('#iniciarSesion').unbind()
+        $('#iniciarSesion').click( function() {
+            logIn()
+        });
+        
+        $('#pwdContainer').toggle()
     });
 
 	$('html, body').animate({scrollTop:0}, 'slow');
 	
 	$('#iniciarSesion').click(function (e) {
-		//console.log(grecaptcha.getResponse(jQuery('#captchaGoogle').attr('data-widget-id')));
+		e.preventDefault() 
 		logIn()
     });
 
     $('#registrar').click(function (e) {
-		//console.log(grecaptcha.getResponse(jQuery('#captchaGoogle2').attr('data-widget-id')));
+		e.preventDefault() 
 		registrar()
     });
+}
+
+function sendPwdEmail(){
+    toast('Cargando...','is-primary')
+    var email = $('#mainEmail').val();
+    const captcha = grecaptcha.getResponse(jQuery('#captchaGoogle').attr('data-widget-id'));
+    if(email == '') {
+        toast('Ingresa algún correo','is-info')
+        return null
+    }
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/changePasswordEcommerce",
+        data:{
+            'mainEmail' : email,
+            'captcha' : captcha
+        },
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            grecaptcha.reset();
+            $('#getBack').css('visibility', 'hidden')
+            $('#mailContainer').css('visibility', 'hidden')
+            $('#captchaGoogle').css('visibility', 'hidden')
+            $('#messageEmail').html('<strong>Se ha mandado el Correo con la nueva Contraseña</strong>')
+
+            $('#sendPwdEmail').text('Ir a Iniciar sesión')
+            $('#sendPwdEmail').unbind()
+            $('#sendPwdEmail').click( function() {
+                $( "#getBack" ).click()
+            });
+            toast('Se ha mandado la nueva Contraseña al correo "' + response.result + '"','is-info')
+        },
+        error: function (error) {
+            if(error.status == '401'){
+                toast('El Correo ingresado no se encuentra registrado','is-danger')
+            }
+            else if(error.status == '400'){
+                toast('¿Eres un Robot?','is-danger')
+            }
+            else if (error == 'Internal Server Error') {
+                toast('Error Interno del Servidor','is-danger')
+            }
+            
+        }
+    })
+    
 }
 
 /* Funcion para iniciar sesion */
@@ -31,6 +114,8 @@ function logIn() {
 
 	var check = validationsUser(mainEmail, passwordUser)
 	if(check) {
+        console.log('entra Login');
+        
 		$.ajax({
 	        type: "POST",
 	        url: ip_server + "/logInEcommerce",

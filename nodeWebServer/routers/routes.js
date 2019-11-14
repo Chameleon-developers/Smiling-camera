@@ -4,6 +4,7 @@ var products=require('../controllers/products')
 var categories=require('../controllers/categories')
 var kioscos=require('../controllers/kioscos')
 var shop=require('../controllers/shop')
+var shopUser=require('../controllers/shopUsers')
 var multer = require("multer")
 
 module.exports = function (app,secureApp) {
@@ -12,6 +13,8 @@ module.exports = function (app,secureApp) {
     app.post('/logIn',login.logIn)
     
     app.post('/changePassword',login.changePassword)
+
+    app.post('/changePasswordEcommerce',login.changePasswordEcommerce)
 
     /* Validar LogIn E-commerce */
     app.post('/logInEcommerce',login.logInEcommerce)
@@ -112,6 +115,12 @@ module.exports = function (app,secureApp) {
 
     /* Agregar a carrito un producto */
     secureApp.post('/addShop', uploading.single('image'), shop.addShop)
+
+    /* Obtiene datos de usuario ecommerce */
+    secureApp.post('/getShopUser', shopUser.getShopUser)
+
+    /* Inserta o actualiza datos de usuario ecommerce */
+    secureApp.post('/updateShopUser', shopUser.updateShopUser)
     
 }
  
