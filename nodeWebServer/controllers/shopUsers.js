@@ -29,12 +29,10 @@ module.exports.updateShopUser = function (req, res) {
             return
         } 
         else {
-            if (result.affectedRows == 1) {
-                res.status(200).json({
-                    Status: 'Success',
-                    message: 'Se actualizaron correctamente los datos'
-                })
-            }
+            res.status(200).json({
+                Status: 'Success',
+                message: 'Se actualizaron correctamente los datos'
+            })
         }
     })    
 }
