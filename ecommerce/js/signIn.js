@@ -12,6 +12,8 @@ function init() {
 	});
 	
 	$( "#changePWD" ).on( "click", function() {
+        console.log('entra');
+        
         $('#mainEmail').val('');
         $('#passwordUser').val('');
 		grecaptcha.reset();
