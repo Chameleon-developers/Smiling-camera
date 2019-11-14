@@ -12,8 +12,6 @@ function init() {
 	});
 	
 	$( "#changePWD" ).on( "click", function() {
-        console.log('entra');
-        
         $('#mainEmail').val('');
         $('#passwordUser').val('');
 		grecaptcha.reset();
@@ -51,12 +49,12 @@ function init() {
 
 	$('html, body').animate({scrollTop:0}, 'slow');
 	
-	$('#iniciarSesion').click(function (e) {
+	$('#iniciarSesion').on( "click", function(e) {
 		//console.log(grecaptcha.getResponse(jQuery('#captchaGoogle').attr('data-widget-id')));
 		logIn()
     });
 
-    $('#registrar').click(function (e) {
+    $('#registrar').on( "click", function(e) {
 		//console.log(grecaptcha.getResponse(jQuery('#captchaGoogle2').attr('data-widget-id')));
 		registrar()
     });
@@ -116,6 +114,8 @@ function logIn() {
 
 	var check = validationsUser(mainEmail, passwordUser)
 	if(check) {
+        console.log('entra Login');
+        
 		$.ajax({
 	        type: "POST",
 	        url: ip_server + "/logInEcommerce",
