@@ -6,6 +6,9 @@ import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/im
 //Exportación de módulos
 export { init }
 
+//Variable para disponibilidad de producto
+var enabledProduct = 0;
+
 /* Función para establecer eventos y datos iniciales */
 function init() {
     
@@ -47,6 +50,14 @@ function init() {
         }
     });
 
+    $('#checkEnable').change(function (e){
+        if(this.checked) {
+            enabledProduct = 1;
+        }
+        else {
+            enabledProduct = 0;
+        }
+    });
 }
 
 
@@ -133,17 +144,20 @@ function setSelectProductSubCategories(productCategories, searchSubCategory) {
 
 function getProducts(idCategory, idSubcategory) {
     var values = {
-        'bearer': sessionStorage.token
+        'bearer': sessionStorage.token,
+        'admin': true
     }
     if (idCategory && !idSubcategory) {
         values = {
             'bearer': sessionStorage.token,
-            'idCategory': idCategory
+            'idCategory': idCategory,
+            'admin': true
         }
     } else if (idSubcategory){
         values = {
             'bearer': sessionStorage.token,
-            'idSubcategory': idSubcategory
+            'idSubcategory': idSubcategory,
+            'admin': true
         }
     }
     
@@ -226,13 +240,7 @@ function updateProduct(){
     var idProduct = $("#editProd").attr('idProduct');
     var imageProduct = $("#editProd").attr('imageProduct');
     var nameProduct = $("#nameProdEdit").val();
-    var enabledProduct = ''
     var modal = $(this).parent().parent().parent()
-    if ($('#checkEnable').checked) {
-        enabledProduct = '1'
-    } else {
-        enabledProduct = '0'
-    }
     const form_data = new FormData()
     
     form_data.append('idProduct', idProduct)
