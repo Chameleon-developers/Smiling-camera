@@ -34,9 +34,10 @@ function init() {
                 getProducts(cat)
             }
         } else {
-            toast('Selecciona una categoría o subcategoría', 'is-info')
+            getProducts();
         }
     });
+    
 
     $('#searchCategory').change(function (e){
         const category = $('#searchCategory option:selected').val()
