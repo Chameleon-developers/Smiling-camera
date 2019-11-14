@@ -432,6 +432,7 @@ module.exports.logInEcommerce = function (req, res) {
                         res.status(200).json({
                             Status: 'Success',
                             token: encrypted,
+                            idUser: result[0].idShopUser,
                         })
                     } else {
                         // In failed auth, error search
@@ -542,7 +543,7 @@ module.exports.registerUser = function (req, res) {
                         if (result.affectedRows == 1) {
                             res.status(200).json({
                                 Status: 'Success',
-                                message: 'Se registró correctamente el usuario'
+                                message: 'Se registró correctamente el usuario',
                             })
                         }
                     }

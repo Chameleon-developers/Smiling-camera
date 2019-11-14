@@ -130,8 +130,8 @@ function logIn() {
 				
 	        	$('#logIn').css('display', 'none')
 				$('#usuario').css('display', 'flex')
-				$('#usuario').attr('data-user', "'" + response.token + "'")
 				sessionStorage.token = response.token
+				sessionStorage.idUser = response.idUser
 				window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
 	        },
 	        error: function (error) {

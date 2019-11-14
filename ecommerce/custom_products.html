@@ -34,7 +34,10 @@
       <div class="step-content has-text-centered is-active">
         <div style="display: inline-flex;">
           <div class="contenedor">
-              <p>Carga una imagen desde tu equipo para comenzar a editar:</p>
+            <div class="Tit_custom">
+                <span>Selecciona un <span style="color: #4AE0B8;">PRODUCTO</span> y una <span style="color: #4AE0B8;">IMÁGEN</span> para comenzar a editar:</span>
+            </div>
+              <br>
               <br>
               <div class="select">
                 <select>
@@ -65,6 +68,7 @@
                         Carga una foto
                       </span>
                     </span>
+                    <br>
                     <span id="nombre-archivo" class="file-name">
                       Archivo...
                     </span>
@@ -81,20 +85,26 @@
         
         
       </div>
-      <div class="step-content has-text-centered">
+      <div class="step-content has-text-centered Tit_custom">
           <p>Previsualiza el resultado</p>
+          <br>
           <div style="display: inline-flex;">
               <div style="max-width: 350px; " class="image-container" id="editor"></div>
               <canvas style="max-width: 350px;" class="image-container" id="preview"></canvas>
           </div>  
-          
-        
-      </div>
+          <div class="Tit2_custom" style="padding-top: 2%;">
+             <em class="fa fa-exclamation-circle numb_tit2custom "></em>
+               Arrastra <span style="font-weight: bold;
+               color: #4AE0B8;
+               padding-right: 6px;">el pequeño cuadrito blanco</span> de la esquina superior
+           izquierda para establecer el área de impresión<br>
+          </div>
+      </div> 
       <div class="step-content has-text-centered">
        <!--<div class="field is-horizontal"></div>-->
-          <label>Selecciona un filtro a aplicar:</label>
+          <label class="Tit_custom">Selecciona un filtro a aplicar:</label>
           
-          <div class="field is-horizontal">
+          <div class="field is-horizontal Tit2_custom">
             <div class="filtros-carousel" >
               <p>Ninguno</p>
               <canvas id="filtro1" maxHeight="80px" class="filtered-image-carousel"></canvas>
@@ -108,7 +118,7 @@
               <canvas id="filtro3" maxHeight="80px" class="filtered-image-carousel"></canvas>
             </div>
             <div class="filtros-carousel">
-              <p>Saturacion</p>
+              <p>Saturación</p>
               <canvas id="filtro4" maxHeight="80px" class="filtered-image-carousel"></canvas>
             </div>
             <div class="filtros-carousel">
@@ -126,7 +136,7 @@
           
       </div>
       <div class="step-content has-text-centered">
-        <h3>Agrega emojis a tu gusto</h3>
+        <h3 class="Tit_custom" style="padding-bottom: 1%;">Agrega emojis a tu gusto</h3>
         <div class="columns">
           <div class="column is-half">
             <!--style="max-width: 35%; position: absolute;" style="position: relative; display: inline-block;"-->
@@ -200,15 +210,15 @@
         
       </div>
       <div class="step-content has-text-centered">
-        <h1 class="title is-4">Listo se ha agregado tu producto al carrito!</h1>
+        <h1 class="title is-4 Tit_custom">¡Listo se ha agregado tu producto al carrito!</h1>
       </div>
     </div>
     <div class="steps-actions">
       <div class="steps-action">
-        <a href="#" data-nav="previous" class="button is-light">Anterior</a>
+        <a href="#" data-nav="previous" class="button is-light Tit2_custom">Anterior</a>
       </div>
       <div class="steps-action">
-        <a href="#" data-nav="next" class="button is-light">Siguiente</a>
+        <a href="#" data-nav="next" class="button is-light Tit2_custom">Siguiente</a>
       </div>
     </div>
   </div>
