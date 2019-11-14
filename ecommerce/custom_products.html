@@ -83,11 +83,23 @@
       </div>
       <div class="step-content has-text-centered">
           <p>Previsualiza el resultado</p>
-          <div style="display: inline-flex;">
+          <!--<div style="display: inline-flex;">
               <div style="max-width: 350px; " class="image-container" id="editor"></div>
               <canvas style="max-width: 350px;" class="image-container" id="preview"></canvas>
-          </div>  
-          
+          </div>-->  
+          <div class="columns is-centered">
+            <div class="column is-half">
+              <h3>Área de trabajo</h3>
+              <div>
+                <div class="image-container" id="editor"></div>
+              </div>
+              
+            </div>
+            <div class="column is-half">
+              <h3>Vista previa</h3>
+              <canvas class="image-container" id="preview"></canvas>
+            </div>
+          </div>
         
       </div>
       <div class="step-content has-text-centered">
@@ -120,9 +132,18 @@
               <canvas id="filtro6" maxHeight="80px" class="filtered-image-carousel"></canvas>
             </div>
           </div>
-
-          <div id="imagen" class="original" style="display: inline;"></div>
-          <canvas id="filtered-image" class="original" style="display: inline;"></canvas>
+          <div class="columns">
+            <div class="column is-half">
+              <h3>Imagen original</h3>
+              <div id="imagen" class="original" style="display: inline;"></div>
+            </div>
+            <div class="column is-half">
+              <h3>Imagen con filtro</h3>
+              <canvas id="filtered-image" class="original" style="display: inline;"></canvas>
+            </div>
+          </div>
+          
+          
           
       </div>
       <div class="step-content has-text-centered">
