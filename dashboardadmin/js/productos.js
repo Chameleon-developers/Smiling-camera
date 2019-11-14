@@ -43,6 +43,10 @@ function init() {
         const category = $('#searchCategory option:selected').val()
         if(category != -1) {
             $('#searchSubCategory').prop('disabled', false)
+
+            var selectList = $("#searchSubCategory")
+            selectList.find("option:gt(0)").remove()
+            
             getSubCategories(category);
         } else {
             $('#searchSubCategory').val(-1)
