@@ -68,7 +68,6 @@
                         Carga una foto
                       </span>
                     </span>
-                    <br>
                     <span id="nombre-archivo" class="file-name">
                       Archivo...
                     </span>
@@ -87,11 +86,23 @@
       </div>
       <div class="step-content has-text-centered Tit_custom">
           <p>Previsualiza el resultado</p>
-          <br>
-          <div style="display: inline-flex;">
+          <!--<div style="display: inline-flex;">
               <div style="max-width: 350px; " class="image-container" id="editor"></div>
               <canvas style="max-width: 350px;" class="image-container" id="preview"></canvas>
-          </div>  
+          </div>-->  
+          <div class="columns is-centered">
+            <div class="column is-half">
+              <h3>Área de trabajo</h3>
+              <div>
+                <div class="image-container" id="editor"></div>
+              </div>
+              
+            </div>
+            <div class="column is-half">
+              <h3>Vista previa</h3>
+              <canvas class="image-container" id="preview"></canvas>
+            </div>
+          </div>
           <div class="Tit2_custom" style="padding-top: 2%;">
              <em class="fa fa-exclamation-circle numb_tit2custom "></em>
                Arrastra <span style="font-weight: bold;
@@ -130,9 +141,18 @@
               <canvas id="filtro6" maxHeight="80px" class="filtered-image-carousel"></canvas>
             </div>
           </div>
-
-          <div id="imagen" class="original" style="display: inline;"></div>
-          <canvas id="filtered-image" class="original" style="display: inline;"></canvas>
+          <div class="columns">
+            <div class="column is-half">
+              <h3>Imagen original</h3>
+              <div id="imagen" class="original" style="display: inline;"></div>
+            </div>
+            <div class="column is-half">
+              <h3>Imagen con filtro</h3>
+              <canvas id="filtered-image" class="original" style="display: inline;"></canvas>
+            </div>
+          </div>
+          
+          
           
       </div>
       <div class="step-content has-text-centered">
@@ -152,50 +172,51 @@
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f602.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f603.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f604.png"/></td>
-                    </tr>
-                    <tr>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f605.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f606.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f607.png"/></td>
-                      <td><img class="emojis-table" src="emoji-data/img-apple-64/1f608.png"/></td>
-                      <td><img class="emojis-table" src="emoji-data/img-apple-64/1f609.png"/></td>
+                      
                     </tr>
                     <tr>
+                      <td><img class="emojis-table" src="emoji-data/img-apple-64/1f608.png"/></td>
+                      <td><img class="emojis-table" src="emoji-data/img-apple-64/1f609.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f610.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f611.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f612.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f613.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f614.png"/></td>
-                    </tr>
-                    <tr>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f615.png"/></td>
+                      
+                    </tr>
+                    
+                    <tr>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f616.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f617.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f618.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f619.png"/></td>
-                    </tr>
-                    <tr>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f620.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f621.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f622.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f623.png"/></td>
-                      <td><img class="emojis-table" src="emoji-data/img-apple-64/1f624.png"/></td>
+                      
                     </tr>
+                    
                     <tr>
+                      <td><img class="emojis-table" src="emoji-data/img-apple-64/1f624.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f625.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f626.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f627.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f628.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f629.png"/></td>
-                    </tr>
-                    <tr>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f630.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f631.png"/></td>
+                      
+                    </tr>
+                   
+                    <tr>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f632.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f633.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f634.png"/></td>
-                    </tr>
-                    <tr>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f635.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f636.png"/></td>
                       <td><img class="emojis-table" src="emoji-data/img-apple-64/1f637.png"/></td>

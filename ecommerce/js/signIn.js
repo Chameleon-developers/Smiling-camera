@@ -49,13 +49,13 @@ function init() {
 
 	$('html, body').animate({scrollTop:0}, 'slow');
 	
-	$('#iniciarSesion').on( "click", function(e) {
-		//console.log(grecaptcha.getResponse(jQuery('#captchaGoogle').attr('data-widget-id')));
+	$('#iniciarSesion').click(function (e) {
+		e.preventDefault() 
 		logIn()
     });
 
-    $('#registrar').on( "click", function(e) {
-		//console.log(grecaptcha.getResponse(jQuery('#captchaGoogle2').attr('data-widget-id')));
+    $('#registrar').click(function (e) {
+		e.preventDefault() 
 		registrar()
     });
 }

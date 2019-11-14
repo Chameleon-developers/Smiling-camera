@@ -73,7 +73,7 @@ function init(idSubcategory, idCategory) {
         // Crea el editor
         new Croppr('#croppr', {
             aspectRatio: null,
-            startSize: [70, 70],
+            startSize: [100, 100],
             onCropEnd: recortarImagen
         })
     }
@@ -90,6 +90,9 @@ function init(idSubcategory, idCategory) {
         const inicioY = data.y;
         const nuevoAncho = data.width;
         const nuevaAltura = data.height;
+        
+        //var zoom;
+        
         const zoom = 1;
         let imagenEn64 = '';
         let imagenFinal64 ='';
