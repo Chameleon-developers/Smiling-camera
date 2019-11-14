@@ -91,14 +91,9 @@ function init(idSubcategory, idCategory) {
         const nuevoAncho = data.width;
         const nuevaAltura = data.height;
         
-        var zoom;
-        if(nuevoAncho>450){
-            
-            zoom = nuevoAncho / 450;
-        }else{
-            zoom =1;
-        }
-        //const zoom = 1;
+        //var zoom;
+        
+        const zoom = 1;
         let imagenEn64 = '';
         let imagenFinal64 ='';
         // La imprimo
