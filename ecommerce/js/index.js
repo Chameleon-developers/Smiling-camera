@@ -1,5 +1,5 @@
 //Importación de módulos
-import { loadFilesHomeCategory, loadFilesHomeSearch, loadFilesInfo, loadFilesUser } from "./plugins.js"
+import { loadFilesHomeCategory, loadFilesHomeSearch, loadFilesInfo, loadFilesUser, ip_server } from "./plugins.js"
 
 /* Función para declarar eventos eventos */
 $(function() {
@@ -7,6 +7,7 @@ $(function() {
 	if (sessionStorage.token) {
 		$('#logIn').css('display', 'none')
 		$('#usuario').css('display', 'flex')
+		$('#usuario').attr('data-user', "'" + sessionStorage.idUser + "'")
 	}
 	getProducts()
 
@@ -64,24 +65,43 @@ function catalogoProducts(idSubcategory, idCategory) {
 
 /* Obtener productos para carrucel */
 function getProducts() {
-	$.ajax({
-        type: "POST",
-        url: /*ip_server*/ "http://localhost:3500" + "/getProductsRandom",
-        data: {
-            //'bearer' : sessionStorage.token,
-        },
-        dataType: "json",
-        success: function (response) {
-
-            setCarrucel(response.products)
-
-        },
-        error: function (error) {
-            if(error.status == '401'){
-                sessionStorage.removeItem('token')
-            }
-        }
-    });
+	if (sessionStorage.token) {
+		$.ajax({
+			type: "POST",
+			url: ip_server + "/logged/getProductsRandom",
+			data: {
+				'bearer' : sessionStorage.token,
+			},
+			dataType: "json",
+			success: function (response) {
+	
+				setCarrucel(response.products)
+	
+			},
+			error: function (error) {
+				if(error.status == '401'){
+					sessionStorage.removeItem('token')
+				}
+			}
+		});
+	}
+	else {
+		$.ajax({
+			type: "POST",
+			url: ip_server + "/getProductsRandom",
+			dataType: "json",
+			success: function (response) {
+	
+				setCarrucel(response.products)
+	
+			},
+			error: function (error) {
+				if(error.status == '401'){
+					sessionStorage.removeItem('token')
+				}
+			}
+		});
+	}
 }
 
 /* Genera carrusel con los productos obtenidos*/
