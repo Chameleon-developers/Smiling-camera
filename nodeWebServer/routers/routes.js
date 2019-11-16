@@ -117,7 +117,7 @@ module.exports = function (app,secureApp) {
     secureApp.post('/addShop', uploading.single('image'), shop.addShop)
     
     /* Obtener carrito de un usuario */
-    secureApp.post('/getShop', shop.getShop)
+    app.post('/getShop', shop.getShop)
 
     /* Obtiene datos de usuario ecommerce */
     secureApp.post('/getShopUser', shopUser.getShopUser)
