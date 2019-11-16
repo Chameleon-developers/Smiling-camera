@@ -369,10 +369,7 @@
   max-width: 32px;
   max-height: 32px;
 }
-.original{
-  max-width: 400px;
-  display: inline-flex;
-}
+
 
 #vista-previa{
   padding: 15px;
@@ -428,6 +425,13 @@ body::after{ content:''; display:block; height:100px; }
   width:100%; 
   height:0px; 
   margin-top:200px;
+}
+.image-canvas{
+  
+  width: 350px;
+  height:350px;
+  margin:0 auto;
+  object-fit: contain;
 }
 /*home*/
 

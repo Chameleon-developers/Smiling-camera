@@ -56,8 +56,9 @@ function init(idSubcategory, idCategory) {
         //escribe el nombre de la imagen en el footer
         const fileName = document.querySelector('#nombre-archivo');
         fileName.textContent = e.target.files[0].name;
-
+        
         vistaPrevia.setAttribute('src',urlImage);
+        
         // Borra editor en caso que existiera una imagen previa
         editor.innerHTML = '';
         let cropprImg = document.createElement('img');
@@ -113,7 +114,7 @@ function init(idSubcategory, idCategory) {
             //document.querySelector('#base64').textContent = imagenEn64;
             
             var img = document.getElementById("imagen");
-            img.innerHTML='<img id="original-image" class="original" src="'+imagenEn64+'"/>'; 
+            img.innerHTML='<img id="original-image" class="image-canvas" src="'+imagenEn64+'"/>'; 
 
             //obtenemos la imagen base
             var originalImage = document.getElementById("original-image");
@@ -197,16 +198,17 @@ var layer;
 function cargarEmoji(w,h,imagenFinal64){
     var width = w;
     var height = h;
-    if(w<500){
+    var ratio = w/h;
+    if(w<350){
         width = w;
-    }else{
-        width = 400;
-    }
-    if(h<350){
+    }else if(h<350){
         height = h;
     }else{
-        height = 300;
+        width = 350*ratio;
+        height= 350*ratio;
     }
+
+    
     
 
 
@@ -237,7 +239,7 @@ function cargarEmoji(w,h,imagenFinal64){
     fondoObj.src = imagenFinal64;
 
 
-    var imageObj = new Image();
+    /*var imageObj = new Image();
     imageObj.onload = function() {
         var yoda = new Konva.Image({
         x: 0,
@@ -252,7 +254,7 @@ function cargarEmoji(w,h,imagenFinal64){
         layer.add(yoda);
         layer.batchDraw();
     };
-    imageObj.src = 'emoji-data/img-apple-64/1f600.png';
+    imageObj.src = 'emoji-data/img-apple-64/1f600.png';*/
     stage.add(layer);
 }
 
@@ -278,3 +280,13 @@ function cargarEmojis (){
         }
     }
 }
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    fetch('http://example.com/movies.json')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(myJson) {
+            console.log(myJson);
+        });
+});
