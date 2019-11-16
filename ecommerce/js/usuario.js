@@ -15,6 +15,12 @@ function init() {
         e.preventDefault() 
 		updateUser()
     });
+
+    $("#passwordUser").click(function (e) {
+        e.preventDefault() 
+		$('#passwordUser').val("")
+		$('#cPasswordUser').val("")
+    });
     
     getDataUser()
 }
@@ -39,7 +45,7 @@ function updateUser() {
 
     var check
 
-    if(passwordUser) {
+    if(passwordUser != '••••••••') {
         check = validationsUser(mainEmail, resetEmail, nameClient, passwordUser, cPasswordUser) 
 
         if(check) {

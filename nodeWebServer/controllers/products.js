@@ -9,6 +9,10 @@ module.exports.getAllProducts = function (req, res) {
     /* Establecer query para la consulta */
     let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.enabledProduct, PROYP.imageProduct, PRO.featuresProduct, PROYP.idCategory, C.nameCategory, PROYP.idSubcategory, SC.nameSubcategory, PRO.idDimension, D.widthDimension, D.heightDimension, PRI.publicUtilityPrice, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 LEFT JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct LEFT JOIN dimensions AS D ON PRO.idDimension = D.idDimension LEFT JOIN categories AS C ON PRO.idCategory = C.idCategory LEFT JOIN subcategories AS SC ON PRO.idSubcategory = SC.idSubcategory WHERE PRO.statusProduct = 1"
 
+    if(!data.admin) {
+        qry+=" AND PROYP.enabledProduct=1"
+    }
+     
     if(data.idSubcategory && data.idCategory) {
         qry+=" AND PRO.idCategory = ? AND PRO.idSubcategory=?"
         values=[data.idCategory, data.idSubcategory]
@@ -111,7 +115,7 @@ module.exports.getProductsRandom = function(req, res) {
     const con = require('./dbconn')()
 
     /* Establecer query para la consulta */
-    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.imageProduct, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 INNER JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct  WHERE PRO.statusProduct = 1 ORDER BY RAND() LIMIT 9"
+    let qry = "SELECT PROYP.idProduct, PROYP.nameProduct, PROYP.imageProduct, PRI.publicPrice FROM productsyouprint AS PROYP INNER JOIN products AS PRO ON PROYP.idProduct=PRO.idProduct AND PROYP.statusProduct=1 INNER JOIN productsprice AS PRI ON PRO.idProduct = PRI.idProduct WHERE PRO.statusProduct = 1 AND PROYP.enabledProduct = 1 ORDER BY RAND() LIMIT 9"
 
     /* Ejecutar la consulta para la obtención de tipos de productos */
     con.query(qry,[], function (err, result, fields) {

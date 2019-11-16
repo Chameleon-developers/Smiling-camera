@@ -42,7 +42,11 @@ $(function() {
 
     $("#secondPartPromotion").on("click", ".infoProduct", function(e) { 
     	loadFilesInfo("infoProducto.html", "js/infoProducto.js", $(this).attr('data-product'));
-    });
+	});
+	
+	$("#carrito").click(function (e) {
+		loadFilesUser("carrito.html", "js/carrito.js")
+	});
 })
 
 /* Función para saber que html y js cargar */

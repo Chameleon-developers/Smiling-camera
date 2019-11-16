@@ -3,11 +3,11 @@ module.exports.addShop = function (req, res) {
     /* Obtener variable para la conexión a la BD */
     const con = require('../controllers/dbconn')()
 
-    // /* Obtener los datos del Body */
+    /* Obtener los datos del Body */
     let data = req.body
     
-    // /* Establecer query para la consulta para insertar */
-    let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser, idProduct) VALUES(?, ?, ?, ?)"
+    /* Establecer query para la consulta para insertar */
+    let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser, idProductYouPrint) VALUES(?, ?, ?, ?)"
     if(req.file) {
         values = [data.quantityShop, req.file.filename, data.idUser, data.idProduct]
     }
@@ -38,4 +38,87 @@ module.exports.addShop = function (req, res) {
             }
         }
     })    
+}
+
+/* Obtener carrito de un usuario */
+module.exports.getShop = function (req, res) {
+    /* Obtener variable para la conexión a la BD */
+    const con = require('../controllers/dbconn')()
+
+    /* Obtener los datos del Body */
+    let data = req.body
+
+    /* Establecer query para la consulta para insertar */
+    let qry = 'SELECT idShop, quantityShop, zipNameShop, idProductYouPrint, PROYP.nameProduct, publicPrice FROM shop AS S INNER JOIN productsyouprint AS PROYP ON S.idProductYouPrint=PROYP.idProduct INNER JOIN productsprice AS PP ON S.idProductYouPrint=PP.idProduct WHERE idUser=?'
+
+    /* Ejecutar la consulta para la obtención de tipos de productos */
+    con.query(qry, data.idUser, function (err, result, fields) {
+        if (err) {
+            // Internal error message send
+            res.status(500).json({
+                Status: 'Internal Error',
+                message: 'Internal Error'
+            })
+            con.end()
+            return
+        } else {
+            // Setup and send of response
+            res.status(200).json({
+                Status: 'Success',
+                shop: result,
+                message: 'Productos del carrito'
+            })
+        }
+    })
+}
+
+module.exports.addDefaultShop = function (req, res) {
+    /* Obtener variable para la conexión a la BD */
+    const con = require('../controllers/dbconn').db_prom()
+
+    /* Obtener los datos del Body */
+    let data = req.body
+
+    /* Establecer query para la consultar si no se encuentra ya el producto */
+    let qry="SELECT idShop, quantityShop FROM shop WHERE idUser = ? AND idProductYouPrint = ?"
+
+    con.query(qry,[res.decode.idUser, data.idProduct]).then( result => {
+        let qry2 = ""
+        if(result.length == 1){
+            let cantidad = parseInt(result[0].quantityShop) + parseInt(data.quantityShop)
+            qry2 = "UPDATE shop SET quantityShop = ? WHERE `idShop` = ?"
+            values = [cantidad, result[0].idShop]
+        } else {
+            qry2 = "INSERT INTO shop (quantityShop, idUser, idProductYouPrint) VALUES(?, ?, ?)"
+            values = [data.quantityShop, res.decode.idUser, data.idProduct]
+        }
+        return con.query(qry2, values)
+    } , err =>{
+        con.close()
+        // Internal error message send
+        res.status(500).json({
+            Status: 'internal error',
+            message: err
+        })
+    }).then(result =>{
+        if(result.affectedRows > 0){
+            res.status(200).json({
+                Status: 'Success',
+                msg: 'Se registró correctamente el kiosco'
+            })
+        }
+    }, err => {
+        con.close()
+        // Internal error message send
+        res.status(500).json({
+            Status: 'internal error',
+            message: err
+        })
+    }).catch(err => {
+        res.status(500).json({
+            status : 'failure',
+            msg : 'Internal error2',
+            ERR: err
+        })
+    })
 }

@@ -6,20 +6,23 @@
             </div>
         </div>
         <div class="column">
-            <h1 id="NameProduct" style='color: #1CD5EA; font-size: 125%;font-weight: 200; font-family:BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif; padding-bottom: 2px;'></h1>
+            <h1 id="NameProduct"
+                style='color: #1CD5EA; font-size: 125%;font-weight: 200; font-family:BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif; padding-bottom: 2px;'>
+            </h1>
             <p><strong>Características:</strong></p>
             <p id="Descripcion"></p>
             <br>
             <p id="Precio" style="color: #1CD5EA;font-size: 36px;font-weight: 700;line-height: 50px;"></p>
             <br>
-            <span style='font-weight: 200; font-family:BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;'>
-                    Ordenar:
+            <span
+                style='font-weight: 200; font-family:BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;'>
+                Cantidad:
             </span>
-            <br> <input id="cant" class="input" type="number" title="Qty" value="1" name="quantity" min="1" max="20" step="1" style="width: 12%;">
+            <br> <input id="cant" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="input"
+                type="number" title="Qty" value="1" name="quantity" min="1" max="10" step="1" style="width: 12%;">
             <br><br>
             <button class="button is-danger">Comprar</button>
-            <a data-Subcategory="1" data-Category="1" class="Customizable"><button class="button is-primary">Agregar al Carrito</button></a>
+            <button id="addCart" class="button is-primary">Agregar al Carrito</button>
         </div>
-
     </div>
 </section>
