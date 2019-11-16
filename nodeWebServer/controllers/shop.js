@@ -52,7 +52,7 @@ module.exports.getShop = function (req, res) {
     let qry = 'SELECT idShop, quantityShop, zipNameShop, idProductYouPrint, PROYP.nameProduct, publicPrice FROM shop AS S INNER JOIN productsyouprint AS PROYP ON S.idProductYouPrint=PROYP.idProduct INNER JOIN productsprice AS PP ON S.idProductYouPrint=PP.idProduct WHERE idUser=?'
 
     /* Ejecutar la consulta para la obtención de tipos de productos */
-    con.query(qry, data.idUser, function (err, result, fields) {
+    con.query(qry, res.decode.idUser, function (err, result, fields) {
         if (err) {
             // Internal error message send
             res.status(500).json({

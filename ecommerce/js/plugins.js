@@ -7,7 +7,8 @@ export {
     loadFilesHomeCategory,
     loadFilesHomeSearch,
     loadFilesInfo,
-    loadFilesUser
+    loadFilesUser,
+    getNumberShop
 }
 
 import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
@@ -139,4 +140,31 @@ function loadFilesUser(htmlFile, jsFile) {
         });
 
     });
+}
+
+/* Funcion para obtener carrito */
+function getNumberShop() {
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/logged/getShop",
+        data: {
+            'bearer': sessionStorage.token,
+        },
+        dataType: "json",
+        success: function (response) {
+            var cantidad = 0
+
+            $.each(response.shop, function (key, value) {
+                cantidad += parseInt(value.quantityShop);
+            })
+            
+            $("#product-count").text(cantidad);
+
+        },
+        error: function (error) {
+            if(error.status == '500'){
+                toast('No se pudo consultar carrito, Error interno del servidor', 'is-danger')
+            }
+        }
+    })
 }

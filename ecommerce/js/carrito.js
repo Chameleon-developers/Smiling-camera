@@ -1,5 +1,5 @@
 //Importación de módulos
-import { toast, modal, ip_server, setTable, loadFilesInfo } from "./plugins.js"
+import { toast, ip_server } from "./plugins.js"
 
 //Exportación de módulos
 export { init }
@@ -18,10 +18,9 @@ function init() {
 function getShop() {
     $.ajax({
         type: "POST",
-        url: ip_server + "/getShop",
+        url: ip_server + "/logged/getShop",
         data: {
-            //'bearer': sessionStorage.token,
-            'idUser': sessionStorage.idUser,
+            'bearer': sessionStorage.token,
         },
         dataType: "json",
         success: function (response) {    

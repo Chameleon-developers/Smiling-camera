@@ -1,5 +1,5 @@
 //Importación de módulos
-import { toast, modal, ip_server, loadFilesUser } from "./plugins.js"
+import { toast, ip_server, loadFilesUser, getNumberShop } from "./plugins.js"
 
 //Exportación de módulos
 export { init }
@@ -71,6 +71,7 @@ function addCart() {
 		dataType: 'json',
 		success: function (data) {
 			toast('Se ha agregado al carrito correctamente','is-info')
+			getNumberShop()
 		},
 		error: function (error) {
 			if(error.status == '401'){

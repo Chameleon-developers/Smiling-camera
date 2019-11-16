@@ -106,7 +106,7 @@ module.exports = function (app,secureApp) {
     /* Home ecommerce */
 
     /* Obtener 3 a 9 productos de manera aleatoria para carrusel */
-    secureApp.post('/getProductsRandom', products.getProductsRandom)
+    //secureApp.post('/getProductsRandom', products.getProductsRandom)
     app.post('/getProductsRandom', products.getProductsRandom)
 
     /* Obtener características de un producto */
@@ -117,7 +117,7 @@ module.exports = function (app,secureApp) {
     secureApp.post('/addDefaultShop', shop.addDefaultShop)
     
     /* Obtener carrito de un usuario */
-    app.post('/getShop', shop.getShop)
+    secureApp.post('/getShop', shop.getShop)
 
     /* Obtiene datos de usuario ecommerce */
     secureApp.post('/getShopUser', shopUser.getShopUser)
