@@ -60,7 +60,7 @@ module.exports = function (app,secureApp) {
     /* obtener los datos basicos de productos registrados */
     secureApp.post('/getProducts', products.getProducts)
 
-    /* Eliminar un producto (baja logica) */
+    /* Eliminar un producto (baja lógica) */
     secureApp.post('/deleteProduct' ,products.deleteProduct)
 
     var storage = multer.diskStorage({
@@ -105,16 +105,16 @@ module.exports = function (app,secureApp) {
 
     /* Home ecommerce */
 
-    /* Obtener 3 a 9 productos de manera aleatoria para carrucel */
+    /* Obtener 3 a 9 productos de manera aleatoria para carrusel */
     secureApp.post('/getProductsRandom', products.getProductsRandom)
     app.post('/getProductsRandom', products.getProductsRandom)
 
-    /* Obtener caracteristicas de un producto */
-    secureApp.post('/getProductById', products.getProductById)
+    /* Obtener características de un producto */
     app.post('/getProductById', products.getProductById)
 
     /* Agregar a carrito un producto */
     secureApp.post('/addShop', uploading.single('image'), shop.addShop)
+    secureApp.post('/addDefaultShop', shop.addDefaultShop)
     
     /* Obtener carrito de un usuario */
     app.post('/getShop', shop.getShop)

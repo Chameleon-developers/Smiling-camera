@@ -71,3 +71,54 @@ module.exports.getShop = function (req, res) {
         }
     })
 }
+
+module.exports.addDefaultShop = function (req, res) {
+    /* Obtener variable para la conexión a la BD */
+    const con = require('../controllers/dbconn').db_prom()
+
+    /* Obtener los datos del Body */
+    let data = req.body
+
+    /* Establecer query para la consultar si no se encuentra ya el producto */
+    let qry="SELECT idShop, quantityShop FROM shop WHERE idUser = ? AND idProductYouPrint = ?"
+
+    con.query(qry,[res.decode.idUser, data.idProduct]).then( result => {
+        let qry2 = ""
+        if(result.length == 1){
+            let cantidad = parseInt(result[0].quantityShop) + parseInt(data.quantityShop)
+            qry2 = "UPDATE shop SET quantityShop = ? WHERE `idShop` = ?"
+            values = [cantidad, result[0].idShop]
+        } else {
+            qry2 = "INSERT INTO shop (quantityShop, idUser, idProductYouPrint) VALUES(?, ?, ?)"
+            values = [data.quantityShop, res.decode.idUser, data.idProduct]
+        }
+        return con.query(qry2, values)
+    } , err =>{
+        con.close()
+        // Internal error message send
+        res.status(500).json({
+            Status: 'internal error',
+            message: err
+        })
+    }).then(result =>{
+        if(result.affectedRows > 0){
+            res.status(200).json({
+                Status: 'Success',
+                msg: 'Se registró correctamente el kiosco'
+            })
+        }
+    }, err => {
+        con.close()
+        // Internal error message send
+        res.status(500).json({
+            Status: 'internal error',
+            message: err
+        })
+    }).catch(err => {
+        res.status(500).json({
+            status : 'failure',
+            msg : 'Internal error2',
+            ERR: err
+        })
+    })
+}
