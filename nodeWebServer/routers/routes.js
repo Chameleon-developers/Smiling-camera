@@ -119,6 +119,12 @@ module.exports = function (app,secureApp) {
     /* Obtener carrito de un usuario */
     app.post('/getShop', shop.getShop)
 
+    /* Elimina un producto del carrito */
+    app.post('/deleteShop', shop.deleteShop)
+
+    /* Actualiza cantidad de producto en carrito */
+    app.post('/updateShop', shop.updateShop)
+
     /* Obtiene datos de usuario ecommerce */
     secureApp.post('/getShopUser', shopUser.getShopUser)
 
