@@ -94,22 +94,24 @@
             <div class="column is-half">
               <h3>Área de trabajo</h3>
               <div>
-                <div class="image-container" id="editor"></div>
+                <div class="image-canvas" id="editor"></div>
+                
+                <div class="Tit2_custom" style="padding-top: 2%;">
+                  <em class="fa fa-exclamation-circle numb_tit2custom "></em>
+                    Arrastra <span style="font-weight: bold;
+                    color: #4AE0B8;
+                    padding-right: 6px;">el pequeño cuadrito blanco</span> de la esquina superior
+                izquierda para establecer el área de impresión<br>
+               </div>
               </div>
               
             </div>
             <div class="column is-half">
               <h3>Vista previa</h3>
-              <canvas class="image-container" id="preview"></canvas>
+              <canvas class="image-canvas" id="preview"></canvas>
             </div>
           </div>
-          <div class="Tit2_custom" style="padding-top: 2%;">
-             <em class="fa fa-exclamation-circle numb_tit2custom "></em>
-               Arrastra <span style="font-weight: bold;
-               color: #4AE0B8;
-               padding-right: 6px;">el pequeño cuadrito blanco</span> de la esquina superior
-           izquierda para establecer el área de impresión<br>
-          </div>
+          
       </div> 
       <div class="step-content has-text-centered">
        <!--<div class="field is-horizontal"></div>-->
@@ -144,11 +146,11 @@
           <div class="columns">
             <div class="column is-half">
               <h3>Imagen original</h3>
-              <div id="imagen" class="original" style="display: inline;"></div>
+              <div id="imagen" class="image-canvas" style="display: inline;"></div>
             </div>
             <div class="column is-half">
               <h3>Imagen con filtro</h3>
-              <canvas id="filtered-image" class="original" style="display: inline;"></canvas>
+              <canvas id="filtered-image" class="image-canvas" style="display: inline;"></canvas>
             </div>
           </div>
           
@@ -160,7 +162,7 @@
         <div class="columns">
           <div class="column is-half">
             <!--style="max-width: 35%; position: absolute;" style="position: relative; display: inline-block;"-->
-            <div id="container" class="contenedor"></div>      
+            <div id="container" class="image-canvas"></div>      
           </div>
           <div class="column is-half">
               <div class="table-container contenedor">
