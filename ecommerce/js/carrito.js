@@ -56,8 +56,8 @@ function agregaTabla(shop) {
             '<td id="subtotal'+value.idShop+'">$'+subtotal+'</td>' +
             '<td>' +
                 '<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">' +
-                    '<a href="#" class=" button is-danger is-inverted modal-button updateShop" data-target="#modalUpdShop"style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-save"></i></span></a>' +
-                    '<a href="#" class=" button is-danger is-inverted modal-button deleteShop" data-target="#modalDelShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>' +
+                    '<a href="#" class="button is-danger is-inverted modal-button updateShop" data-target="#modalUpdShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-save"></i></span></a>' +
+                    '<a href="#" class="button is-danger is-inverted modal-button deleteShop" data-target="#modalDelShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>' +
                 '</div>' +
             '</td>')
 
@@ -65,6 +65,7 @@ function agregaTabla(shop) {
 
         $('#tablaCarrito').append(tr)
     })
+    modal()
 
     var pago = $('<tr><td colspan="6">' +
                 '<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10" style="text-align: right;">' +

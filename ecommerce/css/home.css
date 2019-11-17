@@ -819,12 +819,16 @@ ul.pagination-list li {
 }
 
 .shopping-item {
-  /* border: 1px solid  */
-  /* #ddd; */
-  /* float: right; */
-  /* font-size: 18px; */
-  /* margin-top: 40px;
-  padding: 10px; */
   position: relative;
-  /* box-sizing: border-box; */
+}
+
+.modal.modal-active {
+  visibility: visible;
+}
+.modal.modal-active {
+  display: flex;
+}
+
+.modal.modal-active .modal-background {
+  opacity: 1;
 }

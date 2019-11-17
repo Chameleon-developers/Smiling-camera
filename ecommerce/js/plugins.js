@@ -38,6 +38,7 @@ function toast(msg, type) {
 function modal() {
     document.querySelectorAll('.modal-button').forEach(function(e) {
         e.addEventListener('click', function() {
+            
             var target = document.querySelector(e.getAttribute('data-target'));
             target.classList.add('modal-active');
 
