@@ -12,6 +12,12 @@ function init() {
     getShop()
 
     $('#total').text(" $20.00")
+
+    $('#tablaCarrito').on('change', '.cantidad', function(e) {
+        e.preventDefault()
+        updatePrices($(this).attr('data-shop'))
+		
+    })
 } 
 
 /* Funcion para obtener carrito */
@@ -43,15 +49,16 @@ function agregaTabla(shop) {
     $.each(shop, function (key, value) {
         var tr = $('<tr>')
         var subtotal = value.publicPrice*value.quantityShop
-        
+
         tr.append('<td>'+value.nameProduct+'</td>' +
-            '<td style="width: 200px;"><img src="resources/LibroSINBOTON2.png" alt="img1"></td>' +
-            '<td style="width: 20%;"><input id="cantidad" class="input" type="number" value="'+value.quantityShop+'" min="1"></td> ' +
-            '<td>$'+value.publicPrice+'</td>' +
-            '<td>$'+subtotal+'</td>' +
+            '<td style="width: 200px;"><img src="./uploads/'+value.zipNameShop +'" alt="Imagen de producto"></td>' +
+            '<td style="width: 20%;"><input class="cantidad" id="cantidad'+value.idShop+'" class="input" type="number" value="'+value.quantityShop+'" min="1" data-shop="'+value.idShop+'"></td> ' +
+            '<td id="precio'+value.idShop+'">$'+value.publicPrice+'</td>' +
+            '<td id="subtotal'+value.idShop+'">$'+subtotal+'</td>' +
             '<td>' +
                 '<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">' +
-                    '<a class="button is-primary" id="updateShop" name="button">Actualizar</a>' +
+                    '<a href="#" class=" button is-danger is-inverted modal-button updateShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-save"></i></span></a>' +
+                    '<a href="#" class=" button is-danger is-inverted modal-button deleteShop"  data-target="#modalDelShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>' +
                 '</div>' +
             '</td>')
 
@@ -68,4 +75,31 @@ function agregaTabla(shop) {
     $('#tablaCarrito').append(pago)
 
     $('#total').text(' $' + total)
+}
+
+/* Funcion para actualizar precios */
+function updatePrices(idShop) {
+    let precio = $('#precio'+idShop).text().trim().substring(1)
+    let cant = $('#cantidad'+idShop).val()
+    let subtotalTemp = $('#subtotal'+idShop).text().trim(1).substring(1)
+    var total = $('#total').text().trim().substring(1)
+    
+    total -= subtotalTemp
+
+    var subtotal = precio*cant
+    $('#subtotal'+idShop).text()
+    $('#subtotal'+idShop).text('$'+subtotal)
+
+    total += subtotal
+    $('#total').text(' $' + total)
+}
+
+/* Funcion para eliminar producto de carrito */
+function deleteShop(idShop) {
+
+}
+
+/* Funcion para actualizar producto de carrito */
+function updateShop(idShop) {
+
 }

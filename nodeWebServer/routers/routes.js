@@ -120,10 +120,10 @@ module.exports = function (app,secureApp) {
     secureApp.post('/getShop', shop.getShop)
 
     /* Elimina un producto del carrito */
-    app.post('/deleteShop', shop.deleteShop)
+    secureApp.post('/deleteShop', shop.deleteShop)
 
     /* Actualiza cantidad de producto en carrito */
-    app.post('/updateShop', shop.updateShop)
+    secureApp.post('/updateShop', shop.updateShop)
 
     /* Obtiene datos de usuario ecommerce */
     secureApp.post('/getShopUser', shopUser.getShopUser)
