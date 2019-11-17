@@ -7,14 +7,14 @@ module.exports.addShop = function (req, res) {
     let data = req.body
     
     /* Establecer query para la consulta para insertar */
-    let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser, idProductYouPrint) VALUES(?, ?, ?, ?)"
+    let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser, idProductYouPrint) VALUES(1, ?, ?, ?)"
     if(req.file) {
-        values = [data.quantityShop, req.file.filename, data.idUser, data.idProduct]
+        values = [req.file.filename, res.decode.idUser, data.idSubcategory] //res.decode.idUser
     }
     else {
         res.status(400).json({
             Status: 'Failure',
-            message: 'No se subio ninguna imagen'
+            message: 'No se subió ninguna imagen'
         })
     }
 
