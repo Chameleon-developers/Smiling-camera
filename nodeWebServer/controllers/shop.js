@@ -7,14 +7,14 @@ module.exports.addShop = function (req, res) {
     let data = req.body
     
     /* Establecer query para la consulta para insertar */
-    let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser, idProductYouPrint) VALUES(?, ?, ?, ?)"
+    let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser, idProductYouPrint) VALUES(1, ?, ?, ?)"
     if(req.file) {
-        values = [data.quantityShop, req.file.filename, data.idUser, data.idProduct]
+        values = [req.file.filename, res.decode.idUser, data.idSubcategory] //res.decode.idUser
     }
     else {
         res.status(400).json({
             Status: 'Failure',
-            message: 'No se subio ninguna imagen'
+            message: 'No se subió ninguna imagen'
         })
     }
 
@@ -45,14 +45,11 @@ module.exports.getShop = function (req, res) {
     /* Obtener variable para la conexión a la BD */
     const con = require('../controllers/dbconn')()
 
-    /* Obtener los datos del Body */
-    let data = req.body
-
     /* Establecer query para la consulta para insertar */
     let qry = 'SELECT idShop, quantityShop, zipNameShop, idProductYouPrint, PROYP.nameProduct, publicPrice FROM shop AS S INNER JOIN productsyouprint AS PROYP ON S.idProductYouPrint=PROYP.idProduct INNER JOIN productsprice AS PP ON S.idProductYouPrint=PP.idProduct WHERE idUser=?'
 
     /* Ejecutar la consulta para la obtención de tipos de productos */
-    con.query(qry, data.idUser, function (err, result, fields) {
+    con.query(qry, res.decode.idUser, function (err, result, fields) {
         if (err) {
             // Internal error message send
             res.status(500).json({
@@ -121,4 +118,69 @@ module.exports.addDefaultShop = function (req, res) {
             ERR: err
         })
     })
+}
+
+/* Elimina un producto de carrito */ 
+module.exports.deleteShop = function (req, res) { 
+    /* Obtener variable para la conexión a la BD */ 
+    const con = require('../controllers/dbconn')() 
+ 
+    /* Obtener los datos del Body */ 
+    let data = req.body 
+ 
+    /* Ejecutar la consulta para baja de carrito */ 
+    con.query('DELETE FROM shop WHERE idShop=?',data.idShop, function (err, result, fields) { 
+        if (err) { 
+            // Internal error message send 
+            res.status(500).json({ 
+                Status: 'internal error', 
+                message: err 
+            }) 
+            con.end() 
+            return 
+        } else { 
+            if (result.affectedRows == 1) { 
+                res.status(200).json({ 
+                    Status: 'Success', 
+                    message: 'Se elimino correctamente el producto' 
+                }) 
+            } 
+        } 
+    }) 
+} 
+ 
+/* Actualiza la cantidad de un producto en carrito */ 
+module.exports.updateShop = function (req, res) { 
+    /* Obtener variable para la conexión a la BD */ 
+    const con = require('../controllers/dbconn')() 
+ 
+    /* Obtener los datos del Body */ 
+    let data = req.body 
+     
+    /* Establecer query para la consulta de modificar carrito*/ 
+    let qry="UPDATE shop SET quantityShop=? WHERE idShop=?" 
+ 
+    /* Establece los valores para la consulta */ 
+    values = [data.quantityShop, data.idShop] 
+ 
+    /* Ejecutar la consulta para actualizar cantidad de producto en carrito */ 
+    con.query(qry, values, function (err, result, fields) { 
+        if (err) { 
+            // Internal error message send 
+            res.status(500).json({ 
+                Status: 'internal error', 
+                message: err 
+            }) 
+            con.end() 
+            return 
+        }  
+        else { 
+            if (result.affectedRows == 1) { 
+                res.status(200).json({ 
+                    Status: 'Success', 
+                    message: 'Se actualizo correctamente el producto' 
+                }) 
+            } 
+        } 
+    }) 
 }

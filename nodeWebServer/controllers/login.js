@@ -431,8 +431,7 @@ module.exports.logInEcommerce = function (req, res) {
                         // Setup and send of response
                         res.status(200).json({
                             Status: 'Success',
-                            token: encrypted,
-                            idUser: result[0].idShopUser,
+                            token: encrypted
                         })
                     } else {
                         // In failed auth, error search

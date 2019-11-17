@@ -1,5 +1,5 @@
 //Importación de módulos
-import { loadFilesHomeCategory, loadFilesHomeSearch, loadFilesInfo, loadFilesUser, ip_server } from "./plugins.js"
+import { loadFilesHomeCategory, loadFilesHomeSearch, loadFilesInfo, loadFilesUser, ip_server, getNumberShop } from "./plugins.js"
 
 /* Función para declarar eventos eventos */
 $(function() {
@@ -8,6 +8,9 @@ $(function() {
 		$('#logIn').css('display', 'none')
 		$('#usuario').css('display', 'flex')
 		$('#usuario').attr('data-user', "'" + sessionStorage.idUser + "'")
+		getNumberShop()
+	} else {
+		$('#product-count').css('visibility', 'hidden')
 	}
 	getProducts()
 
@@ -44,8 +47,15 @@ $(function() {
     	loadFilesInfo("infoProducto.html", "js/infoProducto.js", $(this).attr('data-product'));
 	});
 	
-	$("#carrito").click(function (e) {
+	/* $("#carrito").click(function (e) {
 		loadFilesUser("carrito.html", "js/carrito.js")
+	}); */
+	$("#carrito").on("click", function(e) { 
+		if (sessionStorage.token) {
+			loadFilesUser("carrito.html", "js/carrito.js")
+		} else {
+			loadFilesUser("signIn.html", "js/signIn.js")
+		}
 	});
 })
 
@@ -67,12 +77,12 @@ function catalogoProducts(idSubcategory, idCategory) {
 	}
 }
 
-/* Obtener productos para carrucel */
+/* Obtener productos para carrusel */
 function getProducts() {
 	if (sessionStorage.token) {
 		$.ajax({
 			type: "POST",
-			url: ip_server + "/logged/getProductsRandom",
+			url: ip_server + "/getProductsRandom",
 			data: {
 				'bearer' : sessionStorage.token,
 			},

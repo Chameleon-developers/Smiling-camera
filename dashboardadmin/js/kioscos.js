@@ -31,8 +31,6 @@ function addKiosk() {
  
     var check = validationsAddKiosk(nameKiosk,userKiosk, passwordKiosk, cPasswordKiosk)
     if (check) {
-        var modal = $(this).parent().parent().parent()
-        
         $.ajax({
             type: "POST",
             url: ip_server + "/logged/insertKiosco",
@@ -46,11 +44,7 @@ function addKiosk() {
             success: function (response) {
                 toast('Se ha registrado correctamente', 'is-info')
                 /* Vaciar inputs y cerrar modal */
-                modal.removeClass('modal-active')
-                var inputsAddModal = modal.find(".input")
-                $.each(inputsAddModal, function(idx, el) {
-                    el.value = ""
-                });
+                $('.deleteBtn').click()
                 getKiosks()
             },
             error: function (error) {
@@ -183,7 +177,6 @@ function updateKiosk() {
     var nameKiosco = $("#nameKioskUpdate").val();
 
     if(nameKiosco != '') {
-        var modal = $(this).parent().parent().parent()
         $.ajax({
             url: ip_server + "/logged/updateKiosco",
             type: "POST",
@@ -196,11 +189,7 @@ function updateKiosk() {
             success: function (response) {
                 toast('Se ha actualizado el kiosco correctamente', 'is-info')
                 /* Vaciar inputs y cerrar modal */
-                modal.removeClass('modal-active')
-                var inputsAddModal = modal.find(".input")
-                $.each(inputsAddModal, function(idx, el) {
-                    el.value = ""
-                });
+                $('.deleteBtn').click()
                 getKiosks()
             },
             error: function (error) {
@@ -219,7 +208,6 @@ function updateKiosk() {
 /*Funcion para eliminar un registro*/
 function deleteKiosk(){
     var idKiosco = $("#delKiosk").attr('data-k');
-    var modal = $(this).parent().parent().parent()
     $.ajax({
         url: ip_server + "/logged/deleteKiosco",
         type: "POST",
@@ -231,11 +219,7 @@ function deleteKiosk(){
         success: function (response) {
             toast('Se ha eliminado el kiosco correctamente', 'is-info')
             /* Vaciar inputs y cerrar modal */
-            modal.removeClass('modal-active')
-            var inputsAddModal = modal.find(".input")
-            $.each(inputsAddModal, function(idx, el) {
-                el.value = ""
-            });
+            $('.deleteBtn').click()
             getKiosks()
         },
         error: function (error) {

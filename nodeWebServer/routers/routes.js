@@ -50,6 +50,8 @@ module.exports = function (app,secureApp) {
     /* Obtener subcatehgorias existentes */
     secureApp.post('/getSubcategories' ,categories.getSubcategories)
 
+    secureApp.post('/getSubcategoriesEcommerce' ,categories.getSubcategoriesEcommerce)
+
     
     /* PRODUCTOS */
 
@@ -106,18 +108,24 @@ module.exports = function (app,secureApp) {
     /* Home ecommerce */
 
     /* Obtener 3 a 9 productos de manera aleatoria para carrusel */
-    secureApp.post('/getProductsRandom', products.getProductsRandom)
+    //secureApp.post('/getProductsRandom', products.getProductsRandom)
     app.post('/getProductsRandom', products.getProductsRandom)
 
     /* Obtener características de un producto */
     app.post('/getProductById', products.getProductById)
 
     /* Agregar a carrito un producto */
-    secureApp.post('/addShop', uploading.single('image'), shop.addShop)
+    app.post('/addShop', uploading.single('image'), shop.addShop)
     secureApp.post('/addDefaultShop', shop.addDefaultShop)
     
     /* Obtener carrito de un usuario */
-    app.post('/getShop', shop.getShop)
+    secureApp.post('/getShop', shop.getShop)
+
+    /* Elimina un producto del carrito */
+    secureApp.post('/deleteShop', shop.deleteShop)
+
+    /* Actualiza cantidad de producto en carrito */
+    secureApp.post('/updateShop', shop.updateShop)
 
     /* Obtiene datos de usuario ecommerce */
     secureApp.post('/getShopUser', shopUser.getShopUser)

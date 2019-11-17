@@ -802,3 +802,33 @@ ul.pagination-list li {
   background-color: #428bca;
   border-color: #428bca;
 }
+
+.product-count {
+  background: none repeat scroll 0 0 #5a88ca;
+  border-radius: 50%;
+  color:#fff;
+  display: inline-block;
+  font-size: 9px;
+  height: 20px;
+  padding-top: 2px;
+  position: absolute;
+  right: -10px;
+  text-align: center;
+  top: 5px;
+  width: 20px;
+}
+
+.shopping-item {
+  position: relative;
+}
+
+.modal.modal-active {
+  visibility: visible;
+}
+.modal.modal-active {
+  display: flex;
+}
+
+.modal.modal-active .modal-background {
+  opacity: 1;
+}

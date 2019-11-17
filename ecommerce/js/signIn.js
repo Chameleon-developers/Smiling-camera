@@ -15,8 +15,8 @@ function init() {
         $('#mainEmail').val('');
         $('#passwordUser').val('');
 		grecaptcha.reset();
-        $('#getBack').css('visibility', 'visible')
-        $('#messageEmail').css('visibility', 'visible')
+        $('#getBack').css('display', ' block')
+        $('#messageEmail').css('display', ' block')
 
         $('#iniciarSesion').prop('id','sendPwdEmail')
         $('#sendPwdEmail').text('Mandar Correo')
@@ -31,10 +31,10 @@ function init() {
     $( "#getBack" ).on( "click", function() {
         $('#mainEmail').val('');
         grecaptcha.reset();
-        $('#mailContainer').css('visibility', 'visible')
-        $('#getBack').css('visibility', 'hidden')
-        $('#captchaGoogle').css('visibility', 'visible')
-        $('#messageEmail').css('visibility', 'hidden')
+        $('#mailContainer').css('display', ' block')
+        $('#getBack').css('display', ' none')
+        $('#captchaGoogle').css('display', ' block')
+        $('#messageEmail').css('display', ' none')
         $('#messageEmail').html('Se enviara un mail a su correo electrónico de recuperación con la nueva contraseña. <strong>La contraseña anterior se borrará</strong>')
 
         $('#sendPwdEmail').prop('id','iniciarSesion')
@@ -79,9 +79,9 @@ function sendPwdEmail(){
         success: function (response) {
             console.log(response);
             grecaptcha.reset();
-            $('#getBack').css('visibility', 'hidden')
-            $('#mailContainer').css('visibility', 'hidden')
-            $('#captchaGoogle').css('visibility', 'hidden')
+            $('#getBack').css('display', ' none')
+            $('#mailContainer').css('display', ' none')
+            $('#captchaGoogle').css('display', ' none')
             $('#messageEmail').html('<strong>Se ha mandado el Correo con la nueva Contraseña</strong>')
 
             $('#sendPwdEmail').text('Ir a Iniciar sesión')
@@ -131,7 +131,6 @@ function logIn() {
 	        	$('#logIn').css('display', 'none')
 				$('#usuario').css('display', 'flex')
 				sessionStorage.token = response.token
-				sessionStorage.idUser = response.idUser
 				window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
 	        },
 	        error: function (error) {

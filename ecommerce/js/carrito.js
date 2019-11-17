@@ -1,5 +1,5 @@
 //Importación de módulos
-import { toast, modal, ip_server, setTable, loadFilesInfo } from "./plugins.js"
+import { modal, toast, ip_server, getNumberShop } from "./plugins.js"
 
 //Exportación de módulos
 export { init }
@@ -12,20 +12,40 @@ function init() {
     getShop()
 
     $('#total').text(" $20.00")
+
+    $('#tablaCarrito').on('change', '.cantidad', function(e) {
+        e.preventDefault()
+        updatePrices($(this).attr('data-shop'))
+    })
+
+    $('#tablaCarrito').on('click', '.updateShop', function(e) {
+        e.preventDefault()
+        updateShop($(this).attr('data-shop'))
+    })
+
+    $('#tablaCarrito').on('click', '.deleteShop', function(e) {
+        e.preventDefault()
+        $('#delProd').attr('data-shop', $(this).attr('data-shop'))
+    })
+
+    $('#delProd').click(function(e) {
+        e.preventDefault()
+        deleteShop($(this).attr('data-shop'))
+    })
 } 
 
 /* Funcion para obtener carrito */
 function getShop() {
     $.ajax({
         type: "POST",
-        url: ip_server + "/getShop",
+        url: ip_server + "/logged/getShop",
         data: {
-            //'bearer': sessionStorage.token,
-            'idUser': sessionStorage.idUser,
+            'bearer': sessionStorage.token,
         },
         dataType: "json",
         success: function (response) {    
             
+            $('#tablaCarrito').html('')
             agregaTabla(response.shop)
 
         },
@@ -44,15 +64,16 @@ function agregaTabla(shop) {
     $.each(shop, function (key, value) {
         var tr = $('<tr>')
         var subtotal = value.publicPrice*value.quantityShop
-        
+
         tr.append('<td>'+value.nameProduct+'</td>' +
-            '<td style="width: 200px;"><img src="resources/LibroSINBOTON2.png" alt="img1"></td>' +
-            '<td style="width: 20%;"><input id="cantidad" class="input" type="number" value="'+value.quantityShop+'" min="1"></td> ' +
-            '<td>$'+value.publicPrice+'</td>' +
-            '<td>$'+subtotal+'</td>' +
+            '<td style="width: 200px;"><img src="./uploads/'+value.zipNameShop +'" alt="Imagen de producto"></td>' +
+            '<td style="width: 20%;"><input class="cantidad" id="cantidad'+value.idShop+'" class="input" type="number" value="'+value.quantityShop+'" min="1" data-shop="'+value.idShop+'"></td> ' +
+            '<td id="precio'+value.idShop+'">$'+value.publicPrice+'</td>' +
+            '<td id="subtotal'+value.idShop+'">$'+subtotal+'</td>' +
             '<td>' +
                 '<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">' +
-                    '<a class="button is-primary" id="updateShop" name="button">Actualizar</a>' +
+                    '<a href="#" class="button is-danger is-inverted modal-button updateShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-save"></i></span></a>' +
+                    '<a href="#" class="button is-danger is-inverted modal-button deleteShop" data-target="#modalDelShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>' +
                 '</div>' +
             '</td>')
 
@@ -60,6 +81,7 @@ function agregaTabla(shop) {
 
         $('#tablaCarrito').append(tr)
     })
+    modal()
 
     var pago = $('<tr><td colspan="6">' +
                 '<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10" style="text-align: right;">' +
@@ -69,4 +91,75 @@ function agregaTabla(shop) {
     $('#tablaCarrito').append(pago)
 
     $('#total').text(' $' + total)
+}
+
+/* Funcion para actualizar precios */
+function updatePrices(idShop) {
+    let precio = $('#precio'+idShop).text().trim().substring(1)
+    let cant = $('#cantidad'+idShop).val()
+    let subtotalTemp = $('#subtotal'+idShop).text().trim(1).substring(1)
+    var total = $('#total').text().trim().substring(1)
+    
+    total -= subtotalTemp
+
+    var subtotal = precio*cant
+    $('#subtotal'+idShop).text()
+    $('#subtotal'+idShop).text('$'+subtotal)
+
+    total += subtotal
+    $('#total').text(' $' + total)
+}
+
+/* Funcion para eliminar producto de carrito */
+function deleteShop(idShop) {
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/logged/deleteShop",
+        data: {
+            'bearer': sessionStorage.token,
+            'idShop': idShop,
+        },
+        dataType: "json",
+        success: function (response) {    
+            
+            toast('Producto eliminado de carrito correctamente', 'is-info')
+            getNumberShop();
+
+            $('.deleteBtn').click()
+            getShop()
+
+        },
+        error: function (error) {
+            if(error.status == '500'){
+                toast('No se pudo eliminar producto de carrito, Error interno del servidor', 'is-danger')
+            }
+        }
+    })
+}
+
+/* Funcion para actualizar producto de carrito */
+function updateShop(idShop) {
+    let quantityShop = $('#cantidad'+idShop).val()
+
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/logged/updateShop",
+        data: {
+            'bearer': sessionStorage.token,
+            'idShop': idShop,
+            'quantityShop': quantityShop,
+        },
+        dataType: "json",
+        success: function (response) {    
+            
+            toast('Producto actualizado correctamente', 'is-info')
+            getNumberShop();
+
+        },
+        error: function (error) {
+            if(error.status == '500'){
+                toast('No se pudo actualizar carrito, Error interno del servidor', 'is-danger')
+            }
+        }
+    })
 }
