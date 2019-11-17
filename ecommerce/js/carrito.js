@@ -125,12 +125,7 @@ function deleteShop(idShop) {
             toast('Producto eliminado de carrito correctamente', 'is-info')
             getNumberShop();
 
-            /* Vaciar inputs y cerrar modal */
-            modal.removeClass('modal-active')
-            var inputsAddModal = modal.find(".input")
-            $.each(inputsAddModal, function(idx, el) {
-                el.value = ""
-            });
+            $('.deleteBtn').click()
             getShop()
 
         },

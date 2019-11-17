@@ -1,7 +1,5 @@
 //Importación de módulos
 import { toast, modal, ip_server, setTable, loadFiles } from "./plugins.js"
-/* toast options: is-info, is-success, is-warning, is-danger */
-import { importModule } from "https://uupaa.github.io/dynamic-import-polyfill/importModule.js";
 
 //Exportación de módulos
 export { init }
@@ -65,17 +63,6 @@ function init() {
             enabledProduct = 0;
         }
     });
-}
-
-
-/*This function will load and search the products that belongs those categories or subcategories */
-function searchCatSubcat(idCategory, idSubcategory) {
-
-}
-
-/*This function will load and search the products that belongs that category */
-function searchCat(idCategory) {
-
 }
 
 /* Función para consultar las categorias de productos que existen */
@@ -209,7 +196,6 @@ function getProducts(idCategory, idSubcategory) {
 
 function deleteProduct(){
     var idProduct = $("#delProd").attr('idProduct');
-    var modal = $(this).parent().parent().parent()
     $.ajax({
         url: ip_server +
         "/logged/deleteProduct",
@@ -222,11 +208,7 @@ function deleteProduct(){
         success: function (response) {
             toast('Se ha eliminado el producto correctamente', 'is-info')
             /* Vaciar inputs y cerrar modal */
-            modal.removeClass('modal-active')
-            var inputsAddModal = modal.find(".input")
-            $.each(inputsAddModal, function(idx, el) {
-                el.value = ""
-            });
+            $('.deleteBtn').click()
             getProducts();
         },
         error: function (error) {
@@ -247,7 +229,6 @@ function updateProduct(){
     var idProduct = $("#editProd").attr('idProduct');
     var imageProduct = $("#editProd").attr('imageProduct');
     var nameProduct = $("#nameProdEdit").val();
-    var modal = $(this).parent().parent().parent()
     const form_data = new FormData()
     
     form_data.append('idProduct', idProduct)
@@ -267,11 +248,7 @@ function updateProduct(){
         dataType: "json",
         success: function (response) {
             toast('Se ha modificado correctamente', 'is-info')
-            modal.removeClass('modal-active')
-            var inputsAddModal = modal.find(".input")
-            $.each(inputsAddModal, function(idx, el) {
-                el.value = ""
-            });
+            $('.deleteBtn').click()
             getProducts();
         },
         error: function (error) {

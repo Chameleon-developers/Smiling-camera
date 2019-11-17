@@ -166,7 +166,6 @@ function addUser() {
 
     var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser, 1)
     if (check) {
-        var modal = $(this).parent().parent().parent()
         $.ajax({
             type: "POST",
             url: ip_server + "/logged/insertUser",
@@ -182,11 +181,7 @@ function addUser() {
             success: function (response) {
                 toast('Se ha registrado correctamente', 'is-info')
                 /* Vaciar inputs y cerrar modal */
-                modal.removeClass('modal-active')
-                var inputsAddModal = modal.find(".input")
-                $.each(inputsAddModal, function(idx, el) {
-                    el.value = ""
-                });
+                $('.deleteBtn').click()
                 getUsers()
             },
             error: function (error) {
@@ -241,7 +236,6 @@ function updateUser() {
 
     var check = validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordUser, cPasswordUser, update);
     if (check) {
-        var modal = $(this).parent().parent().parent()
         $.ajax({
             type: "POST",
             url: ip_server + "/logged/updateUser",
@@ -250,11 +244,7 @@ function updateUser() {
             success: function (response) {
                 toast('Se modificó correctamente el usuario', 'is-info')
                 /* Vaciar inputs y cerrar modal */
-                modal.removeClass('modal-active')
-                var inputsAddModal = modal.find(".input")
-                $.each(inputsAddModal, function(idx, el) {
-                    el.value = ""
-                });
+                $('.deleteBtn').click()
                 getUsers()
             },
             error: function (error) {
@@ -330,7 +320,6 @@ function validationsAddUser(mainEmail, resetEmail, nameUser, typeUser, passwordU
 /*Funcion para eliminar un registro*/
 function deleteUser(){
     var idManagerUser = $("#delUser").attr('data-u');
-    var modal = $(this).parent().parent().parent()
     $.ajax({
         url: ip_server +
         "/logged/deleteUser",
@@ -343,11 +332,7 @@ function deleteUser(){
         success: function (response) {
             toast('Se ha eliminado el usuario correctamente', 'is-info')
             /* Vaciar inputs y cerrar modal */
-            modal.removeClass('modal-active')
-            var inputsAddModal = modal.find(".input")
-            $.each(inputsAddModal, function(idx, el) {
-                el.value = ""
-            });
+            $('.deleteBtn').click()
             getUsers()
         }
     });
