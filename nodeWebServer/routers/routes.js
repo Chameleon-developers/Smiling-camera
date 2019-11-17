@@ -50,6 +50,8 @@ module.exports = function (app,secureApp) {
     /* Obtener subcatehgorias existentes */
     secureApp.post('/getSubcategories' ,categories.getSubcategories)
 
+    secureApp.post('/getSubcategoriesEcommerce' ,categories.getSubcategoriesEcommerce)
+
     
     /* PRODUCTOS */
 
