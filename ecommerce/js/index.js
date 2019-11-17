@@ -47,8 +47,15 @@ $(function() {
     	loadFilesInfo("infoProducto.html", "js/infoProducto.js", $(this).attr('data-product'));
 	});
 	
-	$("#carrito").click(function (e) {
+	/* $("#carrito").click(function (e) {
 		loadFilesUser("carrito.html", "js/carrito.js")
+	}); */
+	$("#carrito").on("click", function(e) { 
+		if (sessionStorage.token) {
+			loadFilesUser("carrito.html", "js/carrito.js")
+		} else {
+			loadFilesUser("signIn.html", "js/signIn.js")
+		}
 	});
 })
 
