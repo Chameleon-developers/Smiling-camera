@@ -22,6 +22,16 @@ function init() {
         e.preventDefault()
         updateShop($(this).attr('data-shop'))
     })
+
+    $('#tablaCarrito').on('click', '.deleteShop', function(e) {
+        e.preventDefault()
+        $('#delProd').attr('data-shop', $(this).attr('data-shop'))
+    })
+
+    $('#delProd').click(function(e) {
+        e.preventDefault()
+        deleteShop($(this).attr('data-shop'))
+    })
 } 
 
 /* Funcion para obtener carrito */
@@ -35,6 +45,7 @@ function getShop() {
         dataType: "json",
         success: function (response) {    
             
+            $('#tablaCarrito').html('')
             agregaTabla(response.shop)
 
         },
@@ -61,7 +72,7 @@ function agregaTabla(shop) {
             '<td id="subtotal'+value.idShop+'">$'+subtotal+'</td>' +
             '<td>' +
                 '<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">' +
-                    '<a href="#" class="button is-danger is-inverted modal-button updateShop" data-target="#modalUpdShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-save"></i></span></a>' +
+                    '<a href="#" class="button is-danger is-inverted modal-button updateShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-save"></i></span></a>' +
                     '<a href="#" class="button is-danger is-inverted modal-button deleteShop" data-target="#modalDelShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>' +
                 '</div>' +
             '</td>')
@@ -100,7 +111,7 @@ function updatePrices(idShop) {
 }
 
 /* Funcion para eliminar producto de carrito */
-function deleteShop() {
+function deleteShop(idShop) {
     $.ajax({
         type: "POST",
         url: ip_server + "/logged/deleteShop",
@@ -113,6 +124,14 @@ function deleteShop() {
             
             toast('Producto eliminado de carrito correctamente', 'is-info')
             getNumberShop();
+
+            /* Vaciar inputs y cerrar modal */
+            modal.removeClass('modal-active')
+            var inputsAddModal = modal.find(".input")
+            $.each(inputsAddModal, function(idx, el) {
+                el.value = ""
+            });
+            getShop()
 
         },
         error: function (error) {
