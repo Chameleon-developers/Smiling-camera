@@ -17,6 +17,11 @@ function init() {
         e.preventDefault()
         updatePrices($(this).attr('data-shop'))
     })
+
+    $('#tablaCarrito').on('click', '.updateShop', function(e) {
+        e.preventDefault()
+        updateShop($(this).attr('data-shop'))
+    })
 } 
 
 /* Funcion para obtener carrito */
@@ -119,7 +124,7 @@ function deleteShop() {
 }
 
 /* Funcion para actualizar producto de carrito */
-function updateShop() {
+function updateShop(idShop) {
     let quantityShop = $('#cantidad'+idShop).val()
 
     $.ajax({
