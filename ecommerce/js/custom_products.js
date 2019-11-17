@@ -6,6 +6,16 @@ export { init }
 
 /*funcion de bulma */
 
+    console.log("Categorias");
+    fetch('http://localhost:3500/nodeWebServer/getSubcategoriesEcommerce')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(myJson) {
+            console.log(myJson);
+        });
+
+
 /* Función para establecer eventos y datos iniciales */
 function init(idSubcategory, idCategory) {
     var bulma = new bulmaSteps(document.getElementById('stepsDemo'), {
@@ -281,12 +291,3 @@ function cargarEmojis (){
     }
 }
 
-document.addEventListener("DOMContentLoaded", function(event) {
-    fetch('http://example.com/movies.json')
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(myJson) {
-            console.log(myJson);
-        });
-});
