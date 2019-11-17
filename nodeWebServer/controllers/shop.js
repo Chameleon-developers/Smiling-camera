@@ -125,8 +125,11 @@ module.exports.deleteShop = function (req, res) {
     /* Obtener variable para la conexión a la BD */ 
     const con = require('../controllers/dbconn')() 
  
+    /* Obtener los datos del Body */ 
+    let data = req.body 
+ 
     /* Ejecutar la consulta para baja de carrito */ 
-    con.query('DELETE FROM shop WHERE idShop=?', res.decode.idUser, function (err, result, fields) { 
+    con.query('DELETE FROM shop WHERE idShop=?',data.idShop, function (err, result, fields) { 
         if (err) { 
             // Internal error message send 
             res.status(500).json({ 
@@ -158,7 +161,7 @@ module.exports.updateShop = function (req, res) {
     let qry="UPDATE shop SET quantityShop=? WHERE idShop=?" 
  
     /* Establece los valores para la consulta */ 
-    values = [data.quantityShop, res.decode.idUser] 
+    values = [data.quantityShop, data.idShop] 
  
     /* Ejecutar la consulta para actualizar cantidad de producto en carrito */ 
     con.query(qry, values, function (err, result, fields) { 

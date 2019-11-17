@@ -1,5 +1,5 @@
 //Importación de módulos
-import { toast, ip_server } from "./plugins.js"
+import { modal, toast, ip_server, getNumberShop } from "./plugins.js"
 
 //Exportación de módulos
 export { init }
@@ -16,7 +16,6 @@ function init() {
     $('#tablaCarrito').on('change', '.cantidad', function(e) {
         e.preventDefault()
         updatePrices($(this).attr('data-shop'))
-		
     })
 } 
 
@@ -57,8 +56,8 @@ function agregaTabla(shop) {
             '<td id="subtotal'+value.idShop+'">$'+subtotal+'</td>' +
             '<td>' +
                 '<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">' +
-                    '<a href="#" class=" button is-danger is-inverted modal-button updateShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-save"></i></span></a>' +
-                    '<a href="#" class=" button is-danger is-inverted modal-button deleteShop"  data-target="#modalDelShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>' +
+                    '<a href="#" class=" button is-danger is-inverted modal-button updateShop" data-target="#modalUpdShop"style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-save"></i></span></a>' +
+                    '<a href="#" class=" button is-danger is-inverted modal-button deleteShop" data-target="#modalDelShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>' +
                 '</div>' +
             '</td>')
 
@@ -95,11 +94,52 @@ function updatePrices(idShop) {
 }
 
 /* Funcion para eliminar producto de carrito */
-function deleteShop(idShop) {
+function deleteShop() {
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/logged/deleteShop",
+        data: {
+            'bearer': sessionStorage.token,
+            'idShop': idShop,
+        },
+        dataType: "json",
+        success: function (response) {    
+            
+            toast('Producto eliminado de carrito correctamente', 'is-info')
+            getNumberShop();
 
+        },
+        error: function (error) {
+            if(error.status == '500'){
+                toast('No se pudo eliminar producto de carrito, Error interno del servidor', 'is-danger')
+            }
+        }
+    })
 }
 
 /* Funcion para actualizar producto de carrito */
-function updateShop(idShop) {
+function updateShop() {
+    let quantityShop = $('#cantidad'+idShop).val()
 
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/logged/updateShop",
+        data: {
+            'bearer': sessionStorage.token,
+            'idShop': idShop,
+            'quantityShop': quantityShop,
+        },
+        dataType: "json",
+        success: function (response) {    
+            
+            toast('Producto actualizado correctamente', 'is-info')
+            getNumberShop();
+
+        },
+        error: function (error) {
+            if(error.status == '500'){
+                toast('No se pudo actualizar carrito, Error interno del servidor', 'is-danger')
+            }
+        }
+    })
 }
