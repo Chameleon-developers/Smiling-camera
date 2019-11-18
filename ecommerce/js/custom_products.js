@@ -6,15 +6,35 @@ export { init }
 
 /*funcion de bulma */
 
-    console.log("Categorias");
-    fetch('http://localhost:3500/nodeWebServer/getSubcategoriesEcommerce')
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(myJson) {
-            console.log(myJson);
+$.ajax({
+    type: "POST",
+    url: ip_server + "/logged/getSubcategoriesEcommerce",
+    data:{
+        'bearer':sessionStorage.token,
+        'idUser':sessionStorage.idUser
+    },
+    dataType:"json",
+    success: function(response){
+        $.each(response.subcategories, function(i, item) {
+            if(i>=3)
+            $('#selProducts').append("<option value='"+item.idSubcategory+"'>"+item.nameSubcategory+"</option>");
         });
+    },error: function(error){
 
+    }
+});
+
+
+/*
+fetch(ip_server+'/logged/getSubcategoriesEcommerce', {
+    method: 'POST',
+    headers: {
+        'bearer':sessionStorage.token,
+        'idUser':sessionStorage.idToken}
+    })
+    .then(response => response.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', response));*/
 
 /* Función para establecer eventos y datos iniciales */
 function init(idSubcategory, idCategory) {
@@ -73,20 +93,24 @@ function init(idSubcategory, idCategory) {
         editor.innerHTML = '';
         let cropprImg = document.createElement('img');
         cropprImg.setAttribute('id', 'croppr');
+        
         editor.appendChild(cropprImg);
 
         // Limpia la previa en caso que existiera algún elemento previo
+        
         contexto.clearRect(0, 0, miCanvas.width, miCanvas.height);
 
         // Envia la imagen al editor para su recorte
         document.querySelector('#croppr').setAttribute('src', urlImage);
-
+       
         // Crea el editor
         new Croppr('#croppr', {
             aspectRatio: null,
             startSize: [100, 100],
             onCropEnd: recortarImagen
         })
+
+        
     }
 
     /**
@@ -245,8 +269,7 @@ function cargarEmoji(w,h,imagenFinal64){
         layer.add(fondo);
         layer.batchDraw();
     };
-    console.log("base64"+imagenFinal64);
-    fondoObj.src = imagenFinal64;
+    
 
 
     /*var imageObj = new Image();
@@ -266,6 +289,25 @@ function cargarEmoji(w,h,imagenFinal64){
     };
     imageObj.src = 'emoji-data/img-apple-64/1f600.png';*/
     stage.add(layer);
+}
+function enviarImagen(){
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/logged/getSubcategoriesEcommerce",
+        data:{
+            'bearer':sessionStorage.token,
+            'idUser':sessionStorage.idUser
+        },
+        dataType:"json",
+        success: function(response){
+            $.each(response.subcategories, function(i, item) {
+                if(i>=3)
+                $('#selProducts').append("<option value='"+item.idSubcategory+"'>"+item.nameSubcategory+"</option>");
+            });
+        },error: function(error){
+    
+        }
+    });
 }
 
 

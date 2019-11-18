@@ -40,8 +40,8 @@
               <br>
               <br>
               <div class="select">
-                <select>
-                  <option>Selecciona un producto</option>
+                <select id="selProducts">
+                  <!--<option>Selecciona un producto</option>
                   <option>Carcasa para celular</option>
                   <option>Invitación / Tarjeta de felicitación</option>
                   <option>Portavasos</option>
@@ -51,7 +51,7 @@
                   <option>Libreta</option>
                   <option>Mousepad</option>
                   <option>Playera</option>
-                  <option>Lapicero</option>
+                  <option>Lapicero</option>-->
                 </select>
               </div>
               <br>
@@ -78,7 +78,7 @@
               </div>
           </div>
           <div style="display: inline;" class="contenedor">
-            <img id="vista-previa"/>
+            <img class="image-canvas" id="vista-previa"/>
           </div>
         </div>  
         
@@ -94,7 +94,7 @@
             <div class="column is-half">
               <h3>Área de trabajo</h3>
               <div>
-                <div class="image-canvas" id="editor"></div>
+                <div class="image-canvas" style="overflow: scroll;" id="editor"></div>
                 
                 <div class="Tit2_custom" style="padding-top: 2%;">
                   <em class="fa fa-exclamation-circle numb_tit2custom "></em>
@@ -120,27 +120,27 @@
           <div class="field is-horizontal Tit2_custom">
             <div class="filtros-carousel" >
               <p>Ninguno</p>
-              <canvas id="filtro1" maxHeight="80px" class="filtered-image-carousel"></canvas>
+              <canvas id="filtro1" class="filtered-image-carousel"></canvas>
             </div>
             <div class="filtros-carousel">
               <p>Desenfoque</p>
-              <canvas id="filtro2" maxHeight="80px" class="filtered-image-carousel"></canvas>
+              <canvas id="filtro2" class="filtered-image-carousel"></canvas>
             </div>
             <div class="filtros-carousel">
               <p>Escala de Grises</p>
-              <canvas id="filtro3" maxHeight="80px" class="filtered-image-carousel"></canvas>
+              <canvas id="filtro3" class="filtered-image-carousel"></canvas>
             </div>
             <div class="filtros-carousel">
               <p>Saturación</p>
-              <canvas id="filtro4" maxHeight="80px" class="filtered-image-carousel"></canvas>
+              <canvas id="filtro4" class="filtered-image-carousel"></canvas>
             </div>
             <div class="filtros-carousel">
               <p>Sepia</p>
-              <canvas id="filtro5" maxHeight="80px" class="filtered-image-carousel"></canvas>
+              <canvas id="filtro5" class="filtered-image-carousel"></canvas>
             </div> 
             <div class="filtros-carousel">
               <p>Resaltar bordes</p>
-              <canvas id="filtro6" maxHeight="80px" class="filtered-image-carousel"></canvas>
+              <canvas id="filtro6" class="filtered-image-carousel"></canvas>
             </div>
           </div>
           <div class="columns">

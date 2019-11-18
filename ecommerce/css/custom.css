@@ -432,7 +432,39 @@ body::after{ content:''; display:block; height:100px; }
   height:350px;
   margin:0 auto;
   object-fit: contain;
+
 }
+.filtered-image-carousel{
+  width: 90px;
+  height:90px;
+  margin:0 auto;
+  object-fit: contain;
+}
+/*
+.croppr-container{
+  width: 350px;
+  height:350px;
+  margin:0 auto;
+  object-fit: contain;
+}
+.croppr-image{
+  width: 350px;
+  height:350px;
+  
+  object-fit: contain;
+}
+.croppr-imageClipped{
+  width: 350px;
+  height:350px;
+  
+  object-fit: contain;
+}
+.croppr-region{
+  width: 350px;
+  height:350px;
+  
+  object-fit: contain;
+}*/
 /*home*/
 
 @media (max-width: 1087px){
