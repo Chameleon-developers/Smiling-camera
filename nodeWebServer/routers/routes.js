@@ -132,6 +132,5 @@ module.exports = function (app,secureApp) {
 
     /* Inserta o actualiza datos de usuario ecommerce */
     secureApp.post('/updateShopUser', shopUser.updateShopUser)
-    
 }
  

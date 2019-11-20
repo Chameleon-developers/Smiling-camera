@@ -293,17 +293,14 @@ function cargarEmoji(w,h,imagenFinal64){
 function enviarImagen(){
     $.ajax({
         type: "POST",
-        url: ip_server + "/logged/getSubcategoriesEcommerce",
+        url: ip_server + "/logged/addShop",
         data:{
             'bearer':sessionStorage.token,
-            'idUser':sessionStorage.idUser
+            'idUser':sessionStorage.idUser,
         },
         dataType:"json",
         success: function(response){
-            $.each(response.subcategories, function(i, item) {
-                if(i>=3)
-                $('#selProducts').append("<option value='"+item.idSubcategory+"'>"+item.nameSubcategory+"</option>");
-            });
+            
         },error: function(error){
     
         }
