@@ -326,7 +326,6 @@ function enviarImagen(){
         url: ip_server + "/logged/addShop",
         data:{
             'bearer':sessionStorage.token,
-            'idSubcategory':select,
             'image':dataURL
             
         },
