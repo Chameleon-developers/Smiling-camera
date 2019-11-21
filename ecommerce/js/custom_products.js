@@ -2,7 +2,7 @@
 import { toast, modal, ip_server, setTable, loadFilesHomeCategory } from "./plugins.js"
 
 //Exportación de módulos
-export { init }
+export { init, enviarImagen }
 
 /*funcion de bulma */
 
@@ -36,6 +36,7 @@ fetch(ip_server+'/logged/getSubcategoriesEcommerce', {
     .catch(error => console.error('Error:', error))
     .then(response => console.log('Success:', response));*/
 
+    var stage;
 /* Función para establecer eventos y datos iniciales */
 function init(idSubcategory, idCategory) {
     var bulma = new bulmaSteps(document.getElementById('stepsDemo'), {
@@ -226,13 +227,20 @@ function init(idSubcategory, idCategory) {
 
     }
     cargarEmojis();
+
+    var boton = document.getElementById("enviar-foto");
+    boton.addEventListener("click", function(){
+        enviarImagen();
+        
+    }, false);
 }
-var stage;
+
 var layer;
+var fondoObj = new Image();
 function cargarEmoji(w,h,imagenFinal64){
     var width = w;
     var height = h;
-    var ratio = w/h;
+    /*var ratio = w/h;
     if(w<350){
         width = w;
     }else if(h<350){
@@ -240,21 +248,19 @@ function cargarEmoji(w,h,imagenFinal64){
     }else{
         width = 350*ratio;
         height= 350*ratio;
-    }
-
-    
-    
-
+    }*/
 
     stage = new Konva.Stage({
         container: 'container',
         width: width,
-        height: height
+        height: height,
+        id: 'final',
+        name: 'imgf'
     });
 
     layer = new Konva.Layer();
 
-    var fondoObj = new Image();
+    
     fondoObj.onload = function() {
         var fondo = new Konva.Image({
         x: 0,
@@ -270,47 +276,19 @@ function cargarEmoji(w,h,imagenFinal64){
         layer.batchDraw();
     };
     
+    fondoObj.src = imagenFinal64;
 
-
-    /*var imageObj = new Image();
-    imageObj.onload = function() {
-        var yoda = new Konva.Image({
-        x: 0,
-        y: 0,
-        image: imageObj,
-        width: 64,
-        height: 64,
-        draggable: true
-        });
-
-        // add the shape to the layer
-        layer.add(yoda);
-        layer.batchDraw();
-    };
-    imageObj.src = 'emoji-data/img-apple-64/1f600.png';*/
     stage.add(layer);
-}
-function enviarImagen(){
-    $.ajax({
-        type: "POST",
-        url: ip_server + "/logged/addShop",
-        data:{
-            'bearer':sessionStorage.token,
-            'idUser':sessionStorage.idUser,
-        },
-        dataType:"json",
-        success: function(response){
-            
-        },error: function(error){
+        
     
-        }
-    });
 }
+
+
 
 
 function cargarEmojis (){
     var emojisTable = document.getElementsByClassName("emojis-table");
-    console.log(emojisTable.length);
+
     for(let i=0;i<emojisTable.length;i++){
         emojisTable[i].onclick = function (){
             console.log("emoji");
@@ -326,7 +304,37 @@ function cargarEmojis (){
             });
             layer.add(em);
             layer.batchDraw();
+            console.log(document.getElementsByTagName("canvas")[2].toDataURL("image/png"));
         }
     }
+    
 }
 
+
+
+function enviarImagen(){
+    var dataURL = stage.toDataURL({
+        mimeType: 'image/png',
+        quality: 1
+    });
+
+    console.log(dataURL);
+    var select = document.getElementById("selProducts").value;
+    console.log(select);
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/logged/addShop",
+        data:{
+            'bearer':sessionStorage.token,
+            'idSubcategory':select,
+            'image':dataURL
+            
+        },
+        dataType:"json",
+        success: function(response){
+            
+        },error: function(error){
+    
+        }
+    });
+}

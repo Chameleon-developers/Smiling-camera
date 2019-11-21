@@ -440,6 +440,11 @@ body::after{ content:''; display:block; height:100px; }
   margin:0 auto;
   object-fit: contain;
 }
+#container{
+  overflow: auto;
+}
+
+
 /*
 .croppr-container{
   width: 350px;
