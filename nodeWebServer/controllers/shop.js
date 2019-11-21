@@ -7,7 +7,7 @@ module.exports.addShop = function (req, res) {
     let data = req.body
     
     /* Establecer query para la consulta para insertar */
-    let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser, idProductYouPrint) VALUES(1, ?, ?, ?)"
+    let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser, idSubcategory) VALUES(1, ?, ?, ?)"
     if(req.file) {
         values = [req.file.filename, res.decode.idUser, data.idSubcategory] //res.decode.idUser
     }
