@@ -5,39 +5,50 @@ module.exports.addShop = function (req, res) {
 
     /* Obtener los datos del Body */
     let data = req.body
-    
-    /* Establecer query para la consulta para insertar */
-    let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser, idSubcategory) VALUES(1, ?, ?, ?)"
-    if(req.file) {
-        values = [req.file.filename, res.decode.idUser, data.idSubcategory] //res.decode.idUser
-    }
-    else {
+
+    var base64Data = data.image.split(';base64,').pop();
+    var check = true
+    var ruta = '../../dashboardadmin/uploads/'
+    var nombre = Date.now() + '.png'
+
+    require("fs").writeFile(ruta + nombre, base64Data, 'base64', function(err) {
+        if (err) {
+            check = false
+        }
+    });
+
+    if (check) {
+        /* Establecer query para la consulta para insertar */
+        let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser) VALUES(1, ?, ?)"
+
+        values = [nombre, res.decode.idUser]
+
+        /* Ejecutar la consulta para la obtención del último id insertado en carrito */
+        con.query(qry,values,function (err, result, fields) {
+            if (err) {
+                // Internal error message send
+                res.status(500).json({
+                    Status: 'internal error',
+                    message: err
+                })
+                con.end()
+                return
+            } 
+            else {
+                if (result.affectedRows == 1) {
+                    res.status(200).json({
+                        Status: 'Success',
+                        message: 'Se registró correctamente el producto'
+                    })
+                }
+            }
+        })    
+    } else {
         res.status(400).json({
             Status: 'Failure',
             message: 'No se subió ninguna imagen'
         })
     }
-
-    /* Ejecutar la consulta para la obtención del último id insertado en carrito */
-    con.query(qry,values,function (err, result, fields) {
-        if (err) {
-            // Internal error message send
-            res.status(500).json({
-                Status: 'internal error',
-                message: err
-            })
-            con.end()
-            return
-        } 
-        else {
-            if (result.affectedRows == 1) {
-                res.status(200).json({
-                    Status: 'Success',
-                    message: 'Se registró correctamente el producto'
-                })
-            }
-        }
-    })    
 }
 
 /* Obtener carrito de un usuario */
