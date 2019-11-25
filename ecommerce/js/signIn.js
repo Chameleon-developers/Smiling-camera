@@ -109,28 +109,39 @@ function sendPwdEmail(){
 
 /* Funcion para iniciar sesion */
 function logIn() {
+    var data
 	var mainEmail = $('#mainEmail').val()
-	var passwordUser = $('#passwordUser').val()
+    var passwordUser = $('#passwordUser').val()
+    
+    if (sessionStorage.carritoPersonalizado) {
+        var productoPrsonalizado = JSON.parse(sessionStorage.getItem('carritoPersonalizado'))
+        data = {
+            'mainEmail' : mainEmail,
+            'passwordUser' : passwordUser,
+            'captcha': grecaptcha.getResponse(jQuery('#captchaGoogle').attr('data-widget-id')),
+            'image': productoPrsonalizado[0].image,
+            'idSubcategoryYouPrint': productoPrsonalizado[0].idSubcategoryYouPrint
+        }
+    } else {
+        data = {
+            'mainEmail' : mainEmail,
+            'passwordUser' : passwordUser,
+            'captcha': grecaptcha.getResponse(jQuery('#captchaGoogle').attr('data-widget-id'))
+        }
+    }
 
 	var check = validationsUser(mainEmail, passwordUser)
 	if(check) {
-        console.log('entra Login');
-        
 		$.ajax({
 	        type: "POST",
 	        url: ip_server + "/logInEcommerce",
-	        data: {
-	            'mainEmail' : mainEmail,
-				'passwordUser' : passwordUser,
-				'captcha': grecaptcha.getResponse(jQuery('#captchaGoogle').attr('data-widget-id'))
-	        },
+	        data: data,
 	        dataType: "json",
 	        success: function (response) {
-				//console.log(response);
-				
 	        	$('#logIn').css('display', 'none')
 				$('#usuario').css('display', 'flex')
-				sessionStorage.token = response.token
+                sessionStorage.token = response.token
+                sessionStorage.removeItem('carritoPersonalizado')
 				window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
 	        },
 	        error: function (error) {
@@ -164,35 +175,20 @@ function registrar() {
 	var nameUser = $('#nameUserR').val()
 	var passwordUser = $('#passwordUserR').val()
     var cPasswordUser = $('#cPasswordUserR').val()
-    if (sessionStorage.carritoPersonalizado) {
-        var productoPrsonalizado = JSON.parse(sessionStorage.getItem('carritoPersonalizado'))
-        data = {
-            'mainEmail' : mainEmail,
-            'resetEmail' : resetEmail,
-            'nameUser' : nameUser,
-            'passwordUser' : passwordUser,
-            'cPasswordUser' : cPasswordUser,
-            'captcha': grecaptcha.getResponse(jQuery('#captchaGoogle2').attr('data-widget-id')),
-            'image': productoPrsonalizado[0].image,
-            'idSubcategoryYouPrint': productoPrsonalizado[0].idSubcategoryYouPrint
-        }
-    } else {
-        data = {
-            'mainEmail' : mainEmail,
-            'resetEmail' : resetEmail,
-            'nameUser' : nameUser,
-            'passwordUser' : passwordUser,
-            'cPasswordUser' : cPasswordUser,
-            'captcha': grecaptcha.getResponse(jQuery('#captchaGoogle2').attr('data-widget-id')),
-        }
-    }
 
 	var check = validationsAddUser(mainEmail, resetEmail, nameUser, passwordUser, cPasswordUser)
 	if(check) {
 		$.ajax({
 	        type: "POST",
 	        url: ip_server + "/registerUser",
-	        data: data,
+	        data: {
+                'mainEmail' : mainEmail,
+                'resetEmail' : resetEmail,
+                'nameUser' : nameUser,
+                'passwordUser' : passwordUser,
+                'cPasswordUser' : cPasswordUser,
+                'captcha': grecaptcha.getResponse(jQuery('#captchaGoogle2').attr('data-widget-id')),
+            },
 	        dataType: "json",
 	        success: function (response) {
 	        	$('#logIn').css('display', 'none')

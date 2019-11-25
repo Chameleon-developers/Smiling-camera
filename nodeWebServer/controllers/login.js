@@ -428,11 +428,59 @@ module.exports.logInEcommerce = function (req, res) {
                         let encrypted = cipher.update(token, 'utf8', 'hex')
                         encrypted += cipher.final('hex')
 
-                        // Setup and send of response
-                        res.status(200).json({
-                            Status: 'Success',
-                            token: encrypted
-                        })
+                        if (data.image) {
+                            //result.insertId
+                            var base64Data = data.image.split(';base64,').pop();
+                            var check = true
+                            var ruta = '../dashboardadmin/uploads/'
+                            var nombre = Date.now() + '.png'
+
+                            require("fs").writeFile(ruta + nombre, base64Data, 'base64', function (err) {
+                                if (err) {
+                                    check = false
+                                }
+                            });
+
+                            if (check) {
+                                /* Establecer query para la consulta para insertar */
+                                let qry = "INSERT INTO shop(quantityShop, zipNameShop, idUser, idSubcategoryYouPrint) VALUES(1, ?, ?, ?)"
+
+                                values = [nombre, result[0].idShopUser, data.idSubcategoryYouPrint]
+
+                                /* Ejecutar la consulta para la obtención del último id insertado en carrito */
+                                con.query(qry, values, function (err, result2, fields) {
+                                    if (err) {
+                                        // Internal error message send
+                                        res.status(500).json({
+                                            Status: 'internal error',
+                                            message: err
+                                        })
+                                        con.end()
+                                        return
+                                    }
+                                    else {
+                                        if (result2.affectedRows == 1) {
+                                            // Setup and send of response
+                                            res.status(200).json({
+                                                Status: 'Success',
+                                                token: encrypted
+                                            })
+                                        }
+                                    }
+                                })
+                            } else {
+                                res.status(500).json({
+                                    Status: 'internal error',
+                                    message: err
+                                })
+                            }
+                        } else {
+                            // Setup and send of response
+                            res.status(200).json({
+                                Status: 'Success',
+                                token: encrypted
+                            })
+                        }
                     } else {
                         // In failed auth, error search
                         con.query('SELECT nameUser FROM shopusers WHERE nameUser=? AND statusUser = 1 AND ecommerceYouPrint = 1', [data.mainEmail], function (err, result) {
@@ -540,58 +588,10 @@ module.exports.registerUser = function (req, res) {
                         return
                     } else {
                         if (result.affectedRows == 1) {
-                            if (data.image) {
-                                //result.insertId
-                                var base64Data = data.image.split(';base64,').pop();
-                                var check = true
-                                var ruta = '../dashboardadmin/uploads/'
-                                var nombre = Date.now() + '.png'
-
-                                require("fs").writeFile(ruta + nombre, base64Data, 'base64', function (err) {
-                                    if (err) {
-                                        check = false
-                                    }
-                                });
-
-                                if (check) {
-                                    /* Establecer query para la consulta para insertar */
-                                    let qry = "INSERT INTO shop(quantityShop, zipNameShop, idUser, idSubcategoryYouPrint) VALUES(1, ?, ?, ?)"
-
-                                    values = [nombre, result.insertId, data.idSubcategoryYouPrint]
-
-                                    /* Ejecutar la consulta para la obtención del último id insertado en carrito */
-                                    con.query(qry, values, function (err, result2, fields) {
-                                        if (err) {
-                                            // Internal error message send
-                                            res.status(500).json({
-                                                Status: 'internal error',
-                                                message: err
-                                            })
-                                            con.end()
-                                            return
-                                        }
-                                        else {
-                                            if (result2.affectedRows == 1) {
-                                                res.status(200).json({
-                                                    Status: 'Success',
-                                                    message: 'Se registró correctamente el usuario'
-                                                })
-                                            }
-                                        }
-                                    })
-                                } else {
-                                    res.status(500).json({
-                                        Status: 'internal error',
-                                        message: err
-                                    })
-                                }
-                            } else {
-                                res.status(200).json({
-                                    Status: 'Success',
-                                    message: 'Se registró correctamente el usuario',
-                                })
-                            }
-
+                            res.status(200).json({
+                                Status: 'Success',
+                                message: 'Se registró correctamente el usuario',
+                            })
                         }
                     }
                 })
