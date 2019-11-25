@@ -66,10 +66,12 @@ function agregaTabla(shop) {
         console.log(value);
         
         var tr = $('<tr>')
+        var image
         var subtotal = value.publicPrice*value.quantityShop
+        
 
         tr.append('<td>'+value.nameProduct+'</td>' +
-            '<td style="width: 200px;"><img style="width: 100%"; src="../dashboardadmin/uploads/'+value.zipNameShop +'" alt="Imagen de producto"></td>' +
+            '<td style="width: 200px;"><img style="width: 100%"; src="../dashboardadmin/uploads/'+ value.zipNameShop +'" alt="Imagen de producto"></td>' +
             '<td style="width: 20%;"><input class="cantidad" id="cantidad'+value.idShop+'" class="input" type="number" value="'+value.quantityShop+'" min="1" data-shop="'+value.idShop+'"></td> ' +
             '<td id="precio'+value.idShop+'">$'+value.publicPrice+'</td>' +
             '<td id="subtotal'+value.idShop+'">$'+subtotal+'</td>' +

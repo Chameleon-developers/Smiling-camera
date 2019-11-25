@@ -57,7 +57,7 @@ module.exports.getShop = function (req, res) {
     const con = require('../controllers/dbconn')()
 
     /* Establecer query para la consulta para insertar */
-    let qry = 'SELECT idShop, quantityShop, zipNameShop, idProductYouPrint, PROYP.nameProduct, publicPrice, s.idSubcategoryYouPrint, CONCAT(SC.nameSubcategory, " Personalizada") AS nameSubcategory, price FROM shop AS S LEFT JOIN productsyouprint AS PROYP ON S.idProductYouPrint=PROYP.idProduct LEFT JOIN productsprice AS PP ON S.idProductYouPrint=PP.idProduct LEFT JOIN subcategoryyouprint AS SCYP ON s.idSubcategoryYouPrint=SCYP.idSubcategoryYouPrint LEFT JOIN subcategories AS SC ON SCYP.idCategory=SC.idCategory AND SCYP.idSubcategory=SC.idSubcategory WHERE idUser=?'
+    let qry = 'SELECT idShop, quantityShop, zipNameShop, idProductYouPrint, PROYP.nameProduct, PROYP.imageProduct, publicPrice, s.idSubcategoryYouPrint, CONCAT(SC.nameSubcategory, " Personalizada") AS nameSubcategory, price FROM shop AS S LEFT JOIN productsyouprint AS PROYP ON S.idProductYouPrint=PROYP.idProduct LEFT JOIN productsprice AS PP ON S.idProductYouPrint=PP.idProduct LEFT JOIN subcategoryyouprint AS SCYP ON s.idSubcategoryYouPrint=SCYP.idSubcategoryYouPrint LEFT JOIN subcategories AS SC ON SCYP.idCategory=SC.idCategory AND SCYP.idSubcategory=SC.idSubcategory WHERE idUser=?'
 
     /* Ejecutar la consulta para la obtención de tipos de productos */
     con.query(qry, res.decode.idUser, function (err, result, fields) {
@@ -79,7 +79,7 @@ module.exports.getShop = function (req, res) {
                 if(element.idProductYouPrint) {
                     shop.idShop = element.idShop
                     shop.quantityShop = element.quantityShop
-                    shop.zipNameShop = element.zipNameShop
+                    shop.zipNameShop = element.imageProduct
                     shop.idProductYouPrint = element.idProductYouPrint
                     shop.nameProduct = element.nameProduct
                     shop.publicPrice = element.publicPrice
