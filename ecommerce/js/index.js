@@ -14,7 +14,7 @@ $(function() {
 	}
 	getProducts()
 
-	$(".Customizable").click(function (e) {
+	$(".Customizable").on("click", function(e) {
 		e.preventDefault()
 		coutomizableProduct($(this).attr('data-Subcategory'), $(this).attr('data-Category'))
     });

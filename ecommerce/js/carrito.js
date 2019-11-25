@@ -26,11 +26,12 @@ function init() {
     $('#tablaCarrito').on('click', '.deleteShop', function(e) {
         e.preventDefault()
         $('#delProd').attr('data-shop', $(this).attr('data-shop'))
+        $('#delProd').attr('data-image', $(this).attr('data-image'))
     })
 
     $('#delProd').click(function(e) {
         e.preventDefault()
-        deleteShop($(this).attr('data-shop'))
+        deleteShop($(this).attr('data-shop'), $(this).attr('data-image'))
     })
 } 
 
@@ -62,18 +63,20 @@ function agregaTabla(shop) {
     total = 0;
 
     $.each(shop, function (key, value) {
+        console.log(value);
+        
         var tr = $('<tr>')
         var subtotal = value.publicPrice*value.quantityShop
 
         tr.append('<td>'+value.nameProduct+'</td>' +
-            '<td style="width: 200px;"><img src="./uploads/'+value.zipNameShop +'" alt="Imagen de producto"></td>' +
+            '<td style="width: 200px;"><img style="width: 100%"; src="../dashboardadmin/uploads/'+value.zipNameShop +'" alt="Imagen de producto"></td>' +
             '<td style="width: 20%;"><input class="cantidad" id="cantidad'+value.idShop+'" class="input" type="number" value="'+value.quantityShop+'" min="1" data-shop="'+value.idShop+'"></td> ' +
             '<td id="precio'+value.idShop+'">$'+value.publicPrice+'</td>' +
             '<td id="subtotal'+value.idShop+'">$'+subtotal+'</td>' +
             '<td>' +
                 '<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">' +
                     '<a href="#" class="button is-danger is-inverted modal-button updateShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-save"></i></span></a>' +
-                    '<a href="#" class="button is-danger is-inverted modal-button deleteShop" data-target="#modalDelShop" style="padding-left: 10px;" data-shop="'+value.idShop+'"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>' +
+                    '<a href="#" class="button is-danger is-inverted modal-button deleteShop" data-target="#modalDelShop" style="padding-left: 10px;" data-shop="'+value.idShop+'" data-image="'+value.zipNameShop+'"><span class="icon"><i class="fas fa-lg fa-trash-alt"></i></span></a>' +
                 '</div>' +
             '</td>')
 
@@ -111,13 +114,14 @@ function updatePrices(idShop) {
 }
 
 /* Funcion para eliminar producto de carrito */
-function deleteShop(idShop) {
+function deleteShop(idShop, image) {
     $.ajax({
         type: "POST",
         url: ip_server + "/logged/deleteShop",
         data: {
             'bearer': sessionStorage.token,
             'idShop': idShop,
+            'image': image,
         },
         dataType: "json",
         success: function (response) {    

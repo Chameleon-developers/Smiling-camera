@@ -8,7 +8,7 @@ module.exports.addShop = function (req, res) {
 
     var base64Data = data.image.split(';base64,').pop();
     var check = true
-    var ruta = '../../dashboardadmin/uploads/'
+    var ruta = '../dashboardadmin/uploads/'
     var nombre = Date.now() + '.png'
 
     require("fs").writeFile(ruta + nombre, base64Data, 'base64', function(err) {
@@ -19,9 +19,9 @@ module.exports.addShop = function (req, res) {
 
     if (check) {
         /* Establecer query para la consulta para insertar */
-        let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser) VALUES(1, ?, ?)"
+        let qry="INSERT INTO shop(quantityShop, zipNameShop, idUser, idSubcategoryYouPrint) VALUES(1, ?, ?, ?)"
 
-        values = [nombre, res.decode.idUser]
+        values = [nombre, res.decode.idUser, data.idSubcategoryYouPrint]
 
         /* Ejecutar la consulta para la obtención del último id insertado en carrito */
         con.query(qry,values,function (err, result, fields) {
@@ -161,10 +161,21 @@ module.exports.addDefaultShop = function (req, res) {
 /* Elimina un producto de carrito */ 
 module.exports.deleteShop = function (req, res) { 
     /* Obtener variable para la conexión a la BD */ 
-    const con = require('../controllers/dbconn')() 
+    const con = require('../controllers/dbconn')()
  
     /* Obtener los datos del Body */ 
-    let data = req.body 
+    let data = req.body
+
+    var fs = require('fs'); 
+    var filePath = '../dashboardadmin/uploads/' + data.image;
+    try {
+        if(fs.accessSync('../dashboardadmin/uploads/' + data.image)) {
+            fs.unlinkSync(filePath);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    
  
     /* Ejecutar la consulta para baja de carrito */ 
     con.query('DELETE FROM shop WHERE idShop=?',data.idShop, function (err, result, fields) { 
