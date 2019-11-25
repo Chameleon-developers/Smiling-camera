@@ -24,7 +24,6 @@ LenaJS.printCanvas = function(selector, idata) {
 
   selector.width = idata.width;
   selector.height = idata.height;
-
   var ctx = selector.getContext('2d');
   
   ctx.putImageData(idata, 0, 0);
@@ -43,7 +42,6 @@ LenaJS.imagedata_to_image = function (imagedata) {
 }
 
 LenaJS.filterImage = function(selector, filter, image,x,y) {
-
   var args = [this.getImage(image,x,y)];
 
   return this.printCanvas(selector, filter.apply(null, args));

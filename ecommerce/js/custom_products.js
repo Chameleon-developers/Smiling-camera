@@ -75,7 +75,7 @@ function init(idSubcategory, idCategory) {
     //Imagen de vista previa
     const vistaPrevia = document.querySelector('#vista-previa');
     
-    
+    var ancho,alto;
     /**
     * Método que abre el editor con la imagen seleccionada
     */
@@ -118,7 +118,10 @@ function init(idSubcategory, idCategory) {
     * Método que recorta la imagen con las coordenadas proporcionadas con croppr.js
     */
     var filteredImageCanvas = document.getElementById("filtered-image");
-    console.log(typeof filteredImageCanvas);
+    
+    
+
+    
 
     function recortarImagen(data) {
         // Variables
@@ -132,9 +135,16 @@ function init(idSubcategory, idCategory) {
         const zoom = 1;
         let imagenEn64 = '';
         let imagenFinal64 ='';
+
+        
         // La imprimo
         miCanvas.width = nuevoAncho;
         miCanvas.height = nuevaAltura;
+
+        ancho = miCanvas.width;
+        alto = miCanvas.height;
+        console.log(ancho+" "+alto);
+
         // La declaro
         let miNuevaImagenTemp = new Image();
         // Cuando la imagen se carge se procederá al recorte
@@ -149,6 +159,7 @@ function init(idSubcategory, idCategory) {
             //document.querySelector('#base64').textContent = imagenEn64;
             
             var img = document.getElementById("imagen");
+            //class="image-canvas"
             img.innerHTML='<img id="original-image" class="image-canvas" src="'+imagenEn64+'"/>'; 
 
             //obtenemos la imagen base
@@ -170,49 +181,48 @@ function init(idSubcategory, idCategory) {
                 LenaJS.filterImage(filteredImage[4], LenaJS["sepia"], originalImage,160,90);
                 LenaJS.filterImage(filteredImage[5], LenaJS["sharpen"], originalImage,160,90);
                 //LenaJS.filterImage(filteredImage[7], LenaJS["thresholding"], originalImage,160,90);
-                LenaJS.filterImage(filteredImageCanvas, LenaJS['none'], originalImage,originalImage.width,originalImage.height);
+                LenaJS.filterImage(filteredImageCanvas, LenaJS['none'], originalImage,ancho,alto);
+
+                imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                cargarEmoji(ancho,alto,imagenFinal64);
+            };
+            //agregamos los eventos
+            document.getElementById("filtro1").onclick = function(){
+                LenaJS.filterImage(filteredImageCanvas, LenaJS['none'], miCanvas,ancho,alto);
+                //generamos el nuevo base 64
+                imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                cargarEmoji(ancho,alto,imagenFinal64);
+                
+            };
+            document.getElementById("filtro2").onclick = function(){
+                LenaJS.filterImage(filteredImageCanvas, LenaJS['gaussian'], miCanvas,ancho,alto);
+                imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                cargarEmoji(ancho,alto,imagenFinal64);
+                
+            };
+            document.getElementById("filtro3").onclick = function(){
+                LenaJS.filterImage(filteredImageCanvas, LenaJS['grayscale'], miCanvas,ancho,alto);
+                imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
+                cargarEmoji(ancho,alto,imagenFinal64);
+                
+            };
+            document.getElementById("filtro4").onclick = function(){
+                LenaJS.filterImage(filteredImageCanvas, LenaJS['saturation'], miCanvas,ancho,alto);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
                 cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
                 
             };
-            //agregamos los eventos
-            document.getElementById("filtro1").onclick = function(){
-                LenaJS.filterImage(filteredImageCanvas, LenaJS['none'], originalImage,originalImage.width,originalImage.height);
-                //generamos el nuevo base 64
-                imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
-                cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
-                //this.attr('selected','selected');
-                console.log(imagenFinal64)
-            };
-            document.getElementById("filtro2").onclick = function(){
-                LenaJS.filterImage(filteredImageCanvas, LenaJS['gaussian'], originalImage,originalImage.width,originalImage.height);
-                imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
-                cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
-                console.log(imagenFinal64)
-            };
-            document.getElementById("filtro3").onclick = function(){
-                LenaJS.filterImage(filteredImageCanvas, LenaJS['grayscale'], originalImage,originalImage.width,originalImage.height);
-                imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
-                cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
-                console.log(imagenFinal64)
-            };
-            document.getElementById("filtro4").onclick = function(){
-                LenaJS.filterImage(filteredImageCanvas, LenaJS['saturation'], originalImage,originalImage.width,originalImage.height);
-                imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
-                cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
-                console.log(imagenFinal64)
-            };
             document.getElementById("filtro5").onclick = function(){
-                LenaJS.filterImage(filteredImageCanvas, LenaJS['sepia'], originalImage,originalImage.width,originalImage.height);
+                LenaJS.filterImage(filteredImageCanvas, LenaJS['sepia'], miCanvas,ancho,alto);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
                 cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
-                console.log(imagenFinal64)
+                
             };
             document.getElementById("filtro6").onclick = function(){
-                LenaJS.filterImage(filteredImageCanvas, LenaJS['sharpen'], originalImage,originalImage.width,originalImage.height);
+                LenaJS.filterImage(filteredImageCanvas, LenaJS['sharpen'], miCanvas,ancho,alto);
                 imagenFinal64 = filteredImageCanvas.toDataURL("image/jpeg");
                 cargarEmoji(filteredImageCanvas.width,filteredImageCanvas.height,imagenFinal64);
-                console.log(imagenFinal64)
+                
             };
             
             
