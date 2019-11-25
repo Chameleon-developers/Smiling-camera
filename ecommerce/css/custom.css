@@ -424,12 +424,15 @@ body::after{ content:''; display:block; height:100px; }
   bottom:0; 
   width:100%; 
   height:0px; 
-  margin-top:200px;
+  margin-top:300px;
 }
 .image-canvas{
   
-  width: 350px;
-  height:350px;
+  width:420px;
+  height: 420px;
+  /*width: 80%;
+  height:80%;
+  */
   margin:0 auto;
   object-fit: contain;
 
