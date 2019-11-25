@@ -5,23 +5,24 @@ import { toast, modal, ip_server, setTable, loadFilesUser, getNumberShop } from 
 export { init, enviarImagen }
 
 /*funcion de bulma */
+function cargaSubcategorias() {
+    $.ajax({
+        type: "POST",
+        url: ip_server + "/getSubcategoriesEcommerce",
+        data:{
+            'bearer':sessionStorage.token
+        },
+        dataType:"json",
+        success: function(response){
+            $.each(response.subcategories, function(i, item) {
+                if(i>=3)
+                $('#selProducts').append("<option value='"+item.idSubcategoryYouPrint+"'>"+item.nameSubcategory+"</option>");
+            });
+        },error: function(error){
 
-$.ajax({
-    type: "POST",
-    url: ip_server + "/getSubcategoriesEcommerce",
-    data:{
-        'bearer':sessionStorage.token
-    },
-    dataType:"json",
-    success: function(response){
-        $.each(response.subcategories, function(i, item) {
-            if(i>=3)
-            $('#selProducts').append("<option value='"+item.idSubcategoryYouPrint+"'>"+item.nameSubcategory+"</option>");
-        });
-    },error: function(error){
-
-    }
-});
+        }
+    });
+}
 
 
     var stage;
@@ -46,6 +47,8 @@ function init(idSubcategory, idCategory) {
         },
         beforeNext:true,
     });
+
+    cargaSubcategorias()
     
 
     console.log(bulma.options.beforeNext);
