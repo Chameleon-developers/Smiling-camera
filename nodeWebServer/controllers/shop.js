@@ -57,7 +57,7 @@ module.exports.getShop = function (req, res) {
     const con = require('../controllers/dbconn')()
 
     /* Establecer query para la consulta para insertar */
-    let qry = 'SELECT idShop, quantityShop, zipNameShop, idProductYouPrint, PROYP.nameProduct, publicPrice FROM shop AS S INNER JOIN productsyouprint AS PROYP ON S.idProductYouPrint=PROYP.idProduct INNER JOIN productsprice AS PP ON S.idProductYouPrint=PP.idProduct WHERE idUser=?'
+    let qry = 'SELECT idShop, quantityShop, zipNameShop, idProductYouPrint, PROYP.nameProduct, publicPrice, s.idSubcategoryYouPrint, CONCAT(SC.nameSubcategory, " Personalizada") AS nameSubcategory, price FROM shop AS S LEFT JOIN productsyouprint AS PROYP ON S.idProductYouPrint=PROYP.idProduct LEFT JOIN productsprice AS PP ON S.idProductYouPrint=PP.idProduct LEFT JOIN subcategoryyouprint AS SCYP ON s.idSubcategoryYouPrint=SCYP.idSubcategoryYouPrint LEFT JOIN subcategories AS SC ON SCYP.idCategory=SC.idCategory AND SCYP.idSubcategory=SC.idSubcategory WHERE idUser=?'
 
     /* Ejecutar la consulta para la obtención de tipos de productos */
     con.query(qry, res.decode.idUser, function (err, result, fields) {
@@ -69,11 +69,38 @@ module.exports.getShop = function (req, res) {
             })
             con.end()
             return
-        } else {
+        } 
+        else {
+            var shops = []
+
+            result.forEach(element => {
+                var shop = {}
+
+                if(element.idProductYouPrint) {
+                    shop.idShop = element.idShop
+                    shop.quantityShop = element.quantityShop
+                    shop.zipNameShop = element.zipNameShop
+                    shop.idProductYouPrint = element.idProductYouPrint
+                    shop.nameProduct = element.nameProduct
+                    shop.publicPrice = element.publicPrice
+                }
+                else {
+                    shop.idShop = element.idShop
+                    shop.quantityShop = element.quantityShop
+                    shop.zipNameShop = element.zipNameShop
+                    shop.idProductYouPrint = element.idSubcategoryYouPrint
+                    shop.nameProduct = element.nameSubcategory
+                    shop.publicPrice = element.price
+
+                }
+
+                shops.push(shop)
+            })
+
             // Setup and send of response
             res.status(200).json({
                 Status: 'Success',
-                shop: result,
+                shop: shops,
                 message: 'Productos del carrito'
             })
         }
