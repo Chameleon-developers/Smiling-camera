@@ -78,7 +78,7 @@ module.exports.getSubcategoriesEcommerce = function (req, res) {
     const con = require('../controllers/dbconn')()
 
     /* Ejecutar la consulta para la obtención de subcategorias */
-    con.query('SELECT idSubcategory, nameSubcategory FROM subcategories WHERE statusSubcategory = 1', function (err, result, fields) {
+    con.query('SELECT SubYou.idSubcategoryYouPrint, Subc.nameSubcategory FROM subcategoryyouprint AS SubYou INNER JOIN subcategories AS Subc ON SubYou.idSubcategory = Subc.idSubcategory AND SubYou.idCategory = Subc.idCategory WHERE Subc.statusSubcategory = 1', function (err, result, fields) {
         if (err) {
             // Internal error message send
             res.status(500).json({

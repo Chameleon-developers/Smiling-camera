@@ -1,5 +1,5 @@
 //Importación de módulos
-import { toast, modal, ip_server, setTable, loadFilesHomeCategory } from "./plugins.js"
+import { toast, modal, ip_server, setTable, loadFilesUser, getNumberShop } from "./plugins.js"
 
 //Exportación de módulos
 export { init, enviarImagen }
@@ -8,16 +8,15 @@ export { init, enviarImagen }
 
 $.ajax({
     type: "POST",
-    url: ip_server + "/logged/getSubcategoriesEcommerce",
+    url: ip_server + "/getSubcategoriesEcommerce",
     data:{
-        'bearer':sessionStorage.token,
-        'idUser':sessionStorage.idUser
+        'bearer':sessionStorage.token
     },
     dataType:"json",
     success: function(response){
         $.each(response.subcategories, function(i, item) {
             if(i>=3)
-            $('#selProducts').append("<option value='"+item.idSubcategory+"'>"+item.nameSubcategory+"</option>");
+            $('#selProducts').append("<option value='"+item.idSubcategoryYouPrint+"'>"+item.nameSubcategory+"</option>");
         });
     },error: function(error){
 
@@ -25,22 +24,26 @@ $.ajax({
 });
 
 
-/*
-fetch(ip_server+'/logged/getSubcategoriesEcommerce', {
-    method: 'POST',
-    headers: {
-        'bearer':sessionStorage.token,
-        'idUser':sessionStorage.idToken}
-    })
-    .then(response => response.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));*/
-
     var stage;
 /* Función para establecer eventos y datos iniciales */
 function init(idSubcategory, idCategory) {
+    if (sessionStorage.token) {
+        $('#finalTitle').text('¡Listo se ha agregado tu producto al carrito!')
+    } else {
+        $('#finalTitle').text('¡Listo se ha guardado tu producto! Antes de ver tu producto en tu Carrito necesitas Registrarte y posteriormente Iniciar Sesión')
+    }
     var bulma = new bulmaSteps(document.getElementById('stepsDemo'), {
-        onShow: (id) => console.log(id),
+        onShow: (id) => {
+            if (id == 4) {
+                if (sessionStorage.token) {
+                    $('#previousStep').attr('disabled', 'disabled')
+                    enviarImagen();
+                } else {
+                    $('#previousStep').attr('disabled', 'disabled')
+                    enviarImagenUserLess();
+                }
+            }
+        },
         beforeNext:true,
     });
     
@@ -228,10 +231,9 @@ function init(idSubcategory, idCategory) {
     }
     cargarEmojis();
 
-    var boton = document.getElementById("enviar-foto");
+    var boton = document.getElementById("persoRegistrar");
     boton.addEventListener("click", function(){
-        enviarImagen();
-        
+        loadFilesUser("signIn.html", "js/signIn.js")
     }, false);
 }
 
@@ -310,6 +312,23 @@ function cargarEmojis (){
     
 }
 
+function enviarImagenUserLess() {
+    var dataURL = stage.toDataURL({
+        mimeType: 'image/png',
+        quality: 1
+    });
+
+    var select = document.getElementById("selProducts").value;
+    var product = {
+        'image' : dataURL,
+        'idSubcategoryYouPrint' : select
+    }
+    sessionStorage.removeItem('carritoPersonalizado');
+    var data = [];
+    data.push(product);
+    sessionStorage.setItem('carritoPersonalizado', JSON.stringify(data));
+}
+
 
 
 function enviarImagen(){
@@ -326,14 +345,20 @@ function enviarImagen(){
         url: ip_server + "/logged/addShop",
         data:{
             'bearer':sessionStorage.token,
-            'image':dataURL
+            'image':dataURL,
+            'idSubcategoryYouPrint': select
             
         },
         dataType:"json",
         success: function(response){
-            
+            getNumberShop()
         },error: function(error){
-    
+            if(error.status == '400'){
+                toast('No se pudo guardar la imagen, intente en otro momento', 'is-danger')
+            }
+            if(error.status == '500'){
+                toast('No se pudo hacer la operación, Error interno del servidor', 'is-danger')
+            }
         }
     });
 }

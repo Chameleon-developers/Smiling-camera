@@ -158,25 +158,41 @@ function logIn() {
 
 /* Funcion para registrar usuario */
 function registrar() {
+    var data
 	var mainEmail = $('#mainEmailR').val()
 	var resetEmail = $('#resetEmailR').val()
 	var nameUser = $('#nameUserR').val()
 	var passwordUser = $('#passwordUserR').val()
-	var cPasswordUser = $('#cPasswordUserR').val()
+    var cPasswordUser = $('#cPasswordUserR').val()
+    if (sessionStorage.carritoPersonalizado) {
+        var productoPrsonalizado = JSON.parse(sessionStorage.getItem('carritoPersonalizado'))
+        data = {
+            'mainEmail' : mainEmail,
+            'resetEmail' : resetEmail,
+            'nameUser' : nameUser,
+            'passwordUser' : passwordUser,
+            'cPasswordUser' : cPasswordUser,
+            'captcha': grecaptcha.getResponse(jQuery('#captchaGoogle2').attr('data-widget-id')),
+            'image': productoPrsonalizado[0].image,
+            'idSubcategoryYouPrint': productoPrsonalizado[0].idSubcategoryYouPrint
+        }
+    } else {
+        data = {
+            'mainEmail' : mainEmail,
+            'resetEmail' : resetEmail,
+            'nameUser' : nameUser,
+            'passwordUser' : passwordUser,
+            'cPasswordUser' : cPasswordUser,
+            'captcha': grecaptcha.getResponse(jQuery('#captchaGoogle2').attr('data-widget-id')),
+        }
+    }
 
 	var check = validationsAddUser(mainEmail, resetEmail, nameUser, passwordUser, cPasswordUser)
 	if(check) {
 		$.ajax({
 	        type: "POST",
 	        url: ip_server + "/registerUser",
-	        data: {
-	            'mainEmail' : mainEmail,
-	            'resetEmail' : resetEmail,
-	            'nameUser' : nameUser,
-	            'passwordUser' : passwordUser,
-				'cPasswordUser' : cPasswordUser,
-				'captcha': grecaptcha.getResponse(jQuery('#captchaGoogle2').attr('data-widget-id'))
-	        },
+	        data: data,
 	        dataType: "json",
 	        success: function (response) {
 	        	$('#logIn').css('display', 'none')
@@ -186,14 +202,6 @@ function registrar() {
 				toast('Se registró correctamente, ya puede Iniciar Sesión','is-info')
 	        },
 	        error: function (error) {
-	            /* if(error.status == '401'){
-	            	$('#logIn').css('display', 'flex')
-					$('#usuario').css('display', 'none')
-					$('#usuario').attr('data-user', '0')
-	                //sessionStorage.removeItem('token')
-					//window.location.assign("http://" + window.location.hostname+"/Smiling-camera/ecommerce/");
-					toast('401', 'is-warning')
-				} */
 				if(error.status == '400'){
 					toast('¿Eres un Robot?','is-danger')
 				}
