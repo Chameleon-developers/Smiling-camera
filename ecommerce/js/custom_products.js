@@ -38,6 +38,7 @@ function init(idSubcategory, idCategory) {
             if (id == 4) {
                 if (sessionStorage.token) {
                     $('#previousStep').attr('disabled', 'disabled')
+                    $('#persoRegistrar').css('visibility', 'hidden')
                     enviarImagen();
                 } else {
                     $('#previousStep').attr('disabled', 'disabled')

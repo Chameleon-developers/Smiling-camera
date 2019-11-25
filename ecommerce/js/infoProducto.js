@@ -24,6 +24,7 @@ function getInfoProduct(idProduct) {
 			let features = ""
 			$('#imageProd').attr('src','../dashboardadmin/uploads/' + data.products[0].imageProduct)
 			$('#addCart').attr('data-Product',data.products[0].idProduct)
+			$('#addCart').attr('data-image',data.products[0].imageProduct)
 			$('#NameProduct').text(data.products[0].nameProduct)
 			for (var key in data.products[0].featuresProduct.Caracteristicas) {
 				features += key + ": "

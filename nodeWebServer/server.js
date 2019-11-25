@@ -8,10 +8,10 @@ var app = express()
 var secureApp = express.Router()
 
 // Parsers for request's body
-app.use(bodyParser.json({limit : '8mb'}))
+app.use(bodyParser.json({limit : '20mb'}))
 app.use(bodyParser.urlencoded({extended : true , limit : '8mb'}))
 
-secureApp.use(bodyParser.json({limit : '8mb'}))
+secureApp.use(bodyParser.json({limit : '20mb'}))
 secureApp.use(bodyParser.urlencoded({extended : true , limit : '8mb'}))
 
 

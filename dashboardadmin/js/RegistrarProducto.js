@@ -1,5 +1,5 @@
 //Importación de módulos
-import {loadFiles, toast, modal, ip_server } from "./plugins.js"
+import {loadFiles, toast, ip_server } from "./plugins.js"
 //Exportación de módulos
 export { init }
 //Variable para guardar productos
