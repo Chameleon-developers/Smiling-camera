@@ -20,7 +20,7 @@
   "homepage": "https://github.com/Chameleon-developers/Smiling-camera#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "multer": "^1.4.2",
     "mysql": "^2.17.1",
     "request": "^2.88.0"
